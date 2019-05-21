@@ -1,6 +1,6 @@
 # Ice growth diagram (summer 2019)
 ## Introduction
-Complete set of MATLAB code to make the revised ice growth diagram.
+Complete set of MATLAB code to make the revised ice growth diagram. Tested and confirmed operational on MATLAB 2017b+.
 
 ## Workflow
 1. Make sure all code is in the working directory.
