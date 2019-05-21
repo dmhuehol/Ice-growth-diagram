@@ -95,8 +95,8 @@ unnatural = patch(hd.unnatural.supersatBounds,hd.unnatural.TempBounds,hd.unnatur
 unnatural.EdgeColor = 'none';
 hold on
 
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1];
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
+legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
+legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated'};
 
 %% Plot other lines
 if freezingLineLog==1
@@ -108,11 +108,11 @@ if freezingLineLog==1
     legendTexts{end+1} = 'Freezing line';
 end
 
+Tupper = 15; Tlower = -70;
+TlineStandardC = Tupper:-0.1:Tlower;
+[eswLineData] = eswLine(100,Tlower,Tupper);
 if isohumeFlag==1
     %Draw isohumes
-    Tupper = 15; Tlower = -70;
-    TlineStandardC = Tupper:-0.1:Tlower;
-    [eswLineData] = eswLine(100,Tlower,Tupper);
     eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
     eswSupersatLineStandard.Color = [255 230 0]./255;
     eswSupersatLineStandard.LineWidth = 3.2;
