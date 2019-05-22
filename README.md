@@ -9,7 +9,8 @@ Complete set of MATLAB code to make the revised ice growth diagram. Tested and c
 4. Success!
 
 ## Converting between ice supersaturation and vapor density excess
-Previous papers have reported supersaturations in multiple units. Ice supersaturation (percent or decimal) and vapor density excess (g/m^3) are the most common. Conversions between them are possible, but not immediately intuitive. Currently, the revised diagram uses ice supersaturation in percent.  
+Previous ice growth diagrams have reported supersaturations in either ice supersaturation (percent or decimal) or vapor density excess (g/m^3). Conversions between the two units are possible, but not immediately intuitive. Currently, the revised diagram exclusively uses ice supersaturation in percent.  
+The functions iceSupersatToRH and rhow are designed to allow for conversions from ice supersaturation to vapor density difference.
 ### Example 
 Given an ice supersaturation of 3.8% at -8 deg Celsius, what is the vapor density excess at the same temperature?  
 1. [RH] = iceSupersatToRH(3.8,-8)  
