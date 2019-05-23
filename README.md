@@ -55,9 +55,14 @@ Thus a vapor density excess of 0.095 g/m^3 corresponds to an ice supersaturation
 **iceSupersatToRH**: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.  
 **rhow**: Calculates vapor density excess from a relative humidity (with respect to water) in percent and temperature.
 
+## Growth diagram profiles
+The ice growth diagram can be used to plot data from weather balloons. This shows what areas of the crystal growth space are accessible along a profile. The function growthDiagramProfile makes these plots. A sample data structure from the Barrow site is included along with the aforementioned in the "Growth diagram profiles" folder. An example 
+
 ## Sources and Credit
 ------
 Bailey, M.P., & Hallett, J. (2009). A comprehensive habit diagram for atmospheric ice crystals: Confirmation from the laboratory, AIRS II, and other field studies. *Journal of the Atmospheric Sciences, 66*(9), 2888-2899. [doi:10.1175/2009JAS2883.1](https://doi.org/10.1175/2009JAS2883.1)  
 
 All code and documentation written by Daniel Hueholt, under the advisement of Dr. Sandra Yuter at North Carolina State University.  
-[<img src="http://www.environmentanalytics.com/wp-content/uploads/2016/05/cropped-Environment_Analytics_Logo_Draft.png">](http://www.environmentanalytics.com)
+[<img src="http://www.environmentanalytics.com/wp-content/uploads/2016/05/cropped-Environment_Analytics_Logo_Draft.png">](http://www.environmentanalytics.com)  
+
+Barrow soundings data is from the [Integrated Global Radiosonde Archive, version 2](https://www.ncdc.noaa.gov/data-access/weather-balloon/integrated-global-radiosonde-archive).
