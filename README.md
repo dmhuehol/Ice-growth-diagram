@@ -1,4 +1,12 @@
 # Ice growth diagram (summer 2019)
+
+### Table of Contents  
+[Workflow for habit diagram](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#workflow-for-habit-diagram)  
+[Converting between ice supersaturation and vapor density excess](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#converting-between-ice-supersaturation-and-vapor-density-excess)  
+[Basic ice growth diagram examples](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#examples)  
+[Function descriptions](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#function-descriptions)  
+[Growth diagram profiles](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#growth-diagram-profiles)  
+
 ## Introduction
 Complete set of MATLAB code to make the revised ice growth diagram. Tested and confirmed operational on MATLAB 2017b+.
 
