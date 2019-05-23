@@ -52,7 +52,7 @@ Thus a vapor density excess of 0.095 g/m^3 corresponds to an ice supersaturation
 **updraftSupersat:** Estimates maximum possible supersaturation in updraft. CAUTION: this function is still in progress.  
 
 ### Other functions
-**iceSupersatToRH**: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.
+**iceSupersatToRH**: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.  
 **rhow**: Calculates vapor density excess from a relative humidity (with respect to water) in percent and temperature.
 
 ## Sources and Credit
