@@ -43,20 +43,26 @@ Thus a vapor density excess of 0.095 g/m^3 corresponds to an ice supersaturation
 2. iceGrowthDiagram(hd,1,0,1,0,1)
 
 ## Function descriptions
-### Main functions
 **makeGrowthDiagramStruct:** Creates a structure the information needed to plot a growth diagram. Values are derived from Bailey and Hallett 2009.  
 **iceGrowthDiagram:** Plots the revised ice growth diagram.
-
-### Required helper functions
 **eswLine:** Outputs arrays useful to draw isohumes with respect to water on the diagram.  
 **updraftSupersat:** Estimates maximum possible supersaturation in updraft. CAUTION: this function is still in progress.  
 
-### Other functions
 **iceSupersatToRH**: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.  
 **rhow**: Calculates vapor density excess from a relative humidity (with respect to water) in percent and temperature.
 
+**growthDiagramProfile**: Plots radiosonde data over an ice growth diagram.  
+**stationLookupIGRAv2**: Helps generate the title for the growth diagram profile.  
+
 ## Growth diagram profiles
-The ice growth diagram can be used to plot data from weather balloons. This shows what areas of the crystal growth space are accessible along a profile. The function growthDiagramProfile makes these plots. A sample data structure from the Barrow site is included along with the aforementioned in the "Growth diagram profiles" folder. An example 
+The ice growth diagram can be used to plot data from weather balloons. This shows what areas of the crystal growth space are accessible along a profile. The function growthDiagramProfile makes these plots. A sample data structure from the Barrow site is included along with the aforementioned in the "Growth diagram profiles" folder. An example image is below.  
+![Ice growth diagram profile from Jan 4 2018 in Barrow AK](Demo/igd_profile_example.png)  
+**Replicate as follows**  
+1. Open the sample Barrow data in MATLAB  
+2. Make sure stationLookupIGRAv2 and "IGRA v2 Station List" are in the working directory (these are necessary to produce the title of the growth diagram profile).
+3. growthDiagramProfile(barrow_sample,3,1)  
+
+Code to import a general IGRA v2 soundings data file can be found in the [IGRA v2](https://github.com/dmhuehol/IGRA-v2) repository.  
 
 ## Sources and Credit
 ------
