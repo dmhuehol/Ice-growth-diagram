@@ -34,7 +34,6 @@ TlineStandard = TlineStandardC+273.15;
 eswStandard = es0*exp(Lvap/Rv*(1/273.15-1./TlineStandard)); %Saturated vapor pressure with respect to water
 esiStandard = es0*exp(Lsub/Rv*(1/273.15-1./TlineStandard)); %Saturated vapor pressure with respect to ice
 eswPercent = eswStandard.*percent;
-eswLineData = eswPercent./esiStandard-1;
-
+eswLineData = (eswPercent-esiStandard)./esiStandard;
 
 end
