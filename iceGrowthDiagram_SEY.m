@@ -1,5 +1,7 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagram_SEY(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendlocstr,xlimrange)
 %%iceGrowthDiagram
+%%revised from Daniel's version with additional arguments
+
     %Function to plot an ice growth diagram. Returns the figure handle
     %so further modifications are possible. Requires secondary function
     %eswLine.
@@ -112,7 +114,8 @@ Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
 if isohumeFlag==1
-    %Draw isohumes
+    %Draw isohumes, below 100% is one line style and above 100% is another
+    %line style
     eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
     eswSupersatLineStandard.Color = [255 230 0]./255;
     eswSupersatLineStandard.LineWidth = 3.2;
@@ -199,7 +202,7 @@ if isohumeFlag==1
     legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
     
 elseif isohumeFlag==2
-    %Draw isohumes
+    %Draw isohumes, just 100% only
     Tupper = 15; Tlower = -70;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);
@@ -238,19 +241,30 @@ end
 axe = gca;
 axe.FontName = 'Lato';
 axe.FontSize = 18;
+
+%% take out right axis completely until figure out how to make a function of ylim
 yyaxis right
-axe.YTick = [-12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12 14 16 18 20 22 30 40 50 60 70];
+%%%SEY axe.YTick = [0 2 4 6 8 10 12 14 16 18 20 22 30 40 50 60 70]; % axis tick locations on right hand side of graph corresponding to standard atmosphere heights
 %z = [2300 2625 2925 3225 3550 3850 4150 4475 4775 5075 5400 5700 6925 8450 10000 71750 76750];
 %z = z-2300; %Height above freezing line
-zLabels = {'' '' '' '' '' '' '0' '325' '625' '925' '1250' '1550' '1850' '2175' '2475' '2775' '3100' '3400' '4625' '6150' '7700' '69450' '74450'}; %meters
+%%%SEY zLabels = {'0' '325' '625' '925' '1250' '1550' '1850' '2175' '2475' '2775' '3100' '3400' '4625' '6150' '7700' '69450' '74450'}; %meters
+%% SEY revised set of labels
+axe.YTick = [0 4  8  12  16 20 30 40 50 56.5]; % axis tick locations on right hand side of graph corresponding to standard atmosphere heights
+% SEY: 56.5 deg C is tropopause, 11000 m is height of tropopause so
+% relative to 2300 m freezing height, that is 8700 m
+zLabels = {'0' '625' '1250'  '1850'  '2475' '3100' '4625' '6150' '7700' '8700'}; %meters
 yticklabels(zLabels);
-ylim([-8 70])
+ylim([0 60]) %CHANGE write separate function to handle this and spit out other variables, have to change these as well, sign is flipped...
 axe.Layer = 'top';
 yLab = ylabel('Height above freezing level in m (ICAO standard atmosphere)');
 yLab.FontName = 'Lato Bold';
-yyaxis left
-ylim([-70 8])
-xlim([-0.1 0.6])
+
+yyaxis left % changes what axis dot notation refers
+%%%SEY change original ylim([-70 8]) %CHANGE this to an input parameter, BUT if change this to be larger than -70 have to change axe.YTick and ZLabels
+%%% SEY change original xlim([-0.1 0.6]) %CHANGE this to an input parameter
+ylim([-60 0]) %CHANGE this to an input parameter, BUT if change this to be larger than -70 have to change axe.YTick and ZLabels
+%xlim([0 0.6]) %CHANGE this to an input parameter
+xlim(xlimrange)
 
 t = title('Ice growth diagram');
 t.FontName = 'Lato Bold';
@@ -261,7 +275,7 @@ xLab = xlabel('Supersaturation with respect to ice (%)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
 axe.XTick = [0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6];
-xTickLabels = {'0' '5' '10' '15' '20' '25' '30' '35' '40' '45' '50' '55' '60'};
+xTickLabels = {'0' '5' '10' '15' '20' '25' '30' '35' '40' '45' '50' '55' '60'}; %these would change if RHice to plus 100
 xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
@@ -272,6 +286,8 @@ if updraftLog==1
 else
     leg.Location = 'southeast';
 end
+
+leg.Location = legendlocstr;
 
 if legLog==0
     leg.Visible = 'off';

@@ -1,4 +1,4 @@
-function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
+function [hd] = makeGrowthDiagramStruct_SEY(crystalLog,otherLog)
 %%makeGrowthDiagramStruct
     %Function to make a structure containing all information needed to plot
     %a growth diagram. Values derived from Bailey and Hallett 2009.
