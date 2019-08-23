@@ -24,19 +24,21 @@ function [zLabels, tempsInRange, outputTempSpan] = ylimitsForIceDiagram(inputTem
     %Last major revision: 8/23/2019
     %
     
+%% Check inputs
 if abs(inputTempSpan(1))>70
     msg = ['Minimum temperature cannot be less than -70' char(176) 'C'];
     error(msg)
 end
 
+%% Generate y-axis information
 possibleTemps = [0 2 4 6 8 10 12 14 16 18 20 22 30 40 50 56.5 60 70];
 z = [2300 2625 2925 3225 3550 3850 4150 4475 4775 5075 5400 5700 6925 8450 8700 10000 71750 76750];
 possibleZ = z-2300; %Height above freezing line
 
 inputTempSpan = -inputTempSpan;
-tempsInRange = possibleTemps(possibleTemps >= inputTempSpan(2) & possibleTemps <= inputTempSpan(1));
+tempsInRange = possibleTemps(possibleTemps >= inputTempSpan(2) & possibleTemps <= inputTempSpan(1)); %Find temps in input temp range
 zInRange = possibleZ(possibleTemps >= inputTempSpan(2) & possibleTemps <= inputTempSpan(1)); %Heights matching temp indices
-outputTempSpan = fliplr(inputTempSpan);
+outputTempSpan = fliplr(inputTempSpan); %Flip these for right-hand y-axis plotting 
 
 zLabels = {};
 for c = length(zInRange):-1:1
