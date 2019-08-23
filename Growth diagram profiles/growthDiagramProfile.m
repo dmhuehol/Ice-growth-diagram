@@ -1,4 +1,4 @@
-function [] = growthDiagramProfile(sounding,timeIndex,legLog)
+function [fig] = growthDiagramProfile(sounding,timeIndex,legLog)
 %%growthDiagramProfile
     %Function to plot a balloon temperature/humidity profile on the ice growth
     %diagram.
@@ -16,8 +16,8 @@ function [] = growthDiagramProfile(sounding,timeIndex,legLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 5/23/2019
-    %Last major revision: 5/23/2019
+    %Version date: 8/23/2019
+    %Last major revision: 8/23/2019
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram, eswLine
     %
@@ -37,7 +37,7 @@ crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
 freezingLineLog = 1; isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
-[~,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration); %Plot the growth diagram
+[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',[0,0.6]); %Plot the growth diagram
 
 if length(timeIndex)==1
     % Autogenerate title for single profiles
@@ -57,11 +57,18 @@ t = title({['Ice phase space for ' dateString],launchname});
 t.FontName = 'Lato Bold';
 t.FontSize = 20;
 
-%% Plot T,s points on the parameter space defined by the ice growth diagram
+%% Plot points on the parameter space defined by the ice growth diagram
+disp('Plotting in progress!')
+fprintf('Total number of soundings to plot is %d\n',length(timeIndex));  % SEY added so know about how long it will take.
 for c = 1:length(timeIndex)
-    loopTime = timeIndex(c);
     
-    radiosondeHeight = [sounding(loopTime).geopotential]; %For eventual implementation of color-coding for height
+    %Provide some info about progress
+    loopTime = timeIndex(c);
+    if mod(loopTime,100)==0
+        disp(strcat(num2str(round(loopTime/length(timeIndex).*100)), '% complete'))
+    end
+    
+    radiosondeHeight = [sounding(loopTime).geopotential];
     radiosondeHeight1 = radiosondeHeight<=2000;
     radiosondeHeight2 = radiosondeHeight<=4000 & radiosondeHeight>2000;
     radiosondeHeight3 = radiosondeHeight<=6000 & radiosondeHeight>4000;
