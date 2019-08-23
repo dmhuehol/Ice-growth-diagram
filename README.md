@@ -35,21 +35,21 @@ Thus a vapor density excess of 0.095 g/m^3 corresponds to an ice supersaturation
 ![Revised ice growth diagram with all habits, isohumes, legend, and other features](Demo/igd_complete.png)
 **Replicate with**  
 1. [hd] = makeGrowthDiagramStruct(1,1)
-2. iceGrowthDiagram(hd,1,1,1,0,1)  
+2. iceGrowthDiagram(hd,1,1,1,0,1,'southeast',[0,0.6],[-70,0])  
 
 ### No legend
 ------
 ![Revised ice growth diagram with everything except the legend](Demo/igd_isohumes_nolegend.png)
 **Replicate with**  
 1. [hd] = makeGrowthDiagramStruct(1,1)
-2. iceGrowthDiagram(hd,1,1,1,0,0)
+2. iceGrowthDiagram(hd,1,1,1,0,0,'southeast',[0,0.6],[-70,0])
 
 ### No isohumes
 ------
 ![Revised ice growth diagram with no isohumes](Demo/igd_noisohumes.png)
 **Replicate with**  
 1. [hd] = makeGrowthDiagramStruct(1,1)
-2. iceGrowthDiagram(hd,1,0,1,0,1)
+2. iceGrowthDiagram(hd,1,0,1,0,1,'southeast',[0,0.6],[-70,0])
 
 ## Function descriptions
 **makeGrowthDiagramStruct:** Creates a structure the information needed to plot a growth diagram. Values are derived from Bailey and Hallett 2009.  
