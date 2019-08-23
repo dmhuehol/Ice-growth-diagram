@@ -1,8 +1,7 @@
 function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram. Returns the figure handle
-    %so further modifications are possible. Requires secondary function
-    %eswLine.
+    %so further modifications are possible.
     %
     %General form: [fig] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
     %

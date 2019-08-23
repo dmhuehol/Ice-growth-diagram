@@ -10,15 +10,15 @@ function [eswLineData] = eswLine(percent,Tlower,Tupper)
     %saturation RH and ice saturation.
     %
     %Input
-    %percent: A water saturation RH in percent
+    %percent: water saturation RH in percent
     %Tlower: lower bound of temperature in Celsius to calculate saturations
     %Tupper: upper bound of temperature in Celsius to calculate saturations
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 4/26/2019
-    %Last major revision: 
+    %Version date: 5/23/2019
+    %Last major revision: 4/26/2019
     %
 
 %Constants

@@ -14,13 +14,10 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %otherLog: logical 1/0 whether or not to include info for other parameters 
     %   (e.g. subsaturated areas, unnatural supersaturations), defaults to 1 
     %
-    %Might be nice to eventually have temperature/supersat as an input here and only
-    %include habits that appear in that temperature range?
-    %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 5/21/2019
+    %Version date: 8/23/2019
     %Last major revision: 5/21/2019 
     %
 
