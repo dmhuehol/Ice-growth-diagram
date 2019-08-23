@@ -18,13 +18,12 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,i
     %    2 draws only the water saturation line (RH=100%)
     %    0 and all other values don't plot any isohumes
     %ventLog: logical 1/0 to draw the maximum natural supersaturation line
-    %updraftLog: logical 1/0 to draw the guesstimated maximum supersaturation in updraft.
+    %updraftLog: logical 1/0 to draw guesstimated maximum supersaturation in updraft.
     %   Requires secondary function updraftSupersat
     %   CAUTION: this is OF VERY DUBIOUS ACCURACY!
     %legLog: logical 1/0 to show the legend
     %legendLocStr: legend location string ('southeast' is standard)
-    %xlimRange: determines the range for the x-axis, input as 2-element
-    %array (i.e. [0 0.6])
+    %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [0 0.6])
     %ylimRange: determines range for the y-axis (in deg C), input as
     %2-element array in increasing order (i.e. [-60 0]). Minimum
     %temperature cannot be less than -70 degrees Celsius.
@@ -258,17 +257,7 @@ axe = gca;
 axe.FontName = 'Lato';
 axe.FontSize = 18;
 
-%% take out right axis completely until figure out how to make a function of ylim
 yyaxis right
-%%%SEY axe.YTick = [0 2 4 6 8 10 12 14 16 18 20 22 30 40 50 60 70]; % axis tick locations on right hand side of graph corresponding to standard atmosphere heights
-%z = [2300 2625 2925 3225 3550 3850 4150 4475 4775 5075 5400 5700 6925 8450 10000 71750 76750];
-%z = z-2300; %Height above freezing line
-%%%SEY zLabels = {'0' '325' '625' '925' '1250' '1550' '1850' '2175' '2475' '2775' '3100' '3400' '4625' '6150' '7700' '69450' '74450'}; %meters
-%% SEY revised set of labels
-%axe.YTick = [0 4  8  12  16 20 30 40 50 56.5]; % axis tick locations on right hand side of graph corresponding to standard atmosphere heights
-% SEY: 56.5 deg C is tropopause, 11000 m is height of tropopause so
-% relative to 2300 m freezing height, that is 8700 m
-
 [zLabels, tempsInRange, rightLimits] = ylimitsForIceDiagram(ylimRange);
 axe.YTick = tempsInRange;
 yticklabels(zLabels);
@@ -277,8 +266,8 @@ axe.Layer = 'top';
 yLab = ylabel('Height above freezing level in m (ICAO standard atmosphere)');
 yLab.FontName = 'Lato Bold';
 
-yyaxis left % changes what axis dot notation refers
-ylim(ylimRange) %CHANGE this to an input parameter, BUT if change this to be larger than -70 have to change axe.YTick and ZLabels
+yyaxis left %Changes what axis dot notation refers
+ylim(ylimRange)
 xlim(xlimRange)
 
 t = title('Ice growth diagram');
@@ -296,12 +285,6 @@ axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 
 leg = legend(legendEntries,legendTexts);
-if updraftLog==1
-    leg.Location = 'northwest';
-else
-    leg.Location = 'southeast';
-end
-
 leg.Location = legendLocStr;
 
 if legLog==0
