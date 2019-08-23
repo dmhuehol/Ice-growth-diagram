@@ -37,7 +37,7 @@ crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
 freezingLineLog = 1; isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
-[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',[0,0.6]); %Plot the growth diagram
+[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',[0,0.6],[-56.5,0]); %Plot the growth diagram
 
 if length(timeIndex)==1
     % Autogenerate title for single profiles
