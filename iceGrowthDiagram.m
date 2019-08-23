@@ -1,10 +1,10 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram. Returns the figure handle
     %so further modifications are possible. Requires secondary function
     %eswLine.
     %
-    %General form: [fig] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange)
+    %General form: [fig] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
     %
     %Output
     %fig: figure handle for the ice growth diagram
@@ -25,6 +25,9 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,i
     %legendLocStr: legend location string ('southeast' is standard)
     %xlimRange: determines the range for the x-axis, input as 2-element
     %array (i.e. [0 0.6])
+    %ylimRange: determines range for the y-axis (in deg C), input as
+    %2-element array in increasing order (i.e. [-60 0]). Minimum
+    %temperature cannot be less than -70 degrees Celsius.
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
@@ -32,7 +35,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,i
     %Version date: 8/23/2019
     %Last major revision: 8/23/2019
     %
-    %See also makeGrowthDiagramStruct, eswLine
+    %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
 
 %% Check variables
@@ -52,6 +55,10 @@ end
 if ~exist('xlimRange','var')
     xlimRange = [0 0.6];
     disp('Default ice supersaturation range for x-axis is 0 to 60%')
+end
+if ~exist('ylimRange','var')
+    ylimRange = [-56.5 0];
+    disp(['Default temperature range for y-axis is -56.5 to 0' char(176) 'C'])
 end
 
 %% Make s-T diagram
@@ -258,21 +265,20 @@ yyaxis right
 %z = z-2300; %Height above freezing line
 %%%SEY zLabels = {'0' '325' '625' '925' '1250' '1550' '1850' '2175' '2475' '2775' '3100' '3400' '4625' '6150' '7700' '69450' '74450'}; %meters
 %% SEY revised set of labels
-axe.YTick = [0 4  8  12  16 20 30 40 50 56.5]; % axis tick locations on right hand side of graph corresponding to standard atmosphere heights
+%axe.YTick = [0 4  8  12  16 20 30 40 50 56.5]; % axis tick locations on right hand side of graph corresponding to standard atmosphere heights
 % SEY: 56.5 deg C is tropopause, 11000 m is height of tropopause so
 % relative to 2300 m freezing height, that is 8700 m
-zLabels = {'0' '625' '1250'  '1850'  '2475' '3100' '4625' '6150' '7700' '8700'}; %meters
+
+[zLabels, tempsInRange, rightLimits] = ylimitsForIceDiagram(ylimRange);
+axe.YTick = tempsInRange;
 yticklabels(zLabels);
-ylim([0 60]) %CHANGE write separate function to handle this and spit out other variables, have to change these as well, sign is flipped...
+ylim(rightLimits)
 axe.Layer = 'top';
 yLab = ylabel('Height above freezing level in m (ICAO standard atmosphere)');
 yLab.FontName = 'Lato Bold';
 
 yyaxis left % changes what axis dot notation refers
-%%%SEY change original ylim([-70 8]) %CHANGE this to an input parameter, BUT if change this to be larger than -70 have to change axe.YTick and ZLabels
-%%% SEY change original xlim([-0.1 0.6]) %CHANGE this to an input parameter
-ylim([-60 0]) %CHANGE this to an input parameter, BUT if change this to be larger than -70 have to change axe.YTick and ZLabels
-%xlim([0 0.6]) %CHANGE this to an input parameter
+ylim(ylimRange) %CHANGE this to an input parameter, BUT if change this to be larger than -70 have to change axe.YTick and ZLabels
 xlim(xlimRange)
 
 t = title('Ice growth diagram');
