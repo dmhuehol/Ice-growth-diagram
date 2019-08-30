@@ -2,6 +2,13 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
 %%makeGrowthDiagramStruct
     %Function to make a structure containing all information needed to plot
     %a growth diagram. Values derived from Bailey and Hallett 2009.
+    %Saturation vapor pressure equations use the Improved
+    %August-Roche-Magnus equation from
+    % Alduchov, O.A. and R.E. Eskridge, 1996: 
+    % Improved Magnus Form Approximation of Saturation Vapor Pressure.
+    % J. Appl. Meteor., 35, 601?609,
+    % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
+    % See equations 25 and 27 from above citation.
     %
     %General form: [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %
@@ -17,8 +24,8 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 8/23/2019
-    %Last major revision: 5/21/2019 
+    %Version date: 8/29/2019
+    %Last major revision: 8/29/2019
     %
 
 %% Variable Checks
@@ -52,14 +59,19 @@ hd.Constants.es0 = 611; %Pa
 if crystalLog==1
     % "Various plates" habit
     T_vp = [-8 -22];
-    T_vp = T_vp + 273.15;
-    esw_vp = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./T_vp)); %Saturated vapor pressure with respect to water
-    esi_vp = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./T_vp)); %Saturated vapor pressure with respect to ice
+    %T_vp = T_vp + 273.15; %MEA312 saturation equation needed T to be in K
+    esw_vp = 6.1094.*exp((17.625.*T_vp)./(243.04+T_vp));
+    esi_vp = 6.1121.*exp((22.587.*T_vp)./(273.86+T_vp));
+
+    %esw_vp = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./T_vp)); %Original MEA312 saturation equation
+    %esi_vp = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./T_vp)); %Original MEA312 saturation equation
     % "Sector plates" habit
     T_sp = [-8 -12.2; -12.2 -17.6; -17.6 -22];
-    T_sp = T_sp + 273.15;
-    esw_sp = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./T_sp)); %Saturated vapor pressure with respect to water
-    esi_sp = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./T_sp)); %Saturated vapor pressure with respect to ice
+    %T_sp = T_sp + 273.15; %MEA312 saturation equation needed T to be in K
+    esw_sp = 6.1094.*exp((17.625.*T_sp)./(243.04+T_sp));
+    esi_sp = 6.1121.*exp((22.587.*T_sp)./(273.86+T_sp));
+    %esw_sp = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./T_sp)); %Original MEA312 saturation equation
+    %esi_sp = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./T_sp)); %Original MEA312 saturation equation
     
     hd.Plates.Habit = 'Edge growth (plate-like)'; %'Plates';
     hd.Plates.Color = [243 139 156]./255;
@@ -110,7 +122,8 @@ end
 if otherLog==1
     hd.unnatural.Habit = 'Coordinates to block out unnatural supersaturations'; %Follows the 2*water saturation line
     hd.unnatural.Color = [1 1 1];
-    hd.unnatural.TempBounds = [0 -7.5 -14 -18.5 -24.8 0];
+    hd.unnatural.TempBounds = [0 -7.5 -14.4 -19.4 -26.4 0];
+    %hd.unnatural.TempBounds = [0 -7.5 -14 -18.5 -24.8 0]; %Original values from MEA312 saturation equation
     hd.unnatural.supersatBounds = [0 0.1549 0.3068 0.4231 0.6 0.6];
     
     hd.subsaturated.Habit = 'Coordinates to cover subsaturated area, for better radiosonde data plotting.';
