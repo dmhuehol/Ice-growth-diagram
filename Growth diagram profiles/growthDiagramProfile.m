@@ -1,7 +1,13 @@
 function [fig] = growthDiagramProfile(sounding,timeIndex,legLog)
 %%growthDiagramProfile
     %Function to plot a balloon temperature/humidity profile on the ice growth
-    %diagram.
+    %diagram. Saturation vapor pressure equations use the Improved
+    %August-Roche-Magnus equation from
+    % Alduchov, O.A. and R.E. Eskridge, 1996: 
+    % Improved Magnus Form Approximation of Saturation Vapor Pressure.
+    % J. Appl. Meteor., 35, 601?609,
+    % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
+    % See equations 25 and 27 from above citation.
     %
     %General form: growthDiagramProfile(sounding,timeIndex,legLog)
     %
@@ -78,9 +84,14 @@ for c = 1:length(timeIndex)
     
     rhumDecimal = [sounding(loopTime).rhum]./100; %Need humidity in decimal to plot balloon data
     radiosondeTemp = [sounding(loopTime).temp]; %Celsius for plotting
-    radiosondeTempK = radiosondeTemp+273.15; %Kelvins for supersaturation calculations
-    eswStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to water
-    esiStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to ice
+    
+    % Original equations from MEA312 notes
+    %radiosondeTempK = radiosondeTemp+273.15; %Kelvins for supersaturation calculations
+    %eswStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to water
+    %esiStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to ice
+    
+    eswStandardFromRadiosonde = 6.1094.*exp((17.625.*radiosondeTemp)./(243.04+radiosondeTemp));
+    esiStandardFromRadiosonde = 6.1121.*exp((22.587.*radiosondeTemp)./(273.86+radiosondeTemp));
     soundingHumidityPoints = rhumDecimal.*eswStandardFromRadiosonde./esiStandardFromRadiosonde-1;
     
     shp1 = soundingHumidityPoints(radiosondeHeight1);
