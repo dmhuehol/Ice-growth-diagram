@@ -22,8 +22,8 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 8/23/2019
-    %Last major revision: 8/23/2019
+    %Version date: 9/6/2019
+    %Last major revision: 9/6/2019
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram, eswLine
     %
@@ -43,7 +43,7 @@ crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
 freezingLineLog = 1; isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
-[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',[0,0.6],[-56.5,0]); %Plot the growth diagram
+[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',[-0.1,0.6],[-70,10]); %Plot the growth diagram
 
 if length(timeIndex)==1
     % Autogenerate title for single profiles
@@ -58,6 +58,8 @@ else
     % Manually generate title otherwise
     dateString = 'unknown';
     launchname = 'unknown';
+    %dateString = 'DJF 2017-2018';
+    %launchname = 'Utqiagvik, AK';
 end
 t = title({['Ice phase space for ' dateString],launchname});
 t.FontName = 'Lato Bold';
@@ -83,6 +85,9 @@ for c = 1:length(timeIndex)
     radiosondeHeightRest = radiosondeHeight>10000;
     
     rhumDecimal = [sounding(loopTime).rhum]./100; %Need humidity in decimal to plot balloon data
+    
+    rhumDecimal = round(rhumDecimal,2); %Rounding forces the points to fall more clearly along isohumes!
+    
     radiosondeTemp = [sounding(loopTime).temp]; %Celsius for plotting
     
     % Original equations from MEA312 notes
@@ -90,9 +95,11 @@ for c = 1:length(timeIndex)
     %eswStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to water
     %esiStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to ice
     
-    eswStandardFromRadiosonde = 6.1094.*exp((17.625.*radiosondeTemp)./(243.04+radiosondeTemp));
-    esiStandardFromRadiosonde = 6.1121.*exp((22.587.*radiosondeTemp)./(273.86+radiosondeTemp));
-    soundingHumidityPoints = rhumDecimal.*eswStandardFromRadiosonde./esiStandardFromRadiosonde-1;
+    eswStandardFromRadiosonde = (6.1094.*exp((17.625.*radiosondeTemp)./(243.04+radiosondeTemp))).*100;
+    esiStandardFromRadiosonde = (6.1121.*exp((22.587.*radiosondeTemp)./(273.86+radiosondeTemp))).*100;
+    soundingHumidity = rhumDecimal.*eswStandardFromRadiosonde;
+    %soundingHumidity = 0.6.*eswStandardFromRadiosonde;
+    soundingHumidityPoints = (soundingHumidity-esiStandardFromRadiosonde)./esiStandardFromRadiosonde;
     
     shp1 = soundingHumidityPoints(radiosondeHeight1);
     shp2 = soundingHumidityPoints(radiosondeHeight2);
