@@ -86,7 +86,7 @@ for c = 1:length(timeIndex)
     
     rhumDecimal = [sounding(loopTime).rhum]./100; %Need humidity in decimal to plot balloon data
     
-    rhumDecimal = round(rhumDecimal,2); %Rounding forces the points to fall more clearly along isohumes!
+    rhumDecimal = round(rhumDecimal,3); %Rounding forces the points to fall more clearly along isohumes!
     
     radiosondeTemp = [sounding(loopTime).temp]; %Celsius for plotting
     
