@@ -22,7 +22,7 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 9/6/2019
+    %Version date: 9/11/2019
     %Last major revision: 9/6/2019
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram, eswLine
@@ -67,13 +67,14 @@ t.FontSize = 20;
 
 %% Plot points on the parameter space defined by the ice growth diagram
 disp('Plotting in progress!')
-fprintf('Total number of soundings to plot is %d\n',length(timeIndex));  % SEY added so know about how long it will take.
+totalNumber = length(timeIndex);
+disp(['Total number of soundings to plot is ', num2str(totalNumber)]);  % Reports number of soundings to plot
 for c = 1:length(timeIndex)
     
     %Provide some info about progress
     loopTime = timeIndex(c);
     if mod(loopTime,100)==0
-        disp(strcat(num2str(round(loopTime/length(timeIndex).*100)), '% complete'))
+        disp(strcat(num2str(round((loopTime-timeIndex(1))/totalNumber*100)), '% complete')) % Progress report at command window
     end
     
     radiosondeHeight = [sounding(loopTime).geopotential];
