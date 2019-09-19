@@ -22,7 +22,7 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 9/11/2019
+    %Version date: 9/19/2019
     %Last major revision: 9/6/2019
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram, eswLine
@@ -43,7 +43,9 @@ crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
 freezingLineLog = 1; isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
-[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',[-0.1,0.6],[-70,10]); %Plot the growth diagram
+supersatLim = [0,0.6]; %[0,0.6] is standard
+tempLim = [-56.5,0]; % [-56.5,0] is standard, omits stratosphere
+[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',supersatLim,tempLim); %Plot the growth diagram
 
 if length(timeIndex)==1
     % Autogenerate title for single profiles
@@ -58,8 +60,8 @@ else
     % Manually generate title otherwise
     dateString = 'unknown';
     launchname = 'unknown';
-    %dateString = 'DJF 2017-2018';
-    %launchname = 'Utqiagvik, AK';
+    %dateString = 'DJF 2015-2016';
+    %launchname = 'Chatham, MA';
 end
 t = title({['Ice phase space for ' dateString],launchname});
 t.FontName = 'Lato Bold';
