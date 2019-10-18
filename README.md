@@ -1,4 +1,4 @@
-# Ice growth diagram (summer 2019)
+# Ice growth diagram
 
 ### Table of Contents  
 [Workflow for habit diagram](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#workflow-for-habit-diagram)  
