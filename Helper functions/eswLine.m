@@ -7,7 +7,7 @@ function [eswLineData] = eswLine(percent,Tlower,Tupper)
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
     % J. Appl. Meteor., 35, 601?609,
     % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
-    % See equations 25 and 27 from above citation.
+    % See equations 21 and 23 from above citation.
     %
     %General form: [eswLineData] = eswLine(percent,Tlower,Tupper)
     %
