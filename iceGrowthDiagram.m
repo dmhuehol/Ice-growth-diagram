@@ -22,6 +22,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,i
     %   CAUTION: this is OF VERY DUBIOUS ACCURACY!
     %legLog: logical 1/0 to show the legend
     %legendLocStr: legend location string ('southeast' is standard)
+    % with 'southoutside' to move legend below the figure)
     %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [0 0.6])
     %ylimRange: determines range for the y-axis (in deg C), input as
     %2-element array in increasing order (i.e. [-60 0]). Minimum
@@ -30,6 +31,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,i
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
+    %Last major revision: 11/4/2019
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -233,6 +235,7 @@ end
 if ventLog==1
     %Approximate maximum supersaturation line
     maxVentLine = plot(2*eswLineData(151:end),TlineStandardC(151:end));
+    maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
     maxVentLine.Color = [0 26 255]./255;
     maxVentLine.LineWidth = 3.2;
     
@@ -285,6 +288,8 @@ axe.YDir = 'reverse';
 
 leg = legend(legendEntries,legendTexts);
 leg.Location = legendLocStr;
+leg.NumColumns = 3;
+leg.FontSize = 14;
 
 if legLog==0
     leg.Visible = 'off';

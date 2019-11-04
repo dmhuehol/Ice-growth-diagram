@@ -19,7 +19,8 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,freezingLine
     %    0 and all other values don't plot any isohumes
     %ventLog: logical 1/0 to draw the maximum natural supersaturation line
     %legLog: logical 1/0 to show the legend
-    %legendLocStr: legend location string ('southeast' is standard)
+    %legendLocStr: legend location string ('southeast' is standard, call
+    % with 'southoutside' to move legend below the figure)
     %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [0 0.6])
     %ylimRange: determines range for the y-axis (in deg C), input as
     %2-element array in increasing order (i.e. [-60 0]). Minimum
