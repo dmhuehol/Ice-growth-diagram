@@ -30,8 +30,6 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,i
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 9/19/2019
-    %Last major revision: 8/23/2019
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %

@@ -1,4 +1,4 @@
-function [fig] = growthDiagramProfile(sounding,timeIndex,legLog)
+function [fig] = growthDiagramProfile(sounding,timeIndex,legLog, phaseFlag)
 %%growthDiagramProfile
     %Function to plot a balloon temperature/humidity profile on the ice growth
     %diagram. Saturation vapor pressure equations use the Improved
@@ -42,10 +42,21 @@ end
 crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
-freezingLineLog = 1; isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
-supersatLim = [0,0.6]; %[0,0.6] is standard
-tempLim = [-56.5,0]; % [-56.5,0] is standard, omits stratosphere
-[fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',supersatLim,tempLim); %Plot the growth diagram
+if strcmp(phaseFlag,'ice')==1
+   
+    freezingLineLog = 1; isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
+    supersatLim = [0,0.6]; %[0,0.6] is standard
+    tempLim = [-56.5,0]; % [-56.5,0] is standard, omits stratosphere
+    [fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',supersatLim,tempLim); %Plot the growth diagram
+
+elseif strcmp(phaseFlag,'water')==1
+    
+    freezingLineLog = 1; legLogForGeneration = 1;
+    supersatLim = [55,130]; %[0,0.6] is standard
+    tempLim = [-56.5,0]; % [-56.5,0] is standard, omits stratosphere
+    [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,freezingLineLog,legLogForGeneration,'southeast',supersatLim,tempLim); %Plot the growth diagram
+
+end    
 
 if length(timeIndex)==1
     % Autogenerate title for single profiles
@@ -58,8 +69,8 @@ if length(timeIndex)==1
     end
 else
     % Manually generate title otherwise
-    dateString = 'unknown';
-    launchname = 'unknown';
+    dateString = 'Jan-Feb 2018';
+    launchname = 'Utqiagvik, AK';
     %dateString = 'DJF 2015-2016';
     %launchname = 'Chatham, MA';
 end
@@ -89,7 +100,7 @@ for c = 1:length(timeIndex)
     
     rhumDecimal = [sounding(loopTime).rhum]./100; %Need humidity in decimal to plot balloon data
     
-    rhumDecimal = round(rhumDecimal,3); %Rounding forces the points to fall more clearly along isohumes!
+    rhumDecimal = round(rhumDecimal,2); %Rounding forces the points to fall more clearly along isohumes!
     
     radiosondeTemp = [sounding(loopTime).temp]; %Celsius for plotting
     
@@ -101,15 +112,30 @@ for c = 1:length(timeIndex)
     eswStandardFromRadiosonde = (6.1094.*exp((17.625.*radiosondeTemp)./(243.04+radiosondeTemp))).*100;
     esiStandardFromRadiosonde = (6.1121.*exp((22.587.*radiosondeTemp)./(273.86+radiosondeTemp))).*100;
     soundingHumidity = rhumDecimal.*eswStandardFromRadiosonde;
-    %soundingHumidity = 0.6.*eswStandardFromRadiosonde;
-    soundingHumidityPoints = (soundingHumidity-esiStandardFromRadiosonde)./esiStandardFromRadiosonde;
-    
-    shp1 = soundingHumidityPoints(radiosondeHeight1);
-    shp2 = soundingHumidityPoints(radiosondeHeight2);
-    shp3 = soundingHumidityPoints(radiosondeHeight3);
-    shp4 = soundingHumidityPoints(radiosondeHeight4);
-    shp5 = soundingHumidityPoints(radiosondeHeight5);
-    shpRest = soundingHumidityPoints(radiosondeHeightRest);
+    %soundingHumidity = 0.7.*eswStandardFromRadiosonde;
+
+    if strcmp(phaseFlag,'ice')==1 
+        soundingIceHumidityPoints = (soundingHumidity-esiStandardFromRadiosonde)./esiStandardFromRadiosonde;
+        
+        shp1 = soundingIceHumidityPoints(radiosondeHeight1);
+        shp2 = soundingIceHumidityPoints(radiosondeHeight2);
+        shp3 = soundingIceHumidityPoints(radiosondeHeight3);
+        shp4 = soundingIceHumidityPoints(radiosondeHeight4);
+        shp5 = soundingIceHumidityPoints(radiosondeHeight5);
+        shpRest = soundingIceHumidityPoints(radiosondeHeightRest);
+        
+    elseif strcmp(phaseFlag,'water')==1
+        
+        soundingWaterHumidityPoints = rhumDecimal.*100;
+        
+        shp1 = soundingWaterHumidityPoints(radiosondeHeight1);
+        shp2 = soundingWaterHumidityPoints(radiosondeHeight2);
+        shp3 = soundingWaterHumidityPoints(radiosondeHeight3);
+        shp4 = soundingWaterHumidityPoints(radiosondeHeight4);
+        shp5 = soundingWaterHumidityPoints(radiosondeHeight5);
+        shpRest = soundingWaterHumidityPoints(radiosondeHeightRest);
+        
+    end
     
     pc1 = scatter(shp1,radiosondeTemp(radiosondeHeight1),'filled','MarkerEdgeColor',[213,94,0]./255,'MarkerFaceColor',[213,94,0]./255);
     hold on
@@ -118,6 +144,7 @@ for c = 1:length(timeIndex)
     pc4 = scatter(shp4,radiosondeTemp(radiosondeHeight4),'filled','MarkerEdgeColor',[0 158 115]./255,'MarkerFaceColor',[0 158 115]./255);
     pc5 = scatter(shp5,radiosondeTemp(radiosondeHeight5),'filled','MarkerEdgeColor',[0 0 0]./255,'MarkerFaceColor',[0 0 0]./255);
     pcRest = scatter(shpRest,radiosondeTemp(radiosondeHeightRest),'filled','MarkerEdgeColor',[145 144 143]./255,'MarkerFaceColor',[145 144 143]./255);
+
 end
 
 legendEntries(end+1) = pc1;
