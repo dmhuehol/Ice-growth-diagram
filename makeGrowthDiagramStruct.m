@@ -25,8 +25,8 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/1/2019
-    %Last major revision: 11/1/2019
+    %Version date: 11/5/2019
+    %Last major revision: 11/5/2019
     %
     %See also iceSupersatToRH
     %
@@ -137,14 +137,12 @@ if otherLog==1
     
     hd.unnatural.Habit = 'Coordinates to block out unnatural supersaturations'; %Follows the 2*water saturation line
     hd.unnatural.Color = [1 1 1];
-    %hd.unnatural.TempBounds = [0 -7.5 -14.4 -17.8 -19.4 -21.1 -24.1 -26.4 -26.9 0];
     Tupper = 15; Tlower = -70;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);
     hd.unnatural.TempBounds = [0 TlineStandardC(2:11:420) 0];
     %hd.unnatural.TempBounds = [0 -7.5 -14 -18.5 -24.8 0]; %Original values from MEA312 saturation equation
     hd.unnatural.supersatBounds = [0 eswLineData(2:11:420).*2 0.6];
-    %hd.unnatural.supersatBounds = [0 0.1543 0.3077 0.3869 0.4250 0.466 0.5398 0.5976 0.6102 0.6];
     hd.unnatural.waterBounds = iceSupersatToRH(hd.unnatural.supersatBounds.*100,hd.unnatural.TempBounds);
     
     hd.subsaturated.Habit = 'Coordinates to cover subsaturated area (for radiosonde data plotting).';
