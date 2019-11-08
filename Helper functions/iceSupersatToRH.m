@@ -1,6 +1,6 @@
 function [RH] = iceSupersatToRH(iceSupersat,T)
 %%iceSupersatToRH
-    %Converts ice supersaturation in decimal to RH in percent. Uses the
+    %Converts ice supersaturation in % to RH in percent. Uses the
     %Improved August-Roche-Magnus saturation vapor pressure equation from:
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
