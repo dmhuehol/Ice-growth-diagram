@@ -29,8 +29,8 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,freezingLine
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/1/2019
-    %Last major revision: 
+    %Version date: 11/11/2019
+    %Last major revision: 11/11/2019
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -67,6 +67,11 @@ leftColor = [0 0 0]; rightColor = [0 0 0];
 set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-axis color
 
 %% Draw the growth types
+Tupper = 15; Tlower = -70;
+TlineStandardC = Tupper:-0.1:Tlower;
+[eswLineData] = eswLine(100,Tlower,Tupper);
+water_eswLineData = iceSupersatToRH(eswLineData.*100,TlineStandardC);
+
 plates = patch(hd.Plates.waterBounds, hd.Plates.TempBounds, hd.Plates.Color);
 plates.EdgeColor = 'none';
 columnlike = patch(hd.ColumnLike.waterBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
@@ -107,15 +112,15 @@ intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = 'none';
+
 mixed2 = patch(hd.Mixed.waterBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
 mixed2.EdgeColor = 'none';
 warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
-subsaturated = patch(hd.subsaturated.waterBounds(1,:),hd.subsaturated.TempBounds(1,:),hd.subsaturated.Color);
+subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
 unnatural = patch(hd.unnatural.waterBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
 unnatural.EdgeColor = 'none';
-%unnatural.FaceColor = 'none';
 hold on
 
 %legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
@@ -133,17 +138,54 @@ if freezingLineLog==1
     legendTexts{end+1} = 'Freezing line';
 end
 
-Tupper = 15; Tlower = -70;
-TlineStandardC = Tupper:-0.1:Tlower;
-[eswLineData] = eswLine(100,Tlower,Tupper);
-water_eswLineData = iceSupersatToRH(eswLineData.*100,TlineStandardC);
 eswSupersatLineStandard = plot(water_eswLineData,TlineStandardC);
 eswSupersatLineStandard.Color = [255 230 0]./255;
 eswSupersatLineStandard.LineWidth = 3.2;
+eswSupersatLineStandard.LineStyle = ':';
+
+startMat = ones(1,length(TlineStandardC));
+
+water_esi0LineData = iceSupersatToRH(startMat.*0,TlineStandardC);
+esi0Line = plot(water_esi0LineData,TlineStandardC);
+esi0Line.Color = [255 230 0]./255;
+esi0Line.LineWidth = 3.2;
+hold on
+
+water_esi10LineData = iceSupersatToRH(startMat.*10,TlineStandardC);
+esi10Line = plot(water_esi10LineData,TlineStandardC);
+esi10Line.Color = [255 230 0]./255;
+esi10Line.LineWidth = 3.2;
+
+water_esi20LineData = iceSupersatToRH(startMat.*20,TlineStandardC);
+esi20Line = plot(water_esi20LineData,TlineStandardC);
+esi20Line.Color = [255 230 0]./255;
+esi20Line.LineWidth = 3.2;
+
+water_esi30LineData = iceSupersatToRH(startMat.*30,TlineStandardC);
+esi30Line = plot(water_esi30LineData,TlineStandardC);
+esi30Line.Color = [255 230 0]./255;
+esi30Line.LineWidth = 3.2;
+
+water_esi40LineData = iceSupersatToRH(startMat.*40,TlineStandardC);
+esi40Line = plot(water_esi40LineData,TlineStandardC);
+esi40Line.Color = [255 230 0]./255;
+esi40Line.LineWidth = 3.2;
+
+water_esi50LineData = iceSupersatToRH(startMat.*50,TlineStandardC);
+esi50Line = plot(water_esi50LineData,TlineStandardC);
+esi50Line.Color = [255 230 0]./255;
+esi50Line.LineWidth = 3.2;
+
+water_esi60LineData = iceSupersatToRH(startMat.*60,TlineStandardC);
+esi60Line = plot(water_esi60LineData,TlineStandardC);
+esi60Line.Color = [255 230 0]./255;
+esi60Line.LineWidth = 3.2;
+legendEntries(end+1) = esi60Line;
+legendTexts{end+1} = 'Ice isohumes (100% min, 160% max, 10% interval)';
 
 water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
 water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
-water_ventLine.Color = [204 0 0]./255;
+water_ventLine.Color = [0 26 255]./255;
 water_ventLine.LineWidth = 3.2;
 legendEntries(end+1) = water_ventLine;
 legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
