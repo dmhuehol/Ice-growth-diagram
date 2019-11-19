@@ -68,8 +68,6 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 %% Draw the growth types
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
-[eswLineData] = eswLine(100,Tlower,Tupper);
-water_eswLineData = iceSupersatToRH(eswLineData.*100,TlineStandardC);
 
 plates = patch(hd.Plates.waterBounds, hd.Plates.TempBounds, hd.Plates.Color);
 plates.EdgeColor = 'none';
@@ -124,10 +122,49 @@ legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycr
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
-eswSupersatLineStandard = plot(water_eswLineData,TlineStandardC);
-eswSupersatLineStandard.Color = [255 230 0]./255;
-eswSupersatLineStandard.LineWidth = 3.2;
-eswSupersatLineStandard.LineStyle = ':';
+esw50LineStandard = plot([50 50],[-70 0]);
+esw50LineStandard.Color = [255 230 0]./255;
+esw50LineStandard.LineWidth = 3.2;
+esw50LineStandard.LineStyle = ':';
+
+esw60LineStandard = plot([60 60],[-70 0]);
+esw60LineStandard.Color = [255 230 0]./255;
+esw60LineStandard.LineWidth = 3.2;
+esw60LineStandard.LineStyle = ':';
+
+esw70LineStandard = plot([70 70],[-70 0]);
+esw70LineStandard.Color = [255 230 0]./255;
+esw70LineStandard.LineWidth = 3.2;
+esw70LineStandard.LineStyle = ':';
+
+esw80LineStandard = plot([80 80],[-70 0]);
+esw80LineStandard.Color = [255 230 0]./255;
+esw80LineStandard.LineWidth = 3.2;
+esw80LineStandard.LineStyle = ':';
+
+esw90LineStandard = plot([90 90],[-70 0]);
+esw90LineStandard.Color = [255 230 0]./255;
+esw90LineStandard.LineWidth = 3.2;
+esw90LineStandard.LineStyle = ':';
+
+esw100SupersatLineStandard = plot([100 100],[-70 0]);
+esw100SupersatLineStandard.Color = [255 230 0]./255;
+esw100SupersatLineStandard.LineWidth = 3.2;
+esw100SupersatLineStandard.LineStyle = ':';
+legendEntries(end+1) = esw100SupersatLineStandard;
+legendTexts{end+1} = 'Isohumes (10% intervals)';
+
+esw102p5LineStandard = plot([102.5 102.5],[-70 0]);
+esw102p5LineStandard.Color = [255 230 0]./255;
+esw102p5LineStandard.LineWidth = 3.2;
+esw102p5LineStandard.LineStyle = '-.';
+
+esw105LineStandard = plot([105 105],[-70 0]);
+esw105LineStandard.Color = [255 230 0]./255;
+esw105LineStandard.LineWidth = 3.2;
+esw105LineStandard.LineStyle = '-.';
+legendEntries(end+1) = esw105LineStandard;
+legendTexts{end+1} = 'Isohumes (102.5%, 105%)';
 
 startMat = ones(1,length(TlineStandardC));
 
@@ -167,14 +204,15 @@ esi60Line = plot(water_esi60LineData,TlineStandardC);
 esi60Line.Color = [255 230 0]./255;
 esi60Line.LineWidth = 3.2;
 legendEntries(end+1) = esi60Line;
-legendTexts{end+1} = 'Ice isohumes (100% min, 160% max, 10% interval)';
+legendTexts{end+1} = 'Ice-isohumes (100% min, 160% max, 10% interval)';
 
+[eswLineData] = eswLine(100,Tlower,Tupper);
 water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
 water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
 water_ventLine.Color = [0 26 255]./255;
 water_ventLine.LineWidth = 3.2;
 legendEntries(end+1) = water_ventLine;
-legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
+legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
 
 %water_vent200Line = plot([200,200],[25,-75]);
 %water_vent200Line.Color = [204,121,167]./255;
