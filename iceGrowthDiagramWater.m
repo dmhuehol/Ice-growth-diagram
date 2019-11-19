@@ -86,10 +86,6 @@ polycrystalsC1 = patch(hd.PolycrystalsC.waterBounds(1,:),hd.PolycrystalsC.TempBo
 polycrystalsC1.EdgeColor = 'none';
 polycrystalsC2 = patch(hd.PolycrystalsC.waterBounds(2,:),hd.PolycrystalsC.TempBounds(2,:),hd.PolycrystalsC.Color);
 polycrystalsC2.EdgeColor = 'none';
-polycrystalsI = patch(hd.PolycrystalsIntermediate.waterBounds,hd.PolycrystalsIntermediate.TempBounds,hd.PolycrystalsIntermediate.Color(1,:));
-polycrystalsI2 = patch(hd.PolycrystalsIntermediate.waterBounds,hd.PolycrystalsIntermediate.TempBounds,hd.PolycrystalsIntermediate.Color(2,:));
-polycrystalsI.EdgeColor = 'none'; polycrystalsI.FaceAlpha = 1;
-polycrystalsI2.EdgeColor = 'none'; polycrystalsI2.FaceAlpha = 1;
 sectorplates1 = patch(hd.SectorPlates.waterBounds(1,:),hd.SectorPlates.TempBounds(1,:),hd.SectorPlates.Color);
 sectorplates1.EdgeColor = 'none';
 sectorplates2 = patch(hd.SectorPlates.waterBounds(2,:),hd.SectorPlates.TempBounds(2,:),hd.SectorPlates.Color);
