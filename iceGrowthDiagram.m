@@ -1,16 +1,15 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram. Returns the figure handle
     %so further modifications are possible.
     %
-    %General form: [fig] = iceGrowthDiagram(hd,freezingLineLog,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
+    %General form: [fig] = iceGrowthDiagram(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
     %
     %Output
     %fig: figure handle for the ice growth diagram
     %
     %Input
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
-    %freezingLineLog: logical 1/0 to draw a line at 0 deg C
     %isohumeFlag: flag for drawing lines of constant RH with respect to water.
     %    1 draws RH lines at 10% intervals from 0 to 100, and at 2.5% and
     %       5% supersaturations with respect to water
@@ -31,8 +30,8 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,freezingLineLog,i
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/4/2019
-    %Last major revision: 11/4/2019
+    %Version date: 11/18/2019
+    %Last major revision: 11/18/2019
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -114,15 +113,6 @@ legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycr
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
 
 %% Plot other lines
-if freezingLineLog==1
-    %Draw line at 0 deg C
-    TlineFreezing = plot([-20,100],[0,0]);
-    TlineFreezing.LineWidth = 3.2;
-    TlineFreezing.Color = [255 0 255]./255;
-    legendEntries(end+1) = TlineFreezing;
-    legendTexts{end+1} = 'Freezing line';
-end
-
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
