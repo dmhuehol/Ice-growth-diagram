@@ -25,7 +25,7 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/5/2019
+    %Version date: 11/11/2019
     %Last major revision: 11/5/2019
     %
     %See also iceSupersatToRH
@@ -94,7 +94,7 @@ if crystalLog==1
     hd.VariousPlates.Habit = 'Edge growth (various plates)'; %Various plates
     hd.VariousPlates.Color = hd.Plates.Color;
     hd.VariousPlates.TempBounds = [-8 -8 -22 -22];
-    hd.VariousPlates.supersatBounds = [0 (esw_vp(1)-esi_vp(1))/esi_vp(1) (esw_vp(2)-esi_vp(2))/esi_vp(2) 0];
+    hd.VariousPlates.supersatBounds = [0.038 (esw_vp(1)-esi_vp(1))/esi_vp(1) (esw_vp(2)-esi_vp(2))/esi_vp(2) 0.038];
     hd.VariousPlates.waterBounds = iceSupersatToRH(hd.VariousPlates.supersatBounds.*100,hd.VariousPlates.TempBounds);
     
     hd.SectorPlates.Habit = 'Corner growth (sector plates)'; %Sector plates
@@ -123,9 +123,14 @@ if crystalLog==1
     
     hd.Mixed.Habit = 'Mixed (polycrystals, plates, columns, equiaxed)';
     hd.Mixed.Color = [143 111 73]./255;
-    hd.Mixed.TempBounds = [-8 -8 -70 -70; -46.6 -45.9 -70 -70];
-    hd.Mixed.supersatBounds = [0 0.038 0.038 0; 0.038 0.0697 0.0697 0.038];
+    %hd.Mixed.TempBounds = [-8 -22 -8 -22 -46.6 -46.6; nan,nan,nan,nan,nan,nan]; %-70 -70; -46.6 -45.9 -70 -70 nan nan nan];
+    %hd.Mixed.supersatBounds = [0 0 0.038 0.038 0.038 0; nan,nan,nan,nan,nan,nan]; %0.038 0.038 0; 0.038 0.0697 0.0697 0.038 nan nan nan];
+    %hd.Mixed.waterBounds = iceSupersatToRH(hd.Mixed.supersatBounds.*100,hd.Mixed.TempBounds);
+    
+    hd.Mixed.TempBounds = [-8 -22 -30 -40 -46.6 -46.6 -22 -8; -46.6 -55 -60 -70 -70 -60 -55 -45.9]; %-70 -70; -46.6 -45.9 -70 -70 nan nan nan];
+    hd.Mixed.supersatBounds = [0 0 0 0 0 0.038 0.038 0.038; 0 0 0 0 0.0697 0.0697 0.0697 0.0697]; %0.038 0.038 0; 0.038 0.0697 0.0697 0.038 nan nan nan];
     hd.Mixed.waterBounds = iceSupersatToRH(hd.Mixed.supersatBounds.*100,hd.Mixed.TempBounds);
+    
     
 end
 
@@ -142,9 +147,11 @@ if otherLog==1
     
     hd.subsaturated.Habit = 'Coordinates to cover subsaturated area (for radiosonde data plotting).';
     hd.subsaturated.Color = [204 204 204]./255;
-    hd.subsaturated.TempBounds = [0 0 -70 -70];
-    hd.subsaturated.supersatBounds = [-0.6 0 0 -0.6];
-    hd.subsaturated.waterBounds = iceSupersatToRH(hd.subsaturated.supersatBounds.*100,hd.subsaturated.TempBounds);
+    esiLineData = zeros(1,length(TlineStandardC(151:end)));
+    hd.subsaturated.TempBounds = [0 TlineStandardC(151:end) -70 0];%[0 TlineStandardC(151:end) -70];
+    hd.subsaturated.supersatBounds =  [-0.5 esiLineData -0.5 -0.5];%[-0.2 esiLineData -0.2];
+    hd.subsaturated.waterBounds = iceSupersatToRH(hd.subsaturated.supersatBounds*100,hd.subsaturated.TempBounds);
+    
     
     hd.warm.Habit = 'Coordinates to cover the area warmer than freezing (for radiosonde data plotting).';
     hd.warm.Color = [255,255,255]./255; %Invisible by default; suggest [204 204 204]./255 if want to plot
