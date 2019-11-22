@@ -49,8 +49,8 @@ if ~exist('legendLocStr','var')
     disp('Legend location defaults to southeast');
 end
 if ~exist('xlimRange','var')
-    xlimRange = [0 0.6];
-    disp('Default ice supersaturation range for x-axis is 0 to 60%')
+    xlimRange = [55 124];
+    disp('Default RHwater range for x-axis is 55 to 124%')
 end
 if ~exist('ylimRange','var')
     ylimRange = [-56.5 0];
@@ -246,8 +246,8 @@ yLab.FontName = 'Lato Bold';
 xLab = xlabel('Relative humidity with respect to water (%)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
-%axe.XTick = [0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6];
-%xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150' '155' '160'}; %these would change if RHice to plus 100
+axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
+%xTickLabels = {'50' '55' '60' '65' '120' '125' '130' '135' '140' '145' '150' '155' '160'}; %these would change if RHice to plus 100
 %xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
