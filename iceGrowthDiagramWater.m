@@ -1,40 +1,40 @@
 function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
-    %Function to plot an ice growth diagram in relative humidity with
-    %respect to water phase space. Returns the figure handle so further
+    %Function to plot an ice growth diagram with relative humidity with
+    %respect to water as abscissa. Returns the figure handle so further
     %modifications are possible.
     %
-    %General form: [fig] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRang,ylimRange)
+    %General form: [fig] = iceGrowthDiagram(hd,legLog,legendLocStr,xlimRange,ylimRange)
     %
     %Output
     %fig: figure handle for the ice growth diagram
     %
     %Input
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
-    %isohumeFlag: flag for drawing lines of constant RH with respect to water.
-    %    1 draws RH lines at 10% intervals from 0 to 100, and at 2.5% and
-    %       5% supersaturations with respect to water
-    %    2 draws only the water saturation line (RH=100%)
-    %    0 and all other values don't plot any isohumes
-    %ventLog: logical 1/0 to draw the maximum natural supersaturation line
     %legLog: logical 1/0 to show the legend
-    %legendLocStr: legend location string ('southeast' is standard, call
-    % with 'southoutside' to move legend below the figure)
-    %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [0 0.6])
+    %legendLocStr: legend location string ('southoutside' is standard)
+    %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [55 124])
     %ylimRange: determines range for the y-axis (in deg C), input as
-    %2-element array in increasing order (i.e. [-60 0]). Minimum
+    %2-element array in increasing order (i.e. [-56.5 0]). Minimum
     %temperature cannot be less than -70 degrees Celsius.
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/18/2019
-    %Last major revision: 11/18/2019
+    %Version date: 11/22/2019
+    %Last major revision: 11/22/2019
     %
-    %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
+    %See also makeGrowthDiagramStruct, iceGrowthDiagram
     %
 
 %% Check variables
+if nargin == 0
+    disp('Creating default ice diagram!')
+    pause(1) %For the vibes
+    crystalLog = 1;
+    otherLog = 1;
+    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
+end
 if isnumeric(hd)==1
     msg = 'Make sure hd structure is first input!';
     error(msg)
@@ -42,11 +42,15 @@ end
 if ~exist('hd','var')
     crystalLog = 1;
     otherLog = 1;
-    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
+    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
+end
+if ~exist('legLog','var')
+    legLog = 1;
+    disp('Legend enabled by default')
 end
 if ~exist('legendLocStr','var')
-    legendLocStr = 'southeast';
-    disp('Legend location defaults to southeast');
+    legendLocStr = 'southoutside';
+    disp('Legend location defaults to below the figure');
 end
 if ~exist('xlimRange','var')
     xlimRange = [55 124];
@@ -116,9 +120,7 @@ unnatural = patch(hd.unnatural.waterBounds,hd.unnatural.TempBounds,hd.unnatural.
 unnatural.EdgeColor = 'none';
 hold on
 
-%legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated]; %Disabling subsaturated to make images
-%legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated'};
+legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
@@ -214,6 +216,7 @@ water_ventLine.LineWidth = 3.2;
 legendEntries(end+1) = water_ventLine;
 legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
 
+% 200% RH line (compare to 2*esw ventilation line)
 %water_vent200Line = plot([200,200],[25,-75]);
 %water_vent200Line.Color = [204,121,167]./255;
 %water_vent200Line.LineWidth = 3.2;
@@ -231,7 +234,7 @@ axe.YTick = tempsInRange;
 yticklabels(zLabels);
 ylim(rightLimits)
 axe.Layer = 'top';
-yLab = ylabel('Height above freezing level in m (ICAO standard atmosphere)');
+yLab = ylabel(['Height above 0' char(176) 'C level in m (ICAO standard atmosphere)']);
 yLab.FontName = 'Lato Bold';
 
 yyaxis left %Changes what axis dot notation refers
@@ -247,8 +250,6 @@ xLab = xlabel('Relative humidity with respect to water (%)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
 axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
-%xTickLabels = {'50' '55' '60' '65' '120' '125' '130' '135' '140' '145' '150' '155' '160'}; %these would change if RHice to plus 100
-%xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 

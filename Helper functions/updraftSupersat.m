@@ -19,9 +19,12 @@ function [s_max] = updraftSupersat(C,k,w)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 5/21/2019
+    %Version date: 11/22/2019
     %Last major revision: 5/21/2019
     %
+
+msg = 'The justification for the updraft supersaturation equation and its values are unknown. Use with extreme caution!!';
+warning(msg);
 
 if ~exist('C','var')
     C = 1000; %default parameter value for continental airmass, picked arbitrarily from the 300 to 3000 range

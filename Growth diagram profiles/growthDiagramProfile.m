@@ -1,4 +1,4 @@
-function [fig] = growthDiagramProfile(sounding,timeIndex,legLog, phaseFlag)
+function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag)
 %%growthDiagramProfile
     %Function to plot a balloon temperature/humidity profile on the ice growth
     %diagram. Saturation vapor pressure equations use the Improved
@@ -14,18 +14,15 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog, phaseFlag)
     %Inputs
     %sounding: a processed sounding data structure, must include moisture data
     %timeIndex: the index of the desired sounding within the structure
-    %legLog: logical 1/0 to plot/not plot the rather giant legend. Enabled by default.
-    %
-    %Requires secondary functions makeGrowthDiagramStruct,
-    %iceGrowthDiagram, and eswLine
+    %legLog: logical 1/0 to plot/not plot legend. Enabled by default.
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 9/19/2019
-    %Last major revision: 9/6/2019
+    %Version date: 11/22/2019
+    %Last major revision: 11/22/2019
     %
-    %See also makeGrowthDiagramStruct, iceGrowthDiagram, eswLine
+    %See also makeGrowthDiagramStruct, iceGrowthDiagram, iceGrowthDiagramWater, eswLine
     %
 
 %% Variable checks
@@ -38,24 +35,22 @@ if legLog~=0 && legLog~=1
     disp('Legend enabled by default')
 end
 
-%% Setup growth diagram
+%% Set up growth diagram
 crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
-if strcmp(phaseFlag,'ice')==1
-   
-    freezingLineLog = 1; isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
-    supersatLim = [0,0.6]; %[0,0.6] is standard
-    tempLim = [-56.5,0]; % [-56.5,0] is standard, omits stratosphere
-    [fig,legendEntries,legendText] = iceGrowthDiagram(hd,freezingLineLog,isohumesLog,ventLog,updraftLog,legLogForGeneration,'southeast',supersatLim,tempLim); %Plot the growth diagram
-
+if strcmp(phaseFlag,'ice')==1  
+    isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
+    legLocation = 'southeast';
+    satLim = [0,0.6]; %[0,0.6] is standard
+    tempLim = [-56.5,0]; % [-56.5,0] is standard
+    [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,updraftLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 elseif strcmp(phaseFlag,'water')==1
-    
-    freezingLineLog = 1; legLogForGeneration = 1;
-    supersatLim = [55,130]; %[0,0.6] is standard
-    tempLim = [-56.5,0]; % [-56.5,0] is standard, omits stratosphere
-    [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,freezingLineLog,legLogForGeneration,'southeast',supersatLim,tempLim); %Plot the growth diagram
-
+    legLogForGeneration = 1;
+    legLocation = 'northeast';
+    satLim = [55,124]; %[55,124] is standard
+    tempLim = [-56.5,0]; % [-56.5,0] is standard
+    [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 end    
 
 if length(timeIndex)==1
@@ -69,10 +64,8 @@ if length(timeIndex)==1
     end
 else
     % Manually generate title otherwise
-    dateString = 'Jan-Feb 2018';
+    dateString = 'Jan 1 2018 to May 2 2019';
     launchname = 'Utqiagvik, AK';
-    %dateString = 'DJF 2015-2016';
-    %launchname = 'Chatham, MA';
 end
 t = title({['Ice phase space for ' dateString],launchname});
 t.FontName = 'Lato Bold';
@@ -82,8 +75,7 @@ t.FontSize = 20;
 disp('Plotting in progress!')
 totalNumber = length(timeIndex);
 disp(['Total number of soundings to plot is ', num2str(totalNumber)]);  % Reports number of soundings to plot
-for c = 1:length(timeIndex)
-    
+for c = 1:length(timeIndex)   
     %Provide some info about progress
     loopTime = timeIndex(c);
     if mod(loopTime,100)==0
@@ -99,20 +91,12 @@ for c = 1:length(timeIndex)
     radiosondeHeightRest = radiosondeHeight>10000;
     
     rhumDecimal = [sounding(loopTime).rhum]./100; %Need humidity in decimal to plot balloon data
-    
-    rhumDecimal = round(rhumDecimal,2); %Rounding forces the points to fall more clearly along isohumes!
-    
+    rhumDecimal = round(rhumDecimal,2); %Rounding forces the points to fall more clearly along isohumes!    
     radiosondeTemp = [sounding(loopTime).temp]; %Celsius for plotting
-    
-    % Original equations from MEA312 notes
-    %radiosondeTempK = radiosondeTemp+273.15; %Kelvins for supersaturation calculations
-    %eswStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lvap/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to water
-    %esiStandardFromRadiosonde = hd.Constants.es0*exp(hd.Constants.Lsub/hd.Constants.Rv*(1/273.15-1./radiosondeTempK)); %Saturated vapor pressure with respect to ice
     
     eswStandardFromRadiosonde = (6.1094.*exp((17.625.*radiosondeTemp)./(243.04+radiosondeTemp))).*100;
     esiStandardFromRadiosonde = (6.1121.*exp((22.587.*radiosondeTemp)./(273.86+radiosondeTemp))).*100;
     soundingHumidity = rhumDecimal.*eswStandardFromRadiosonde;
-    %soundingHumidity = 0.7.*eswStandardFromRadiosonde;
 
     if strcmp(phaseFlag,'ice')==1 
         soundingIceHumidityPoints = (soundingHumidity-esiStandardFromRadiosonde)./esiStandardFromRadiosonde;
@@ -122,10 +106,8 @@ for c = 1:length(timeIndex)
         shp3 = soundingIceHumidityPoints(radiosondeHeight3);
         shp4 = soundingIceHumidityPoints(radiosondeHeight4);
         shp5 = soundingIceHumidityPoints(radiosondeHeight5);
-        shpRest = soundingIceHumidityPoints(radiosondeHeightRest);
-        
+        shpRest = soundingIceHumidityPoints(radiosondeHeightRest);        
     elseif strcmp(phaseFlag,'water')==1
-        
         soundingWaterHumidityPoints = rhumDecimal.*100;
         
         shp1 = soundingWaterHumidityPoints(radiosondeHeight1);
@@ -144,7 +126,6 @@ for c = 1:length(timeIndex)
     pc4 = scatter(shp4,radiosondeTemp(radiosondeHeight4),'filled','MarkerEdgeColor',[0 158 115]./255,'MarkerFaceColor',[0 158 115]./255);
     pc5 = scatter(shp5,radiosondeTemp(radiosondeHeight5),'filled','MarkerEdgeColor',[0 0 0]./255,'MarkerFaceColor',[0 0 0]./255);
     pcRest = scatter(shpRest,radiosondeTemp(radiosondeHeightRest),'filled','MarkerEdgeColor',[145 144 143]./255,'MarkerFaceColor',[145 144 143]./255);
-
 end
 
 legendEntries(end+1) = pc1;
@@ -160,7 +141,7 @@ legendText{end+1} = 'Balloon data: 8-10 km';
 legendEntries(end+1) = pcRest;
 legendText{end+1} = 'Balloon data: >10 km';
 leg = legend(legendEntries,legendText);
-leg.Location = 'southeast';
+leg.Location = legLocation;
 leg.FontSize = 10;
 if legLog==0
     leg.Visible = 'off';

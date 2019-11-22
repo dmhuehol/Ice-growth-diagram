@@ -20,7 +20,7 @@ function [zLabels, tempsInRange, outputTempSpan] = ylimitsForIceDiagram(inputTem
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 8/23/2019
+    %Version date: 11/22/2019
     %Last major revision: 8/23/2019
     %
     
@@ -35,9 +35,8 @@ possibleTemps = [0 2 4 6 8 10 12 14 16 18 20 22 30 40 50 56.5 60 70];
 % SEY: 56.5 deg C is tropopause, 11000 m is height of tropopause
 z = [2300 2625 2925 3225 3550 3850 4150 4475 4775 5075 5400 5700 6925 8450 10000 11000 71750 76750];
 % Note the massive jump in heights for the final 2 points is due to the
-% leap to mesospheric heights (as temperature is near-constant or
-% increasing in the stratosphere)
-possibleZ = z-2300; %Height above freezing line
+% leap to mesospheric heights
+possibleZ = z-2300; %Height above 0C line
 
 inputTempSpan = -inputTempSpan;
 tempsInRange = possibleTemps(possibleTemps >= inputTempSpan(2) & possibleTemps <= inputTempSpan(1)); %Find temps in input temp range

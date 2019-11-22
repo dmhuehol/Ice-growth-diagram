@@ -1,6 +1,6 @@
 function [RH] = iceSupersatToRH(iceSupersat,T)
 %%iceSupersatToRH
-    %Converts ice supersaturation in % to RH in percent. Uses the
+    %Converts ice supersaturation in percent to RH in percent. Uses the
     %Improved August-Roche-Magnus saturation vapor pressure equation from:
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
@@ -20,29 +20,19 @@ function [RH] = iceSupersatToRH(iceSupersat,T)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 8/29/2019
+    %Version date: 11/22/2019
     %Last major revision: 8/29/2019
     %
     %See also rhow
     %
-%Constants for MEA312 equation
-% Lsub = 2.834*10^6; %J/(kg)
-% Lvap = 2.501*10^6; %J/Kg
-% Rv = 461.5; %J/(kgK)
-% es0 = 611; %Pa
 
 iceSupersat = iceSupersat./100;
 
 eswStandard = 6.1094.*exp((17.625.*T)./(243.04+T));
 esiStandard = 6.1121.*exp((22.587.*T)./(273.86+T));
 
-% Old MEA312 equation
-%Tk = T+273.15;
-%eswStandard = es0*exp(Lvap/Rv*(1/273.15-1./Tk)); %Saturated vapor pressure with respect to water
-%esiStandard = es0*exp(Lsub/Rv*(1/273.15-1./Tk)); %Saturated vapor pressure with respect to ice
-%esiStandard = esiStandard./100;
-
 esw = esiStandard.*(iceSupersat+1);
 
 RH = esw./eswStandard.*100;
+
 end

@@ -20,18 +20,17 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventL
     %   Requires secondary function updraftSupersat
     %   CAUTION: this is OF VERY DUBIOUS ACCURACY!
     %legLog: logical 1/0 to show the legend
-    %legendLocStr: legend location string ('southeast' is standard, call
-    % with 'southoutside' to move legend below the figure)
-    %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [0 0.6])
-    %ylimRange: determines range for the y-axis (in deg C), input as
-    %2-element array in increasing order (i.e. [-60 0]). Minimum
-    %temperature cannot be less than -70 degrees Celsius.
+    %legendLocStr: legend location string ('southoutside' is standard)
+    %xlimRange: determines range for x-axis, input as 2-element array (i.e. [0 0.6])
+    %ylimRange: determines range for y-axis (in deg C), input as 2-element
+    %    array in increasing order (i.e. [-60 0]). Minimum temperature cannot
+    %    be less than -70 degrees Celsius.
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/18/2019
-    %Last major revision: 11/18/2019
+    %Version date: 11/22/2019
+    %Last major revision: 11/22/2019
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -42,13 +41,25 @@ if ~exist('hd','var')
     otherLog = 1;
     [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 end
+if ~exist('isohumeFlag','var')
+    isohumeFlag = 1;
+    disp('Isohumes enabled by default')
+end
+if ~exist('ventLog','var')
+    ventLog = 1;
+    disp('Ventilation line enabled by default')
+end
 if ~exist('updraftLog','var')
     updraftLog = 0;
-    disp('Updraft guesstimation disabled by default');
+    disp('Updraft guesstimation disabled by default')
+end
+if ~exist('legLog','var')
+    legLog = 1;
+    disp('Legend enabled by default')
 end
 if ~exist('legendLocStr','var')
-    legendLocStr = 'southeast';
-    disp('Legend location defaults to southeast');
+    legendLocStr = 'southoutside';
+    disp('Legend location defaults to below the diagram');
 end
 if ~exist('xlimRange','var')
     xlimRange = [0 0.6];
@@ -107,18 +118,16 @@ unnatural = patch(hd.unnatural.supersatBounds,hd.unnatural.TempBounds,hd.unnatur
 unnatural.EdgeColor = 'none';
 hold on
 
-%legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Disabling subsaturated to make images
-%legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated'};
+legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Sans subsaturated to make images
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
+%legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated]; %With subsaturated
+%legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated'};
 
 %% Plot other lines
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
 if isohumeFlag==1
-    %Draw isohumes, below 100% is one line style and above 100% is another
-    %line style
     eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
     eswSupersatLineStandard.Color = [255 230 0]./255;
     eswSupersatLineStandard.LineWidth = 3.2;
@@ -205,7 +214,7 @@ if isohumeFlag==1
     legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
     
 elseif isohumeFlag==2
-    %Draw isohumes, just 100% only
+    %Draw isohumes, 100% only
     Tupper = 15; Tlower = -70;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);
@@ -217,10 +226,11 @@ elseif isohumeFlag==2
     legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
 else
     %do nothing, don't plot isohumes
+    disp('Isohumes disabled')
 end
 
 if ventLog==1
-    %Approximate maximum supersaturation line
+    %Approximate maximum supersaturation with ventilation line
     maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
     maxVentLine.Color = [0 26 255]./255;
     maxVentLine.LineWidth = 3.2;
@@ -251,7 +261,7 @@ axe.YTick = tempsInRange;
 yticklabels(zLabels);
 ylim(rightLimits)
 axe.Layer = 'top';
-yLab = ylabel('Height above freezing level in m (ICAO standard atmosphere)');
+yLab = ylabel(['Height above 0' char(176) 'C level in m (ICAO standard atmosphere)']);
 yLab.FontName = 'Lato Bold';
 
 yyaxis left %Changes what axis dot notation refers
@@ -267,7 +277,7 @@ xLab = xlabel('Relative humidity with respect to ice (%)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
 axe.XTick = [0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6];
-xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150' '155' '160'}; %these would change if RHice to plus 100
+xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150' '155' '160'};
 xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';

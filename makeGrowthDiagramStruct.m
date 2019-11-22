@@ -25,8 +25,8 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/18/2019
-    %Last major revision: 11/18/2019
+    %Version date: 11/22/2019
+    %Last major revision: 11/22/2019
     %
     %See also iceSupersatToRH
     %
@@ -58,7 +58,7 @@ if crystalLog==0 && otherLog==0
 end
 
 %% Setup
-hd = struct('Plates',''); %Structure needs at least one field to use dot notation
+hd = struct('Constants',''); %Structure needs at least one field to use dot notation
 
 % Thermodynamic constants
 hd.Constants.Lsub = 2.834*10^6; %J/(kgK) (latent heat of sublimation)
@@ -159,10 +159,6 @@ if otherLog==1
     hd.warm.supersatBounds = [0 0.6 0.6 0];
     hd.warm.waterBounds = iceSupersatToRH(hd.warm.supersatBounds.*100,hd.warm.TempBounds);
     
-end
-
-if crystalLog == 0
-    hd = rmfield(hd,'Plates'); %Remove plate field if building structure without crystal growth info
 end
 
 end

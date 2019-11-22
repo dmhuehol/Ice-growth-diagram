@@ -23,26 +23,17 @@ function [eswLineData] = eswLine(percent,Tlower,Tupper)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 8/29/2019
+    %Version date: 11/22/2019
     %Last major revision: 8/29/2019
     %
-
-%Constants, required for original MEA312 saturation equation
-% Lsub = 2.834*10^6; %J/(kg)
-% Lvap = 2.501*10^6; %J/Kg
-% Rv = 461.5; %J/(kgK)
-% es0 = 611; %Pa
 
 percent = percent/100;
 
 TlineStandardC = Tupper:-0.1:Tlower;
-%TlineStandard = TlineStandardC+273.15; %MEA312 saturation equation needed T to be in K
 
 eswStandard = 6.1094.*exp((17.625.*TlineStandardC)./(243.04+TlineStandardC));
 esiStandard = 6.1121.*exp((22.587.*TlineStandardC)./(273.86+TlineStandardC));
 
-%eswStandard = es0*exp(Lvap/Rv*(1/273.15-1./TlineStandard)); %Original MEA312 saturation equation
-%esiStandard = es0*exp(Lsub/Rv*(1/273.15-1./TlineStandard)); %Original MEA312 saturation equation
 eswPercent = eswStandard.*percent;
 eswLineData = (eswPercent-esiStandard)./esiStandard;
 

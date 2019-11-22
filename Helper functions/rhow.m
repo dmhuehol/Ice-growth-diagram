@@ -19,22 +19,13 @@ function [rhoDiff] = rhow(RHpercent,T)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 4/30/2019
-    %Last major revision: 
+    %Version date: 11/22/2019
+    %Last major revision: 4/30/2019
     %
-
-%Constants originally required by MEA312 saturation equation
-%Lsub = 2.834*10^6; %J/(kg)
-%Lvap = 2.501*10^6; %J/Kg
-%es0 = 611; %Pa
 
 RHdecimal = RHpercent/100; %Equations use decimal instead of percent
 Rv = 461.5; %J/(kgK)
 Tk = T+273.15;
-
-% Original MEA312 equation
-%eswStandard = es0*exp(Lvap/Rv*(1/273.15-(1./Tk))); %Saturated vapor pressure with respect to water
-%esiStandard = es0*exp(Lsub/Rv*(1/273.15-(1./Tk))); %Saturated vapor pressure with respect to ice
 
 eswStandard = 6.1094.*exp((17.625.*T)./(243.04+T));
 esiStandard = 6.1121.*exp((22.587.*T)./(273.86+T));
