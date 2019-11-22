@@ -1,5 +1,7 @@
 # Ice growth diagram
 
+WARNING: Documentation is outdated!
+
 ### Table of Contents  
 [Workflow for habit diagram](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#workflow-for-habit-diagram)  
 [Converting between ice supersaturation and vapor density excess](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#converting-between-ice-supersaturation-and-vapor-density-excess)  
