@@ -1,46 +1,65 @@
-function [s_max] = updraftSupersat(C,k,w)
+function [s_upper] = updraftSupersat(c,k,updraft)
 %%updraftSupersat
     %Function to calculate maximum possible supersaturation inside an
-    %updraft. This equation comes from MEA412: Atmospheric Physics at NC
-    %State, and is originally derived from Twomey 1959 "The nuclei of
+    %updraft. These equations come from Twomey 1959 "The nuclei of
     %natural cloud formation part II".
+    % These equations are ONLY valid at P=800 hPa and T=10C.
     %
-    %General form: [s_max] = updraftSupersat(C,k,w)
+    %General form: [s_upper,s_lower] = updraftSupersat(c,k,updraft)
     %
     %Output
-    %s_max: the maximum possible supersaturation in the updraft, with
-    %respect to water
+    %s_max: the maximum supersaturation in the updraft. Output in
+    %deg C which can be converted to % wrt water.
     %
     %Inputs
-    %C: magic parameter having to do with aerosols?
-    %k: magic parameter having to do with aerosols?
-    %w: updraft speed in m/s (cm/s conversion handled within the function)
+    %c: aerosol distribution constant
+    %   pristine maritime: 125
+    %   modified maritime: 160
+    %   continental: 2000
+    %   
+    %k: aerosol distribution constant
+    %   pristine maritime: 1/3
+    %   modified maritime: 1/4
+    %   continental: 2/5
+    %updraft: updraft speed in cm/s
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
-    %Last major revision: 5/21/2019
+    % Written as part of HON499: Capstone II
+    %Version date: 2/23/2020
+    %Last major revision: 2/23/2020
     %
 
 msg = 'The justification for the updraft supersaturation equation and its values are unknown. Use with extreme caution!!';
 warning(msg);
 
-if ~exist('C','var')
-    C = 1000; %default parameter value for continental airmass, picked arbitrarily from the 300 to 3000 range
+if ~exist('c','var')
+     msg = 'Aerosol parameter c is required!';
+     error(msg)
 end
 if ~exist('k','var')
-    k = 1; %default parameter value for continental airmass, picked arbitrarily from the 0.2 to 2.0 range
+    msg = 'Aerosol parameter k is required!';
+    error(msg)
 end
-if ~exist('w','var')
-    msg = 'Using default updraft speed of 1 m/s';
-    warning(msg);
-    w = 1;
+if ~exist('updraft','var')
+     msg = 'Using default updraft speed of 1 m/s';
+     warning(msg);
+     updraft = 1;
 end
 
-w = w*100; %Convert from m/s to cm/s
 
-s_max = 3.6*(((1.6*10^(-3)*w^(3/2)))/C)^(1/(k+2));
+%%
+B = beta(3/2,k/2);
+s_upper = ((1.63*10^(-3).*updraft.^(3/2))./(c.*k.*B))^(1/(k+2)); % Equation 10
+
+% In progress
+% m = k+2;
+% A = 2.^(-3/2);
+% a = A./m;
+% alpha = 4.35*10^(-4).*(7.93*10^(-5)*updraft).^(k+0.5).*(c.*k)./(m).*B;
+% s_lower = alpha.*time.*(1-(a.*m)./(m+1).*time.^m+(a.^2.*m.^2)./((m+1).*(2.*m+1)).*time.^(2.*m)-((a.^3.*m.^3)./((m+1).*(2.*m+1).*(3.*m+1)).*time.^(3.*m))); % Equation 7
+
 
 
 end
