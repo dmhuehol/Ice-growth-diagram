@@ -29,13 +29,17 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVapor(hd,isohumeFlag,
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
-    %Last major revision: 11/22/2019
+    %Version date: 2/23/2020
+    %Last major revision: 2/23/2020
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
 
 %% Check variables
+if isnumeric(hd)==1
+    msg = 'Must enter a habit diagram structure as first input!';
+    error(msg)
+end
 if ~exist('hd','var')
     crystalLog = 1;
     otherLog = 1;
@@ -62,7 +66,7 @@ if ~exist('legendLocStr','var')
     disp('Legend location defaults to below the diagram');
 end
 if ~exist('xlimRange','var')
-    xlimRange = [-1.5 1.5];
+    xlimRange = [0 0.6];
     disp('Default ice supersaturation range for x-axis is 0 to 60%')
 end
 if ~exist('ylimRange','var')
@@ -76,12 +80,10 @@ leftColor = [0 0 0]; rightColor = [0 0 0];
 set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-axis color
 
 %% Draw the growth types
-plates = patch(hd.Plates.vaporBounds, hd.Plates.TempBounds,hd.Plates.Color);
+plates = patch(hd.Plates.vaporBounds, hd.Plates.TempBounds, hd.Plates.Color);
 plates.EdgeColor = 'none';
 columnlike = patch(hd.ColumnLike.vaporBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
 columnlike.EdgeColor = 'none';
-variousplates = patch(hd.VariousPlates.vaporBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.Color);
-variousplates.EdgeColor = 'none';
 polycrystalsP1 = patch(hd.PolycrystalsP.vaporBounds(1,:),hd.PolycrystalsP.TempBounds(1,:),hd.PolycrystalsP.Color);
 polycrystalsP1.EdgeColor = 'none';
 polycrystalsP2 = patch(hd.PolycrystalsP.vaporBounds(2,:),hd.PolycrystalsP.TempBounds(2,:),hd.PolycrystalsP.Color);
@@ -98,30 +100,36 @@ sectorplates3 = patch(hd.SectorPlates.vaporBounds(3,:),hd.SectorPlates.TempBound
 sectorplates3.EdgeColor = 'none';
 dendrites = patch(hd.Dendrites.vaporBounds,hd.Dendrites.TempBounds,hd.Dendrites.Color);
 dendrites.EdgeColor = 'none';
+variousplates = patch(hd.VariousPlates.vaporBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.Color);
+variousplates.EdgeColor = 'none';
+
+
 intermediateSPD_floor = patch([hd.Dendrites.vaporBounds(1),hd.Dendrites.vaporBounds(1) hd.Dendrites.vaporBounds(2) hd.Dendrites.vaporBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([hd.SectorPlates.vaporBounds(5),hd.Dendrites.vaporBounds(4) hd.Dendrites.vaporBounds(4) hd.Dendrites.vaporBounds(1)], [hd.SectorPlates.TempBounds(5) hd.SectorPlates.TempBounds(11) hd.Dendrites.TempBounds(3),hd.Dendrites.TempBounds(2)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_wall = patch([hd.SectorPlates.vaporBounds(2,3) hd.SectorPlates.vaporBounds(2,2) hd.Dendrites.vaporBounds(1) hd.Dendrites.vaporBounds(4)], [hd.SectorPlates.TempBounds(3) hd.SectorPlates.TempBounds(2) hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_wall.EdgeColor = 'none';
 intermediateSPD_ceiling = patch([hd.Dendrites.vaporBounds(4),hd.Dendrites.vaporBounds(4) hd.SectorPlates.vaporBounds(6) hd.SectorPlates.vaporBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_cursedTriangle = patch([hd.SectorPlates.vaporBounds(5),hd.Dendrites.vaporBounds(1) hd.Dendrites.vaporBounds(1)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(1) hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
-intermediateSPD_cursedTriangle.EdgeColor = 'none';
+intermediateSPD_triangleTop = patch([hd.SectorPlates.vaporBounds(2,3) hd.Dendrites.vaporBounds(4) hd.Dendrites.vaporBounds(1)], [hd.SectorPlates.TempBounds(3) hd.Dendrites.TempBounds(3) hd.SectorPlates.TempBounds(3)], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleTop.EdgeColor = 'none';
+intermediateSPD_triangleBottom = patch([hd.SectorPlates.vaporBounds(2,2), hd.Dendrites.vaporBounds(1), hd.Dendrites.vaporBounds(1)], [hd.SectorPlates.TempBounds(2), hd.Dendrites.TempBounds(1), hd.SectorPlates.TempBounds(2)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleBottom.EdgeColor = 'none';
+
 mixed1 = patch(hd.Mixed.vaporBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = 'none';
+
 mixed2 = patch(hd.Mixed.vaporBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
 mixed2.EdgeColor = 'none';
 warmerThanFreezing = patch(hd.warm.vaporBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
-subsaturated = patch(hd.subsaturated.vaporBounds(1,:),hd.subsaturated.TempBounds(1,:),hd.subsaturated.Color);
+subsaturated = patch(hd.subsaturated.vaporBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
 unnatural = patch(hd.unnatural.vaporBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
 unnatural.EdgeColor = 'none';
 hold on
 
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Sans subsaturated to make images
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
-%legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated]; %With subsaturated
-%legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated'};
+legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
+legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
 Tupper = 15; Tlower = -70;
@@ -286,7 +294,7 @@ t.FontName = 'Lato Bold';
 t.FontSize = 20;
 yLab = ylabel(['Temperature in ' char(176) 'C']);
 yLab.FontName = 'Lato Bold';
-xLab = xlabel('Vapor pressure');
+xLab = xlabel('Vapor pressure excess');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
 %axe.XTick = iceSupersatToVapor([0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6],zeros(1,13));

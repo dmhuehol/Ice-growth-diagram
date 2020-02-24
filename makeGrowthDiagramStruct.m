@@ -95,8 +95,11 @@ if crystalLog==1
     
     hd.VariousPlates.Habit = 'Edge growth (various plates)'; %Various plates
     hd.VariousPlates.Color = hd.Plates.Color;
-    hd.VariousPlates.TempBounds = [-8 -8 -22 -22];
-    hd.VariousPlates.supersatBounds = [0.038 (esw_vp(1)-esi_vp(1))/esi_vp(1) (esw_vp(2)-esi_vp(2))/esi_vp(2) 0.038];
+    Tupper = -8; Tlower = -22;
+    TlineStandardC = Tupper:-0.1:Tlower;
+    [eswLineData] = eswLine(100,Tlower,Tupper);
+    hd.VariousPlates.TempBounds = [-8 TlineStandardC -22];
+    hd.VariousPlates.supersatBounds = [0.038 eswLineData 0.038];
     hd.VariousPlates.waterBounds = iceSupersatToRH(hd.VariousPlates.supersatBounds.*100,hd.VariousPlates.TempBounds);
     hd.VariousPlates.vaporBounds = iceSupersatToVapor(hd.VariousPlates.supersatBounds,hd.VariousPlates.TempBounds);
     
@@ -145,11 +148,11 @@ if otherLog==1
     
     hd.unnatural.Habit = 'Coordinates to block out unnatural supersaturations'; %Follows the 2*water saturation line
     hd.unnatural.Color = [1 1 1];
-    Tupper = 15; Tlower = -70;
-    TlineStandardC = Tupper:-0.1:Tlower;
-    [eswLineData] = eswLine(100,Tlower,Tupper);
-    hd.unnatural.TempBounds = [0 TlineStandardC(2:11:420) 0];
-    hd.unnatural.supersatBounds = [0 eswLineData(2:11:420).*2 0.6];
+    Tupper_other = 15; Tlower_other = -70;
+    TlineStandardC = Tupper_other:-0.1:Tlower_other;
+    [eswLineData_other] = eswLine(100,Tlower_other,Tupper_other);
+    hd.unnatural.TempBounds = [0 TlineStandardC(2:11:end) 0];
+    hd.unnatural.supersatBounds = [0 eswLineData_other(2:11:end).*2 0.6];
     hd.unnatural.waterBounds = iceSupersatToRH(hd.unnatural.supersatBounds.*100,hd.unnatural.TempBounds);
     hd.unnatural.vaporBounds = iceSupersatToVapor(hd.unnatural.supersatBounds,hd.unnatural.TempBounds);
     
