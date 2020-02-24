@@ -6,7 +6,7 @@ function [RH] = iceSupersatToRH(iceSupersat,T)
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
     % J. Appl. Meteor., 35, 601?609,
     % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
-    % See equations 25 and 27 from above citation.
+    % See equations 21 and 23 from above citation.
     %
     %General form: [RH] = iceSupersatToRH(iceSupersat,T)
     %
@@ -15,15 +15,16 @@ function [RH] = iceSupersatToRH(iceSupersat,T)
     %
     %Inputs:
     %iceSupersat: supersaturation with respect to ice in %
+    %T: temperature in deg C
     %
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
-    %Last major revision: 8/29/2019
+    %Version date: 2/23/2020
+    %Last major revision: 2/23/2020
     %
-    %See also rhow
+    %See also iceSupersatToVapor
     %
 
 iceSupersat = iceSupersat./100;
