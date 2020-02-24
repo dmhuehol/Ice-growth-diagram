@@ -31,9 +31,6 @@ function [s_upper] = updraftSupersat(c,k,updraft)
     %Last major revision: 2/23/2020
     %
 
-msg = 'The justification for the updraft supersaturation equation and its values are unknown. Use with extreme caution!!';
-warning(msg);
-
 if ~exist('c','var')
      msg = 'Aerosol parameter c is required!';
      error(msg)

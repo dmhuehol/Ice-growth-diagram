@@ -29,6 +29,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVapor(hd,isohumeFlag,
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
+    % Written as part of HON499: Capstone II
     %Version date: 2/23/2020
     %Last major revision: 2/23/2020
     %
@@ -294,7 +295,7 @@ t.FontName = 'Lato Bold';
 t.FontSize = 20;
 yLab = ylabel(['Temperature in ' char(176) 'C']);
 yLab.FontName = 'Lato Bold';
-xLab = xlabel('Vapor pressure excess');
+xLab = xlabel('Vapor pressure (Pa)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
 %axe.XTick = iceSupersatToVapor([0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6],zeros(1,13));

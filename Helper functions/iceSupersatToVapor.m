@@ -21,6 +21,7 @@ function [vaporPressure] = iceSupersatToVapor(iceSupersat,temp)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
+    % Written as part of HON499: Capstone II
     %Version date: 2/23/2020
     %Last major revision: 2/23/2020
     %
