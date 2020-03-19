@@ -25,6 +25,7 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
+    %Portions written as part of HON499: Capstone II
     %Version date: 3/19/2020
     %Last major revision: 3/19/2020
     %
