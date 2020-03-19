@@ -1,4 +1,4 @@
-function [vaporPressure] = iceSupersatToVapor(iceSupersat,temp)
+function [vaporPressure] = iceSupersatToVaporExc(iceSupersat,temp)
 %%iceSupersatToRH
     %Converts ice supersaturation in percent to vapor pressure excess in
     %Pa. Uses the Improved August-Roche-Magnus saturation vapor pressure equation from:

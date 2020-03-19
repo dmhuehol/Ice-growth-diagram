@@ -1,9 +1,9 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramVapor(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram. Returns the figure handle
     %so further modifications are possible.
     %
-    %General form: [fig] = iceGrowthDiagramVapor(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
+    %General form: [fig] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
     %
     %Output
     %fig: figure handle for the ice growth diagram
@@ -30,8 +30,8 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVapor(hd,isohumeFlag,
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     % Written as part of HON499: Capstone II
-    %Version date: 2/23/2020
-    %Last major revision: 2/23/2020
+    %Version date: 3/19/2020
+    %Last major revision: 3/19/2020
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -136,91 +136,91 @@ legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dend
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
-[eswLineData] = iceSupersatToVapor(eswLineData,TlineStandardC);
+[eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
 if isohumeFlag==1
     eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
     eswSupersatLineStandard.Color = [255 230 0]./255;
     eswSupersatLineStandard.LineWidth = 3.2;
     
     eswLine90Data = eswLine(90,Tlower,Tupper);
-    [eswLine90Data] = iceSupersatToVapor(eswLine90Data,TlineStandardC);
+    [eswLine90Data] = iceSupersatToVaporExc(eswLine90Data,TlineStandardC);
     eswSupersatLineStandard90 = plot(eswLine90Data,TlineStandardC);
     eswSupersatLineStandard90.LineStyle = ':';
     eswSupersatLineStandard90.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard90.LineWidth = 3.2;
     
     eswLine80Data = eswLine(80,Tlower,Tupper);
-    [eswLine80Data] = iceSupersatToVapor(eswLine80Data,TlineStandardC);
+    [eswLine80Data] = iceSupersatToVaporExc(eswLine80Data,TlineStandardC);
     eswSupersatLineStandard80 = plot(eswLine80Data,TlineStandardC);
     eswSupersatLineStandard80.LineStyle = ':';
     eswSupersatLineStandard80.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard80.LineWidth = 3.2;
     
     eswLine70Data = eswLine(70,Tlower,Tupper);
-    [eswLine70Data] = iceSupersatToVapor(eswLine70Data,TlineStandardC);
+    [eswLine70Data] = iceSupersatToVaporExc(eswLine70Data,TlineStandardC);
     eswSupersatLineStandard70 = plot(eswLine70Data,TlineStandardC);
     eswSupersatLineStandard70.LineStyle = ':';
     eswSupersatLineStandard70.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard70.LineWidth = 3.2;
     
     eswLine60Data = eswLine(60,Tlower,Tupper);
-    [eswLine60Data] = iceSupersatToVapor(eswLine60Data,TlineStandardC);
+    [eswLine60Data] = iceSupersatToVaporExc(eswLine60Data,TlineStandardC);
     eswSupersatLineStandard60 = plot(eswLine60Data,TlineStandardC);
     eswSupersatLineStandard60.LineStyle = ':';
     eswSupersatLineStandard60.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard60.LineWidth = 3.2;
     
     eswLine50Data = eswLine(50,Tlower,Tupper);
-    [eswLine50Data] = iceSupersatToVapor(eswLine50Data,TlineStandardC);
+    [eswLine50Data] = iceSupersatToVaporExc(eswLine50Data,TlineStandardC);
     eswSupersatLineStandard50 = plot(eswLine50Data,TlineStandardC);
     eswSupersatLineStandard50.LineStyle = ':';
     eswSupersatLineStandard50.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard50.LineWidth = 3.2;
     
     eswLine40Data = eswLine(40,Tlower,Tupper);
-    [eswLine40Data] = iceSupersatToVapor(eswLine40Data,TlineStandardC);
+    [eswLine40Data] = iceSupersatToVaporExc(eswLine40Data,TlineStandardC);
     eswSupersatLineStandard40 = plot(eswLine40Data,TlineStandardC);
     eswSupersatLineStandard40.LineStyle = ':';
     eswSupersatLineStandard40.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard40.LineWidth = 3.2;
     
     eswLine30Data = eswLine(30,Tlower,Tupper);
-    [eswLine30Data] = iceSupersatToVapor(eswLine30Data,TlineStandardC);
+    [eswLine30Data] = iceSupersatToVaporExc(eswLine30Data,TlineStandardC);
     eswSupersatLineStandard30 = plot(eswLine30Data,TlineStandardC);
     eswSupersatLineStandard30.LineStyle = ':';
     eswSupersatLineStandard30.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard30.LineWidth = 3.2;
     
     eswLine20Data = eswLine(20,Tlower,Tupper);
-    [eswLine20Data] = iceSupersatToVapor(eswLine20Data,TlineStandardC);
+    [eswLine20Data] = iceSupersatToVaporExc(eswLine20Data,TlineStandardC);
     eswSupersatLineStandard20 = plot(eswLine20Data,TlineStandardC);
     eswSupersatLineStandard20.LineStyle = ':';
     eswSupersatLineStandard20.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard20.LineWidth = 3.2;
     
     eswLine10Data = eswLine(10,Tlower,Tupper);
-    [eswLine10Data] = iceSupersatToVapor(eswLine10Data,TlineStandardC);
+    [eswLine10Data] = iceSupersatToVaporExc(eswLine10Data,TlineStandardC);
     eswSupersatLineStandard10 = plot(eswLine10Data,TlineStandardC);
     eswSupersatLineStandard10.LineStyle = ':';
     eswSupersatLineStandard10.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard10.LineWidth = 3.2;
     
     eswLine0Data = eswLine(0,Tlower,Tupper);
-    [eswLine0Data] = iceSupersatToVapor(eswLine0Data,TlineStandardC);
+    [eswLine0Data] = iceSupersatToVaporExc(eswLine0Data,TlineStandardC);
     eswSupersatLineStandard0 = plot(eswLine0Data,TlineStandardC);
     eswSupersatLineStandard0.LineStyle = ':';
     eswSupersatLineStandard0.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandard0.LineWidth = 3.2;
     
     eswLinep25Data = eswLine(102.5,Tlower,Tupper);
-    [eswLinep25Data] = iceSupersatToVapor(eswLinep25Data,TlineStandardC);
+    [eswLinep25Data] = iceSupersatToVaporExc(eswLinep25Data,TlineStandardC);
     eswSupersatLineStandardp25 = plot(eswLinep25Data(151:end),TlineStandardC(151:end));
     eswSupersatLineStandardp25.LineStyle = '-.';
     eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp25.LineWidth = 3.2;
     
     eswLinep5Data = eswLine(105,Tlower,Tupper);
-    [eswLinep5Data] = iceSupersatToVapor(eswLinep5Data,TlineStandardC);
+    [eswLinep5Data] = iceSupersatToVaporExc(eswLinep5Data,TlineStandardC);
     eswSupersatLineStandardp5 = plot(eswLinep5Data(151:end),TlineStandardC(151:end));
     eswSupersatLineStandardp5.LineStyle = '-.';
     eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
@@ -298,7 +298,7 @@ yLab.FontName = 'Lato Bold';
 xLab = xlabel('Vapor pressure (Pa)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
-%axe.XTick = iceSupersatToVapor([0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6],zeros(1,13));
+%axe.XTick = iceSupersatToVaporExc([0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6],zeros(1,13));
 %xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150' '155' '160'};
 %xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
