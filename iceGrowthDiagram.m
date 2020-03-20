@@ -29,8 +29,9 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventL
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
-    %Last major revision: 11/22/2019
+    %Edits made as part of HON499: Capstone II
+    %Version date: 3/19/2020
+    %Last major revision: 3/19/2020
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -193,13 +194,13 @@ if isohumeFlag==1
     eswSupersatLineStandard0.LineWidth = 3.2;
     
     eswLinep25Data = eswLine(102.5,Tlower,Tupper);
-    eswSupersatLineStandardp25 = plot(eswLinep25Data(151:end),TlineStandardC(151:end));
+    eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
     eswSupersatLineStandardp25.LineStyle = '-.';
     eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp25.LineWidth = 3.2;
     
     eswLinep5Data = eswLine(105,Tlower,Tupper);
-    eswSupersatLineStandardp5 = plot(eswLinep5Data(151:end),TlineStandardC(151:end));
+    eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
     eswSupersatLineStandardp5.LineStyle = '-.';
     eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp5.LineWidth = 3.2;
