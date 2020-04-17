@@ -21,7 +21,8 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,legLog,legen
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
+    %Edits made as part of HON499: Capstone II
+    %Version date: 3/19/2020
     %Last major revision: 11/22/2019
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram
@@ -156,12 +157,12 @@ esw100SupersatLineStandard.LineStyle = ':';
 legendEntries(end+1) = esw100SupersatLineStandard;
 legendTexts{end+1} = 'Isohumes (10% intervals)';
 
-esw102p5LineStandard = plot([102.5 102.5],[-70 0]);
+esw102p5LineStandard = plot([102.5 102.5],[-70 -2.6]);
 esw102p5LineStandard.Color = [255 230 0]./255;
 esw102p5LineStandard.LineWidth = 3.2;
 esw102p5LineStandard.LineStyle = '-.';
 
-esw105LineStandard = plot([105 105],[-70 0]);
+esw105LineStandard = plot([105 105],[-70 -5.2]);
 esw105LineStandard.Color = [255 230 0]./255;
 esw105LineStandard.LineWidth = 3.2;
 esw105LineStandard.LineStyle = '-.';
@@ -177,32 +178,32 @@ esi0Line.LineWidth = 3.2;
 hold on
 
 water_esi10LineData = iceSupersatToRH(startMat.*10,TlineStandardC);
-esi10Line = plot(water_esi10LineData,TlineStandardC);
+esi10Line = plot(water_esi10LineData(201:end),TlineStandardC(201:end));
 esi10Line.Color = [255 230 0]./255;
 esi10Line.LineWidth = 3.2;
 
 water_esi20LineData = iceSupersatToRH(startMat.*20,TlineStandardC);
-esi20Line = plot(water_esi20LineData,TlineStandardC);
+esi20Line = plot(water_esi20LineData(248:end),TlineStandardC(248:end));
 esi20Line.Color = [255 230 0]./255;
 esi20Line.LineWidth = 3.2;
 
 water_esi30LineData = iceSupersatToRH(startMat.*30,TlineStandardC);
-esi30Line = plot(water_esi30LineData,TlineStandardC);
+esi30Line = plot(water_esi30LineData(291:end),TlineStandardC(291:end));
 esi30Line.Color = [255 230 0]./255;
 esi30Line.LineWidth = 3.2;
 
 water_esi40LineData = iceSupersatToRH(startMat.*40,TlineStandardC);
-esi40Line = plot(water_esi40LineData,TlineStandardC);
+esi40Line = plot(water_esi40LineData(335:end),TlineStandardC(335:end));
 esi40Line.Color = [255 230 0]./255;
 esi40Line.LineWidth = 3.2;
 
 water_esi50LineData = iceSupersatToRH(startMat.*50,TlineStandardC);
-esi50Line = plot(water_esi50LineData,TlineStandardC);
+esi50Line = plot(water_esi50LineData(376:end),TlineStandardC(376:end));
 esi50Line.Color = [255 230 0]./255;
 esi50Line.LineWidth = 3.2;
 
 water_esi60LineData = iceSupersatToRH(startMat.*60,TlineStandardC);
-esi60Line = plot(water_esi60LineData,TlineStandardC);
+esi60Line = plot(water_esi60LineData(416:end),TlineStandardC(416:end));
 esi60Line.Color = [255 230 0]./255;
 esi60Line.LineWidth = 3.2;
 legendEntries(end+1) = esi60Line;
