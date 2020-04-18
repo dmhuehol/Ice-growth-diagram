@@ -1,20 +1,20 @@
-function [vaporPressure] = iceSupersatToVaporExc(iceSupersat,temp)
-%%iceSupersatToRH
-    %Converts ice supersaturation in percent to vapor pressure excess in
-    %Pa. Uses the Improved August-Roche-Magnus saturation vapor pressure equation from:
+function [vaporDensExc] = iceSupersatToVaporExc(iceSupersat,temp)
+%%iceSupersatToVaporExc
+    %Converts ice supersaturation in percent to vapor density excess in
+    %g/m^3. Uses the Improved August-Roche-Magnus saturation vapor pressure equation from:
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
     % J. Appl. Meteor., 35, 601?609,
     % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
     % See equation 23 from above citation.
     %
-    %General form: [RH] = iceSupersatToVapor(iceSupersat,temp)
+    %General form: [vaporDensExc] = iceSupersatToVaporExc(iceSupersat,temp)
     %
     %Output
-    %RH: relative humidity (with respect to water) in %
+    %vaporDensExc: vapor density excess in g/m^3
     %
     %Inputs:
-    %iceSupersat: supersaturation with respect to ice in %
+    %iceSupersat: supersaturation with respect to ice decimal
     %temp: temperature in deg C
     %
     %
@@ -27,8 +27,11 @@ function [vaporPressure] = iceSupersatToVaporExc(iceSupersat,temp)
     %
     %See also iceSupersatToRH
     %
-
+Rv = 461.5; %J/(kgK)
+Tk = temp+273.15;
 esiStandard = 6.1121.*exp((22.587.*temp)./(273.86+temp)); % Saturation vapor pressure at input temperature
-vaporPressure = iceSupersat.*esiStandard;
+vaporPressure = iceSupersat*100.*esiStandard;
+vaporDensExc = vaporPressure./(Rv*Tk);
+vaporDensExc = vaporDensExc.*10^3;
 
 end
