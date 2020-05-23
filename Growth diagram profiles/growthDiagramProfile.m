@@ -64,8 +64,6 @@ if length(timeIndex)==1
     end
 else
     % Manually generate title otherwise
-    dateString = 'Jan 1 2018 to May 2 2019';
-    launchname = 'Utqiagvik, AK';
 end
 t = title({['Ice phase space for ' dateString],launchname});
 t.FontName = 'Lato Bold';
@@ -82,7 +80,13 @@ for c = 1:length(timeIndex)
         disp(strcat(num2str(round((loopTime-timeIndex(1))/totalNumber*100)), '% complete')) % Progress report at command window
     end
     
-    radiosondeHeight = [sounding(loopTime).geopotential];
+    try
+        radiosondeHeight = [sounding(loopTime).geopotential];
+    catch 
+        radiosondeHeight = [sounding(loopTime).height];
+        %TODO: rewrite sounding import functions so we no longer have this
+        %ridiculous mismatch between naming conventions
+    end
     radiosondeHeight1 = radiosondeHeight<=2000;
     radiosondeHeight2 = radiosondeHeight<=4000 & radiosondeHeight>2000;
     radiosondeHeight3 = radiosondeHeight<=6000 & radiosondeHeight>4000;
