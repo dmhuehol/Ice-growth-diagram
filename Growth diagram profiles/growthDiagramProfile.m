@@ -137,6 +137,10 @@ for c = 1:length(timeIndex)
     pcRest = scatter(shpRest,radiosondeTemp(radiosondeHeightRest),'filled','MarkerEdgeColor',[145 144 143]./255,'MarkerFaceColor',[145 144 143]./255);
 end
 
+% If following two lines uncommented, legend contains only balloon height entries
+legendEntries = [];
+legendText = {};
+
 legendEntries(end+1) = pc1;
 legendText{end+1} = 'Balloon data: 0-2 km';
 legendEntries(end+1) = pc2;
@@ -151,7 +155,7 @@ legendEntries(end+1) = pcRest;
 legendText{end+1} = 'Balloon data: >10 km';
 leg = legend(legendEntries,legendText);
 leg.Location = legLocation;
-leg.FontSize = 10;
+leg.FontSize = 14;
 if legLog==0
     leg.Visible = 'off';
 end
