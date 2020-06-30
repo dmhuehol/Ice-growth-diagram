@@ -31,9 +31,6 @@
 %% Ice growth diagram in terms of relative humidity with respect to water
 %function [fig,legendEntries,legendTexts] = iceGrowthDiagramTextbook(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
 %% Check variables
-isohumeFlag = 1;
-ventLog = 1;
-updraftLog = 0;
 legLog = 1;
 legendLocStr = 'southoutside';
 xlimRange = [0 0.6];
@@ -96,128 +93,98 @@ legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dend
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
-if isohumeFlag==1
-    eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
-    eswSupersatLineStandard.Color = [255 230 0]./255;
-    eswSupersatLineStandard.LineWidth = 3.2;
-    
-    eswLine90Data = eswLine(90,Tlower,Tupper);
-    eswSupersatLineStandard90 = plot(eswLine90Data,TlineStandardC);
-    eswSupersatLineStandard90.LineStyle = ':';
-    eswSupersatLineStandard90.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard90.LineWidth = 3.2;
-    
-    eswLine80Data = eswLine(80,Tlower,Tupper);
-    eswSupersatLineStandard80 = plot(eswLine80Data,TlineStandardC);
-    eswSupersatLineStandard80.LineStyle = ':';
-    eswSupersatLineStandard80.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard80.LineWidth = 3.2;
-    
-    eswLine70Data = eswLine(70,Tlower,Tupper);
-    eswSupersatLineStandard70 = plot(eswLine70Data,TlineStandardC);
-    eswSupersatLineStandard70.LineStyle = ':';
-    eswSupersatLineStandard70.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard70.LineWidth = 3.2;
-    
-    eswLine60Data = eswLine(60,Tlower,Tupper);
-    eswSupersatLineStandard60 = plot(eswLine60Data,TlineStandardC);
-    eswSupersatLineStandard60.LineStyle = ':';
-    eswSupersatLineStandard60.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard60.LineWidth = 3.2;
-    
-    eswLine50Data = eswLine(50,Tlower,Tupper);
-    eswSupersatLineStandard50 = plot(eswLine50Data,TlineStandardC);
-    eswSupersatLineStandard50.LineStyle = ':';
-    eswSupersatLineStandard50.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard50.LineWidth = 3.2;
-    
-    eswLine40Data = eswLine(40,Tlower,Tupper);
-    eswSupersatLineStandard40 = plot(eswLine40Data,TlineStandardC);
-    eswSupersatLineStandard40.LineStyle = ':';
-    eswSupersatLineStandard40.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard40.LineWidth = 3.2;
-    
-    eswLine30Data = eswLine(30,Tlower,Tupper);
-    eswSupersatLineStandard30 = plot(eswLine30Data,TlineStandardC);
-    eswSupersatLineStandard30.LineStyle = ':';
-    eswSupersatLineStandard30.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard30.LineWidth = 3.2;
-    
-    eswLine20Data = eswLine(20,Tlower,Tupper);
-    eswSupersatLineStandard20 = plot(eswLine20Data,TlineStandardC);
-    eswSupersatLineStandard20.LineStyle = ':';
-    eswSupersatLineStandard20.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard20.LineWidth = 3.2;
-    
-    eswLine10Data = eswLine(10,Tlower,Tupper);
-    eswSupersatLineStandard10 = plot(eswLine10Data,TlineStandardC);
-    eswSupersatLineStandard10.LineStyle = ':';
-    eswSupersatLineStandard10.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard10.LineWidth = 3.2;
-    
-    eswLine0Data = eswLine(0,Tlower,Tupper);
-    eswSupersatLineStandard0 = plot(eswLine0Data,TlineStandardC);
-    eswSupersatLineStandard0.LineStyle = ':';
-    eswSupersatLineStandard0.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandard0.LineWidth = 3.2;
-    
-    eswLinep25Data = eswLine(102.5,Tlower,Tupper);
-    eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
-    eswSupersatLineStandardp25.LineStyle = '-.';
-    eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandardp25.LineWidth = 3.2;
-    
-    eswLinep5Data = eswLine(105,Tlower,Tupper);
-    eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
-    eswSupersatLineStandardp5.LineStyle = '-.';
-    eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
-    eswSupersatLineStandardp5.LineWidth = 3.2;
-    
-    
-    legendEntries(end+1) = eswSupersatLineStandard;
-    legendEntries(end+1) = eswSupersatLineStandard90;
-    legendEntries(end+1) = eswSupersatLineStandardp5;
-    
-    legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
-    legendTexts{end+1} = 'Saturation with respect to water (10% intervals)';
-    legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
-    
-elseif isohumeFlag==2
-    %Draw isohumes, 100% only
-    Tupper = 15; Tlower = -70;
-    TlineStandardC = Tupper:-0.1:Tlower;
-    [eswLineData] = eswLine(100,Tlower,Tupper);
-    eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
-    eswSupersatLineStandard.Color = [255 230 0]./255;
-    eswSupersatLineStandard.LineWidth = 3.2;
-    
-    legendEntries(end+1) = eswSupersatLineStandard;
-    legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
-else
-    %do nothing, don't plot isohumes
-    disp('Isohumes disabled')
-end
+eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
+eswSupersatLineStandard.Color = [255 230 0]./255;
+eswSupersatLineStandard.LineWidth = 3.2;
 
-if ventLog==1
-    %Approximate maximum supersaturation with ventilation line
-    maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
-    maxVentLine.Color = [0 26 255]./255;
-    maxVentLine.LineWidth = 3.2;
-    
-    legendEntries(end+1) = maxVentLine;
-    legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
-end
-if updraftLog == 1
-    %Plot guesstimated maximum updraft supersaturation (of questionable use)
-    [s_max] = updraftSupersat(1000,1,1);
-    s_maxUsable = 1+s_max;
-    [updraftMaxSupersatPoints] = eswLine(s_maxUsable*100,Tlower,Tupper);
-    lineSupersat = plot(updraftMaxSupersatPoints,TlineStandardC);
-    lineSupersat.LineWidth = 2;
-    
-    legendEntries(end+1) = lineSupersat;
-    legendTexts{end+1} = 'Guesstimated max supersat in updraft';
-end
+eswLine90Data = eswLine(90,Tlower,Tupper);
+eswSupersatLineStandard90 = plot(eswLine90Data,TlineStandardC);
+eswSupersatLineStandard90.LineStyle = ':';
+eswSupersatLineStandard90.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard90.LineWidth = 3.2;
+
+eswLine80Data = eswLine(80,Tlower,Tupper);
+eswSupersatLineStandard80 = plot(eswLine80Data,TlineStandardC);
+eswSupersatLineStandard80.LineStyle = ':';
+eswSupersatLineStandard80.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard80.LineWidth = 3.2;
+
+eswLine70Data = eswLine(70,Tlower,Tupper);
+eswSupersatLineStandard70 = plot(eswLine70Data,TlineStandardC);
+eswSupersatLineStandard70.LineStyle = ':';
+eswSupersatLineStandard70.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard70.LineWidth = 3.2;
+
+eswLine60Data = eswLine(60,Tlower,Tupper);
+eswSupersatLineStandard60 = plot(eswLine60Data,TlineStandardC);
+eswSupersatLineStandard60.LineStyle = ':';
+eswSupersatLineStandard60.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard60.LineWidth = 3.2;
+
+eswLine50Data = eswLine(50,Tlower,Tupper);
+eswSupersatLineStandard50 = plot(eswLine50Data,TlineStandardC);
+eswSupersatLineStandard50.LineStyle = ':';
+eswSupersatLineStandard50.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard50.LineWidth = 3.2;
+
+eswLine40Data = eswLine(40,Tlower,Tupper);
+eswSupersatLineStandard40 = plot(eswLine40Data,TlineStandardC);
+eswSupersatLineStandard40.LineStyle = ':';
+eswSupersatLineStandard40.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard40.LineWidth = 3.2;
+
+eswLine30Data = eswLine(30,Tlower,Tupper);
+eswSupersatLineStandard30 = plot(eswLine30Data,TlineStandardC);
+eswSupersatLineStandard30.LineStyle = ':';
+eswSupersatLineStandard30.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard30.LineWidth = 3.2;
+
+eswLine20Data = eswLine(20,Tlower,Tupper);
+eswSupersatLineStandard20 = plot(eswLine20Data,TlineStandardC);
+eswSupersatLineStandard20.LineStyle = ':';
+eswSupersatLineStandard20.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard20.LineWidth = 3.2;
+
+eswLine10Data = eswLine(10,Tlower,Tupper);
+eswSupersatLineStandard10 = plot(eswLine10Data,TlineStandardC);
+eswSupersatLineStandard10.LineStyle = ':';
+eswSupersatLineStandard10.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard10.LineWidth = 3.2;
+
+eswLine0Data = eswLine(0,Tlower,Tupper);
+eswSupersatLineStandard0 = plot(eswLine0Data,TlineStandardC);
+eswSupersatLineStandard0.LineStyle = ':';
+eswSupersatLineStandard0.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandard0.LineWidth = 3.2;
+
+eswLinep25Data = eswLine(102.5,Tlower,Tupper);
+eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
+eswSupersatLineStandardp25.LineStyle = '-.';
+eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandardp25.LineWidth = 3.2;
+
+eswLinep5Data = eswLine(105,Tlower,Tupper);
+eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
+eswSupersatLineStandardp5.LineStyle = '-.';
+eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
+eswSupersatLineStandardp5.LineWidth = 3.2;
+
+
+legendEntries(end+1) = eswSupersatLineStandard;
+legendEntries(end+1) = eswSupersatLineStandard90;
+legendEntries(end+1) = eswSupersatLineStandardp5;
+
+legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
+legendTexts{end+1} = 'Saturation with respect to water (10% intervals)';
+legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
+
+%Approximate maximum supersaturation with ventilation line
+maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
+maxVentLine.Color = [0 26 255]./255;
+maxVentLine.LineWidth = 3.2;
+
+legendEntries(end+1) = maxVentLine;
+legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
 
 %% Diagram settings
 axe = gca;
