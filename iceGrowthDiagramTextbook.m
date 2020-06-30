@@ -29,19 +29,20 @@
 [hd] = makeGrowthDiagramStruct(1,1);
 
 %% Ice growth diagram in terms of relative humidity with respect to water
-%function [fig,legendEntries,legendTexts] = iceGrowthDiagramTextbook(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
-%% Check variables
+%function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
+
+% Check variables
 legLog = 1;
 legendLocStr = 'southoutside';
 xlimRange = [0 0.6];
 ylimRange = [-56.5 0];
 
-%% Make s-T diagram
+% Make s-T diagram
 fig = figure;
 leftColor = [0 0 0]; rightColor = [0 0 0];
 set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-axis color
 
-%% Draw the growth types
+% Draw the growth types
 plates = patch(hd.Plates.supersatBounds, hd.Plates.TempBounds,hd.Plates.TextbookColor);
 plates.EdgeColor = 'none';
 columnlike = patch(hd.ColumnLike.supersatBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
@@ -185,6 +186,23 @@ maxVentLine.LineWidth = 3.2;
 
 legendEntries(end+1) = maxVentLine;
 legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
+
+% Plot on-figure labels
+lFace = text(0.01,-6,'Face growth (column-like)');
+lFace.FontName = 'Lato'; lFace.FontSize = 13;
+lEdge = text(0.06,-15.8,'Edge growth (plate-like)');
+lEdge.FontName = 'Lato'; lEdge.FontSize = 13;
+lCornerBranched = text(0.185,-14.8,'Corner growth (branched, dendrites)');
+lCornerBranched.FontName = 'Lato'; lCornerBranched.FontSize = 13;
+lCornerSector = text(0.28,-19.7,'Corner growth (sector plates)');
+lCornerSector.FontName = 'Lato'; lCornerSector.FontSize = 13;
+lPolycrystalsPlatelike = text(0.27,-32,'Polycrystals (platelike)');
+lPolycrystalsPlatelike.FontName = 'Lato'; lPolycrystalsPlatelike.FontSize = 13;
+lPolycrystalsColumnar = text(0.32,-49.5,'Polycrystals (columnar)');
+lPolycrystalsColumnar.FontName = 'Lato'; lPolycrystalsColumnar.FontSize = 13;
+lMixed = text(0.02,-19.5,'Mixed (polycrystals, plates, columns, equiaxed)');
+lMixed.FontName = 'Lato'; lMixed.FontSize = 13;
+lMixed.Rotation = 90;
 
 %% Diagram settings
 axe = gca;
