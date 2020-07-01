@@ -204,6 +204,31 @@ lMixed = text(0.02,-19.5,'Mixed (polycrystals, plates, columns, equiaxed)');
 lMixed.FontName = 'Lato'; lMixed.FontSize = 13;
 lMixed.Rotation = 90;
 
+% On-figure labels for isohumes
+lWater60 = text(0.008,-54.89,'60%');
+lWater60.FontName = 'Lato'; lWater60.FontSize = 11;
+lWater60.Rotation = 34;
+lWater70 = text(0.1161,-48.5,'70%');
+lWater70.FontName = 'Lato'; lWater70.FontSize = 11;
+lWater70.Rotation = 33;
+lWater80 = text(0.236,-44.9,'80%');
+lWater80.FontName = 'Lato'; lWater80.FontSize = 11;
+lWater80.Rotation = 31;
+lWater90 = text(0.3412,-40.9,'90%');
+lWater90.FontName = 'Lato'; lWater90.FontSize = 11;
+lWater90.Rotation = 29;
+lWater100 = text(0.4428,-37.4,'100%');
+lWater100.FontName = 'Lato'; lWater100.FontSize = 11;
+lWater100.Rotation = 24;
+lWater102p5 = text(0.4596,-36,'102.5%');
+lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 11;
+lWater102p5.Rotation = 24;
+lWater105 = text(0.4742,-34.5,'105% (approx. max ambient supersat)');
+lWater105.FontName = 'Lato'; lWater105.FontSize = 11;
+lWater105.Rotation = 22;
+lVent = text(0.36,-15.9,'Approx. max natural supersat (with ventilation)');
+lVent.FontName = 'Lato'; lVent.FontSize = 12;
+lVent.Rotation = 13;
 %% Diagram settings
 axe = gca;
 axe.FontName = 'Lato';
@@ -240,7 +265,4 @@ leg = legend(legendEntries,legendTexts);
 leg.Location = legendLocStr;
 leg.NumColumns = 3;
 leg.FontSize = 14;
-
-if legLog==0
-    leg.Visible = 'off';
-end
+% leg.Visible = 'off';
