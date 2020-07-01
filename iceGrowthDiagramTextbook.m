@@ -95,8 +95,6 @@ Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
 eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
-eswSupersatLineStandard.Color = [255 230 0]./255;
-eswSupersatLineStandard.LineWidth = 3.2;
 eswSupersatLineStandard.Color = [144 143 143]./255;
 eswSupersatLineStandard.LineWidth = 0.5;
 
