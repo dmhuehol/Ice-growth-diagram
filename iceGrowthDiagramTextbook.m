@@ -32,8 +32,6 @@
 %function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
 
 % Check variables
-legLog = 1;
-legendLocStr = 'southoutside';
 xlimRange = [0 0.6];
 ylimRange = [-56.5 0];
 
@@ -84,11 +82,6 @@ subsaturated.EdgeColor = 'none';
 unnatural = patch(hd.unnatural.supersatBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
 unnatural.EdgeColor = 'none';
 hold on
-
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Sans subsaturated to make images
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
-%legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated]; %With subsaturated
-%legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated'};
 
 %% Plot other lines
 Tupper = 15; Tlower = -70;
@@ -170,22 +163,9 @@ eswSupersatLineStandardp5.LineStyle = '-.';
 eswSupersatLineStandardp5.Color = [144 143 143]./255;
 eswSupersatLineStandardp5.LineWidth = 0.5;
 
-
-legendEntries(end+1) = eswSupersatLineStandard;
-legendEntries(end+1) = eswSupersatLineStandard90;
-legendEntries(end+1) = eswSupersatLineStandardp5;
-
-legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
-legendTexts{end+1} = 'Saturation with respect to water (10% intervals)';
-legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
-
-%Approximate maximum supersaturation with ventilation line
 maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
 maxVentLine.Color = [0 26 255]./255;
 maxVentLine.LineWidth = 1;
-
-legendEntries(end+1) = maxVentLine;
-legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
 
 % On-figure labels for growth modes
 lFace = text(0.01,-6,'Face growth (column-like)');
@@ -219,16 +199,16 @@ lWater90.FontName = 'Lato'; lWater90.FontSize = 11; lWater90.Color = [144 143 14
 lWater90.Rotation = 29;
 lWater100 = text(0.4428,-37.4,'100% (T_{ice} = T_{air})');
 lWater100.FontName = 'Lato'; lWater100.FontSize = 11; lWater100.Color = [144 143 143]./255;
-lWater100.Rotation = 21;
+lWater100.Rotation = 26;
 lWater102p5 = text(0.4596,-36,'102.5%');
 lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 11; lWater102p5.Color = [144 143 143]./255;
-lWater102p5.Rotation = 21;
+lWater102p5.Rotation = 26;
 lWater105 = text(0.4742,-34.5,'105% (approx. max ambient supersat)');
 lWater105.FontName = 'Lato'; lWater105.FontSize = 11; lWater105.Color = [144 143 143]./255;
-lWater105.Rotation = 21;
+lWater105.Rotation = 25;
 lVent = text(0.36,-15.9,'Approx. max natural supersat (with ventilation)');
 lVent.FontName = 'Lato'; lVent.FontSize = 12;
-lVent.Rotation = 13;
+lVent.Rotation = 16;
 
 %% Diagram settings
 axe = gca;
@@ -261,9 +241,3 @@ xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150'
 xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
-
-leg = legend(legendEntries,legendTexts);
-leg.Location = legendLocStr;
-leg.NumColumns = 3;
-leg.FontSize = 14;
-% leg.Visible = 'off';
