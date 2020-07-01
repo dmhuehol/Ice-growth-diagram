@@ -97,78 +97,80 @@ TlineStandardC = Tupper:-0.1:Tlower;
 eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
 eswSupersatLineStandard.Color = [255 230 0]./255;
 eswSupersatLineStandard.LineWidth = 3.2;
+eswSupersatLineStandard.Color = [144 143 143]./255;
+eswSupersatLineStandard.LineWidth = 0.5;
 
 eswLine90Data = eswLine(90,Tlower,Tupper);
 eswSupersatLineStandard90 = plot(eswLine90Data,TlineStandardC);
-eswSupersatLineStandard90.LineStyle = ':';
-eswSupersatLineStandard90.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard90.LineWidth = 3.2;
+eswSupersatLineStandard90.LineStyle = '--';
+eswSupersatLineStandard90.Color = [144 143 143]./255;
+eswSupersatLineStandard90.LineWidth = 0.5;
 
 eswLine80Data = eswLine(80,Tlower,Tupper);
 eswSupersatLineStandard80 = plot(eswLine80Data,TlineStandardC);
-eswSupersatLineStandard80.LineStyle = ':';
-eswSupersatLineStandard80.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard80.LineWidth = 3.2;
+eswSupersatLineStandard80.LineStyle = '--';
+eswSupersatLineStandard80.Color = [144 143 143]./255;
+eswSupersatLineStandard80.LineWidth = 0.5;
 
 eswLine70Data = eswLine(70,Tlower,Tupper);
 eswSupersatLineStandard70 = plot(eswLine70Data,TlineStandardC);
-eswSupersatLineStandard70.LineStyle = ':';
-eswSupersatLineStandard70.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard70.LineWidth = 3.2;
+eswSupersatLineStandard70.LineStyle = '--';
+eswSupersatLineStandard70.Color = [144 143 143]./255;
+eswSupersatLineStandard70.LineWidth = 0.5;
 
 eswLine60Data = eswLine(60,Tlower,Tupper);
 eswSupersatLineStandard60 = plot(eswLine60Data,TlineStandardC);
-eswSupersatLineStandard60.LineStyle = ':';
-eswSupersatLineStandard60.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard60.LineWidth = 3.2;
+eswSupersatLineStandard60.LineStyle = '--';
+eswSupersatLineStandard60.Color = [144 143 143]./255;
+eswSupersatLineStandard60.LineWidth = 0.5;
 
 eswLine50Data = eswLine(50,Tlower,Tupper);
 eswSupersatLineStandard50 = plot(eswLine50Data,TlineStandardC);
-eswSupersatLineStandard50.LineStyle = ':';
-eswSupersatLineStandard50.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard50.LineWidth = 3.2;
+eswSupersatLineStandard50.LineStyle = '--';
+eswSupersatLineStandard50.Color = [144 143 143]./255;
+eswSupersatLineStandard50.LineWidth = 0.5;
 
 eswLine40Data = eswLine(40,Tlower,Tupper);
 eswSupersatLineStandard40 = plot(eswLine40Data,TlineStandardC);
-eswSupersatLineStandard40.LineStyle = ':';
-eswSupersatLineStandard40.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard40.LineWidth = 3.2;
+eswSupersatLineStandard40.LineStyle = '--';
+eswSupersatLineStandard40.Color = [144 143 143]./255;
+eswSupersatLineStandard40.LineWidth = 0.5;
 
 eswLine30Data = eswLine(30,Tlower,Tupper);
 eswSupersatLineStandard30 = plot(eswLine30Data,TlineStandardC);
-eswSupersatLineStandard30.LineStyle = ':';
-eswSupersatLineStandard30.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard30.LineWidth = 3.2;
+eswSupersatLineStandard30.LineStyle = '--';
+eswSupersatLineStandard30.Color = [144 143 143]./255;
+eswSupersatLineStandard30.LineWidth = 0.5;
 
 eswLine20Data = eswLine(20,Tlower,Tupper);
 eswSupersatLineStandard20 = plot(eswLine20Data,TlineStandardC);
-eswSupersatLineStandard20.LineStyle = ':';
-eswSupersatLineStandard20.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard20.LineWidth = 3.2;
+eswSupersatLineStandard20.LineStyle = '--';
+eswSupersatLineStandard20.Color = [144 143 143]./255;
+eswSupersatLineStandard20.LineWidth = 0.5;
 
 eswLine10Data = eswLine(10,Tlower,Tupper);
 eswSupersatLineStandard10 = plot(eswLine10Data,TlineStandardC);
-eswSupersatLineStandard10.LineStyle = ':';
-eswSupersatLineStandard10.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard10.LineWidth = 3.2;
+eswSupersatLineStandard10.LineStyle = '--';
+eswSupersatLineStandard10.Color = [144 143 143]./255;
+eswSupersatLineStandard10.LineWidth = 0.5;
 
 eswLine0Data = eswLine(0,Tlower,Tupper);
 eswSupersatLineStandard0 = plot(eswLine0Data,TlineStandardC);
-eswSupersatLineStandard0.LineStyle = ':';
-eswSupersatLineStandard0.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard0.LineWidth = 3.2;
+eswSupersatLineStandard0.LineStyle = '--';
+eswSupersatLineStandard0.Color = [144 143 143]./255;
+eswSupersatLineStandard0.LineWidth = 0.5;
 
 eswLinep25Data = eswLine(102.5,Tlower,Tupper);
 eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
 eswSupersatLineStandardp25.LineStyle = '-.';
-eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandardp25.LineWidth = 3.2;
+eswSupersatLineStandardp25.Color = [144 143 143]./255;
+eswSupersatLineStandardp25.LineWidth = 0.5;
 
 eswLinep5Data = eswLine(105,Tlower,Tupper);
 eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
 eswSupersatLineStandardp5.LineStyle = '-.';
-eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandardp5.LineWidth = 3.2;
+eswSupersatLineStandardp5.Color = [144 143 143]./255;
+eswSupersatLineStandardp5.LineWidth = 0.5;
 
 
 legendEntries(end+1) = eswSupersatLineStandard;
@@ -182,12 +184,12 @@ legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
 %Approximate maximum supersaturation with ventilation line
 maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
 maxVentLine.Color = [0 26 255]./255;
-maxVentLine.LineWidth = 3.2;
+maxVentLine.LineWidth = 1;
 
 legendEntries(end+1) = maxVentLine;
 legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
 
-% Plot on-figure labels
+% On-figure labels for growth modes
 lFace = text(0.01,-6,'Face growth (column-like)');
 lFace.FontName = 'Lato'; lFace.FontSize = 13;
 lEdge = text(0.06,-15.8,'Edge growth (plate-like)');
@@ -206,29 +208,30 @@ lMixed.Rotation = 90;
 
 % On-figure labels for isohumes
 lWater60 = text(0.008,-54.89,'60%');
-lWater60.FontName = 'Lato'; lWater60.FontSize = 11;
+lWater60.FontName = 'Lato'; lWater60.FontSize = 11; lWater60.Color = [144 143 143]./255;
 lWater60.Rotation = 34;
 lWater70 = text(0.1161,-48.5,'70%');
-lWater70.FontName = 'Lato'; lWater70.FontSize = 11;
+lWater70.FontName = 'Lato'; lWater70.FontSize = 11; lWater70.Color = [144 143 143]./255;
 lWater70.Rotation = 33;
 lWater80 = text(0.236,-44.9,'80%');
-lWater80.FontName = 'Lato'; lWater80.FontSize = 11;
+lWater80.FontName = 'Lato'; lWater80.FontSize = 11; lWater80.Color = [144 143 143]./255;
 lWater80.Rotation = 31;
 lWater90 = text(0.3412,-40.9,'90%');
-lWater90.FontName = 'Lato'; lWater90.FontSize = 11;
+lWater90.FontName = 'Lato'; lWater90.FontSize = 11; lWater90.Color = [144 143 143]./255;
 lWater90.Rotation = 29;
 lWater100 = text(0.4428,-37.4,'100% (T_{ice} = T_{air})');
-lWater100.FontName = 'Lato'; lWater100.FontSize = 11;
-lWater100.Rotation = 22;
+lWater100.FontName = 'Lato'; lWater100.FontSize = 11; lWater100.Color = [144 143 143]./255;
+lWater100.Rotation = 21;
 lWater102p5 = text(0.4596,-36,'102.5%');
-lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 11;
-lWater102p5.Rotation = 22;
+lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 11; lWater102p5.Color = [144 143 143]./255;
+lWater102p5.Rotation = 21;
 lWater105 = text(0.4742,-34.5,'105% (approx. max ambient supersat)');
-lWater105.FontName = 'Lato'; lWater105.FontSize = 11;
-lWater105.Rotation = 22;
+lWater105.FontName = 'Lato'; lWater105.FontSize = 11; lWater105.Color = [144 143 143]./255;
+lWater105.Rotation = 21;
 lVent = text(0.36,-15.9,'Approx. max natural supersat (with ventilation)');
 lVent.FontName = 'Lato'; lVent.FontSize = 12;
 lVent.Rotation = 13;
+
 %% Diagram settings
 axe = gca;
 axe.FontName = 'Lato';
