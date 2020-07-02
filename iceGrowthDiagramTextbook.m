@@ -655,6 +655,22 @@ lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
 lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
 lVentVde.Rotation = 6;
 
+% On-figure growth mode labels
+lEdgeWarmVde = text(0.01,-2,'Edge growth (plate-like)');
+lEdgeWarmVde.FontName = 'Lato'; lEdgeWarmVde.FontSize = 13;
+lFaceVde = text(0.07,-6,'Face growth (column-like)');
+lFaceVde.FontName = 'Lato'; lFaceVde.FontSize = 13;
+lEdgeColdVde = text(0.12,-14,'Edge growth (plate-like)');
+lEdgeColdVde.FontName = 'Lato'; lEdgeColdVde.FontSize = 13;
+lCornerSectorVde = text(0.28,-19.9,'Corner growth (sector plates)');
+lCornerSectorVde.FontName = 'Lato'; lCornerSectorVde.FontSize = 13;
+lCornerBranchedVde = text(0.33,-15,'Corner growth (branched, dendrites)');
+lCornerBranchedVde.FontName = 'Lato'; lCornerBranchedVde.FontSize = 13;
+lPolycrystalsPlatelikeVde = text(0.17,-28,'Polycrystals (platelike)');
+lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 13;
+lPolycrystalsColumnarVde = text(0.0215,-45.8,{'Polycrystals', '(columnar)'});
+lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 13;
+
 % Diagram settings
 axe = gca;
 axe.FontName = 'Lato';
