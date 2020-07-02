@@ -473,44 +473,44 @@ xlimRange = [0 0.5];
 ylimRange = [-56.5 0];
 
 % Draw the growth types
-plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.Color);
+plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.TextbookColor);
 plates.EdgeColor = 'none';
-columnlike = patch(hd.ColumnLike.vaporExcBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
+columnlike = patch(hd.ColumnLike.vaporExcBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
 columnlike.EdgeColor = 'none';
-polycrystalsP1 = patch(hd.PolycrystalsP.vaporExcBounds(1,:),hd.PolycrystalsP.TempBounds(1,:),hd.PolycrystalsP.Color);
+polycrystalsP1 = patch(hd.PolycrystalsP.vaporExcBounds(1,:),hd.PolycrystalsP.TempBounds(1,:),hd.PolycrystalsP.TextbookColor);
 polycrystalsP1.EdgeColor = 'none';
-polycrystalsP2 = patch(hd.PolycrystalsP.vaporExcBounds(2,:),hd.PolycrystalsP.TempBounds(2,:),hd.PolycrystalsP.Color);
+polycrystalsP2 = patch(hd.PolycrystalsP.vaporExcBounds(2,:),hd.PolycrystalsP.TempBounds(2,:),hd.PolycrystalsP.TextbookColor);
 polycrystalsP2.EdgeColor = 'none';
-polycrystalsC1 = patch(hd.PolycrystalsC.vaporExcBounds(1,:),hd.PolycrystalsC.TempBounds(1,:),hd.PolycrystalsC.Color);
+polycrystalsC1 = patch(hd.PolycrystalsC.vaporExcBounds(1,:),hd.PolycrystalsC.TempBounds(1,:),hd.PolycrystalsC.TextbookColor);
 polycrystalsC1.EdgeColor = 'none';
-polycrystalsC2 = patch(hd.PolycrystalsC.vaporExcBounds(2,:),hd.PolycrystalsC.TempBounds(2,:),hd.PolycrystalsC.Color);
+polycrystalsC2 = patch(hd.PolycrystalsC.vaporExcBounds(2,:),hd.PolycrystalsC.TempBounds(2,:),hd.PolycrystalsC.TextbookColor);
 polycrystalsC2.EdgeColor = 'none';
-sectorplates1 = patch(hd.SectorPlates.vaporExcBounds(1,:),hd.SectorPlates.TempBounds(1,:),hd.SectorPlates.Color);
+sectorplates1 = patch(hd.SectorPlates.vaporExcBounds(1,:),hd.SectorPlates.TempBounds(1,:),hd.SectorPlates.TextbookColor);
 sectorplates1.EdgeColor = 'none';
-sectorplates2 = patch(hd.SectorPlates.vaporExcBounds(2,:),hd.SectorPlates.TempBounds(2,:),hd.SectorPlates.Color);
+sectorplates2 = patch(hd.SectorPlates.vaporExcBounds(2,:),hd.SectorPlates.TempBounds(2,:),hd.SectorPlates.TextbookColor);
 sectorplates2.EdgeColor = 'none';
-sectorplates3 = patch(hd.SectorPlates.vaporExcBounds(3,:),hd.SectorPlates.TempBounds(3,:),hd.SectorPlates.Color);
+sectorplates3 = patch(hd.SectorPlates.vaporExcBounds(3,:),hd.SectorPlates.TempBounds(3,:),hd.SectorPlates.TextbookColor);
 sectorplates3.EdgeColor = 'none';
-dendrites = patch(hd.Dendrites.vaporExcBounds,hd.Dendrites.TempBounds,hd.Dendrites.Color);
+dendrites = patch(hd.Dendrites.vaporExcBounds,hd.Dendrites.TempBounds,hd.Dendrites.TextbookColor);
 dendrites.EdgeColor = 'none';
-variousplates = patch(hd.VariousPlates.vaporExcBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.Color);
+variousplates = patch(hd.VariousPlates.vaporExcBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.TextbookColor);
 variousplates.EdgeColor = 'none';
 
-intermediateSPD_floor = patch([hd.Dendrites.vaporExcBounds(1),hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(2) hd.Dendrites.vaporExcBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
+intermediateSPD_floor = patch([hd.Dendrites.vaporExcBounds(1),hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(2) hd.Dendrites.vaporExcBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([hd.SectorPlates.vaporExcBounds(2,3) hd.SectorPlates.vaporExcBounds(2,2) hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(4)], [hd.SectorPlates.TempBounds(3) hd.SectorPlates.TempBounds(2) hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_wall = patch([hd.SectorPlates.vaporExcBounds(2,3) hd.SectorPlates.vaporExcBounds(2,2) hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(4)], [hd.SectorPlates.TempBounds(3) hd.SectorPlates.TempBounds(2) hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
 intermediateSPD_wall.EdgeColor = 'none';
-intermediateSPD_ceiling = patch([hd.Dendrites.vaporExcBounds(4),hd.Dendrites.vaporExcBounds(4) hd.SectorPlates.vaporExcBounds(6) hd.SectorPlates.vaporExcBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_ceiling = patch([hd.Dendrites.vaporExcBounds(4),hd.Dendrites.vaporExcBounds(4) hd.SectorPlates.vaporExcBounds(6) hd.SectorPlates.vaporExcBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
 intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_triangleTop = patch([hd.SectorPlates.vaporExcBounds(2,3) hd.Dendrites.vaporExcBounds(4) hd.Dendrites.vaporExcBounds(1)], [hd.SectorPlates.TempBounds(3) hd.Dendrites.TempBounds(3) hd.SectorPlates.TempBounds(3)], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleTop = patch([hd.SectorPlates.vaporExcBounds(2,3) hd.Dendrites.vaporExcBounds(4) hd.Dendrites.vaporExcBounds(1)], [hd.SectorPlates.TempBounds(3) hd.Dendrites.TempBounds(3) hd.SectorPlates.TempBounds(3)], reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
 intermediateSPD_triangleTop.EdgeColor = 'none';
-intermediateSPD_triangleBottom = patch([hd.SectorPlates.vaporExcBounds(2,2), hd.Dendrites.vaporExcBounds(1), hd.Dendrites.vaporExcBounds(1)], [hd.SectorPlates.TempBounds(2), hd.Dendrites.TempBounds(1), hd.SectorPlates.TempBounds(2)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleBottom = patch([hd.SectorPlates.vaporExcBounds(2,2), hd.Dendrites.vaporExcBounds(1), hd.Dendrites.vaporExcBounds(1)], [hd.SectorPlates.TempBounds(2), hd.Dendrites.TempBounds(1), hd.SectorPlates.TempBounds(2)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
 intermediateSPD_triangleBottom.EdgeColor = 'none';
 
-mixed1 = patch(hd.Mixed.vaporExcBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
+mixed1 = patch(hd.Mixed.vaporExcBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.TextbookColor);
 mixed1.EdgeColor = 'none';
 
-mixed2 = patch(hd.Mixed.vaporExcBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
+mixed2 = patch(hd.Mixed.vaporExcBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.TextbookColor);
 mixed2.EdgeColor = 'none';
 warmerThanFreezing = patch(hd.warm.vaporExcBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
@@ -529,92 +529,92 @@ TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
 [eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
 eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
-eswSupersatLineStandard.Color = [255 230 0]./255;
-eswSupersatLineStandard.LineWidth = 3.2;
+eswSupersatLineStandard.Color = [144 143 143]./255;
+eswSupersatLineStandard.LineWidth = 0.5;
 
 eswLine90Data = eswLine(90,Tlower,Tupper);
 [eswLine90Data] = iceSupersatToVaporExc(eswLine90Data,TlineStandardC);
 eswSupersatLineStandard90 = plot(eswLine90Data,TlineStandardC);
-eswSupersatLineStandard90.LineStyle = ':';
-eswSupersatLineStandard90.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard90.LineWidth = 3.2;
+eswSupersatLineStandard90.LineStyle = '--';
+eswSupersatLineStandard90.Color = [144 143 143]./255;
+eswSupersatLineStandard90.LineWidth = 0.5;
 
 eswLine80Data = eswLine(80,Tlower,Tupper);
 [eswLine80Data] = iceSupersatToVaporExc(eswLine80Data,TlineStandardC);
 eswSupersatLineStandard80 = plot(eswLine80Data,TlineStandardC);
-eswSupersatLineStandard80.LineStyle = ':';
-eswSupersatLineStandard80.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard80.LineWidth = 3.2;
+eswSupersatLineStandard80.LineStyle = '--';
+eswSupersatLineStandard80.Color = [144 143 143]./255;
+eswSupersatLineStandard80.LineWidth = 0.5;
 
 eswLine70Data = eswLine(70,Tlower,Tupper);
 [eswLine70Data] = iceSupersatToVaporExc(eswLine70Data,TlineStandardC);
 eswSupersatLineStandard70 = plot(eswLine70Data,TlineStandardC);
-eswSupersatLineStandard70.LineStyle = ':';
-eswSupersatLineStandard70.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard70.LineWidth = 3.2;
+eswSupersatLineStandard70.LineStyle = '--';
+eswSupersatLineStandard70.Color = [144 143 143]./255;
+eswSupersatLineStandard70.LineWidth = 0.5;
 
 eswLine60Data = eswLine(60,Tlower,Tupper);
 [eswLine60Data] = iceSupersatToVaporExc(eswLine60Data,TlineStandardC);
 eswSupersatLineStandard60 = plot(eswLine60Data,TlineStandardC);
-eswSupersatLineStandard60.LineStyle = ':';
-eswSupersatLineStandard60.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard60.LineWidth = 3.2;
+eswSupersatLineStandard60.LineStyle = '--';
+eswSupersatLineStandard60.Color = [144 143 143]./255;
+eswSupersatLineStandard60.LineWidth = 0.5;
 
 eswLine50Data = eswLine(50,Tlower,Tupper);
 [eswLine50Data] = iceSupersatToVaporExc(eswLine50Data,TlineStandardC);
 eswSupersatLineStandard50 = plot(eswLine50Data,TlineStandardC);
-eswSupersatLineStandard50.LineStyle = ':';
-eswSupersatLineStandard50.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard50.LineWidth = 3.2;
+eswSupersatLineStandard50.LineStyle = '--';
+eswSupersatLineStandard50.Color = [144 143 143]./255;
+eswSupersatLineStandard50.LineWidth = 0.5;
 
 eswLine40Data = eswLine(40,Tlower,Tupper);
 [eswLine40Data] = iceSupersatToVaporExc(eswLine40Data,TlineStandardC);
 eswSupersatLineStandard40 = plot(eswLine40Data,TlineStandardC);
-eswSupersatLineStandard40.LineStyle = ':';
-eswSupersatLineStandard40.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard40.LineWidth = 3.2;
+eswSupersatLineStandard40.LineStyle = '--';
+eswSupersatLineStandard40.Color = [144 143 143]./255;
+eswSupersatLineStandard40.LineWidth = 0.5;
 
 eswLine30Data = eswLine(30,Tlower,Tupper);
 [eswLine30Data] = iceSupersatToVaporExc(eswLine30Data,TlineStandardC);
 eswSupersatLineStandard30 = plot(eswLine30Data,TlineStandardC);
-eswSupersatLineStandard30.LineStyle = ':';
-eswSupersatLineStandard30.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard30.LineWidth = 3.2;
+eswSupersatLineStandard30.LineStyle = '--';
+eswSupersatLineStandard30.Color = [144 143 143]./255;
+eswSupersatLineStandard30.LineWidth = 0.5;
 
 eswLine20Data = eswLine(20,Tlower,Tupper);
 [eswLine20Data] = iceSupersatToVaporExc(eswLine20Data,TlineStandardC);
 eswSupersatLineStandard20 = plot(eswLine20Data,TlineStandardC);
-eswSupersatLineStandard20.LineStyle = ':';
-eswSupersatLineStandard20.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard20.LineWidth = 3.2;
+eswSupersatLineStandard20.LineStyle = '--';
+eswSupersatLineStandard20.Color = [144 143 143]./255;
+eswSupersatLineStandard20.LineWidth = 0.5;
 
 eswLine10Data = eswLine(10,Tlower,Tupper);
 [eswLine10Data] = iceSupersatToVaporExc(eswLine10Data,TlineStandardC);
 eswSupersatLineStandard10 = plot(eswLine10Data,TlineStandardC);
-eswSupersatLineStandard10.LineStyle = ':';
-eswSupersatLineStandard10.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard10.LineWidth = 3.2;
+eswSupersatLineStandard10.LineStyle = '--';
+eswSupersatLineStandard10.Color = [144 143 143]./255;
+eswSupersatLineStandard10.LineWidth = 0.5;
 
 eswLine0Data = eswLine(0,Tlower,Tupper);
 [eswLine0Data] = iceSupersatToVaporExc(eswLine0Data,TlineStandardC);
 eswSupersatLineStandard0 = plot(eswLine0Data,TlineStandardC);
-eswSupersatLineStandard0.LineStyle = ':';
-eswSupersatLineStandard0.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandard0.LineWidth = 3.2;
+eswSupersatLineStandard0.LineStyle = '--';
+eswSupersatLineStandard0.Color = [144 143 143]./255;
+eswSupersatLineStandard0.LineWidth = 0.5;
 
 eswLinep25Data = eswLine(102.5,Tlower,Tupper);
 [eswLinep25Data] = iceSupersatToVaporExc(eswLinep25Data,TlineStandardC);
 eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
 eswSupersatLineStandardp25.LineStyle = '-.';
-eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandardp25.LineWidth = 3.2;
+eswSupersatLineStandardp25.Color = [144 143 143]./255;
+eswSupersatLineStandardp25.LineWidth = 0.5;
 
 eswLinep5Data = eswLine(105,Tlower,Tupper);
 [eswLinep5Data] = iceSupersatToVaporExc(eswLinep5Data,TlineStandardC);
 eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
 eswSupersatLineStandardp5.LineStyle = '-.';
-eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
-eswSupersatLineStandardp5.LineWidth = 3.2;
+eswSupersatLineStandardp5.Color = [144 143 143]./255;
+eswSupersatLineStandardp5.LineWidth = 0.5;
 
 
 legendEntries(end+1) = eswSupersatLineStandard;
@@ -628,7 +628,7 @@ legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
 %Approximate maximum supersaturation with ventilation line
 maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
 maxVentLine.Color = [0 26 255]./255;
-maxVentLine.LineWidth = 3.2;
+maxVentLine.LineWidth = 1.2;
 
 legendEntries(end+1) = maxVentLine;
 legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
