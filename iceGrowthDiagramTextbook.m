@@ -520,9 +520,6 @@ unnatural = patch(hd.unnatural.vaporExcBounds,hd.unnatural.TempBounds,hd.unnatur
 unnatural.EdgeColor = 'none';
 hold on
 
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
-
 % Plot other lines
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
@@ -616,26 +613,15 @@ eswSupersatLineStandardp5.LineStyle = '-.';
 eswSupersatLineStandardp5.Color = [144 143 143]./255;
 eswSupersatLineStandardp5.LineWidth = 0.5;
 
-legendEntries(end+1) = eswSupersatLineStandard;
-legendEntries(end+1) = eswSupersatLineStandard90;
-legendEntries(end+1) = eswSupersatLineStandardp5;
-
-legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
-legendTexts{end+1} = 'Saturation with respect to water (10% intervals)';
-legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
-
 %Approximate maximum supersaturation with ventilation line
 maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
 maxVentLine.Color = [0 26 255]./255;
 maxVentLine.LineWidth = 1.2;
 
-legendEntries(end+1) = maxVentLine;
-legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
-
 % On-figure isohume labels
 l70Vde = text(0.005243,-48.8,'70%');
 l70Vde.FontName = 'Lato'; l70Vde.FontSize = 11; l70Vde.Color = [144 143 143]./255;
-l70Vde.Rotation = -86;
+l70Vde.Rotation = -85;
 l80Vde = text(0.02493,-36.7,'80%');
 l80Vde.FontName = 'Lato'; l80Vde.FontSize = 11; l80Vde.Color = [144 143 143]./255;
 l80Vde.Rotation = -80;
@@ -644,16 +630,16 @@ l90Vde.FontName = 'Lato'; l90Vde.FontSize = 11; l90Vde.Color = [144 143 143]./25
 l90Vde.Rotation = -55;
 l100Vde = text(0.1866,-21,'100%');
 l100Vde.FontName = 'Lato'; l100Vde.FontSize = 11; l100Vde.Color = [144 143 143]./255;
-l100Vde.Rotation = -29;
+l100Vde.Rotation = -33;
 l2p5Vde = text(0.2133,-20.8,'102.5%');
 l2p5Vde.FontName = 'Lato'; l2p5Vde.FontSize = 11; l2p5Vde.Color = [144 143 143]./255;
-l2p5Vde.Rotation = -24;
-l5Vde = text(0.2443,-20.3,'105% (approx. max ambient supersat)');
+l2p5Vde.Rotation = -28;
+l5Vde = text(0.235,-21.1,'105% (approx. max ambient supersat)');
 l5Vde.FontName = 'Lato'; l5Vde.FontSize = 11; l5Vde.Color = [144 143 143]./255;
-l5Vde.Rotation = -21.5;
+l5Vde.Rotation = -26;
 lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
 lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
-lVentVde.Rotation = 6;
+lVentVde.Rotation = 7;
 
 % On-figure growth mode labels
 lEdgeWarmVde = text(0.01,-2,'Edge growth (plate-like)');
@@ -702,14 +688,5 @@ axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2
 %xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
-
-leg = legend(legendEntries,legendTexts);
-leg.Location = legendLocStr;
-leg.NumColumns = 3;
-leg.FontSize = 14;
-
-if legLog==0
-    leg.Visible = 'off';
-end
 
 
