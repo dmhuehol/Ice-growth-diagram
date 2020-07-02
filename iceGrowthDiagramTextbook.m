@@ -616,7 +616,6 @@ eswSupersatLineStandardp5.LineStyle = '-.';
 eswSupersatLineStandardp5.Color = [144 143 143]./255;
 eswSupersatLineStandardp5.LineWidth = 0.5;
 
-
 legendEntries(end+1) = eswSupersatLineStandard;
 legendEntries(end+1) = eswSupersatLineStandard90;
 legendEntries(end+1) = eswSupersatLineStandardp5;
@@ -632,6 +631,29 @@ maxVentLine.LineWidth = 1.2;
 
 legendEntries(end+1) = maxVentLine;
 legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
+
+% On-figure isohume labels
+l70Vde = text(0.005243,-48.8,'70%');
+l70Vde.FontName = 'Lato'; l70Vde.FontSize = 11; l70Vde.Color = [144 143 143]./255;
+l70Vde.Rotation = -86;
+l80Vde = text(0.02493,-36.7,'80%');
+l80Vde.FontName = 'Lato'; l80Vde.FontSize = 11; l80Vde.Color = [144 143 143]./255;
+l80Vde.Rotation = -80;
+l90Vde = text(0.06927,-30.6,'90%');
+l90Vde.FontName = 'Lato'; l90Vde.FontSize = 11; l90Vde.Color = [144 143 143]./255;
+l90Vde.Rotation = -55;
+l100Vde = text(0.1866,-21,'100%');
+l100Vde.FontName = 'Lato'; l100Vde.FontSize = 11; l100Vde.Color = [144 143 143]./255;
+l100Vde.Rotation = -29;
+l2p5Vde = text(0.2133,-20.8,'102.5%');
+l2p5Vde.FontName = 'Lato'; l2p5Vde.FontSize = 11; l2p5Vde.Color = [144 143 143]./255;
+l2p5Vde.Rotation = -24;
+l5Vde = text(0.2443,-20.3,'105% (approx. max ambient supersat)');
+l5Vde.FontName = 'Lato'; l5Vde.FontSize = 11; l5Vde.Color = [144 143 143]./255;
+l5Vde.Rotation = -21.5;
+lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
+lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
+lVentVde.Rotation = 6;
 
 % Diagram settings
 axe = gca;
