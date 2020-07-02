@@ -167,7 +167,7 @@ if otherLog==1
     hd.unnatural.vaporExcBounds = iceSupersatToVaporExc(hd.unnatural.supersatBounds,hd.unnatural.TempBounds);
     
     hd.subsaturated.Habit = 'Coordinates to cover subsaturated area (for radiosonde data plotting).';
-    hd.subsaturated.Color = [204 204 204]./255;
+    hd.subsaturated.Color = [222 222 222]./255;
     esiLineData = zeros(1,length(TlineStandardC(151:end)));
     hd.subsaturated.TempBounds = [0 TlineStandardC(151:end) -70 0];%[0 TlineStandardC(151:end) -70];
     hd.subsaturated.supersatBounds =  [-0.5 esiLineData -0.5 -0.5];%[-0.2 esiLineData -0.2];

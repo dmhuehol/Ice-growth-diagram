@@ -398,7 +398,7 @@ water_ventLine.LineWidth = 1.2;
 legendEntries(end+1) = water_ventLine;
 legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
 
-% On-figure labels
+% On-figure labels for isohumes and ice-isohumes
 lIce0 = text(83.38,-18.3,'100% (ice saturation)');
 lIce0.FontName = 'Lato'; lIce0.FontSize = 11; lIce0.Color = [144 143 143]./255;
 lIce0.Rotation = -30;
@@ -406,34 +406,46 @@ lIce0.Rotation = -30;
 lIce10 = text(86.7,-24,'110% (ice)');
 lIce10.FontName = 'Lato'; lIce10.FontSize = 11; lIce10.Color = [144 143 143]./255;
 lIce10.Rotation = -30;
-
 lIce20 = text(88.88,-30.4,'120% (ice)');
 lIce20.FontName = 'Lato'; lIce20.FontSize = 11; lIce20.Color = [144 143 143]./255;
 lIce20.Rotation = -30;
-
 lIce30 = text(90.95,-36.4,'130% (ice)');
 lIce30.FontName = 'Lato'; lIce30.FontSize = 11; lIce30.Color = [144 143 143]./255;
 lIce30.Rotation = -30;
-
 lIce40 = text(92.92,-42.1,'140% (ice)');
 lIce40.FontName = 'Lato'; lIce40.FontSize = 11; lIce40.Color = [144 143 143]./255;
 lIce40.Rotation = -30;
-
 lIce50 = text(94.81,-47.6,'150% (ice)');
 lIce50.FontName = 'Lato'; lIce50.FontSize = 11; lIce50.Color = [144 143 143]./255;
 lIce50.Rotation = -30;
-
 lIce60 = text(96.7,-52.9,'160% (ice)');
 lIce60.FontName = 'Lato'; lIce60.FontSize = 11; lIce60.Color = [144 143 143]./255;
 lIce60.Rotation = -30;
-
 lW5 = text(105,-45,'105% (approx. max ambient supersat)');
 lW5.FontName = 'Lato'; lW5.FontSize = 11; lW5.Color = [144 143 143]./255;
 lW5.Rotation = 90;
-
 lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
 lVentW.FontName = 'Lato'; lVentW.FontSize = 12; lVentW.Color = 'k';
 lVentW.Rotation = 30;
+
+% On-figure labels for growth modes
+lIceSubsaturated = text(65,-14,'Subsaturated with respect to ice, no ice growth');
+lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 11;
+lFaceW = text(95.5,-6,'Face growth (column-like)');
+lFaceW.FontName = 'Lato'; lFaceW.FontSize = 13;
+lEdgeW = text(91.25,-14.5,'Edge growth (plate-like)');
+lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 13;
+lCornerSectorW = text(105.5,-19.5,'Corner growth (sector plates)');
+lCornerSectorW.FontName = 'Lato'; lCornerSectorW.FontSize = 13;
+lCornerBranchedW = text(104,-15,{'Corner growth', '(branched, dendrites)'});
+lCornerBranchedW.FontName = 'Lato'; lCornerBranchedW.FontSize = 13;
+lMixedW = text(68.9,-40,'Mixed (polycrystals, plates, columns, equiaxed)');
+lMixedW.FontName = 'Lato'; lMixedW.FontSize = 13;
+lMixedW.Rotation = -36;
+lPolycrystalsPlatelikeW = text(80.6,-36,'Polycrystals (platelike)');
+lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 13;
+lPolycrystalsColumnarW = text(77,-60,'Polycrystals (columnar)');
+lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 13;
 
 % Diagram settings
 axe = gca;
