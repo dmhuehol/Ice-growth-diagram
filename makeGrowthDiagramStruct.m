@@ -1,7 +1,12 @@
 function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
 %%makeGrowthDiagramStruct
     %Function to make a structure containing all information needed to plot
-    %an ice growth diagram. Values derived from Bailey and Hallett 2009.
+    %an ice growth diagram. Values derived from Bailey and Hallett 2009 and
+    %Bailey and Hallett 2004. Bailey and Hallett 2009 cuts off the top of
+    %the diagram at a 0.6 ice supersaturation, but lab work in Bailey and
+    %Hallett 2004 extends to higher values. The supersaturations above 0.6
+    %come from Bailey and Hallett 2004.
+    %
     %Saturation vapor pressure equations use the Improved
     %August-Roche-Magnus equation from
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
@@ -121,14 +126,14 @@ if crystalLog==1
     hd.PolycrystalsP.Habit = 'Polycrystals (platelike)';
     hd.PolycrystalsP.Color = [89 25 42]./255;
     hd.PolycrystalsP.TempBounds = [-46.6 -40.2 -22 -22; -40.2 -40.2 -22 -22];
-    hd.PolycrystalsP.supersatBounds = [0.038 0.33 0.33 0.038; 0.33 0.6 0.6 0.33];
+    hd.PolycrystalsP.supersatBounds = [0.038 0.33 0.33 0.038; 0.33 1 0.6 0.33];
     hd.PolycrystalsP.waterBounds = iceSupersatToRH(hd.PolycrystalsP.supersatBounds.*100,hd.PolycrystalsP.TempBounds);
     hd.PolycrystalsP.vaporExcBounds = iceSupersatToVaporExc(hd.PolycrystalsP.supersatBounds,hd.PolycrystalsP.TempBounds);
     
     hd.PolycrystalsC.Habit = 'Polycrystals (columnar)';
     hd.PolycrystalsC.Color = [0 54 70]./255;
     hd.PolycrystalsC.TempBounds = [-46.6 -40.2 -70 -70; -70 -70 -40.2 -40.2];
-    hd.PolycrystalsC.supersatBounds = [0.038 0.33 0.33 0.038; 0.33 0.6 0.6 0.33];
+    hd.PolycrystalsC.supersatBounds = [0.038 0.33 0.33 0.038; 0.33 1 1 0.33];
     hd.PolycrystalsC.waterBounds = iceSupersatToRH(hd.PolycrystalsC.supersatBounds.*100,hd.PolycrystalsC.TempBounds);
     hd.PolycrystalsC.vaporExcBounds = iceSupersatToVaporExc(hd.PolycrystalsC.supersatBounds,hd.PolycrystalsC.TempBounds);
     
