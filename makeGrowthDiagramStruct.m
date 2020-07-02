@@ -139,8 +139,8 @@ if crystalLog==1
     hd.PolycrystalsC.Habit = 'Polycrystals (columnar)';
     hd.PolycrystalsC.Color = [0 54 70]./255;
     hd.PolycrystalsC.TextbookColor = [183 198 203]./255;
-    hd.PolycrystalsC.TempBounds = [-46.6 -40.2 -70 -70; -70 -70 -40.2 -40.2];
-    hd.PolycrystalsC.supersatBounds = [0.038 0.33 0.33 0.038; 0.33 1 1 0.33];
+    hd.PolycrystalsC.TempBounds = [-46.6 -40.2 -70 -70 -70; -70 -70 -50 -40.2 -40.2];
+    hd.PolycrystalsC.supersatBounds = [0.038 0.33 0.33 0.33 0.038; 0.33 1 1 1 0.33];
     hd.PolycrystalsC.waterBounds = iceSupersatToRH(hd.PolycrystalsC.supersatBounds.*100,hd.PolycrystalsC.TempBounds);
     hd.PolycrystalsC.vaporExcBounds = iceSupersatToVaporExc(hd.PolycrystalsC.supersatBounds,hd.PolycrystalsC.TempBounds);
     
