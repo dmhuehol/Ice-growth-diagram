@@ -239,9 +239,6 @@ axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 
 %% Ice growth diagram in terms of relative humidity with respect to water
-legLog = 1;
-legendLocStr = 'southoutside';
-
 % Modifiable variables
 xlimRange = [55 124];
 ylimRange = [-70 0];
@@ -297,9 +294,6 @@ unnatural = patch(hd.unnatural.waterBounds,hd.unnatural.TempBounds,hd.unnatural.
 unnatural.EdgeColor = 'none';
 hold on
 
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
-
 % Plot other lines
 esw50LineStandard = plot([50 50],[-70 0]);
 esw50LineStandard.Color = [144 143 143]./255;
@@ -329,8 +323,6 @@ esw90LineStandard.LineStyle = '--';
 esw100SupersatLineStandard = plot([100 100],[-70 0]);
 esw100SupersatLineStandard.Color = [144 143 143]./255;
 esw100SupersatLineStandard.LineWidth = 1;
-legendEntries(end+1) = esw100SupersatLineStandard;
-legendTexts{end+1} = 'Isohumes (10% intervals)';
 
 esw102p5LineStandard = plot([102.5 102.5],[-70 -2.6]);
 esw102p5LineStandard.Color = [144 143 143]./255;
@@ -341,8 +333,6 @@ esw105LineStandard = plot([105 105],[-70 -5.2]);
 esw105LineStandard.Color = [144 143 143]./255;
 esw105LineStandard.LineWidth = 0.5;
 esw105LineStandard.LineStyle = '-.';
-legendEntries(end+1) = esw105LineStandard;
-legendTexts{end+1} = 'Isohumes (102.5%, 105%)';
 
 startMat = ones(1,length(TlineStandardC));
 
@@ -387,46 +377,42 @@ esi60Line = plot(water_esi60LineData(416:end),TlineStandardC(416:end));
 esi60Line.Color = [144 143 143]./255;
 esi60Line.LineWidth = 1.5;
 esi60Line.LineStyle = ':';
-legendEntries(end+1) = esi60Line;
-legendTexts{end+1} = 'Ice-isohumes (100% min, 160% max, 10% interval)';
 
 [eswLineData] = eswLine(100,Tlower,Tupper);
 water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
 water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
 water_ventLine.Color = [0 26 255]./255;
 water_ventLine.LineWidth = 1.2;
-legendEntries(end+1) = water_ventLine;
-legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
 
 % On-figure labels for isohumes and ice-isohumes
 lIce0 = text(83.38,-18.3,'100% (ice saturation)');
 lIce0.FontName = 'Lato'; lIce0.FontSize = 11; lIce0.Color = [144 143 143]./255;
-lIce0.Rotation = -30;
+lIce0.Rotation = -35;
 
 lIce10 = text(86.7,-24,'110% (ice)');
 lIce10.FontName = 'Lato'; lIce10.FontSize = 11; lIce10.Color = [144 143 143]./255;
-lIce10.Rotation = -30;
+lIce10.Rotation = -34;
 lIce20 = text(88.88,-30.4,'120% (ice)');
 lIce20.FontName = 'Lato'; lIce20.FontSize = 11; lIce20.Color = [144 143 143]./255;
-lIce20.Rotation = -30;
+lIce20.Rotation = -34;
 lIce30 = text(90.95,-36.4,'130% (ice)');
 lIce30.FontName = 'Lato'; lIce30.FontSize = 11; lIce30.Color = [144 143 143]./255;
-lIce30.Rotation = -30;
+lIce30.Rotation = -34;
 lIce40 = text(92.92,-42.1,'140% (ice)');
 lIce40.FontName = 'Lato'; lIce40.FontSize = 11; lIce40.Color = [144 143 143]./255;
-lIce40.Rotation = -30;
+lIce40.Rotation = -34;
 lIce50 = text(94.81,-47.6,'150% (ice)');
 lIce50.FontName = 'Lato'; lIce50.FontSize = 11; lIce50.Color = [144 143 143]./255;
-lIce50.Rotation = -30;
+lIce50.Rotation = -34;
 lIce60 = text(96.7,-52.9,'160% (ice)');
 lIce60.FontName = 'Lato'; lIce60.FontSize = 11; lIce60.Color = [144 143 143]./255;
-lIce60.Rotation = -30;
+lIce60.Rotation = -34;
 lW5 = text(105,-45,'105% (approx. max ambient supersat)');
 lW5.FontName = 'Lato'; lW5.FontSize = 11; lW5.Color = [144 143 143]./255;
 lW5.Rotation = 90;
 lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
 lVentW.FontName = 'Lato'; lVentW.FontSize = 12; lVentW.Color = 'k';
-lVentW.Rotation = 30;
+lVentW.Rotation = 35;
 
 % On-figure labels for growth modes
 lIceSubsaturated = text(65,-14,'Subsaturated with respect to ice, no ice growth');
@@ -441,7 +427,7 @@ lCornerBranchedW = text(104,-15,{'Corner growth', '(branched, dendrites)'});
 lCornerBranchedW.FontName = 'Lato'; lCornerBranchedW.FontSize = 13;
 lMixedW = text(68.9,-40,'Mixed (polycrystals, plates, columns, equiaxed)');
 lMixedW.FontName = 'Lato'; lMixedW.FontSize = 13;
-lMixedW.Rotation = -36;
+lMixedW.Rotation = -40;
 lPolycrystalsPlatelikeW = text(80.6,-36,'Polycrystals (platelike)');
 lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 13;
 lPolycrystalsColumnarW = text(77,-60,'Polycrystals (columnar)');
@@ -476,12 +462,3 @@ axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2
 axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
-
-leg = legend(legendEntries,legendTexts);
-leg.Location = legendLocStr;
-leg.NumColumns = 3;
-leg.FontSize = 14;
-
-if legLog==0
-    leg.Visible = 'off';
-end
