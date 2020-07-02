@@ -33,7 +33,7 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 
 %% Ice growth diagram in terms of relative humidity with respect to ice
 % Check variables
-xlimRange = [0 0.6];
+xlimRange = [-0 0.6];
 ylimRange = [-56.5 0];
 
 % Draw the growth types
@@ -244,7 +244,7 @@ legendLocStr = 'southoutside';
 
 % Modifiable variables
 xlimRange = [55 124];
-ylimRange = [-56.5 0];
+ylimRange = [-70 0];
 
 % Draw the growth modes
 Tupper = 15; Tlower = -70;
@@ -328,7 +328,7 @@ esw90LineStandard.LineStyle = '--';
 
 esw100SupersatLineStandard = plot([100 100],[-70 0]);
 esw100SupersatLineStandard.Color = [144 143 143]./255;
-esw100SupersatLineStandard.LineWidth = 0.5;
+esw100SupersatLineStandard.LineWidth = 1;
 legendEntries(end+1) = esw100SupersatLineStandard;
 legendTexts{end+1} = 'Isohumes (10% intervals)';
 
@@ -349,7 +349,7 @@ startMat = ones(1,length(TlineStandardC));
 water_esi0LineData = iceSupersatToRH(startMat.*0,TlineStandardC);
 esi0Line = plot(water_esi0LineData,TlineStandardC);
 esi0Line.Color = [144 143 143]./255;
-esi0Line.LineWidth = 0.5;
+esi0Line.LineWidth = 1;
 hold on
 
 water_esi10LineData = iceSupersatToRH(startMat.*10,TlineStandardC);
