@@ -6,12 +6,12 @@
 % General form: call iceGrowthDiagramTextbook at command window. The user
 % will be provided with an input prompt.
 %
-% iceGrowthDiagramTextbook is designed to be replicable, not necessarily
-% flexible. The figure drawing is accomplished through a thicket of
-% hardcoding in order to make the appropriate on-lable figures, alpha
-% values, and more. The code is sectioned off by the moisture variables.
-% A very limited selection of parameters are modifiable and are described
-% at the beginning of their respective sections.
+% iceGrowthDiagramTextbook is designed to be replicable, not flexible. The
+% figure drawing is accomplished through a thicket of hardcoding in order
+% to make the appropriate on-figure labels, colors, etc. The code is
+% sectioned off by the moisture variables in a switch/case block. A very
+% limited selection of parameters are modifiable and are described at the
+% start of their respective sections. 
 %
 % For flexible code that produces the high-contrast applied ice growth
 % diagram, see iceGrowthDiagram, iceGrowthDiagramWater, and
@@ -21,8 +21,8 @@
 %Written by: Daniel Hueholt
 %North Carolina State University
 %Research Assistant at Environment Analytics
-%Version date: 7/1/2020
-%Last major revision: 7/1/2020
+%Version date: 7/2/2020
+%Last major revision: 7/2/2020
 %
 %Based on concept art originally made in Adobe Illustrator by Dr. Matthew
 %Miller, Senior Research Scholar at Environment Analytics.
