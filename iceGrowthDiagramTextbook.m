@@ -428,7 +428,7 @@ lCornerBranchedW.FontName = 'Lato'; lCornerBranchedW.FontSize = 13;
 lMixedW = text(68.9,-40,'Mixed (polycrystals, plates, columns, equiaxed)');
 lMixedW.FontName = 'Lato'; lMixedW.FontSize = 13;
 lMixedW.Rotation = -40;
-lPolycrystalsPlatelikeW = text(80.6,-36,'Polycrystals (platelike)');
+lPolycrystalsPlatelikeW = text(80.6,-34,'Polycrystals (platelike)');
 lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 13;
 lPolycrystalsColumnarW = text(77,-60,'Polycrystals (columnar)');
 lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 13;
