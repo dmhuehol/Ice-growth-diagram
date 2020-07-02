@@ -394,7 +394,7 @@ legendTexts{end+1} = 'Ice-isohumes (100% min, 160% max, 10% interval)';
 water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
 water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
 water_ventLine.Color = [0 26 255]./255;
-water_ventLine.LineWidth = 1;
+water_ventLine.LineWidth = 1.2;
 legendEntries(end+1) = water_ventLine;
 legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
 
@@ -426,6 +426,14 @@ lIce50.Rotation = -30;
 lIce60 = text(96.7,-52.9,'160% (ice)');
 lIce60.FontName = 'Lato'; lIce60.FontSize = 11; lIce60.Color = [144 143 143]./255;
 lIce60.Rotation = -30;
+
+lW5 = text(105,-45,'105% (approx. max ambient supersat)');
+lW5.FontName = 'Lato'; lW5.FontSize = 11; lW5.Color = [144 143 143]./255;
+lW5.Rotation = 90;
+
+lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
+lVentW.FontName = 'Lato'; lVentW.FontSize = 12; lVentW.Color = 'k';
+lVentW.Rotation = 30;
 
 % Diagram settings
 axe = gca;
