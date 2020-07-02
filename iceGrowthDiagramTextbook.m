@@ -241,7 +241,7 @@ axe.YDir = 'reverse';
 %% Ice growth diagram in terms of relative humidity with respect to water
 % Modifiable variables
 xlimRange = [55 124];
-ylimRange = [-70 0];
+ylimRange = [-56.5 0];
 
 % Draw the growth modes
 Tupper = 15; Tlower = -70;
@@ -387,32 +387,31 @@ water_ventLine.LineWidth = 1.2;
 % On-figure labels for isohumes and ice-isohumes
 lIce0 = text(83.38,-18.3,'100% (ice saturation)');
 lIce0.FontName = 'Lato'; lIce0.FontSize = 11; lIce0.Color = [144 143 143]./255;
-lIce0.Rotation = -35;
-
+lIce0.Rotation = -41;
 lIce10 = text(86.7,-24,'110% (ice)');
 lIce10.FontName = 'Lato'; lIce10.FontSize = 11; lIce10.Color = [144 143 143]./255;
-lIce10.Rotation = -34;
+lIce10.Rotation = -40;
 lIce20 = text(88.88,-30.4,'120% (ice)');
 lIce20.FontName = 'Lato'; lIce20.FontSize = 11; lIce20.Color = [144 143 143]./255;
-lIce20.Rotation = -34;
+lIce20.Rotation = -40;
 lIce30 = text(90.95,-36.4,'130% (ice)');
 lIce30.FontName = 'Lato'; lIce30.FontSize = 11; lIce30.Color = [144 143 143]./255;
-lIce30.Rotation = -34;
+lIce30.Rotation = -40;
 lIce40 = text(92.92,-42.1,'140% (ice)');
 lIce40.FontName = 'Lato'; lIce40.FontSize = 11; lIce40.Color = [144 143 143]./255;
-lIce40.Rotation = -34;
+lIce40.Rotation = -40;
 lIce50 = text(94.81,-47.6,'150% (ice)');
 lIce50.FontName = 'Lato'; lIce50.FontSize = 11; lIce50.Color = [144 143 143]./255;
-lIce50.Rotation = -34;
+lIce50.Rotation = -40;
 lIce60 = text(96.7,-52.9,'160% (ice)');
 lIce60.FontName = 'Lato'; lIce60.FontSize = 11; lIce60.Color = [144 143 143]./255;
-lIce60.Rotation = -34;
-lW5 = text(105,-45,'105% (approx. max ambient supersat)');
+lIce60.Rotation = -40;
+lW5 = text(105,-41,'105% (approx. max ambient supersat)');
 lW5.FontName = 'Lato'; lW5.FontSize = 11; lW5.Color = [144 143 143]./255;
 lW5.Rotation = 90;
 lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
 lVentW.FontName = 'Lato'; lVentW.FontSize = 12; lVentW.Color = 'k';
-lVentW.Rotation = 35;
+lVentW.Rotation = 41;
 
 % On-figure labels for growth modes
 lIceSubsaturated = text(65,-14,'Subsaturated with respect to ice, no ice growth');
@@ -427,10 +426,10 @@ lCornerBranchedW = text(104,-15,{'Corner growth', '(branched, dendrites)'});
 lCornerBranchedW.FontName = 'Lato'; lCornerBranchedW.FontSize = 13;
 lMixedW = text(68.9,-40,'Mixed (polycrystals, plates, columns, equiaxed)');
 lMixedW.FontName = 'Lato'; lMixedW.FontSize = 13;
-lMixedW.Rotation = -40;
+lMixedW.Rotation = -47;
 lPolycrystalsPlatelikeW = text(80.6,-34,'Polycrystals (platelike)');
 lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 13;
-lPolycrystalsColumnarW = text(77,-60,'Polycrystals (columnar)');
+lPolycrystalsColumnarW = text(77,-50,'Polycrystals (columnar)');
 lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 13;
 
 % Diagram settings
@@ -462,3 +461,4 @@ axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2
 axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
+
