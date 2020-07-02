@@ -398,6 +398,35 @@ water_ventLine.LineWidth = 1;
 legendEntries(end+1) = water_ventLine;
 legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
 
+% On-figure labels
+lIce0 = text(83.38,-18.3,'100% (ice saturation)');
+lIce0.FontName = 'Lato'; lIce0.FontSize = 11; lIce0.Color = [144 143 143]./255;
+lIce0.Rotation = -30;
+
+lIce10 = text(86.7,-24,'110% (ice)');
+lIce10.FontName = 'Lato'; lIce10.FontSize = 11; lIce10.Color = [144 143 143]./255;
+lIce10.Rotation = -30;
+
+lIce20 = text(88.88,-30.4,'120% (ice)');
+lIce20.FontName = 'Lato'; lIce20.FontSize = 11; lIce20.Color = [144 143 143]./255;
+lIce20.Rotation = -30;
+
+lIce30 = text(90.95,-36.4,'130% (ice)');
+lIce30.FontName = 'Lato'; lIce30.FontSize = 11; lIce30.Color = [144 143 143]./255;
+lIce30.Rotation = -30;
+
+lIce40 = text(92.92,-42.1,'140% (ice)');
+lIce40.FontName = 'Lato'; lIce40.FontSize = 11; lIce40.Color = [144 143 143]./255;
+lIce40.Rotation = -30;
+
+lIce50 = text(94.81,-47.6,'150% (ice)');
+lIce50.FontName = 'Lato'; lIce50.FontSize = 11; lIce50.Color = [144 143 143]./255;
+lIce50.Rotation = -30;
+
+lIce60 = text(96.7,-52.9,'160% (ice)');
+lIce60.FontName = 'Lato'; lIce60.FontSize = 11; lIce60.Color = [144 143 143]./255;
+lIce60.Rotation = -30;
+
 % Diagram settings
 axe = gca;
 axe.FontName = 'Lato';
