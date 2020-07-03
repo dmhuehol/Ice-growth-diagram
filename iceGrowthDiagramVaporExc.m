@@ -51,8 +51,8 @@ if ~exist('isohumeFlag','var')
     disp('Isohumes enabled by default')
 end
 if ~exist('ventLog','var')
-    ventLog = 1;
-    disp('Ventilation line enabled by default')
+    ventLog = 0;
+    disp('Ventilation line disabled by default')
 end
 if ~exist('updraftLog','var')
     updraftLog = 0;
@@ -67,7 +67,11 @@ if ~exist('legendLocStr','var')
     disp('Legend location defaults to below the diagram');
 end
 if ~exist('xlimRange','var')
-    xlimRange = [0 0.6];
+    if ventLog
+        xlimRange = [0 0.5];
+    else
+        xlimRange = [0 0.351];
+    end
     disp('Default ice supersaturation range for x-axis is 0 to 60%')
 end
 if ~exist('ylimRange','var')
@@ -125,8 +129,12 @@ warmerThanFreezing = patch(hd.warm.vaporExcBounds(1,:),hd.warm.TempBounds(1,:),h
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.vaporExcBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
-unnatural = patch(hd.unnatural.vaporExcBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
-unnatural.EdgeColor = 'none';
+if ventLog
+    unnaturalVent = patch(hd.unnaturalVent.vaporExcBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+    unnaturalVent.EdgeColor = 'none';
+end
+unnatural105 = patch(hd.unnatural105.vaporExcBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+unnatural105.EdgeColor = 'none';
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
@@ -214,14 +222,22 @@ if isohumeFlag==1
     
     eswLinep25Data = eswLine(102.5,Tlower,Tupper);
     [eswLinep25Data] = iceSupersatToVaporExc(eswLinep25Data,TlineStandardC);
-    eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
+    if ventLog
+        eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
+    else
+        eswSupersatLineStandardp25 = plot(eswLinep25Data,TlineStandardC);
+    end
     eswSupersatLineStandardp25.LineStyle = '-.';
     eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp25.LineWidth = 3.2;
     
     eswLinep5Data = eswLine(105,Tlower,Tupper);
     [eswLinep5Data] = iceSupersatToVaporExc(eswLinep5Data,TlineStandardC);
-    eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
+    if ventLog
+        eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
+    else
+        eswSupersatLineStandardp5 = plot(eswLinep5Data,TlineStandardC);
+    end
     eswSupersatLineStandardp5.LineStyle = '-.';
     eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp5.LineWidth = 3.2;
