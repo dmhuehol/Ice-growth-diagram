@@ -47,7 +47,7 @@ crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
 if strcmp(phaseFlag,'ice')==1  
-    isohumesLog = 1; ventLog = 1; updraftLog = 0; legLogForGeneration = 1;
+    isohumesLog = 1; ventLog = 0; updraftLog = 0; legLogForGeneration = 1;
     legLocation = 'southeast';
     satLim = [0,0.6]; %[0,0.6] is standard
     tempLim = [-56.5,0]; % [-56.5,0] is standard
