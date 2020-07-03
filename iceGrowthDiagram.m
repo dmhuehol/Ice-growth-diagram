@@ -47,7 +47,7 @@ if ~exist('isohumeFlag','var')
     disp('Isohumes enabled by default')
 end
 if ~exist('ventLog','var')
-    ventLog = 1;
+    ventLog = 0;
     disp('Ventilation line enabled by default')
 end
 if ~exist('updraftLog','var')
@@ -115,8 +115,12 @@ warmerThanFreezing = patch(hd.warm.supersatBounds(1,:),hd.warm.TempBounds(1,:),h
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.supersatBounds(1,:),hd.subsaturated.TempBounds(1,:),hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
-unnatural = patch(hd.unnatural.supersatBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
-unnatural.EdgeColor = 'none';
+if ventLog
+    unnaturalVent = patch(hd.unnaturalVent.supersatBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+    unnaturalVent.EdgeColor = 'none';
+end
+unnatural105 = patch(hd.unnatural105.supersatBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+unnatural105.EdgeColor = 'none';
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Sans subsaturated to make images
@@ -194,13 +198,15 @@ if isohumeFlag==1
     eswSupersatLineStandard0.LineWidth = 3.2;
     
     eswLinep25Data = eswLine(102.5,Tlower,Tupper);
-    eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
+    %eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
+    eswSupersatLineStandardp25 = plot(eswLinep25Data,TlineStandardC);
     eswSupersatLineStandardp25.LineStyle = '-.';
     eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp25.LineWidth = 3.2;
     
     eswLinep5Data = eswLine(105,Tlower,Tupper);
-    eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
+    %eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
+    eswSupersatLineStandardp5 = plot(eswLinep5Data,TlineStandardC);
     eswSupersatLineStandardp5.LineStyle = '-.';
     eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp5.LineWidth = 3.2;

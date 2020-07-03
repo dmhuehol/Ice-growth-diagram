@@ -1,4 +1,4 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,legLog,legendLocStr,xlimRange,ylimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram with relative humidity with
     %respect to water as abscissa. Returns the figure handle so further
@@ -11,6 +11,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,legLog,legen
     %
     %Input
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
+    %ventLog: logical 1/0 to show ventilation
     %legLog: logical 1/0 to show the legend
     %legendLocStr: legend location string ('southoutside' is standard)
     %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [55 124])
@@ -45,6 +46,9 @@ if ~exist('hd','var')
     otherLog = 1;
     [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
 end
+if ~exist('ventLog','var')
+    ventLog = 0;
+end
 if ~exist('legLog','var')
     legLog = 1;
     disp('Legend enabled by default')
@@ -54,8 +58,13 @@ if ~exist('legendLocStr','var')
     disp('Legend location defaults to below the figure');
 end
 if ~exist('xlimRange','var')
-    xlimRange = [55 124];
-    disp('Default RHwater range for x-axis is 55 to 124%')
+    if ventLog
+        xlimRange = [55 124];
+        disp('Default RHwater range for x-axis (with ventilation) is 55 to 124%')
+    else
+        xlimRange = [55 105];
+        disp('Default RHwater range for x-axis is 55 to 107%')
+    end    
 end
 if ~exist('ylimRange','var')
     ylimRange = [-56.5 0];
@@ -117,8 +126,12 @@ warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.w
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
-unnatural = patch(hd.unnatural.waterBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
-unnatural.EdgeColor = 'none';
+if ventLog
+    unnaturalVent = patch(hd.unnaturalVent.waterBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+    unnaturalVent.EdgeColor = 'none';
+end
+unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+unnatural105.EdgeColor = 'none';
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
@@ -157,12 +170,20 @@ esw100SupersatLineStandard.LineStyle = ':';
 legendEntries(end+1) = esw100SupersatLineStandard;
 legendTexts{end+1} = 'Isohumes (10% intervals)';
 
-esw102p5LineStandard = plot([102.5 102.5],[-70 -2.6]);
+if ventLog
+    esw102p5LineStandard = plot([102.5 102.5],[-70 -2.6]);
+else
+    esw102p5LineStandard = plot([102.5 102.5],[-70 0]);
+end
 esw102p5LineStandard.Color = [255 230 0]./255;
 esw102p5LineStandard.LineWidth = 3.2;
 esw102p5LineStandard.LineStyle = '-.';
 
-esw105LineStandard = plot([105 105],[-70 -5.2]);
+if ventLog
+    esw105LineStandard = plot([105 105],[-70 -5.2]);
+else
+    esw105LineStandard = plot([105 105],[-70 0]);
+end
 esw105LineStandard.Color = [255 230 0]./255;
 esw105LineStandard.LineWidth = 3.2;
 esw105LineStandard.LineStyle = '-.';
@@ -178,44 +199,70 @@ esi0Line.LineWidth = 3.2;
 hold on
 
 water_esi10LineData = iceSupersatToRH(startMat.*10,TlineStandardC);
-esi10Line = plot(water_esi10LineData(201:end),TlineStandardC(201:end));
+if ventLog
+    esi10Line = plot(water_esi10LineData(201:end),TlineStandardC(201:end));
+else
+    esi10Line = plot(water_esi10LineData(198:end),TlineStandardC(198:end));
+end
 esi10Line.Color = [255 230 0]./255;
 esi10Line.LineWidth = 3.2;
 
 water_esi20LineData = iceSupersatToRH(startMat.*20,TlineStandardC);
-esi20Line = plot(water_esi20LineData(248:end),TlineStandardC(248:end));
+if ventLog
+    esi20Line = plot(water_esi20LineData(248:end),TlineStandardC(248:end));
+else
+    esi20Line = plot(water_esi20LineData(285:end),TlineStandardC(285:end));
+end
 esi20Line.Color = [255 230 0]./255;
 esi20Line.LineWidth = 3.2;
 
 water_esi30LineData = iceSupersatToRH(startMat.*30,TlineStandardC);
-esi30Line = plot(water_esi30LineData(291:end),TlineStandardC(291:end));
+if ventLog
+    esi30Line = plot(water_esi30LineData(291:end),TlineStandardC(291:end));
+else
+    esi30Line = plot(water_esi30LineData(366:end),TlineStandardC(366:end));
+end
 esi30Line.Color = [255 230 0]./255;
 esi30Line.LineWidth = 3.2;
 
 water_esi40LineData = iceSupersatToRH(startMat.*40,TlineStandardC);
-esi40Line = plot(water_esi40LineData(335:end),TlineStandardC(335:end));
+if ventLog
+    esi40Line = plot(water_esi40LineData(335:end),TlineStandardC(335:end));
+else
+    esi40Line = plot(water_esi40LineData(441:end),TlineStandardC(441:end));
+end
 esi40Line.Color = [255 230 0]./255;
 esi40Line.LineWidth = 3.2;
 
 water_esi50LineData = iceSupersatToRH(startMat.*50,TlineStandardC);
-esi50Line = plot(water_esi50LineData(376:end),TlineStandardC(376:end));
+if ventLog
+    esi50Line = plot(water_esi50LineData(376:end),TlineStandardC(376:end));
+else
+    esi50Line = plot(water_esi50LineData(514:end),TlineStandardC(514:end));
+end
 esi50Line.Color = [255 230 0]./255;
 esi50Line.LineWidth = 3.2;
 
 water_esi60LineData = iceSupersatToRH(startMat.*60,TlineStandardC);
-esi60Line = plot(water_esi60LineData(416:end),TlineStandardC(416:end));
+if ventLog
+    esi60Line = plot(water_esi60LineData(416:end),TlineStandardC(416:end));
+else
+    esi60Line = plot(water_esi60LineData(584:end),TlineStandardC(584:end));
+end
 esi60Line.Color = [255 230 0]./255;
 esi60Line.LineWidth = 3.2;
 legendEntries(end+1) = esi60Line;
 legendTexts{end+1} = 'Ice-isohumes (100% min, 160% max, 10% interval)';
 
-[eswLineData] = eswLine(100,Tlower,Tupper);
-water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
-water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
-water_ventLine.Color = [0 26 255]./255;
-water_ventLine.LineWidth = 3.2;
-legendEntries(end+1) = water_ventLine;
-legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
+if ventLog
+    [eswLineData] = eswLine(100,Tlower,Tupper);
+    water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
+    water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
+    water_ventLine.Color = [0 26 255]./255;
+    water_ventLine.LineWidth = 3.2;
+    legendEntries(end+1) = water_ventLine;
+    legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
+end
 
 % 200% RH line (compare to 2*esw ventilation line)
 %water_vent200Line = plot([200,200],[25,-75]);
@@ -250,7 +297,11 @@ yLab.FontName = 'Lato Bold';
 xLab = xlabel('Relative humidity with respect to water (%)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
-axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
+if ventLog
+    axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
+else
+    axe.XTick = [50 55 60 70 80 90 100 102.5 105];
+end
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 

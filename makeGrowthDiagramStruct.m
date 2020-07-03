@@ -161,15 +161,23 @@ end
 
 if otherLog==1
     
-    hd.unnatural.Habit = 'Coordinates to block out unnatural supersaturations'; %Follows the 2*water saturation line
-    hd.unnatural.Color = [1 1 1];
+    hd.unnaturalVent.Habit = 'Coordinates to block out unnatural supersaturations corresponding to ventilation'; %Follows the 2*water saturation line
+    hd.unnaturalVent.Color = [1 1 1];
     Tupper_other = 15; Tlower_other = -70;
     TlineStandardC = Tupper_other:-0.1:Tlower_other;
     [eswLineData_other] = eswLine(100,Tlower_other,Tupper_other);
-    hd.unnatural.TempBounds = [0 TlineStandardC(2:11:end) 0];
-    hd.unnatural.supersatBounds = [0 eswLineData_other(2:11:end).*2 0.6];
-    hd.unnatural.waterBounds = iceSupersatToRH(hd.unnatural.supersatBounds.*100,hd.unnatural.TempBounds);
-    hd.unnatural.vaporExcBounds = iceSupersatToVaporExc(hd.unnatural.supersatBounds,hd.unnatural.TempBounds);
+    hd.unnaturalVent.TempBounds = [0 TlineStandardC(2:11:end) 0];
+    hd.unnaturalVent.supersatBounds = [0 eswLineData_other(2:11:end).*2 1];
+    hd.unnaturalVent.waterBounds = iceSupersatToRH(hd.unnaturalVent.supersatBounds.*100,hd.unnaturalVent.TempBounds);
+    hd.unnaturalVent.vaporExcBounds = iceSupersatToVaporExc(hd.unnaturalVent.supersatBounds,hd.unnaturalVent.TempBounds);
+    
+    hd.unnatural105.Habit = 'Coordinates to block out unphysical supersaturations greater than 105% RHw';
+    hd.unnatural105.Color = [1 1 1];
+    [ew105_line] = eswLine(105,Tlower_other,Tupper_other);
+    hd.unnatural105.TempBounds = [0 TlineStandardC(2:11:end) 0];
+    hd.unnatural105.supersatBounds = [0 ew105_line(2:11:end) 1];
+    hd.unnatural105.waterBounds = iceSupersatToRH(hd.unnatural105.supersatBounds.*100,hd.unnatural105.TempBounds);
+    hd.unnatural105.vaporExcBounds = iceSupersatToVaporExc(hd.unnatural105.supersatBounds,hd.unnatural105.TempBounds);
     
     hd.subsaturated.Habit = 'Coordinates to cover subsaturated area (for radiosonde data plotting).';
     hd.subsaturated.Color = [222 222 222]./255;
