@@ -47,10 +47,11 @@ if strcmp(phaseFlag,'ice')==1
     [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,updraftLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 elseif strcmp(phaseFlag,'water')==1
     legLogForGeneration = 1;
-    legLocation = 'northeast';
-    satLim = [55,124]; %[55,124] is standard
+    legLocation = 'southoutside';
+    ventLog = 0;
+    satLim = [55,105]; %[55 105] is standard without ventilation; [55 124] with ventilation
     tempLim = [-56.5,0]; % [-56.5,0] is standard
-    [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
+    [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 end    
 
 if length(timeIndex)==1
@@ -64,8 +65,8 @@ if length(timeIndex)==1
     end
 else
     % Manually generate title otherwise
-    dateString = '7 Feb 2020';
-    launchname = '43.1025,-76.1891 (north of Syracuse, NY)';
+    dateString = 'Jan-Feb 2018';
+    launchname = 'Utqiagvik, AK';
 end
 t = title({['Ice phase space for ' dateString],launchname});
 t.FontName = 'Lato Bold';
