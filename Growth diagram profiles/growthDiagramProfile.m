@@ -1,4 +1,4 @@
-function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag)
+function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual)
 %%growthDiagramProfile
     %Function to plot a balloon temperature/humidity profile on the ice growth
     %diagram. Saturation vapor pressure equations use the Improved
@@ -15,12 +15,16 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag)
     %sounding: a processed sounding data structure, must include moisture data
     %timeIndex: the index of the desired sounding within the structure
     %legLog: logical 1/0 to plot/not plot legend. Enabled by default.
+    %phaseFlag: 'water' to plot as relative humidity with respect to water,
+    %   'ice' to plot as relative humidity with respect to ice
+    %manual: 'm' to use date and launchname designated in code, any other
+    %   value or leave off for user to be prompted for these
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
-    %Last major revision: 11/22/2019
+    %Version date: 7/2/2020
+    %Last major revision: 7/2/2020
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram, iceGrowthDiagramWater, eswLine
     %
@@ -33,6 +37,9 @@ end
 if legLog~=0 && legLog~=1
     legLog = 1;
     disp('Legend enabled by default')
+end
+if ~exist('manual','var')
+    manual = 0;
 end
 
 %% Set up growth diagram
@@ -64,9 +71,13 @@ if length(timeIndex)==1
         launchname = 'Unknown';
     end
 else
-    % Manually generate title otherwise
-    dateString = 'Jan-Feb 2018';
-    launchname = 'Utqiagvik, AK';
+    if ~strcmp(manual,'m')
+        dateString = input('Enter date for title: ','s');
+        launchname = input('Enter location for title: ','s');
+    else
+        dateString = 'DJF 2019-2020';
+        launchname = 'Upton, NY';
+    end
 end
 t = title({['Ice growth profile for ' dateString],launchname});
 t.FontName = 'Lato Bold';
