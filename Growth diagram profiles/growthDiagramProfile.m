@@ -68,7 +68,7 @@ else
     dateString = 'Jan-Feb 2018';
     launchname = 'Utqiagvik, AK';
 end
-t = title({['Ice phase space for ' dateString],launchname});
+t = title({['Ice growth profile for ' dateString],launchname});
 t.FontName = 'Lato Bold';
 t.FontSize = 20;
 
