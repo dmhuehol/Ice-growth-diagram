@@ -59,8 +59,15 @@ elseif strcmp(phaseFlag,'water')==1
     satLim = [55,105]; %[55 105] is standard without ventilation; [55 124] with ventilation
     tempLim = [-56.5,0]; % [-56.5,0] is standard
     [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
-end    
-
+elseif strcmp(phaseFlag,'vde')==1
+    legLogForGeneration = 1;
+    legLocation = 'southoutside';
+    isohumeLog = 1; updraftLog = 0;
+    ventLog = 0;
+    satLim = [0,0.35]; %[55 105] is standard without ventilation; [55 124] with ventilation
+    tempLim = [-56.5,0]; % [-56.5,0] is standard
+    [fig,legendEntries,legendText] = iceGrowthDiagramVaporExc(hd,isohumeLog,ventLog,updraftLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
+end
 if length(timeIndex)==1
     % Autogenerate title for single profiles
     try
@@ -75,8 +82,8 @@ else
         dateString = input('Enter date for title: ','s');
         launchname = input('Enter location for title: ','s');
     else
-        dateString = 'DJF 2019-2020';
-        launchname = 'Upton, NY';
+        dateString = 'Jan-Feb 2018';
+        launchname = 'Utqiagvik, AK';
     end
 end
 t = title({['Ice growth profile for ' dateString],launchname});
@@ -137,6 +144,19 @@ for c = 1:length(timeIndex)
         shp4 = soundingWaterHumidityPoints(radiosondeHeight4);
         shp5 = soundingWaterHumidityPoints(radiosondeHeight5);
         shpRest = soundingWaterHumidityPoints(radiosondeHeightRest);
+        
+    elseif strcmp(phaseFlag,'vde')==1
+        soundingIceHumidityPoints = (soundingHumidity-esiStandardFromRadiosonde)./esiStandardFromRadiosonde;
+        for v = length(soundingIceHumidityPoints):-1:1
+            soundingVdePoints(v) = iceSupersatToVaporExc(soundingIceHumidityPoints(v),radiosondeTemp(v));
+        end
+        
+        shp1 = soundingVdePoints(radiosondeHeight1);
+        shp2 = soundingVdePoints(radiosondeHeight2);
+        shp3 = soundingVdePoints(radiosondeHeight3);
+        shp4 = soundingVdePoints(radiosondeHeight4);
+        shp5 = soundingVdePoints(radiosondeHeight5);
+        shpRest = soundingVdePoints(radiosondeHeightRest);
         
     end
     
