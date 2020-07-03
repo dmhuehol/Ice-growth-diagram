@@ -300,7 +300,7 @@ axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2
 if ventLog
     axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
 else
-    axe.XTick = [50 55 60 70 80 90 100 102.5 105];
+    axe.XTick = [50 55 60 65 70 75 80 85 90 95 100 105];
 end
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
