@@ -41,6 +41,10 @@ end
 if ~exist('manual','var')
     manual = 0;
 end
+if ~strcmp(phaseFlag,'ice') && ~strcmp(phaseFlag,'water') && ~strcmp(phaseFlag,'vde')
+    phaseMsg = 'Valid phases are ''ice'', ''water'', and ''vde''. See function help and try again.';
+    error(phaseMsg)
+end
 
 %% Set up growth diagram
 crystalLog = 1; otherLog = 1;
@@ -79,6 +83,10 @@ if length(timeIndex)==1
     end
 else
     if ~strcmp(manual,'m')
+        startDatetime = datetime(sounding(timeIndex(1)).year,sounding(timeIndex(1)).month,sounding(timeIndex(1)).day,sounding(timeIndex(1)).hour,0,0);
+        endDatetime = datetime(sounding(timeIndex(end)).year,sounding(timeIndex(end)).month,sounding(timeIndex(end)).day,sounding(timeIndex(end)).hour,0,0);
+        disp(['Starting date is: ',datestr(startDatetime)])
+        disp(['Ending date is: ',datestr(endDatetime)])
         dateString = input('Enter date for title: ','s');
         launchname = input('Enter location for title: ','s');
     else
@@ -170,8 +178,8 @@ for c = 1:length(timeIndex)
 end
 
 % If following two lines uncommented, legend contains only balloon height entries
-legendEntries = [];
-legendText = {};
+% legendEntries = [];
+% legendText = {};
 
 legendEntries(end+1) = pc1;
 legendText{end+1} = 'Balloon data: 0-2 km';
