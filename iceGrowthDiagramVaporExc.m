@@ -37,6 +37,13 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
     %
 
 %% Check variables
+if nargin == 0
+    disp('Creating default ice diagram!')
+    pause(1) %For the vibes
+    crystalLog = 1;
+    otherLog = 1;
+    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
+end
 if isnumeric(hd)==1
     msg = 'Must enter a habit diagram structure as first input!';
     error(msg)

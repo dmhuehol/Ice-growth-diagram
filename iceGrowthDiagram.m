@@ -48,7 +48,7 @@ if ~exist('isohumeFlag','var')
 end
 if ~exist('ventLog','var')
     ventLog = 0;
-    disp('Ventilation line enabled by default')
+    disp('Ventilation line disabled by default')
 end
 if ~exist('updraftLog','var')
     updraftLog = 0;

@@ -63,7 +63,7 @@ if ~exist('xlimRange','var')
         disp('Default RHwater range for x-axis (with ventilation) is 55 to 124%')
     else
         xlimRange = [55 105];
-        disp('Default RHwater range for x-axis is 55 to 107%')
+        disp('Default RHwater range for x-axis is 55 to 105%')
     end    
 end
 if ~exist('ylimRange','var')
@@ -183,6 +183,9 @@ if ventLog
     esw105LineStandard = plot([105 105],[-70 -5.2]);
 else
     esw105LineStandard = plot([105 105],[-70 0]);
+    if xlimRange(2)==105
+        esw105LineStandard.Visible = 'off';
+    end
 end
 esw105LineStandard.Color = [255 230 0]./255;
 esw105LineStandard.LineWidth = 3.2;
