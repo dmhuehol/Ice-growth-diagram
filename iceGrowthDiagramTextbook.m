@@ -21,8 +21,8 @@
 %Written by: Daniel Hueholt
 %North Carolina State University
 %Research Assistant at Environment Analytics
-%Version date: 7/2/2020
-%Last major revision: 7/2/2020
+%Version date: 7/7/2020
+%Last major revision: 7/7/2020
 %
 %Based on concept art originally made in Adobe Illustrator by Dr. Matthew
 %Miller, Senior Research Scholar at Environment Analytics.
@@ -100,8 +100,10 @@ switch castInTermsOf
         warmerThanFreezing.EdgeColor = 'none';
         subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
         subsaturated.EdgeColor = 'none';
-        unnatural = patch(hd.unnatural.waterBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
-        unnatural.EdgeColor = 'none';
+        %unnaturalVent = patch(hd.unnaturalVent.waterBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+        %unnaturalVent.EdgeColor = 'none';
+        unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+        unnatural105.EdgeColor = 'none';
         hold on
         
         % Plot other lines
@@ -188,11 +190,11 @@ switch castInTermsOf
         esi60Line.LineWidth = 1.5;
         esi60Line.LineStyle = ':';
         
-        [eswLineData] = eswLine(100,Tlower,Tupper);
-        water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
-        water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
-        water_ventLine.Color = [0 26 255]./255;
-        water_ventLine.LineWidth = 1.2;
+        %[eswLineData] = eswLine(100,Tlower,Tupper);
+        %water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
+        %water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
+        %water_ventLine.Color = [0 26 255]./255;
+        %water_ventLine.LineWidth = 1.2;
         
         % On-figure labels for isohumes and ice-isohumes
         lIce0 = text(83.38,-18.3,'100% (ice saturation)');
@@ -219,9 +221,9 @@ switch castInTermsOf
         lW5 = text(105,-41,'105% (approx. max ambient supersat)');
         lW5.FontName = 'Lato'; lW5.FontSize = 11; lW5.Color = [144 143 143]./255;
         lW5.Rotation = 90;
-        lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
-        lVentW.FontName = 'Lato'; lVentW.FontSize = 12; lVentW.Color = 'k';
-        lVentW.Rotation = 41;
+        %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
+        %lVentW.FontName = 'Lato'; lVentW.FontSize = 12; lVentW.Color = 'k';
+        %lVentW.Rotation = 41;
         
         % On-figure labels for growth modes
         lIceSubsaturated = text(65,-14,'Subsaturated with respect to ice, no ice growth');
@@ -316,8 +318,10 @@ switch castInTermsOf
         warmerThanFreezing.EdgeColor = 'none';
         subsaturated = patch(hd.subsaturated.supersatBounds(1,:),hd.subsaturated.TempBounds(1,:),hd.subsaturated.Color);
         subsaturated.EdgeColor = 'none';
-        unnatural = patch(hd.unnatural.supersatBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
-        unnatural.EdgeColor = 'none';
+        %unnaturalVent = patch(hd.unnaturalVent.supersatBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+        %unnaturalVent.EdgeColor = 'none';
+        unnatural105 = patch(hd.unnatural105.supersatBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+        unnatural105.EdgeColor = 'none';
         hold on
         
         % Plot isohumes and ventilation lines
@@ -400,9 +404,9 @@ switch castInTermsOf
         eswSupersatLineStandardp5.Color = [144 143 143]./255;
         eswSupersatLineStandardp5.LineWidth = 0.5;
         
-        maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
-        maxVentLine.Color = [0 26 255]./255;
-        maxVentLine.LineWidth = 1;
+        %maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
+        %maxVentLine.Color = [0 26 255]./255;
+        %maxVentLine.LineWidth = 1;
         
         % On-figure labels for growth modes
         lFace = text(0.01,-6,'Face growth (column-like)');
@@ -443,9 +447,9 @@ switch castInTermsOf
         lWater105 = text(0.4742,-34.5,'105% (approx. max ambient supersat)');
         lWater105.FontName = 'Lato'; lWater105.FontSize = 11; lWater105.Color = [144 143 143]./255;
         lWater105.Rotation = 25;
-        lVent = text(0.36,-15.9,'Approx. max natural supersat (with ventilation)');
-        lVent.FontName = 'Lato'; lVent.FontSize = 12;
-        lVent.Rotation = 16;
+        %lVent = text(0.36,-15.9,'Approx. max natural supersat (with ventilation)');
+        %lVent.FontName = 'Lato'; lVent.FontSize = 12;
+        %lVent.Rotation = 16;
         
         % Diagram settings
         axe = gca;
@@ -533,8 +537,10 @@ switch castInTermsOf
         warmerThanFreezing.EdgeColor = 'none';
         subsaturated = patch(hd.subsaturated.vaporExcBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
         subsaturated.EdgeColor = 'none';
-        unnatural = patch(hd.unnatural.vaporExcBounds,hd.unnatural.TempBounds,hd.unnatural.Color);
-        unnatural.EdgeColor = 'none';
+        unnaturalVent = patch(hd.unnaturalVent.vaporExcBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+        unnaturalVent.EdgeColor = 'none';
+        unnatural105 = patch(hd.unnatural105.vaporExcBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+        unnatural105.EdgeColor = 'none';
         hold on
         
         % Plot other lines
@@ -631,9 +637,9 @@ switch castInTermsOf
         eswSupersatLineStandardp5.LineWidth = 0.5;
         
         %Approximate maximum supersaturation with ventilation line
-        maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
-        maxVentLine.Color = [0 26 255]./255;
-        maxVentLine.LineWidth = 1.2;
+        %maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
+        %maxVentLine.Color = [0 26 255]./255;
+        %maxVentLine.LineWidth = 1.2;
         
         % On-figure isohume labels
         l70Vde = text(0.005243,-48.8,'70%');
@@ -654,9 +660,9 @@ switch castInTermsOf
         l5Vde = text(0.235,-21.1,'105% (approx. max ambient supersat)');
         l5Vde.FontName = 'Lato'; l5Vde.FontSize = 11; l5Vde.Color = [144 143 143]./255;
         l5Vde.Rotation = -26;
-        lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
-        lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
-        lVentVde.Rotation = 7;
+        %lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
+        %lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
+        %lVentVde.Rotation = 7;
         
         % On-figure growth mode labels
         lEdgeWarmVde = text(0.01,-2,'Edge growth (plate-like)');
