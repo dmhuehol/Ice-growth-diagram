@@ -143,11 +143,15 @@ switch castInTermsOf
         
         startMat = ones(1,length(TlineStandardC));
         
+        %text(83.38,-18.3,'100% (ice saturation)');
         water_esi0LineData = iceSupersatToRH(startMat.*0,TlineStandardC);
-        esi0Line = plot(water_esi0LineData,TlineStandardC);
+        esi0Line = plot(water_esi0LineData(1:289),TlineStandardC(1:289));
         esi0Line.Color = [144 143 143]./255;
         esi0Line.LineWidth = 1;
         hold on
+        esi0Line2 = plot(water_esi0LineData(332:end),TlineStandardC(332:end));
+        esi0Line2.Color = [144 143 143]./255;
+        esi0Line2.LineWidth = 1;
         
         water_esi10LineData = iceSupersatToRH(startMat.*10,TlineStandardC);
         esi10Line = plot(water_esi10LineData(201:end),TlineStandardC(201:end));
@@ -649,9 +653,9 @@ switch castInTermsOf
         l2p5Vde = text(0.2133,-20.8,'102.5%');
         l2p5Vde.FontName = 'Lato'; l2p5Vde.FontSize = 11; l2p5Vde.Color = [144 143 143]./255;
         l2p5Vde.Rotation = -22;
-        l5Vde = text(0.235,-21.1,'105% (approx. max ambient supersat)');
+        l5Vde = text(0.2245,-22,'105% (approx. max ambient supersat)');
         l5Vde.FontName = 'Lato'; l5Vde.FontSize = 11; l5Vde.Color = [144 143 143]./255;
-        l5Vde.Rotation = -17;
+        l5Vde.Rotation = -18;
         %lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
         %lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
         %lVentVde.Rotation = 7;
@@ -671,7 +675,7 @@ switch castInTermsOf
         lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 13;
         lPolycrystalsPlatelikeVde = text(0.085,-28,'Polycrystals (platelike)');
         lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 13;
-        lPolycrystalsColumnarVde = text(0.009,-48.05,{'Polycrystals', '(columnar)'});
+        lPolycrystalsColumnarVde = text(0.008,-48.05,{'Polycrystals', '(columnar)'});
         lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 13;
         
         % Diagram settings
