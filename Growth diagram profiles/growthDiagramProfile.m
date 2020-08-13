@@ -58,14 +58,14 @@ if strcmp(phaseFlag,'ice')==1
     [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,updraftLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 elseif strcmp(phaseFlag,'water')==1
     legLogForGeneration = 1;
-    legLocation = 'southoutside';
+    legLocation = 'northeast';
     ventLog = 0;
     satLim = [55,105]; %[55 105] is standard without ventilation; [55 124] with ventilation
     tempLim = [-56.5,0]; % [-56.5,0] is standard
     [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 elseif strcmp(phaseFlag,'vde')==1
     legLogForGeneration = 1;
-    legLocation = 'southoutside';
+    legLocation = 'northeast';
     isohumeLog = 1; updraftLog = 0;
     ventLog = 0;
     satLim = [0,0.35]; %[55 105] is standard without ventilation; [55 124] with ventilation
@@ -90,8 +90,8 @@ else
         dateString = input('Enter date for title: ','s');
         launchname = input('Enter location for title: ','s');
     else
-        dateString = 'Jan-Feb 2018';
-        launchname = 'Utqiagvik, AK';
+        dateString = 'Dec-Feb 2014-2015';
+        launchname = 'Upton, NY';
     end
 end
 t = title({['Ice growth profile for ' dateString],launchname});
@@ -178,25 +178,28 @@ for c = 1:length(timeIndex)
 end
 
 % If following two lines uncommented, legend contains only balloon height entries
-% legendEntries = [];
-% legendText = {};
+legendEntries = [];
+legendText = {};
 
 legendEntries(end+1) = pc1;
-legendText{end+1} = 'Balloon data: 0-2 km';
+legendText{end+1} = '0-2 km';
 legendEntries(end+1) = pc2;
-legendText{end+1} = 'Balloon data: 2-4 km';
+legendText{end+1} = '2-4 km';
 legendEntries(end+1) = pc3;
-legendText{end+1} = 'Balloon data: 4-6 km';
+legendText{end+1} = '4-6 km';
 legendEntries(end+1) = pc4;
-legendText{end+1} = 'Balloon data: 6-8 km';
+legendText{end+1} = '6-8 km';
 legendEntries(end+1) = pc5;
-legendText{end+1} = 'Balloon data: 8-10 km';
+legendText{end+1} = '8-10 km';
 legendEntries(end+1) = pcRest;
-legendText{end+1} = 'Balloon data: >10 km';
+legendText{end+1} = '>10 km';
+
 leg = legend(legendEntries,legendText);
-leg.Location = legLocation;
-leg.FontSize = 14;
-if legLog==0
+if legLog==1
+    leg.Location = legLocation;
+    leg.FontSize = 14;
+    leg.NumColumns = 1;
+else
     leg.Visible = 'off';
 end
 

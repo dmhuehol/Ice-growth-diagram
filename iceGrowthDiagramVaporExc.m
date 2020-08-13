@@ -327,13 +327,13 @@ axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 
-leg = legend(legendEntries,legendTexts);
-leg.Location = legendLocStr;
-leg.NumColumns = 3;
-leg.FontSize = 14;
-
-if legLog==0
-    leg.Visible = 'off';
+if legLog == 1
+    leg = legend(legendEntries,legendTexts);
+    leg.Location = legendLocStr;
+    leg.NumColumns = 3;
+    leg.FontSize = 14;
+else
+    %no legend
 end
 
 end
