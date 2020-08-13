@@ -1,6 +1,12 @@
 %% makeFigures
 % This script loads the necessary data and makes the exact figures shown
 % in the ice diagram paper.
+%
+% Written by: Daniel Hueholt
+% North Carolina State University
+% Research Assistant at Environment Analytics
+% Version date: 8/13/2020
+% Last major revision: 
 
 %% Fig: okx_djf1415
 load('okx_djf1415.mat'); %Load radiosonde data for Upton, NY DJF 2014-2015

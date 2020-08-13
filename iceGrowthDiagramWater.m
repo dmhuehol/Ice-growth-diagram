@@ -23,7 +23,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legL
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Edits made as part of HON499: Capstone II
-    %Version date: 3/19/2020
+    %Version date: 8/13/2020
     %Last major revision: 11/22/2019
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram
