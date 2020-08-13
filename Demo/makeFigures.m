@@ -38,3 +38,11 @@ growthDiagramProfile(dnr_djf1819,1:179,1,'water',0);
 % Enter 'Dec-Feb 2018-2019' when prompted for date
 % Enter 'Denver, CO' when prompted for location
 
+%% Fig: impactsUIUC_20200207_1200UTC
+load('impUIUC_20200207_1200.mat'); %Load single radiosonde data from UIUC launch north of Syracuse on 2020 02 07
+% Change the launchname variable in growthDiagramProfile to
+% 43.1025,-76.1891 (north of Syracuse, NY)
+growthDiagramProfile(impUIUC_20200207_1200,1,1,'water')
+
+
+
