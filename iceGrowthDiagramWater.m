@@ -190,7 +190,7 @@ end
 esw105LineStandard.Color = [255 230 0]./255;
 esw105LineStandard.LineWidth = 3.2;
 esw105LineStandard.LineStyle = '-.';
-legendEntries(end+1) = esw105LineStandard;
+legendEntries(end+1) = esw102p5LineStandard;
 legendTexts{end+1} = 'Isohumes (102.5%, 105%)';
 
 startMat = ones(1,length(TlineStandardC));
