@@ -6,7 +6,7 @@
     * [Ice growth diagram: Relative humidity with respect to water](#ice-growth-diagram-relative-humidity-with-respect-to-water)  
     * [Ice growth diagram: Relative humidity with respect to ice](#ice-growth-diagram-relative-humidity-with-respect-to-ice)
     * [Ice growth diagram: Vapor density excess](#ice-growth-diagram-vapor-density-excess)
-    * [Ice growth diagram: Relative humidity with respect to water (textbook version)(#ice-growth-diagram-relative-humidity-with-respect-to-water-textbook-edition)
+    * [Ice growth diagram: Relative humidity with respect to water (textbook version)](#ice-growth-diagram-relative-humidity-with-respect-to-water-textbook-edition)
 * [Converting between ice supersaturation and vapor density excess](#converting-between-ice-supersaturation-and-vapor-density-excess)
 * [Repository description](#repository-description)
     * [Root](#root)
