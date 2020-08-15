@@ -110,7 +110,6 @@ The function `growthDiagramProfile` can be used to plot data from radiosondes on
 Code to import a general IGRA v2 soundings data file can be found in the [IGRA v2](https://github.com/dmhuehol/IGRA-v2) repository.  
 
 ## Sources and Credit
-------
 **Bailey, M.P., & Hallett, J. (2009)**: A comprehensive habit diagram for atmospheric ice crystals: Confirmation from the laboratory, AIRS II, and other field studies. *Journal of the Atmospheric Sciences, 66*(9), 2888-2899. [doi:10.1175/2009JAS2883.1](https://doi.org/10.1175/2009JAS2883.1)  
 **Kobayashi, T., 1961**: The growth of snow crystals at low supersaturations. *Philosophical Magazine, 5326* (71), 1363–1370, doi:10.1080/14786436108241231, URL http://www.tandfonline.com/doi/533abs/10.1080/14786436108241231.  
 **Furukawa, Y., and J. S. Wettlaufer, 2007**: Snow and ice crystals. *Physics Today, 60* (12), 70–71,485doi:10.1063/1.2825081, URL https://physicstoday.scitation.org/doi/10.1063/1.2825081.  
