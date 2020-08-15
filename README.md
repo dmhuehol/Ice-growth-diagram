@@ -64,7 +64,7 @@ Two common units of supersaturation are ice supersaturation (percent or decimal)
 ### Example 
 Given an ice supersaturation of 3.8% at -8 deg Celsius, what is the vapor density excess at the same temperature?  
 1. `[vde] = iceSupersatToVaporExc(0.038,-8)`  
-This returns `vde = 0.0962`. Thus a vapor density excess of 0.096 g/m^3 corresponds to an ice supersaturation of 3.8% at -8 deg Celsius!
+This returns `vde = 0.0962`. Thus a vapor density excess of 0.096 g/m^3 corresponds to an ice supersaturation of 3.8% at -8 deg Celsius!  
 To convert from ice supersaturation to relative humidity with respect to water use `iceSupersatToRH`. To calculate vapor density excess from relative humidity with respect to water directly, use `rhow`.
 
 ## Repository description
