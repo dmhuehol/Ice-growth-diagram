@@ -1,8 +1,6 @@
 # Ice growth diagram
 
-WARNING: Documentation is outdated!
-
-### Table of Contents  
+### Table of Contents  -- OUTDATED AUGUST 2020
 [Workflow for habit diagram](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#workflow-for-habit-diagram)  
 [Converting between ice supersaturation and vapor density excess](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#converting-between-ice-supersaturation-and-vapor-density-excess)  
 [Basic ice growth diagram examples](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#examples)  
@@ -11,13 +9,47 @@ WARNING: Documentation is outdated!
 [Sources and credit](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#sources-and-credit)
 
 ## Introduction
-Complete set of MATLAB code to make the revised ice growth diagram. Tested and confirmed operational on MATLAB 2017b+.
+Complete set of MATLAB code to plot the ice growth diagram both on its own and with data. Tested and confirmed operational on MATLAB 2020a+. The ice growth diagram can be cast into three moisture variables: relative humidity with respect to water (preferred), relative humidity with respect to ice, and vapor density excess over ice saturation. There are "textbook" and "applied" versions of each ice diagram; the textbook versions are designed to be the most aesthetically-pleasing, while the applied versions are higher-contrast and suitable for data overlays.
 
-## Workflow for habit diagram
-1. Make sure all code is in the working directory.
-2. Run makeGrowthDiagramStruct to produce hd structure
-3. Run iceGrowthDiagram using the hd structure as input
-4. Success!
+## Basic ice diagrams
+The following examples show how to make the three applied diagrams and the textbook diagram cast in terms of relative humidity with respect to water.
+
+### Ice growth diagram: relative humidity with respect to water
+![Ice growth diagram with respect to water](Demo/igd_rhw_applied.png)
+This is our preferred version of the diagram. Relative humidity with respect to water is easier to understand and better represents the phase space of ice processes in the atmosphere than other moisture variables.
+#### Minimal code to replicate
+1. `iceGrowthDiagramWater`
+The code will automatically set inputs, including the necessary basic hd structure.
+#### Full code to replicate
+1. `[hd] = makeGrowthDiagramStruct(1,1)`
+2. `iceGrowthDiagramWater(hd,0,1,'southoutside',[55 105],[-56.5,0])`
+
+### Ice growth diagram: relative humidity with respect to ice
+![Ice growth diagram with respect to water](Demo/igd_rhi_applied.png)
+For comparison to previous work, especially Bailey and Hallett (2009).
+#### Minimal code to replicate
+1. `iceGrowthDiagram`
+The code will automatically set inputs, including the necessary basic hd structure.
+#### Full code to replicate
+1. `[hd] = makeGrowthDiagramStruct(1,1)`
+2. `iceGrowthDiagram(hd,1,0,0,1,'southoutside',[0 0.6],[-56.5,0])`
+
+### Ice growth diagram: vapor density excess
+![Ice growth diagram with respect to water](Demo/igd_vde_applied.png)
+For comparison to previous work, especially Kobayashi (1961), Furukawa and Wettlaufer (2007), or Libbrecht (2017).
+#### Minimal code to replicate
+1. `iceGrowthDiagramVaporExc`
+The code will automatically set inputs, including the necessary basic hd structure.
+#### Full code to replicate
+1. `[hd] = makeGrowthDiagramStruct(1,1)`
+2. `iceGrowthDiagramVaporExc(hd,1,0,0,1,'southoutside',[0,0.351],[-56.5,0])`
+
+### Ice growth diagram: relative humidity with respect to water (textbook edition)
+![Ice growth diagram with respect to water](Demo/igd_textbook.png)
+This code can also be used to generate analogous images in terms of relative humidity with respect to ice or vapor density excess.
+#### Code to replicate
+1. `iceGrowthDiagramTextbook`
+2. The code will prompt the user for a phase. Input `'water'` to obtain the diagram shown here.
 
 ## Converting between ice supersaturation and vapor density excess
 Previous ice growth diagrams have reported supersaturations in either ice supersaturation (percent or decimal) or vapor density excess (g/m^3). Converting between the two units is possible, but not immediately intuitive. Currently, the revised diagram exclusively uses the ice supersaturation percent unit.  
@@ -31,41 +63,33 @@ Given an ice supersaturation of 3.8% at -8 deg Celsius, what is the vapor densit
   
 Thus a vapor density excess of 0.095 g/m^3 corresponds to an ice supersaturation of 3.8% at -8 deg Celsius!
 
-## Examples
-### "Complete" ice growth diagram
-------
-![Revised ice growth diagram with all habits, isohumes, legend, and other features](Demo/igd_complete.png)
-**Replicate with**  
-1. [hd] = makeGrowthDiagramStruct(1,1)
-2. iceGrowthDiagram(hd,1,1,1,0,1,'southeast',[0,0.6],[-70,0])  
+## Repository description
+### root
+`makeGrowthDiagramStruct`: Creates a structure the information needed to plot a growth diagram. Values are derived from Bailey and Hallett 2009.  
+`iceGrowthDiagramWater`: Plots the ice growth diagram in terms of relative humidity with respect to water. Input options allow for control of diagram aesthetics, e.g. isohumes, ventilation, legend, etc.  
+`iceGrowthDiagram`: Plots the ice growth diagram in terms of relative humidity with respect to ice. Input options allow for control of diagram aesthetics, e.g. isohumes, ventilation, legend, etc.  
+`iceGrowthDiagramVaporExc`: Plots the ice growth diagram in terms of vapor density excess over ice saturation. Input options allow for control of diagram aesthetics, e.g. isohumes, ventilation, legend, etc.
 
-### No legend
-------
-![Revised ice growth diagram with everything except the legend](Demo/igd_isohumes_nolegend.png)
-**Replicate with**  
-1. [hd] = makeGrowthDiagramStruct(1,1)
-2. iceGrowthDiagram(hd,1,1,1,0,0,'southeast',[0,0.6],[-70,0])
+### Helper functions subdirectory
+`eswLine`: Outputs arrays useful to draw isohumes with respect to water on the diagram.  
+`iceSupersatToRH`: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.   
+`iceSupersatToVaporExc`: Converts an ice supersaturation in percent to a vapor density excess in g/m^3.  
+`rhow`: Converts a relative humidity with respect to water to vapor density excess in g/m^3.  
+`updraftSupersat`: Uses the Twomey equation to calculate supersaturation in an updraft but only at a certain range of thermodynamic conditions well above freezing. Implemented as a curiosity.  
+`ylimitsForIceDiagram`: Generates labels and tick marks for the ICAO atmospheric height approximation axis on the ice diagram.
 
-### No isohumes
-------
-![Revised ice growth diagram with no isohumes](Demo/igd_noisohumes.png)
-**Replicate with**  
-1. [hd] = makeGrowthDiagramStruct(1,1)
-2. iceGrowthDiagram(hd,1,0,1,0,1,'southeast',[0,0.6],[-70,0])
+### Growth diagram profiles subdirectory
+`growthDiagramProfile`: Plots ice growth profiles for input radiosonde data. See the [IGRA v2](https://github.com/dmhuehol/IGRA-v2/) repository for information on radiosonde data.  
+`stationLookupIGRAv2`: Looks up station names for titles of ice growth profiles.  
+`IGRA v2 Station List.mat`: List of radiosonde launch site station names.  
+`utqiagvik_sample.mat`: Sample data to make ice growth profiles.
 
-## Function descriptions
-**makeGrowthDiagramStruct:** Creates a structure the information needed to plot a growth diagram. Values are derived from Bailey and Hallett 2009.  
-**iceGrowthDiagram:** Plots the revised ice growth diagram.
-**eswLine:** Outputs arrays useful to draw isohumes with respect to water on the diagram.  
-**updraftSupersat:** Estimates maximum possible supersaturation in updraft. CAUTION: this function is still in progress.  
+### Demo subdirectory
+`*.mat` files: Radiosonde data files used for in-progress paper "Revisiting diagrams of ice growth environments."  
+`makeFigures`: Script used to make images for in-progress paper "Revisiting diagrams of ice growth environments."  
+Image files in this directory are used in the Github readme.
 
-**iceSupersatToRH**: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.  
-**rhow**: Calculates vapor density excess from a relative humidity (with respect to water) in percent and temperature.
-
-**growthDiagramProfile**: Plots radiosonde data over an ice growth diagram.  
-**stationLookupIGRAv2**: Helps generate the title for the growth diagram profile.  
-
-## Growth diagram profiles
+## Growth diagram profiles -- OUTDATED AUGUST 2020
 The ice growth diagram can be used to plot data from weather balloons. This shows what areas of the crystal growth space are accessible along a profile. The function growthDiagramProfile makes these plots. A sample data structure from the Barrow site is included along with the aforementioned in the "Growth diagram profiles" folder. An example image is below.  
 ![Ice growth diagram profile from Jan 4 2018 in Barrow AK](Demo/igd_profile_example.png)  
 **Replicate as follows**  
@@ -78,8 +102,11 @@ Code to import a general IGRA v2 soundings data file can be found in the [IGRA v
 ## Sources and Credit
 ------
 Bailey, M.P., & Hallett, J. (2009). A comprehensive habit diagram for atmospheric ice crystals: Confirmation from the laboratory, AIRS II, and other field studies. *Journal of the Atmospheric Sciences, 66*(9), 2888-2899. [doi:10.1175/2009JAS2883.1](https://doi.org/10.1175/2009JAS2883.1)  
+Kobayashi, T., 1961: The growth of snow crystals at low supersaturations. *Philosophical Magazine, 5326* (71), 1363–1370, doi:10.1080/14786436108241231, URL http://www.tandfonline.com/doi/533abs/10.1080/14786436108241231.  
+Furukawa, Y., and J. S. Wettlaufer, 2007: Snow and ice crystals. *Physics Today, 60* (12), 70–71,485doi:10.1063/1.2825081, URL https://physicstoday.scitation.org/doi/10.1063/1.2825081.  
+Libbrecht, K. G., 2017:  Physical Dynamics of Ice Crystal Growth. *Annu. Rev. Mater. Res., 57147* (1), 271–295, doi:10.1146/annurev-matsci-070616-124135, URL https://doi.org/10.1146/572annurev-matsci-070616-124135, publisher: Annual Reviews.
 
-All code and documentation written by Daniel Hueholt, under the advisement of Dr. Sandra Yuter at North Carolina State University.  
+All code and documentation written by Daniel Hueholt, under the advisement of Dr. Sandra Yuter at North Carolina State University.    
 [<img src="http://www.environmentanalytics.com/wp-content/uploads/2016/05/cropped-Environment_Analytics_Logo_Draft.png">](http://www.environmentanalytics.com)  
 
-Barrow soundings data is from the [Integrated Global Radiosonde Archive, version 2](https://www.ncdc.noaa.gov/data-access/weather-balloon/integrated-global-radiosonde-archive).
+Radiosonde data is from the [Integrated Global Radiosonde Archive, version 2](https://www.ncdc.noaa.gov/data-access/weather-balloon/integrated-global-radiosonde-archive).
