@@ -1,6 +1,6 @@
 function [vaporDensExc] = iceSupersatToVaporExc(iceSupersat,temp)
 %%iceSupersatToVaporExc
-    %Converts ice supersaturation in percent to vapor density excess in
+    %Converts ice supersaturation in decimal to vapor density excess in
     %g/m^3. Uses the Improved August-Roche-Magnus saturation vapor pressure equation from:
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
@@ -14,15 +14,15 @@ function [vaporDensExc] = iceSupersatToVaporExc(iceSupersat,temp)
     %vaporDensExc: vapor density excess in g/m^3
     %
     %Inputs:
-    %iceSupersat: supersaturation with respect to ice decimal
+    %iceSupersat: supersaturation with respect to ice as a decimal
     %temp: temperature in deg C
     %
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
-    %Undergraduate Research Assistant at Environment Analytics
-    % Written as part of HON499: Capstone II
-    %Version date: 2/23/2020
+    %Research Assistant at Environment Analytics
+    % Created as part of HON499: Capstone II
+    %Version date: 8/14/2020
     %Last major revision: 2/23/2020
     %
     %See also iceSupersatToRH
