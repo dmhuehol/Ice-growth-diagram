@@ -1,12 +1,20 @@
 # Ice growth diagram
 
-### Table of Contents  -- OUTDATED AUGUST 2020
-[Workflow for habit diagram](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#workflow-for-habit-diagram)  
-[Converting between ice supersaturation and vapor density excess](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#converting-between-ice-supersaturation-and-vapor-density-excess)  
-[Basic ice growth diagram examples](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#examples)  
-[Function descriptions](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#function-descriptions)  
-[Growth diagram profiles](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#growth-diagram-profiles)  
-[Sources and credit](https://github.com/dmhuehol/Ice-growth-diagram-summer-2019-#sources-and-credit)
+## Table of Contents
+* [Introduction](#introduction)  
+* [Basic ice diagrams](#basic-ice-diagrams)  
+    * [Ice growth diagram: Relative humidity with respect to water](#ice-growth-diagram-relative-humidity-with-respect-to-water)  
+    * [Ice growth diagram: Relative humidity with respect to ice](#ice-growth-diagram-relative-humidity-with-respect-to-ice)
+    * [Ice growth diagram: Vapor density excess](#ice-growth-diagram-vapor-density-excess)
+    * [Ice growth diagram: Relative humidity with respect to water (textbook version)(#ice-growth-diagram-relative-humidity-with-respect-to-water-textbook-edition)
+* [Converting between ice supersaturation and vapor density excess](#converting-between-ice-supersaturation-and-vapor-density-excess)
+* [Repository description](#repository-description)
+    * [Root](#root)
+    * [Helper functions](#helper-functions-subdirectory)
+    * [Growth diagram profiles](#growth-diagram-profiles-subdirectory)
+    * [Demo](#demo-subdirectory)
+* [Growth diagram profiles](#growth-diagram-profiles)
+* [Sources and credit](#sources-and-credit)
 
 ## Introduction
 Complete set of MATLAB code to plot the ice growth diagram both on its own and with data. Tested and confirmed operational on MATLAB 2020a+. The ice growth diagram can be cast into three moisture variables: relative humidity with respect to water (preferred), relative humidity with respect to ice, and vapor density excess over ice saturation. There are "textbook" and "applied" versions of each ice diagram; the textbook versions are designed to be the most aesthetically-pleasing, while the applied versions are higher-contrast and suitable for data overlays.
