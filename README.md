@@ -89,13 +89,15 @@ Thus a vapor density excess of 0.095 g/m^3 corresponds to an ice supersaturation
 `makeFigures`: Script used to make images for in-progress paper "Revisiting diagrams of ice growth environments."  
 Image files in this directory are used in the Github readme.
 
-## Growth diagram profiles -- OUTDATED AUGUST 2020
-The ice growth diagram can be used to plot data from weather balloons. This shows what areas of the crystal growth space are accessible along a profile. The function growthDiagramProfile makes these plots. A sample data structure from the Barrow site is included along with the aforementioned in the "Growth diagram profiles" folder. An example image is below.  
-![Ice growth diagram profile from Jan 4 2018 in Barrow AK](Demo/igd_profile_example.png)  
-**Replicate as follows**  
-1. Open the sample Barrow data in MATLAB  
-2. Make sure stationLookupIGRAv2 and "IGRA v2 Station List" are in the working directory (these are necessary to produce the title of the growth diagram profile).
-3. growthDiagramProfile(barrow_sample,3,1)  
+## Growth diagram profiles
+The function `growthDiagramProfile` can be used to plot data from radiosondes on the ice growth diagram. This shows what areas of the crystal growth space are accessible along a profile. A sample data structure from the Utqiagvik launch site is included in the "Growth diagram profiles" subdirectory. An example image is below.  
+![Ice growth diagram profile from Jan 2018 in Barrow AK](Demo/utqiagvik_sample_readme.png)  
+**Code to replicate**  
+1. Open the sample Utqiagvik data in MATLAB  
+2. Make sure `stationLookupIGRAv2` and `IGRA v2 Station List.m` are in the working directory. These are necessary to produce the title of the growth diagram profile.
+3. `growthDiagramProfile(utqiagvik_sample,1:39,1,'water')`  
+4. The command window will prompt for a date. Type "Jan 2018".  
+5. The command window will prompt for a location. Type "Utqiagvik, AK".
 
 Code to import a general IGRA v2 soundings data file can be found in the [IGRA v2](https://github.com/dmhuehol/IGRA-v2) repository.  
 
