@@ -81,7 +81,7 @@ Thus a vapor density excess of 0.095 g/m^3 corresponds to an ice supersaturation
 ### Helper functions subdirectory
 `eswLine`: Outputs arrays useful to draw isohumes with respect to water on the diagram.  
 `iceSupersatToRH`: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.   
-`iceSupersatToVaporExc`: Converts an ice supersaturation in percent to a vapor density excess in g/m^3.  
+`iceSupersatToVaporExc`: Converts an ice supersaturation in decimal to a vapor density excess in g/m^3.  
 `rhow`: Converts a relative humidity with respect to water to vapor density excess in g/m^3.  
 `updraftSupersat`: Uses the Twomey equation to calculate supersaturation in an updraft but only at a certain range of thermodynamic conditions well above freezing. Implemented as a curiosity.  
 `ylimitsForIceDiagram`: Generates labels and tick marks for the ICAO atmospheric height approximation axis on the ice diagram.
