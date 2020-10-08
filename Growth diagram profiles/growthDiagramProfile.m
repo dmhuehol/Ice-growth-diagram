@@ -58,7 +58,7 @@ if strcmp(phaseFlag,'ice')==1
     [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,updraftLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 elseif strcmp(phaseFlag,'water')==1
     legLogForGeneration = 1;
-    legLocation = 'northeast';
+    legLocation = 'southoutside';
     ventLog = 0;
     satLim = [55,105]; %[55 105] is standard without ventilation; [55 124] with ventilation
     tempLim = [-56.5,0]; % [-56.5,0] is standard
@@ -79,7 +79,7 @@ if length(timeIndex)==1
         [launchname] = stationLookupIGRAv2(sounding(timeIndex).stationID);
     catch ME %#ok
         dateString = datestr(datenum(sounding(timeIndex).valid_date_num(1),sounding(timeIndex).valid_date_num(2),sounding(timeIndex).valid_date_num(3),sounding(timeIndex).valid_date_num(4),0,0),'mmm dd, yyyy HH UTC'); %For title
-        launchname = 'Unknown';
+        launchname = '43.1025,-76.1891 (north of Syracuse, NY)';
     end
 else
     if ~strcmp(manual,'m')
@@ -178,8 +178,8 @@ for c = 1:length(timeIndex)
 end
 
 % If following two lines uncommented, legend contains only balloon height entries
-legendEntries = [];
-legendText = {};
+%legendEntries = [];
+%legendText = {};
 
 legendEntries(end+1) = pc1;
 legendText{end+1} = '0-2 km';
@@ -198,7 +198,7 @@ leg = legend(legendEntries,legendText);
 if legLog==1
     leg.Location = legLocation;
     leg.FontSize = 14;
-    leg.NumColumns = 1;
+    leg.NumColumns = 3;
 else
     leg.Visible = 'off';
 end
