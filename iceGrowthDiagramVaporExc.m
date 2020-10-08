@@ -92,6 +92,11 @@ leftColor = [0 0 0]; rightColor = [0 0 0];
 set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-axis color
 
 %% Draw the growth types
+Tupper = 15; Tlower = -70;
+TlineStandardC = Tupper:-0.1:Tlower;
+[eswLineData] = eswLine(100,Tlower,Tupper);
+[eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
+
 plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.Color);
 plates.EdgeColor = 'none';
 columnlike = patch(hd.ColumnLike.vaporExcBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
@@ -115,6 +120,10 @@ dendrites.EdgeColor = 'none';
 variousplates = patch(hd.VariousPlates.vaporExcBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.Color);
 variousplates.EdgeColor = 'none';
 
+intermediatePlatesP = patch([hd.VariousPlates.vaporExcBounds(end),hd.VariousPlates.vaporExcBounds(end)-3,eswLineData(351),eswLineData(371)],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediatePlatesP.EdgeColor = 'none';
+intermediateSectorP = patch([eswLineData(351) 0.9113 0.9113 eswLineData(371)],[-20 -20 -22 -22],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediateSectorP.EdgeColor = 'none';
 
 intermediateSPD_floor = patch([hd.Dendrites.vaporExcBounds(1),hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(2) hd.Dendrites.vaporExcBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
@@ -148,10 +157,6 @@ legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycr
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
-Tupper = 15; Tlower = -70;
-TlineStandardC = Tupper:-0.1:Tlower;
-[eswLineData] = eswLine(100,Tlower,Tupper);
-[eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
 if isohumeFlag==1
     eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
     eswSupersatLineStandard.Color = [255 230 0]./255;

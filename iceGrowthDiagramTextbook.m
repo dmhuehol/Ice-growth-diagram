@@ -46,6 +46,11 @@ fig = figure;
 leftColor = [0 0 0]; rightColor = [0 0 0];
 set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-axis color
 
+Tupper = 15; Tlower = -70;
+TlineStandardC = Tupper:-0.1:Tlower;
+[eswLineData] = eswLine(100,Tlower,Tupper);
+[eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
+
 switch castInTermsOf
     case "water"
         %% Ice growth diagram in terms of relative humidity with respect to water
@@ -79,6 +84,11 @@ switch castInTermsOf
         sectorplates3.EdgeColor = 'none';
         dendrites = patch(hd.Dendrites.waterBounds,hd.Dendrites.TempBounds,hd.Dendrites.TextbookColor);
         dendrites.EdgeColor = 'none';
+        
+        intermediatePlatesP = patch([hd.VariousPlates.waterBounds(end),hd.VariousPlates.waterBounds(end)-3,100 100],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediatePlatesP.EdgeColor = 'none';
+        intermediateSectorP = patch([100 100 131 131],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediateSectorP.EdgeColor = 'none';
         
         intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
         intermediateSPD_floor.EdgeColor = 'none';
@@ -298,6 +308,12 @@ switch castInTermsOf
         sectorplates3.EdgeColor = 'none';
         dendrites = patch(hd.Dendrites.supersatBounds,hd.Dendrites.TempBounds,hd.Dendrites.TextbookColor);
         dendrites.EdgeColor = 'none';
+        
+        intermediatePlatesP = patch([hd.VariousPlates.supersatBounds(end),hd.VariousPlates.supersatBounds(end),eswLineData(351) eswLineData(371)],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediatePlatesP.EdgeColor = 'none';
+        intermediateSectorP = patch([eswLineData(351) 0.6 0.6 eswLineData(371)],[-20 -20 -22 -22],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediateSectorP.EdgeColor = 'none';
+        
         intermediateSPD_floor = patch([hd.Dendrites.supersatBounds(1),hd.Dendrites.supersatBounds(1) hd.Dendrites.supersatBounds(2) hd.Dendrites.supersatBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
         intermediateSPD_floor.EdgeColor = 'none';
         intermediateSPD_wall = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.supersatBounds(4) hd.Dendrites.supersatBounds(4) hd.Dendrites.supersatBounds(1)], [hd.SectorPlates.TempBounds(5) hd.SectorPlates.TempBounds(11) hd.Dendrites.TempBounds(3),hd.Dendrites.TempBounds(2)],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
@@ -520,6 +536,11 @@ switch castInTermsOf
         dendrites.EdgeColor = 'none';
         variousplates = patch(hd.VariousPlates.vaporExcBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.TextbookColor);
         variousplates.EdgeColor = 'none';
+        
+        intermediatePlatesP = patch([hd.VariousPlates.vaporExcBounds(end),hd.VariousPlates.vaporExcBounds(end)-3,eswLineData(351),eswLineData(371)],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediatePlatesP.EdgeColor = 'none';
+        intermediateSectorP = patch([eswLineData(351) 0.9113 0.9113 eswLineData(371)],[-20 -20 -22 -22],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediateSectorP.EdgeColor = 'none';
         
         intermediateSPD_floor = patch([hd.Dendrites.vaporExcBounds(1),hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(2) hd.Dendrites.vaporExcBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
         intermediateSPD_floor.EdgeColor = 'none';

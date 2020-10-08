@@ -106,6 +106,11 @@ sectorplates3.EdgeColor = 'none';
 dendrites = patch(hd.Dendrites.waterBounds,hd.Dendrites.TempBounds,hd.Dendrites.Color);
 dendrites.EdgeColor = 'none';
 
+intermediatePlatesP = patch([hd.VariousPlates.waterBounds(end),hd.VariousPlates.waterBounds(end)-3,100 100],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediatePlatesP.EdgeColor = 'none';
+intermediateSectorP = patch([100 100 200 200],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediateSectorP.EdgeColor = 'none';
+
 intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
 intermediateSPD_wall = patch([hd.SectorPlates.waterBounds(2,3) hd.SectorPlates.waterBounds(2,2) hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(4)], [hd.SectorPlates.TempBounds(3) hd.SectorPlates.TempBounds(2) hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
@@ -118,10 +123,12 @@ intermediateSPD_triangleBottom = patch([hd.SectorPlates.waterBounds(2,2), hd.Den
 intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
-mixed1.EdgeColor = 'none';
+mixed1.EdgeColor = hd.Mixed.Color;
+mixed1.EdgeAlpha = 0;
 
 mixed2 = patch(hd.Mixed.waterBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
 mixed2.EdgeColor = 'none';
+
 warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
@@ -168,7 +175,7 @@ esw100SupersatLineStandard.Color = [255 230 0]./255;
 esw100SupersatLineStandard.LineWidth = 3.2;
 esw100SupersatLineStandard.LineStyle = ':';
 legendEntries(end+1) = esw100SupersatLineStandard;
-legendTexts{end+1} = 'Isohumes (10% intervals)';
+legendTexts{end+1} = 'RHw (10% intervals)';
 
 if ventLog
     esw102p5LineStandard = plot([102.5 102.5],[-70 -2.6]);
@@ -191,7 +198,7 @@ esw105LineStandard.Color = [255 230 0]./255;
 esw105LineStandard.LineWidth = 3.2;
 esw105LineStandard.LineStyle = '-.';
 legendEntries(end+1) = esw102p5LineStandard;
-legendTexts{end+1} = 'Isohumes (102.5%, 105%)';
+legendTexts{end+1} = 'RHw (102.5%, 105%)';
 
 startMat = ones(1,length(TlineStandardC));
 
@@ -255,7 +262,7 @@ end
 esi60Line.Color = [255 230 0]./255;
 esi60Line.LineWidth = 3.2;
 legendEntries(end+1) = esi60Line;
-legendTexts{end+1} = 'Ice-isohumes (100% min, 160% max, 10% interval)';
+legendTexts{end+1} = 'RHi (100% min, 160% max, 10% interval)';
 
 if ventLog
     [eswLineData] = eswLine(100,Tlower,Tupper);
