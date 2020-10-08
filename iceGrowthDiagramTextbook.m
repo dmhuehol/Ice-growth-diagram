@@ -447,25 +447,25 @@ switch castInTermsOf
         
         % On-figure labels for isohumes
         lWater60 = text(0.008,-54.89,'60%');
-        lWater60.FontName = 'Lato'; lWater60.FontSize = 11; lWater60.Color = [144 143 143]./255;
+        lWater60.FontName = 'Lato'; lWater60.FontSize = 11;
         lWater60.Rotation = 34;
         lWater70 = text(0.1161,-48.5,'70%');
-        lWater70.FontName = 'Lato'; lWater70.FontSize = 11; lWater70.Color = [144 143 143]./255;
+        lWater70.FontName = 'Lato'; lWater70.FontSize = 11;
         lWater70.Rotation = 33;
         lWater80 = text(0.236,-44.9,'80%');
-        lWater80.FontName = 'Lato'; lWater80.FontSize = 11; lWater80.Color = [144 143 143]./255;
+        lWater80.FontName = 'Lato'; lWater80.FontSize = 11;
         lWater80.Rotation = 31;
         lWater90 = text(0.3412,-40.9,'90%');
-        lWater90.FontName = 'Lato'; lWater90.FontSize = 11; lWater90.Color = [144 143 143]./255;
+        lWater90.FontName = 'Lato'; lWater90.FontSize = 11;
         lWater90.Rotation = 29;
         lWater100 = text(0.4428,-37.4,'100% (T_{ice} = T_{air})');
-        lWater100.FontName = 'Lato'; lWater100.FontSize = 11; lWater100.Color = [144 143 143]./255;
+        lWater100.FontName = 'Lato'; lWater100.FontSize = 11;
         lWater100.Rotation = 26;
         lWater102p5 = text(0.4596,-36,'102.5%');
-        lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 11; lWater102p5.Color = [144 143 143]./255;
+        lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 11;
         lWater102p5.Rotation = 26;
         lWater105 = text(0.4742,-34.5,'105% (approx. max ambient supersat)');
-        lWater105.FontName = 'Lato'; lWater105.FontSize = 11; lWater105.Color = [144 143 143]./255;
+        lWater105.FontName = 'Lato'; lWater105.FontSize = 11;
         lWater105.Rotation = 25;
         %lVent = text(0.36,-15.9,'Approx. max natural supersat (with ventilation)');
         %lVent.FontName = 'Lato'; lVent.FontSize = 12;
@@ -668,22 +668,22 @@ switch castInTermsOf
         
         % On-figure isohume labels
         l70Vde = text(0.005243,-48.8,'70%');
-        l70Vde.FontName = 'Lato'; l70Vde.FontSize = 11; l70Vde.Color = [144 143 143]./255;
+        l70Vde.FontName = 'Lato'; l70Vde.FontSize = 11;
         l70Vde.Rotation = -85;
         l80Vde = text(0.02493,-36.7,'80%');
-        l80Vde.FontName = 'Lato'; l80Vde.FontSize = 11; l80Vde.Color = [144 143 143]./255;
+        l80Vde.FontName = 'Lato'; l80Vde.FontSize = 11;
         l80Vde.Rotation = -80;
         l90Vde = text(0.06927,-30.6,'90%');
-        l90Vde.FontName = 'Lato'; l90Vde.FontSize = 11; l90Vde.Color = [144 143 143]./255;
+        l90Vde.FontName = 'Lato'; l90Vde.FontSize = 11;
         l90Vde.Rotation = -50;
         l100Vde = text(0.1866,-21,'100%');
-        l100Vde.FontName = 'Lato'; l100Vde.FontSize = 11; l100Vde.Color = [144 143 143]./255;
+        l100Vde.FontName = 'Lato'; l100Vde.FontSize = 11;
         l100Vde.Rotation = -27;
         l2p5Vde = text(0.2133,-20.8,'102.5%');
-        l2p5Vde.FontName = 'Lato'; l2p5Vde.FontSize = 11; l2p5Vde.Color = [144 143 143]./255;
+        l2p5Vde.FontName = 'Lato'; l2p5Vde.FontSize = 11;
         l2p5Vde.Rotation = -22;
         l5Vde = text(0.2245,-22,'105% (approx. max ambient supersat)');
-        l5Vde.FontName = 'Lato'; l5Vde.FontSize = 11; l5Vde.Color = [144 143 143]./255;
+        l5Vde.FontName = 'Lato'; l5Vde.FontSize = 11;
         l5Vde.Rotation = -18;
         %lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
         %lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
