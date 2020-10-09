@@ -31,7 +31,7 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Portions written as part of HON499: Capstone II
-    %Version date: 3/19/2020
+    %Version date: 10/8/2020
     %Last major revision: 3/19/2020
     %
     %See also iceSupersatToRH, iceSupersatToVaporExc
@@ -74,7 +74,6 @@ hd.Constants.es0 = 611; %Pa (vapor pressure constant)
 
 %% Make structure
 if crystalLog==1
-    
     % "Various plates" habit
     T_vp = [-8 -22];
     esw_vp = 6.1094.*exp((17.625.*T_vp)./(243.04+T_vp));
@@ -148,19 +147,13 @@ if crystalLog==1
     hd.Mixed.Color = [143 111 73]./255;
     hd.Mixed.TextbookColor = [223 214 203]./255;
     
-    %hd.Mixed.TempBounds = [-8 -22 -8 -22 -46.6 -46.6; nan,nan,nan,nan,nan,nan]; %-70 -70; -46.6 -45.9 -70 -70 nan nan nan];
-    %hd.Mixed.supersatBounds = [0 0 0.038 0.038 0.038 0; nan,nan,nan,nan,nan,nan]; %0.038 0.038 0; 0.038 0.0697 0.0697 0.038 nan nan nan];
-    %hd.Mixed.waterBounds = iceSupersatToRH(hd.Mixed.supersatBounds.*100,hd.Mixed.TempBounds);
-    
     hd.Mixed.TempBounds = [-8 -14 -22 -30 -34.1 -40 -46.6 -46.6 -22 -8; -46.6 -50 -55 -60 -65 -70 -70 -60 -55 -45.9]; %-70 -70; -46.6 -45.9 -70 -70 nan nan nan];
     hd.Mixed.supersatBounds = [0 0 0 0 0 0 0 0.038 0.038 0.038; 0 0 0 0 0 0 0.0697 0.0697 0.0697 0.0697]; %0.038 0.038 0; 0.038 0.0697 0.0697 0.038 nan nan nan];
     hd.Mixed.waterBounds = iceSupersatToRH(hd.Mixed.supersatBounds.*100,hd.Mixed.TempBounds);
-    hd.Mixed.vaporExcBounds = iceSupersatToVaporExc(hd.Mixed.supersatBounds,hd.Mixed.TempBounds);
-    
+    hd.Mixed.vaporExcBounds = iceSupersatToVaporExc(hd.Mixed.supersatBounds,hd.Mixed.TempBounds);  
 end
 
 if otherLog==1
-    
     hd.unnaturalVent.Habit = 'Coordinates to block out unnatural supersaturations corresponding to ventilation'; %Follows the 2*water saturation line
     hd.unnaturalVent.Color = [1 1 1];
     Tupper_other = 15; Tlower_other = -70;
@@ -193,7 +186,6 @@ if otherLog==1
     hd.warm.supersatBounds = [0 0.6 0.6 0];
     hd.warm.waterBounds = iceSupersatToRH(hd.warm.supersatBounds.*100,hd.warm.TempBounds);
     hd.warm.vaporExcBounds = iceSupersatToVaporExc(hd.warm.supersatBounds,hd.warm.TempBounds);
-    
 end
 
 end

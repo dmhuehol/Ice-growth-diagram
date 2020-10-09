@@ -1,9 +1,9 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram. Returns the figure handle
     %so further modifications are possible.
     %
-    %General form: [fig] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
+    %General form: [fig] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRang,ylimRange)
     %
     %Output
     %fig: figure handle for the ice growth diagram
@@ -16,9 +16,6 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
     %    2 draws only the water saturation line (RH=100%)
     %    0 and all other values don't plot any isohumes
     %ventLog: logical 1/0 to draw the maximum natural supersaturation line
-    %updraftLog: logical 1/0 to draw guesstimated maximum supersaturation in updraft.
-    %   Requires secondary function updraftSupersat
-    %   CAUTION: this is OF VERY DUBIOUS ACCURACY!
     %legLog: logical 1/0 to show the legend
     %legendLocStr: legend location string ('southoutside' is standard)
     %xlimRange: determines range for x-axis, input as 2-element array (i.e. [0 0.6])
@@ -30,7 +27,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     % Written as part of HON499: Capstone II
-    %Version date: 8/13/2020
+    %Version date: 10/8/2020
     %Last major revision: 3/19/2020
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
@@ -39,7 +36,6 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
 %% Check variables
 if nargin == 0
     disp('Creating default ice diagram!')
-    pause(1) %For the vibes
     crystalLog = 1;
     otherLog = 1;
     [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
@@ -60,10 +56,6 @@ end
 if ~exist('ventLog','var')
     ventLog = 0;
     disp('Ventilation line disabled by default')
-end
-if ~exist('updraftLog','var')
-    updraftLog = 0;
-    disp('Updraft guesstimation disabled by default')
 end
 if ~exist('legLog','var')
     legLog = 1;
@@ -288,17 +280,6 @@ if ventLog==1
     legendEntries(end+1) = maxVentLine;
     legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
 end
-if updraftLog == 1
-    %Plot guesstimated maximum updraft supersaturation (of questionable use)
-    [s_max] = updraftSupersat(1000,1,1);
-    s_maxUsable = 1+s_max;
-    [updraftMaxSupersatPoints] = eswLine(s_maxUsable*100,Tlower,Tupper);
-    lineSupersat = plot(updraftMaxSupersatPoints,TlineStandardC);
-    lineSupersat.LineWidth = 2;
-    
-    legendEntries(end+1) = lineSupersat;
-    legendTexts{end+1} = 'Guesstimated max supersat in updraft';
-end
 
 %% Diagram settings
 axe = gca;
@@ -326,9 +307,6 @@ yLab.FontName = 'Lato Bold';
 xLab = xlabel('Vapor density excess (gm^{-3})');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
-%axe.XTick = iceSupersatToVaporExc([0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6],zeros(1,13));
-%xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150' '155' '160'};
-%xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 

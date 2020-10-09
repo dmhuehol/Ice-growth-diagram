@@ -1,4 +1,4 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram. Returns the figure handle
     %so further modifications are possible.
@@ -16,9 +16,6 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventL
     %    2 draws only the water saturation line (RH=100%)
     %    0 and all other values don't plot any isohumes
     %ventLog: logical 1/0 to draw the maximum natural supersaturation line
-    %updraftLog: logical 1/0 to draw guesstimated maximum supersaturation in updraft.
-    %   Requires secondary function updraftSupersat
-    %   CAUTION: this is OF VERY DUBIOUS ACCURACY!
     %legLog: logical 1/0 to show the legend
     %legendLocStr: legend location string ('southoutside' is standard)
     %xlimRange: determines range for x-axis, input as 2-element array (i.e. [0 0.6])
@@ -30,8 +27,8 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventL
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Edits made as part of HON499: Capstone II
-    %Version date: 8/13/2020
-    %Last major revision: 3/19/2020
+    %Version date: 10/8/2020
+    %Last major revision: 10/8/2020
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -49,10 +46,6 @@ end
 if ~exist('ventLog','var')
     ventLog = 0;
     disp('Ventilation line disabled by default')
-end
-if ~exist('updraftLog','var')
-    updraftLog = 0;
-    disp('Updraft guesstimation disabled by default')
 end
 if ~exist('legLog','var')
     legLog = 1;
@@ -135,8 +128,6 @@ hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Sans subsaturated to make images
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
-%legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated]; %With subsaturated
-%legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated'};
 
 %% Plot other lines
 if isohumeFlag==1
@@ -205,14 +196,12 @@ if isohumeFlag==1
     eswSupersatLineStandard0.LineWidth = 3.2;
     
     eswLinep25Data = eswLine(102.5,Tlower,Tupper);
-    %eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
     eswSupersatLineStandardp25 = plot(eswLinep25Data,TlineStandardC);
     eswSupersatLineStandardp25.LineStyle = '-.';
     eswSupersatLineStandardp25.Color = [255/255 230/255 0 0.8];
     eswSupersatLineStandardp25.LineWidth = 3.2;
     
     eswLinep5Data = eswLine(105,Tlower,Tupper);
-    %eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
     eswSupersatLineStandardp5 = plot(eswLinep5Data,TlineStandardC);
     eswSupersatLineStandardp5.LineStyle = '-.';
     eswSupersatLineStandardp5.Color = [255/255 230/255 0 0.8];
@@ -251,17 +240,6 @@ if ventLog==1
     
     legendEntries(end+1) = maxVentLine;
     legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
-end
-if updraftLog == 1
-    %Plot guesstimated maximum updraft supersaturation (of questionable use)
-    [s_max] = updraftSupersat(1000,1,1);
-    s_maxUsable = 1+s_max;
-    [updraftMaxSupersatPoints] = eswLine(s_maxUsable*100,Tlower,Tupper);
-    lineSupersat = plot(updraftMaxSupersatPoints,TlineStandardC);
-    lineSupersat.LineWidth = 2;
-    
-    legendEntries(end+1) = lineSupersat;
-    legendTexts{end+1} = 'Guesstimated max supersat in updraft';
 end
 
 %% Diagram settings

@@ -51,11 +51,11 @@ crystalLog = 1; otherLog = 1;
 [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 
 if strcmp(phaseFlag,'ice')==1  
-    isohumesLog = 1; ventLog = 0; updraftLog = 0; legLogForGeneration = 1;
+    isohumesLog = 1; ventLog = 0; legLogForGeneration = 1;
     legLocation = 'southeast';
     satLim = [0,0.6]; %[0,0.6] is standard
     tempLim = [-56.5,0]; % [-56.5,0] is standard
-    [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,updraftLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
+    [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 elseif strcmp(phaseFlag,'water')==1
     legLogForGeneration = 1;
     legLocation = 'southoutside';
@@ -66,11 +66,11 @@ elseif strcmp(phaseFlag,'water')==1
 elseif strcmp(phaseFlag,'vde')==1
     legLogForGeneration = 1;
     legLocation = 'northeast';
-    isohumeLog = 1; updraftLog = 0;
+    isohumeLog = 1;
     ventLog = 0;
     satLim = [0,0.35]; %[55 105] is standard without ventilation; [55 124] with ventilation
     tempLim = [-56.5,0]; % [-56.5,0] is standard
-    [fig,legendEntries,legendText] = iceGrowthDiagramVaporExc(hd,isohumeLog,ventLog,updraftLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
+    [fig,legendEntries,legendText] = iceGrowthDiagramVaporExc(hd,isohumeLog,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
 end
 if length(timeIndex)==1
     % Autogenerate title for single profiles

@@ -21,7 +21,7 @@
 %Written by: Daniel Hueholt
 %North Carolina State University
 %Research Assistant at Environment Analytics
-%Version date: 7/7/2020
+%Version date: 10/8/2020
 %Last major revision: 7/7/2020
 %
 %Based on concept art originally made in Adobe Illustrator by Dr. Matthew
@@ -153,7 +153,6 @@ switch castInTermsOf
         
         startMat = ones(1,length(TlineStandardC));
         
-        %text(83.38,-18.3,'100% (ice saturation)');
         water_esi0LineData = iceSupersatToRH(startMat.*0,TlineStandardC);
         esi0Line = plot(water_esi0LineData(1:289),TlineStandardC(1:289));
         esi0Line.Color = [144 143 143]./255;
@@ -198,12 +197,6 @@ switch castInTermsOf
         esi60Line.Color = [144 143 143]./255;
         esi60Line.LineWidth = 1.5;
         esi60Line.LineStyle = ':';
-        
-        %[eswLineData] = eswLine(100,Tlower,Tupper);
-        %water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
-        %water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
-        %water_ventLine.Color = [0 26 255]./255;
-        %water_ventLine.LineWidth = 1.2;
         
         % On-figure labels for isohumes and ice-isohumes
         lIce0 = text(83.38,-18.3,'100% (ice saturation)');
@@ -733,9 +726,6 @@ switch castInTermsOf
         xLab = xlabel('Vapor density excess (gm^{-3})');
         xLab.FontName = 'Lato Bold';
         axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
-        %axe.XTick = iceSupersatToVaporExc([0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6],zeros(1,13));
-        %xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150' '155' '160'};
-        %xticklabels(xTickLabels);
         axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
         axe.YDir = 'reverse';
     otherwise

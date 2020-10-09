@@ -34,7 +34,7 @@ TlineStandardC = Tupper:-0.1:Tlower;
 eswStandard = 6.1094.*exp((17.625.*TlineStandardC)./(243.04+TlineStandardC));
 esiStandard = 6.1121.*exp((22.587.*TlineStandardC)./(273.86+TlineStandardC));
 
-eswPercent = eswStandard.*percent;
-eswLineData = (eswPercent-esiStandard)./esiStandard;
+vaporPressure = eswStandard.*percent;
+eswLineData = (vaporPressure-esiStandard)./esiStandard;
 
 end
