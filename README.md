@@ -40,7 +40,7 @@ For comparison to previous work, especially Bailey and Hallett (2009).
 The code will automatically set inputs, including the necessary basic hd structure.
 #### Full code to replicate
 1. `[hd] = makeGrowthDiagramStruct(1,1)`
-2. `iceGrowthDiagram(hd,1,0,0,1,'southoutside',[0 0.6],[-56.5,0])`
+2. `iceGrowthDiagram(hd,1,0,1,'southoutside',[0 0.6],[-56.5,0])`
 
 ### Ice growth diagram: vapor density excess
 ![Ice growth diagram with respect to water](Demo/igd_vde_applied.png)
@@ -50,7 +50,7 @@ For comparison to previous work, especially Kobayashi (1961), Furukawa and Wettl
 The code will automatically set inputs, including the necessary basic hd structure.
 #### Full code to replicate
 1. `[hd] = makeGrowthDiagramStruct(1,1)`
-2. `iceGrowthDiagramVaporExc(hd,1,0,0,1,'southoutside',[0,0.351],[-56.5,0])`
+2. `iceGrowthDiagramVaporExc(hd,1,0,1,'southoutside',[0,0.351],[-56.5,0])`
 
 ### Ice growth diagram: relative humidity with respect to water (textbook edition)
 ![Ice growth diagram with respect to water](Demo/igd_textbook.png)
@@ -66,7 +66,7 @@ Given an ice supersaturation of 3.8% at -8 deg Celsius, what is the vapor densit
 1. `[vde] = iceSupersatToVaporExc(0.038,-8)`  
 This returns `vde = 0.0962`. Thus a vapor density excess of 0.096 g/m^3 corresponds to an ice supersaturation of 3.8% at -8 deg Celsius!  
 
-To convert from ice supersaturation to relative humidity with respect to water use `iceSupersatToRH`. To calculate vapor density excess from relative humidity with respect to water directly, use `rhow`.
+To convert from ice supersaturation to relative humidity with respect to water use `iceSupersatToRH`. For the reverse process, see `convertRhwRhi`. To calculate vapor density excess from relative humidity with respect to water directly, use `rhow`.
 
 ## Repository description
 ### root
