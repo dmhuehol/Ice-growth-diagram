@@ -76,6 +76,7 @@ To convert from ice supersaturation to relative humidity with respect to water u
 `iceGrowthDiagramVaporExc`: Plots the ice growth diagram in terms of vapor density excess over ice saturation. Input options allow for control of diagram aesthetics, e.g. isohumes, ventilation, legend, etc.
 
 ### Helper functions subdirectory
+`convertRhwRhi`: Converts relative humidity with respect to water to relative humidity with respect to ice.
 `eswLine`: Outputs arrays useful to draw isohumes with respect to water on the diagram.  
 `iceSupersatToRH`: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.   
 `iceSupersatToVaporExc`: Converts an ice supersaturation in decimal to a vapor density excess in g/m^3.  
