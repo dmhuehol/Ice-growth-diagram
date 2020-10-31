@@ -734,4 +734,6 @@ switch castInTermsOf
         error(inputFailureMsg)
 end
 
+set(gcf,'renderer','Painters')
+
 end

@@ -273,6 +273,7 @@ xTickLabels = {'100' '105' '110' '115' '120' '125' '130' '135' '140' '145' '150'
 xticklabels(xTickLabels);
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
+set(gcf,'renderer','Painters')
 
 if legLog==1
     leg = legend(legendEntries,legendTexts);

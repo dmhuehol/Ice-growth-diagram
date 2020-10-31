@@ -194,6 +194,10 @@ legendText{end+1} = '8-10 km';
 legendEntries(end+1) = pcRest;
 legendText{end+1} = '>10 km';
 
+% set (gcf, 'PaperPositionMode', 'manual','PaperPosition',[0 0 1 1])
+% print('-painters','-dsvg','igd_okx_20142015')
+set(gcf,'renderer','Painters')
+
 leg = legend(legendEntries,legendText);
 if legLog==1
     leg.Location = legLocation;

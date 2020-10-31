@@ -309,6 +309,7 @@ xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
+set(gcf,'renderer','Painters')
 
 if legLog == 1
     leg = legend(legendEntries,legendTexts);
