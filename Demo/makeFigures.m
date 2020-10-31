@@ -51,6 +51,12 @@ growthDiagramProfile(dnr_djf1819,1:179,1,'water',0);
 % Enter 'Dec-Feb 2018-2019' when prompted for date
 % Enter 'Denver, CO' when prompted for location
 
+%% Fig: Subfigure for sequences
+[hd] = makeGrowthDiagramStruct(1,1);
+iceGrowthDiagramWater(hd,0,0,[],[90 105],[-23,-7]); %EC sequence
+iceGrowthDiagramWater(hd,0,0,[],[90 105],[-15,0]); %FE sequence
+iceGrowthDiagramWater(hd,0,0,[],[65 105],[-50,-30]); %PcPp sequence
+
 %% Bonus content
 %% Fig: impactsUIUC_20200207_1200UTC
 load('impUIUC_20200207_1200.mat'); %Load single radiosonde data from UIUC launch north of Syracuse on 2020 02 07
