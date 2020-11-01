@@ -82,7 +82,6 @@ To convert from ice supersaturation to relative humidity with respect to water u
 `iceSupersatToVaporExc`: Converts an ice supersaturation in decimal to a vapor density excess in g/m^3.  
 `rhwToVaporExc`: Converts a relative humidity with respect to water to vapor density excess in g/m^3.  
 `eswLine`: Outputs arrays useful to draw isohumes with respect to water on the diagram.  
-`updraftSupersat`: Uses the Twomey equation to calculate supersaturation in an updraft but only at a certain range of thermodynamic conditions well above freezing. Implemented as a curiosity.  
 `ylimitsForIceDiagram`: Generates labels and tick marks for the ICAO atmospheric height approximation axis on the ice diagram.
 
 ### Growth diagram profiles subdirectory
