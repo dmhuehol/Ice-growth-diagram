@@ -11,15 +11,12 @@ function [name] = stationLookupIGRAv2(stationID)
 %Input:
 %stationID: the 11-character IGRA v2 station identifier
 %
-%Version date: 8/14/2018
+%Version date: 10/31/2020
 %Last major revision: 6/27/2018
 %Written by: Daniel Hueholt
 %North Carolina State University
 %Undergraduate Research Assistant at Environment Analytics
 %
-%See also importIGRAv2
-%
-
 
 load('IGRA v2 Station List.mat') %Must be in active directory
 
