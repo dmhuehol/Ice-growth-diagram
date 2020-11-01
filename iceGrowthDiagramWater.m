@@ -149,141 +149,32 @@ legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycr
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
-esw50LineStandard = plot([50 50],[-70 0]);
-esw50LineStandard.Color = [255 230 0]./255;
-esw50LineStandard.LineWidth = 3.2;
-esw50LineStandard.LineStyle = ':';
-
-esw60LineStandard = plot([60 60],[-70 0]);
-esw60LineStandard.Color = [255 230 0]./255;
-esw60LineStandard.LineWidth = 3.2;
-esw60LineStandard.LineStyle = ':';
-
-esw70LineStandard = plot([70 70],[-70 0]);
-esw70LineStandard.Color = [255 230 0]./255;
-esw70LineStandard.LineWidth = 3.2;
-esw70LineStandard.LineStyle = ':';
-
-esw80LineStandard = plot([80 80],[-70 0]);
-esw80LineStandard.Color = [255 230 0]./255;
-esw80LineStandard.LineWidth = 3.2;
-esw80LineStandard.LineStyle = ':';
-
-esw90LineStandard = plot([90 90],[-70 0]);
-esw90LineStandard.Color = [255 230 0]./255;
-esw90LineStandard.LineWidth = 3.2;
-esw90LineStandard.LineStyle = ':';
-
-esw100SupersatLineStandard = plot([100 100],[-70 0]);
-esw100SupersatLineStandard.Color = [255 230 0]./255;
-esw100SupersatLineStandard.LineWidth = 3.2;
-esw100SupersatLineStandard.LineStyle = ':';
-legendEntries(end+1) = esw100SupersatLineStandard;
-legendTexts{end+1} = 'RHw (10% intervals)';
-
-if ventLog
-    esw102p5LineStandard = plot([102.5 102.5],[-70 -2.6]);
-else
-    esw102p5LineStandard = plot([102.5 102.5],[-70 0]);
-end
-esw102p5LineStandard.Color = [255 230 0]./255;
-esw102p5LineStandard.LineWidth = 3.2;
-esw102p5LineStandard.LineStyle = '-.';
-
-if ventLog
-    esw105LineStandard = plot([105 105],[-70 -5.2]);
-else
-    esw105LineStandard = plot([105 105],[-70 0]);
-    if xlimRange(2)==105
-        esw105LineStandard.Visible = 'off';
+for rhwc = [90:-10:0, 100, 102.5, 105]
+    actHandle = num2str(rhwc);
+    actHandleNoPunct = actHandle(actHandle~='.');
+    eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
+    if rhwc>100
+        eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
+    else
+        eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
     end
+    eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [255/255 230/255 0 0.8];
+    eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 3.2;
 end
-esw105LineStandard.Color = [255 230 0]./255;
-esw105LineStandard.LineWidth = 3.2;
-esw105LineStandard.LineStyle = '-.';
-legendEntries(end+1) = esw102p5LineStandard;
-legendTexts{end+1} = 'RHw (102.5%, 105%)';
+legendEntries(end+1) = eswLine_Handles.p90Plot;
+legendEntries(end+1) = eswLine_Handles.p105Plot;
+legendTexts{end+1} = 'RH_w (10% intervals)';
+legendTexts{end+1} = 'RH_w (102.5%, 105%)';
 
-startMat = ones(1,length(TlineStandardC));
-
-water_esi0LineData = iceSupersatToRH(startMat.*0,TlineStandardC);
-esi0Line = plot(water_esi0LineData,TlineStandardC);
-esi0Line.Color = [255 230 0]./255;
-esi0Line.LineWidth = 3.2;
-hold on
-
-water_esi10LineData = iceSupersatToRH(startMat.*10,TlineStandardC);
-if ventLog
-    esi10Line = plot(water_esi10LineData(201:end),TlineStandardC(201:end));
-else
-    esi10Line = plot(water_esi10LineData(198:end),TlineStandardC(198:end));
+for rhic = 60:-10:0
+    actRhiHandle = num2str(rhic);
+    esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
+    esiLine_Handles.(['p', actRhiHandle, 'Plot']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num']),TlineStandardC);
+    esiLine_Handles.(['p', actRhiHandle, 'Plot']).Color = [255/255 230/255 0 0.8];
+    esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 3.2;
 end
-esi10Line.Color = [255 230 0]./255;
-esi10Line.LineWidth = 3.2;
-
-water_esi20LineData = iceSupersatToRH(startMat.*20,TlineStandardC);
-if ventLog
-    esi20Line = plot(water_esi20LineData(248:end),TlineStandardC(248:end));
-else
-    esi20Line = plot(water_esi20LineData(285:end),TlineStandardC(285:end));
-end
-esi20Line.Color = [255 230 0]./255;
-esi20Line.LineWidth = 3.2;
-
-water_esi30LineData = iceSupersatToRH(startMat.*30,TlineStandardC);
-if ventLog
-    esi30Line = plot(water_esi30LineData(291:end),TlineStandardC(291:end));
-else
-    esi30Line = plot(water_esi30LineData(366:end),TlineStandardC(366:end));
-end
-esi30Line.Color = [255 230 0]./255;
-esi30Line.LineWidth = 3.2;
-
-water_esi40LineData = iceSupersatToRH(startMat.*40,TlineStandardC);
-if ventLog
-    esi40Line = plot(water_esi40LineData(335:end),TlineStandardC(335:end));
-else
-    esi40Line = plot(water_esi40LineData(441:end),TlineStandardC(441:end));
-end
-esi40Line.Color = [255 230 0]./255;
-esi40Line.LineWidth = 3.2;
-
-water_esi50LineData = iceSupersatToRH(startMat.*50,TlineStandardC);
-if ventLog
-    esi50Line = plot(water_esi50LineData(376:end),TlineStandardC(376:end));
-else
-    esi50Line = plot(water_esi50LineData(514:end),TlineStandardC(514:end));
-end
-esi50Line.Color = [255 230 0]./255;
-esi50Line.LineWidth = 3.2;
-
-water_esi60LineData = iceSupersatToRH(startMat.*60,TlineStandardC);
-if ventLog
-    esi60Line = plot(water_esi60LineData(416:end),TlineStandardC(416:end));
-else
-    esi60Line = plot(water_esi60LineData(584:end),TlineStandardC(584:end));
-end
-esi60Line.Color = [255 230 0]./255;
-esi60Line.LineWidth = 3.2;
-legendEntries(end+1) = esi60Line;
-legendTexts{end+1} = 'RHi (100% min, 160% max, 10% interval)';
-
-if ventLog
-    [eswLineData] = eswLine(100,Tlower,Tupper);
-    water_ventLineData = iceSupersatToRH(2*eswLineData(151:end).*100,TlineStandardC(151:end));
-    water_ventLine = plot(water_ventLineData,TlineStandardC(151:end));
-    water_ventLine.Color = [0 26 255]./255;
-    water_ventLine.LineWidth = 3.2;
-    legendEntries(end+1) = water_ventLine;
-    legendTexts{end+1} = 'Approximate max natural saturation with ventilation';
-end
-
-% 200% RH line (compare to 2*esw ventilation line)
-%water_vent200Line = plot([200,200],[25,-75]);
-%water_vent200Line.Color = [204,121,167]./255;
-%water_vent200Line.LineWidth = 3.2;
-%legendEntries(end+1) = water_vent200Line;
-%legendTexts{end+1} = '200% RH';
+legendEntries(end+1) = esiLine_Handles.p60Plot;
+legendTexts{end+1} = 'RH_{ice} (10% intervals)';
 
 %% Diagram settings
 axe = gca;
@@ -318,7 +209,6 @@ else
 end
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
-set(gcf,'renderer','Painters')
 
 if legLog == 1
     leg = legend(legendEntries,legendTexts);
