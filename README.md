@@ -13,8 +13,8 @@
     * [Helper functions](#helper-functions-subdirectory)
     * [Growth diagram profiles](#growth-diagram-profiles-subdirectory)
     * [Demo](#demo-subdirectory)
-* [Growth diagram profiles](#growth-diagram-profiles)
-* [Sources and credit](#sources-and-credit)
+* [Making growth diagram profiles](#making-growth-diagram-profiles)
+* [Sources and credits](#sources-and-credits)
 
 ## Introduction
 Complete set of MATLAB code to plot the ice growth diagram both on its own and with data. Tested and confirmed operational on MATLAB 2020a+. The ice growth diagram can be cast into three moisture variables: relative humidity with respect to water (preferred), relative humidity with respect to ice, and vapor density excess over ice saturation. There are "textbook" and "applied" versions of each ice diagram; the textbook versions are designed to be the most aesthetically-pleasing, while the applied versions are higher-contrast and suitable for data overlays.
@@ -95,7 +95,7 @@ To convert from ice supersaturation to relative humidity with respect to water u
 `makeFigures`: Script used to make images for in-progress paper "Revisiting diagrams of ice growth environments."  
 Image files in this directory are used in the Github readme.
 
-## Growth diagram profiles
+## Making growth diagram profiles
 The function `growthDiagramProfile` can be used to plot data from radiosondes on the ice growth diagram. This shows what areas of the crystal growth space are accessible along a profile. A sample data structure from the Utqiagvik launch site is included in the "Growth diagram profiles" subdirectory. An example image is below.  
 ![Ice growth diagram profile from Jan 2018 in Barrow AK](Demo/utqiagvik_sample_readme.png)  
 **Code to replicate**  
@@ -107,7 +107,7 @@ The function `growthDiagramProfile` can be used to plot data from radiosondes on
 
 Code to import a general IGRA v2 soundings data file can be found in the [IGRA v2](https://github.com/dmhuehol/IGRA-v2) repository.  
 
-## Sources and Credit
+## Sources and Credits
 **Bailey, M.P., & Hallett, J. (2004)**: Growth Rates and Habits of Ice Crystals between -20°C and -70°C. *Journal of the Atmospheric Sciences, 61*(5), 514-544. [doi.org/10.1175/1520-0469(2004)061%3C0514:GRAHOI%3E2.0.CO;2](https://doi.org/10.1175/1520-0469(2004)061%3C0514:GRAHOI%3E2.0.CO;2)  
 **Bailey, M.P., & Hallett, J. (2009)**: A comprehensive habit diagram for atmospheric ice crystals: Confirmation from the laboratory, AIRS II, and other field studies. *Journal of the Atmospheric Sciences, 66*(9), 2888-2899. [doi:10.1175/2009JAS2883.1](https://doi.org/10.1175/2009JAS2883.1)  
 **Furukawa, Y., and J. S. Wettlaufer, 2007**: Snow and ice crystals. *Physics Today, 60* (12), 70–71,485doi:10.1063/1.2825081, URL https://physicstoday.scitation.org/doi/10.1063/1.2825081.  
