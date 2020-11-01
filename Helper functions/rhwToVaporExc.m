@@ -1,5 +1,5 @@
-function [rhoDiff] = rhow(rhw,temp)
-%%rhow
+function [rhoDiff] = rhwToVaporExc(rhw,temp)
+%%rhwToVaporExc
     %Calculates vapor density for a given RH percent and T. Uses the
     %Improved August-Roche-Magnus saturation vapor pressure equation from:
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
@@ -7,7 +7,7 @@ function [rhoDiff] = rhow(rhw,temp)
     % J. Appl. Meteor., 35, 601?609,
     % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
     %
-    %General form: [rhoDiff] = rhow(rhw,temp)
+    %General form: [rhoDiff] = rhwToVaporExc(rhw,temp)
     %
     %Output
     %rhoDiff: vapor density excess in g/m^3

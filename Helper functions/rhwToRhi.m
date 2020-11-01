@@ -1,5 +1,5 @@
-function [rhi] = convertRhwRhi(rhw,temp)
-%%convertRhwRhi
+function [rhi] = rhwToRhi(rhw,temp)
+%%rhwToRhi
     %Converts relative humidity with respect to water to relative humidity
     %with respect to ice
     %Equation is the Improved August-Roche-Magnus approximation from:
@@ -9,7 +9,7 @@ function [rhi] = convertRhwRhi(rhw,temp)
     % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
     % See equations 21 and 23 from above citation.
     %
-    %General form: [rhi] = convertRhwRhi(percent,temp)
+    %General form: [rhi] = rhwToRhi(percent,temp)
     %
     %Output
     %rhi: relative humidity with respect to ice percentage
