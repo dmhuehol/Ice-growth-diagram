@@ -28,7 +28,7 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
+    %Version date: 11/1/2020
     %Last major revision: 10/31/2020
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram, iceGrowthDiagramWater, eswLine
@@ -53,6 +53,10 @@ if ~strcmp(phaseFlag,'ice') && ~strcmp(phaseFlag,'water') && ~strcmp(phaseFlag,'
     phaseMsg = 'Valid phases are ''ice'', ''water'', and ''vde''. See function help and try again.';
     error(phaseMsg)
 end
+
+classNum = {'numeric'};
+attribute = {};
+validateattributes(timeIndex,classNum,attribute);
 
 %% Set up growth diagram
 crystalLog = 1; otherLog = 1;
