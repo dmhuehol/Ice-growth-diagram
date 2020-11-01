@@ -21,8 +21,8 @@
 %Written by: Daniel Hueholt
 %North Carolina State University
 %Research Assistant at Environment Analytics
-%Version date: 10/8/2020
-%Last major revision: 7/7/2020
+%Version date: 10/31/2020
+%Last major revision: 10/31/2020
 %
 %Based on concept art originally made in Adobe Illustrator by Dr. Matthew
 %Miller, Senior Research Scholar at Environment Analytics.
@@ -734,6 +734,16 @@ switch castInTermsOf
         error(inputFailureMsg)
 end
 
+saveFigPrompt = 'Save figure as PNG? [Y/N] ';
+saveYesNo = input(saveFigPrompt,'s');
+
+set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
 set(gcf,'renderer','Painters')
+
+if strcmp(saveYesNo,'Y') || strcmp(saveYesNo,'y')
+    saveFilename = ['igd_' char(castInTermsOf)];
+    disp(['Saving figure as: ' saveFilename '.png'])
+    saveas(gcf,saveFilename,'png');
+end
 
 end

@@ -1,4 +1,4 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram. Returns the figure handle
     %so further modifications are possible.
@@ -22,13 +22,14 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
     %ylimRange: determines range for y-axis (in deg C), input as 2-element
     %    array in increasing order (i.e. [-60 0]). Minimum temperature cannot
     %    be less than -70 degrees Celsius.
+    %printFig: 1/0 to save/not save figure as PNG (0 by default)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     % Written as part of HON499: Capstone II
-    %Version date: 10/8/2020
-    %Last major revision: 3/19/2020
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
     %
     %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
     %
@@ -76,6 +77,9 @@ end
 if ~exist('ylimRange','var')
     ylimRange = [-56.5 0];
     disp(['Default temperature range for y-axis is -56.5 to 0' char(176) 'C'])
+end
+if ~exist('printFig','var')
+    printFig = 0;
 end
 
 %% Make s-T diagram
@@ -309,7 +313,6 @@ xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
-set(gcf,'renderer','Painters')
 
 if legLog == 1
     leg = legend(legendEntries,legendTexts);
@@ -318,6 +321,14 @@ if legLog == 1
     leg.FontSize = 14;
 else
     %no legend
+end
+
+set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
+set(gcf,'renderer','Painters')
+if printFig == 1
+    saveFilename = 'igd_vde';
+    disp(['Saving figure as: ' saveFilename '.png'])
+    saveas(gcf,saveFilename,'png');
 end
 
 end

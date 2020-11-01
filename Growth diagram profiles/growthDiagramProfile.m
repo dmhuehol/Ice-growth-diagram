@@ -208,7 +208,7 @@ else
     leg.Visible = 'off';
 end
 
-set(gcf, 'Position', get(0, 'Screensize'));
+set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
 set(gcf,'renderer','Painters')
 if printFig == 1
     dateStringNoSpace = dateString(~isspace(dateString));

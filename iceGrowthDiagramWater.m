@@ -1,4 +1,4 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram with relative humidity with
     %respect to water as abscissa. Returns the figure handle so further
@@ -18,13 +18,14 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legL
     %ylimRange: determines range for the y-axis (in deg C), input as
     %2-element array in increasing order (i.e. [-56.5 0]). Minimum
     %temperature cannot be less than -70 degrees Celsius.
+    %printFig: 1/0 to save/not save figure as PNG (0 by default)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Edits made as part of HON499: Capstone II
-    %Version date: 8/13/2020
-    %Last major revision: 11/22/2019
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram
     %
@@ -72,6 +73,9 @@ if ~exist('ylimRange','var')
 end
 if legendLocStr == 0
     legendLocStr = 'none';
+end
+if ~exist('printFig','var')
+    printFig = 0;
 end
 
 %% Make s-T diagram
@@ -323,6 +327,14 @@ if legLog == 1
     leg.FontSize = 14;
 else
     %no legend
+end
+
+set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
+set(gcf,'renderer','Painters')
+if printFig == 1
+    saveFilename = 'igd_rhw';
+    disp(['Saving figure as: ' saveFilename '.png'])
+    saveas(gcf,saveFilename,'png');
 end
 
 end
