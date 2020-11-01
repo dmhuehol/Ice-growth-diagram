@@ -1,32 +1,32 @@
 %% iceGrowthDiagramTextbook
-% This code produces textbook-quality ice growth diagrams in terms of
-% relative humidity with respect to water, relative humidity with respect to
-% ice, and vapor density excess.
-%
-% General form: call iceGrowthDiagramTextbook at command window. The user
-% will be provided with an input prompt.
-%
-% iceGrowthDiagramTextbook is designed to be replicable, not flexible. The
-% figure drawing is accomplished through a thicket of hardcoding in order
-% to make the appropriate on-figure labels, colors, etc. The code is
-% sectioned off by the moisture variables in a switch/case block. A very
-% limited selection of parameters are modifiable and are described at the
-% start of their respective sections. 
-%
-% For flexible code that produces the high-contrast applied ice growth
-% diagram, see iceGrowthDiagram, iceGrowthDiagramWater, and
-% iceGrowthDiagramVaporExc. To create ice growth profiles from soundings
-% data, see growthDiagramProfile.
-%
-%Written by: Daniel Hueholt
-%North Carolina State University
-%Research Assistant at Environment Analytics
-%Version date: 10/31/2020
-%Last major revision: 10/31/2020
-%
-%Based on concept art originally made in Adobe Illustrator by Dr. Matthew
-%Miller, Senior Research Scholar at Environment Analytics.
-%
+    % This code produces textbook-quality ice growth diagrams in terms of
+    % relative humidity with respect to water, relative humidity with respect to
+    % ice, and vapor density excess.
+    %
+    % General form: call iceGrowthDiagramTextbook at command window. The user
+    % will be provided with an input prompt.
+    %
+    % iceGrowthDiagramTextbook is designed to be replicable, not flexible. The
+    % figure drawing is accomplished through a thicket of hardcoding in order
+    % to make the appropriate on-figure labels, colors, etc. The code is
+    % sectioned off by the moisture variables in a switch/case block. A very
+    % limited selection of parameters are modifiable and are described at the
+    % start of their respective sections. 
+    %
+    % For flexible code that produces the high-contrast applied ice growth
+    % diagram, see iceGrowthDiagram, iceGrowthDiagramWater, and
+    % iceGrowthDiagramVaporExc. To create ice growth profiles from soundings
+    % data, see growthDiagramProfile.
+    %
+    %Written by: Daniel Hueholt
+    %North Carolina State University
+    %Research Assistant at Environment Analytics
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
+    %
+    %Based on concept art originally made in Adobe Illustrator by Dr. Matthew
+    %Miller, Senior Research Scholar at Environment Analytics.
+    %
 
 function [] = iceGrowthDiagramTextbook()
 %% Input
@@ -264,8 +264,8 @@ switch castInTermsOf
         intermediateSPD_wall.EdgeColor = 'none';
         intermediateSPD_ceiling = patch([hd.Dendrites.supersatBounds(4),hd.Dendrites.supersatBounds(4) hd.SectorPlates.supersatBounds(6) hd.SectorPlates.supersatBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
         intermediateSPD_ceiling.EdgeColor = 'none';
-        intermediateSPD_cursedTriangle = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.supersatBounds(1) hd.Dendrites.supersatBounds(1)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(1) hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
-        intermediateSPD_cursedTriangle.EdgeColor = 'none';
+        intermediateSPD_remainingTriangle = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.supersatBounds(1) hd.Dendrites.supersatBounds(1)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(1) hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
+        intermediateSPD_remainingTriangle.EdgeColor = 'none';
         mixed1 = patch(hd.Mixed.supersatBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.TextbookColor);
         mixed1.EdgeColor = 'none';
         mixed2 = patch(hd.Mixed.supersatBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.TextbookColor);
@@ -387,11 +387,6 @@ switch castInTermsOf
         axe.YDir = 'reverse';
     case "vde"
         %% Ice growth diagram in terms of vapor density excess
-        %function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRange,ylimRange)
-        
-        legLog = 1;
-        legendLocStr = 'southoutside';
-        
         % Modifiable variables
         xlimRange = [0 0.351];
         ylimRange = [-56.5 0];
@@ -547,10 +542,11 @@ switch castInTermsOf
         axe.YDir = 'reverse';
     otherwise
         close all
-        inputFailureMsg = 'Invalid input! Please try the function again.';
+        inputFailureMsg = 'Invalid input! Please check input and try again.';
         error(inputFailureMsg)
 end
 
+%% Prompt user whether to save figure as PNG
 saveFigPrompt = 'Save figure as PNG? [Y/N] ';
 saveYesNo = input(saveFigPrompt,'s');
 

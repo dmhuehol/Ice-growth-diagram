@@ -1,12 +1,15 @@
 function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
 %%iceGrowthDiagram
-    %Function to plot an ice growth diagram. Returns the figure handle
-    %so further modifications are possible.
+    %Function to plot an ice growth diagram in terms of relative humidity
+    %with respect to ice. Returns the figure handle so further
+    %modifications are possible.
     %
-    %General form: [fig] = iceGrowthDiagram(hd,isohumeFlag,ventLog,updraftLog,legLog,legendLocStr,xlimRang,ylimRange)
+    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRang,ylimRange,printFig)
     %
     %Output
     %fig: figure handle for the ice growth diagram
+    %legendEntries: figure legend data, used when called by growthDiagramProfile
+    %legendTexts: figure legend texts, used when called by growthDiagramProfile
     %
     %Input
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
@@ -17,10 +20,10 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventL
     %    0 and all other values don't plot any isohumes
     %ventLog: logical 1/0 to draw the maximum natural supersaturation line
     %legLog: logical 1/0 to show the legend
-    %legendLocStr: legend location string ('southoutside' is standard)
-    %xlimRange: determines range for x-axis, input as 2-element array (i.e. [0 0.6])
+    %legendLocStr: legend location string ('southoutside' is default)
+    %xlimRange: determines range for x-axis, input as 2-element array (default: [0 0.6])
     %ylimRange: determines range for y-axis (in deg C), input as 2-element
-    %    array in increasing order (i.e. [-60 0]). Minimum temperature cannot
+    %    array in increasing order (default: [-56.5 0]). Minimum temperature cannot
     %    be less than -70 degrees Celsius.
     %printFig: 1/0 to save/not save figure as PNG (0 by default)
     %
@@ -110,8 +113,8 @@ intermediateSPD_wall = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.sup
 intermediateSPD_wall.EdgeColor = 'none';
 intermediateSPD_ceiling = patch([hd.Dendrites.supersatBounds(4),hd.Dendrites.supersatBounds(4) hd.SectorPlates.supersatBounds(6) hd.SectorPlates.supersatBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_cursedTriangle = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.supersatBounds(1) hd.Dendrites.supersatBounds(1)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(1) hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
-intermediateSPD_cursedTriangle.EdgeColor = 'none';
+intermediateSPD_remainingTriangle = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.supersatBounds(1) hd.Dendrites.supersatBounds(1)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(1) hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_remainingTriangle.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.supersatBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = 'none';
@@ -154,11 +157,11 @@ if isohumeFlag==1 %Draw isohumes wrt water at 10% intervals up to 100%, plus 102
     legendEntries(end+1) = eswLine_Handles.p100Plot;
     legendEntries(end+1) = eswLine_Handles.p90Plot;
     legendEntries(end+1) = eswLine_Handles.p105Plot;    
-    legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
-    legendTexts{end+1} = 'Saturation with respect to water (10% intervals)';
-    legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
+    legendTexts{end+1} = 'RH_w = 100% (T_{ice} = T_{air})';
+    legendTexts{end+1} = 'RH_w (10% intervals)';
+    legendTexts{end+1} = 'RH_w (102.5%, 105%)';
     
-elseif isohumeFlag==2 %Draw isohumes, 100% only
+elseif isohumeFlag==2 %Draw 100% RHw isohume only
     Tupper = 15; Tlower = -70;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);

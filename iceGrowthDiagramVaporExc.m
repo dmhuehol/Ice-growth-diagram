@@ -1,12 +1,15 @@
 function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
-%%iceGrowthDiagram
-    %Function to plot an ice growth diagram. Returns the figure handle
-    %so further modifications are possible.
+%%iceGrowthDiagramVaporExc
+    %Function to plot an ice growth diagram with respect to vapor density
+    %excess over ice saturation. Returns the figure handle so further
+    %modifications are possible.
     %
-    %General form: [fig] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRang,ylimRange)
+    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRang,ylimRange,printFig)
     %
     %Output
     %fig: figure handle for the ice growth diagram
+    %legendEntries: figure legend data, used when called by growthDiagramProfile
+    %legendTexts: figure legend texts, used when called by growthDiagramProfile
     %
     %Input
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
@@ -18,9 +21,9 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
     %ventLog: logical 1/0 to draw the maximum natural supersaturation line
     %legLog: logical 1/0 to show the legend
     %legendLocStr: legend location string ('southoutside' is standard)
-    %xlimRange: determines range for x-axis, input as 2-element array (i.e. [0 0.6])
+    %xlimRange: determines range for x-axis, input as 2-element array (default: [0 0.351])
     %ylimRange: determines range for y-axis (in deg C), input as 2-element
-    %    array in increasing order (i.e. [-60 0]). Minimum temperature cannot
+    %    array in increasing order (default: [-56.5 0]). Minimum temperature cannot
     %    be less than -70 degrees Celsius.
     %printFig: 1/0 to save/not save figure as PNG (0 by default)
     %
@@ -31,7 +34,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
     %Version date: 10/31/2020
     %Last major revision: 10/31/2020
     %
-    %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
+    %See also makeGrowthDiagramStruct, eswLine, iceSupersatToVaporExc, ylimitsForIceDiagram
     %
 
 %% Check variables
@@ -46,8 +49,7 @@ if isnumeric(hd)==1
     error(msg)
 end
 if ~exist('hd','var')
-    crystalLog = 1;
-    otherLog = 1;
+    crystalLog = 1; otherLog = 1;
     [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate the structure containing all growth diagram information
 end
 if ~exist('isohumeFlag','var')
@@ -134,7 +136,6 @@ intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.vaporExcBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = 'none';
-
 mixed2 = patch(hd.Mixed.vaporExcBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
 mixed2.EdgeColor = 'none';
 warmerThanFreezing = patch(hd.warm.vaporExcBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
@@ -178,8 +179,7 @@ if isohumeFlag==1
     legendTexts{end+1} = 'RH_w (10% intervals)';
     legendTexts{end+1} = 'RH_w (102.5%, 105%)';
  
-elseif isohumeFlag==2
-    %Draw isohumes, 100% only
+elseif isohumeFlag==2 %Draw 100% RHw isohume only
     Tupper = 15; Tlower = -70;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);
@@ -189,13 +189,11 @@ elseif isohumeFlag==2
     
     legendEntries(end+1) = eswSupersatLineStandard;
     legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
-else
-    %do nothing, don't plot isohumes
+else %do nothing, don't plot isohumes
     disp('Isohumes disabled')
 end
 
-if ventLog==1
-    %Approximate maximum supersaturation with ventilation line
+if ventLog==1 %Approximate maximum supersaturation with ventilation line
     maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
     maxVentLine.Color = [0 26 255]./255;
     maxVentLine.LineWidth = 3.2;

@@ -1,7 +1,13 @@
 function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
 %%makeGrowthDiagramStruct
     %Function to make a structure containing all information needed to plot
-    %an ice growth diagram. Values derived from Bailey and Hallett 2009 and
+    %an ice growth diagram. These values are used in the submitted paper
+    %this code accompanies, tentatively:
+    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, submitted 2020: Revisiting
+    % Diagrams of Ice Growth Environments, Bulletin of the American
+    % Meteorological Society, submitted.
+    %
+    %Values are derived from text and figures in Bailey and Hallett 2009 and
     %Bailey and Hallett 2004. Bailey and Hallett 2009 cuts off the top of
     %the diagram at a 0.6 ice supersaturation, but lab work in Bailey and
     %Hallett 2004 extends to higher values. The supersaturations above 0.6
@@ -19,7 +25,8 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %
     %Output
     %hd: a structure containing name, plot colors, temperature bounds,
-    %   RHice bounds, and RHwater bounds for all habits
+    %   RHice bounds, RHw bounds, and vapor density excess bounds for all
+    %   regions of the diagram
     %
     %Inputs
     %crystalLog: logical 1/0 whether or not to contain info for crystal
@@ -31,8 +38,8 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Portions written as part of HON499: Capstone II
-    %Version date: 10/8/2020
-    %Last major revision: 3/19/2020
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
     %
     %See also iceSupersatToRH, iceSupersatToVaporExc
     %
@@ -43,10 +50,10 @@ if nargin ~= 2
     error(msg)
 end
 
-if ~isnumeric(crystalLog) || ~isnumeric(otherLog)
-    msg = 'Inputs must be 0 or 1! Check input and try again.';
-    error(msg)
-end
+classNum = {'numeric'};
+attribute = {'>=',0,'<=',1};
+validateattributes(crystalLog,classNum,attribute);
+validateattributes(otherLog,classNum,attribute);
 
 if crystalLog==1 && otherLog==1
     disp('Structure includes crystal growth and information for other parameters.')

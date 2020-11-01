@@ -44,5 +44,4 @@ rhoi = esiStandard./(Rv*tempK);
 rhoDiff = rhow-rhoi;
 rhoDiff = rhoDiff.*10^3;
 
-
 end

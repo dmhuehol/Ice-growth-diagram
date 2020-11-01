@@ -1,13 +1,22 @@
 function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
-%%iceGrowthDiagram
-    %Function to plot an ice growth diagram with relative humidity with
-    %respect to water as abscissa. Returns the figure handle so further
-    %modifications are possible.
+%%iceGrowthDiagramWater
+    %Function to plot an ice growth diagram in terms of relative humidity
+    %with respect to water. This is the version of the diagram highlighted
+    %in the submitted paper this code accompanies, tentatively:
+    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, submitted 2020: Revisiting
+    % Diagrams of Ice Growth Environments, Bulletin of the American
+    % Meteorological Society, submitted.
     %
-    %General form: [fig] = iceGrowthDiagram(hd,legLog,legendLocStr,xlimRange,ylimRange)
+    %We strongly recommend this diagram in educational and research
+    %contexts outside of specific applications where the relative humidity
+    %with respect to ice or vapor density excess versions are necessary.
+    %
+    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
     %
     %Output
     %fig: figure handle for the ice growth diagram
+    %legendEntries: figure legend data, used when called by growthDiagramProfile
+    %legendTexts: figure legend texts, used when called by growthDiagramProfile
     %
     %Input
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
@@ -16,8 +25,8 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legL
     %legendLocStr: legend location string ('southoutside' is standard)
     %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [55 124])
     %ylimRange: determines range for the y-axis (in deg C), input as
-    %2-element array in increasing order (i.e. [-56.5 0]). Minimum
-    %temperature cannot be less than -70 degrees Celsius.
+    %   2-element array in increasing order (i.e. [-56.5 0]). Minimum
+    %   temperature cannot be less than -70 degrees Celsius.
     %printFig: 1/0 to save/not save figure as PNG (0 by default)
     %
     %Written by: Daniel Hueholt
@@ -27,7 +36,7 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legL
     %Version date: 10/31/2020
     %Last major revision: 10/31/2020
     %
-    %See also makeGrowthDiagramStruct, iceGrowthDiagram
+    %See also makeGrowthDiagramStruct, iceSupersatToRH
     %
 
 %% Check variables
@@ -129,10 +138,8 @@ intermediateSPD_triangleBottom.EdgeColor = 'none';
 mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = hd.Mixed.Color;
 mixed1.EdgeAlpha = 0;
-
 mixed2 = patch(hd.Mixed.waterBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
 mixed2.EdgeColor = 'none';
-
 warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
@@ -173,8 +180,9 @@ for rhic = 60:-10:0
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).Color = [255/255 230/255 0 0.8];
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 3.2;
 end
+
 legendEntries(end+1) = esiLine_Handles.p60Plot;
-legendTexts{end+1} = 'RH_{ice} (10% intervals)';
+legendTexts{end+1} = 'RH_{ice} (10% intervals, 100% min, 160% max)';
 
 %% Diagram settings
 axe = gca;

@@ -1,6 +1,6 @@
 function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual,printFig)
 %%growthDiagramProfile
-    %Function to plot a balloon temperature/humidity profile on the ice growth
+    %Function to plot a weather balloon profile on the ice growth
     %diagram. Saturation vapor pressure equations use the Improved
     %August-Roche-Magnus equation from
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
@@ -9,7 +9,11 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual
     % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
     % See equations 25 and 27 from above citation.
     %
-    %General form: growthDiagramProfile(sounding,timeIndex,legLog)
+    %The input sounding structure matches the format output by the IGRA v2
+    %processing code at github.com/dmhuehol/IGRA-v2. Sample files are
+    %included in this repository.
+    %
+    %General form: growthDiagramProfile(sounding,timeIndex,legLog,manual,printFig)
     %
     %Inputs
     %sounding: a processed sounding data structure, must include moisture data
@@ -19,7 +23,7 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual
     %   'ice' to plot as relative humidity with respect to ice
     %manual: 'm' to use date and launchname designated in code, any other
     %   value or leave off for user to be prompted for these
-    %printFig: 0 to not save figure, 1 to save a PNG (0 by default)
+    %printFig: logical 1/0 to save/not save figure as a PNG (0 by default)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
@@ -94,8 +98,8 @@ else
         dateString = input('Enter date for title: ','s');
         launchname = input('Enter location for title: ','s');
     else
-        dateString = 'Dec-Feb 2014-2015';
-        launchname = 'Upton, NY';
+        dateString = 'date';
+        launchname = 'location';
     end
 end
 t = title({['Ice growth profile for ' dateString],launchname});
@@ -117,10 +121,8 @@ for c = 1:length(timeIndex)
         radiosondeHeight = [sounding(loopTime).geopotential];
     elseif isfield(sounding(loopTime),'height')
         radiosondeHeight = [sounding(loopTime).height];
-        %TODO: rewrite sounding import functions so we no longer have this
-        %ridiculous mismatch between naming conventions
     else
-        msg = 'revenge of the good coding practices';
+        msg = 'Cannot locate height field in data!';
         error(msg)
     end
     radiosondeHeight1 = radiosondeHeight<=2000;
@@ -212,7 +214,10 @@ set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
 set(gcf,'renderer','Painters')
 if printFig == 1
     dateStringNoSpace = dateString(~isspace(dateString));
-    saveFilename = ['iceGrowthProfile' '_' dateStringNoSpace '_' launchname];
+    dateStringNoDash = dateStringNoSpace(dateStringNoSpace~='-');
+    launchnameNoSpace = launchname(~isspace(launchname));
+    launchnameNoComma = launchnameNoSpace(launchnameNoSpace~=',');
+    saveFilename = ['iceGrowthProfile' '_' dateStringNoDash '_' launchnameNoComma];
     disp(['Saving figure as: ' saveFilename '.png'])
     saveas(gcf,saveFilename,'png');
 end

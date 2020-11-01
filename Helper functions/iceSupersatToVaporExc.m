@@ -17,7 +17,6 @@ function [vaporDensExc] = iceSupersatToVaporExc(iceSupersatDecimal,temp)
     %iceSupersatDecimal: supersaturation with respect to ice as a decimal
     %temp: temperature in deg C
     %
-    %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Research Assistant at Environment Analytics

@@ -1,22 +1,22 @@
 function [name] = stationLookupIGRAv2(stationID)
 %%stationLookupIGRAv2
-%Retrieves the station name for a sounding launch site. Requires
-%the "IGRA v2 Station List.mat" file to be present in the active directory.
-%
-%General form: [name] = stationLookupIGRAv2(stationID)
-%
-%Output:
-%name: Name of the sounding launch site in Proper Case
-%
-%Input:
-%stationID: the 11-character IGRA v2 station identifier
-%
-%Version date: 10/31/2020
-%Last major revision: 6/27/2018
-%Written by: Daniel Hueholt
-%North Carolina State University
-%Undergraduate Research Assistant at Environment Analytics
-%
+    %Retrieves the station name for a sounding launch site. Requires
+    %the "IGRA v2 Station List.mat" file to be present in the active directory.
+    %
+    %General form: [name] = stationLookupIGRAv2(stationID)
+    %
+    %Output
+    %name: Name of the sounding launch site in Proper Case
+    %
+    %Input:
+    %stationID: the 11-character IGRA v2 station identifier
+    %
+    %Version date: 10/31/2020
+    %Last major revision: 6/27/2018
+    %Written by: Daniel Hueholt
+    %North Carolina State University
+    %Undergraduate Research Assistant at Environment Analytics
+    %
 
 load('IGRA v2 Station List.mat') %Must be in active directory
 
@@ -26,7 +26,7 @@ rawName = cell2mat(igra2stationlist.Name(nameIndex));
 
 % For some sites, the name in the station list is not a great
 % representation and needs to be improved by hand
-% For most, make the name capitalized case for better readability
+% For most, make the name proper case for better readability
 switch nameIndex
     case 2017
         name = 'Utqiagvik, AK';
