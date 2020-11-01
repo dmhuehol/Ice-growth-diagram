@@ -1,4 +1,4 @@
-function [eswLineData] = eswLine(percent,Tlower,Tupper)
+function [eswLineData] = eswLine(rhw,Tlower,Tupper)
 %%eswLine
     %Makes arrays of water RH difference from ice saturation. Used to plot
     %isohumes on s-T diagram.
@@ -9,32 +9,42 @@ function [eswLineData] = eswLine(percent,Tlower,Tupper)
     % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
     % See equations 21 and 23 from above citation.
     %
-    %General form: [eswLineData] = eswLine(percent,Tlower,Tupper)
+    %General form: [eswLineData] = eswLine(rhw,Tlower,Tupper)
     %
     %Output
     %eswLineData: array where elements are given in difference between water
     %saturation RH and ice saturation.
     %
     %Input
-    %percent: water saturation RH in percent
+    %rhw: water saturation RH in percent
     %Tlower: lower bound of temperature in Celsius to calculate saturations
     %Tupper: upper bound of temperature in Celsius to calculate saturations
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
-    %Last major revision: 8/29/2019
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
     %
 
-percent = percent/100;
+classNum = {'numeric'};
+attribute = {};
+validateattributes(Tlower,classNum,attribute); %Check to ensure numeric
+validateattributes(Tupper,classNum,attribute); %Check to ensure numeric input
+
+if Tlower>Tupper %Check to make sure bounds are ordered correctly
+    msg = 'Lower bound must be less than upper bound! Check input and try again.';
+    error(msg);
+end
+
+rhw = rhw/100;
 
 TlineStandardC = Tupper:-0.1:Tlower;
 
 eswStandard = 6.1094.*exp((17.625.*TlineStandardC)./(243.04+TlineStandardC));
 esiStandard = 6.1121.*exp((22.587.*TlineStandardC)./(273.86+TlineStandardC));
 
-vaporPressure = eswStandard.*percent;
+vaporPressure = eswStandard.*rhw;
 eswLineData = (vaporPressure-esiStandard)./esiStandard;
 
 end

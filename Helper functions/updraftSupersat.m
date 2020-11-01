@@ -27,23 +27,15 @@ function [s_upper] = updraftSupersat(c,k,updraft)
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     % Written as part of HON499: Capstone II
-    %Version date: 2/23/2020
-    %Last major revision: 2/23/2020
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
     %
 
-if ~exist('c','var')
-     msg = 'Aerosol parameter c is required!';
-     error(msg)
-end
-if ~exist('k','var')
-    msg = 'Aerosol parameter k is required!';
-    error(msg)
-end
-if ~exist('updraft','var')
-     msg = 'Using default updraft speed of 1 m/s';
-     warning(msg);
-     updraft = 1;
-end
+classNum = {'numeric'};
+attribute = {};
+validateattributes(c,classNum,attribute); %Check to ensure numeric
+validateattributes(k,classNum,attribute);
+validateattributes(updraft,classNum,attribute);
 
 
 %%

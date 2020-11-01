@@ -20,22 +20,18 @@ function [zLabels, tempsInRange, outputTempSpan] = ylimitsForIceDiagram(inputTem
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/22/2019
-    %Last major revision: 8/23/2019
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
     %
     
-%% Check inputs
-if abs(inputTempSpan(1))>70
-    msg = ['Minimum temperature cannot be less than -70' char(176) 'C'];
-    error(msg)
-end
+classNum = {'numeric'};
+attribute = {'>=',-70};
+validateattributes(inputTempSpan,classNum,attribute); %Check to ensure numeric greater than -70C (diagram does not go farther than -70C)
 
-%% Generate y-axis information
 possibleTemps = [0 2 4 6 8 10 12 14 16 18 20 22 30 40 50 56.5 60 70];
-% SEY: 56.5 deg C is tropopause, 11000 m is height of tropopause
+% -56.5 deg C is tropopause, 11000 m is height of tropopause
 z = [2300 2625 2925 3225 3550 3850 4150 4475 4775 5075 5400 5700 6925 8450 10000 11000 71750 76750];
-% Note the massive jump in heights for the final 2 points is due to the
-% leap to mesospheric heights
+% Note massive jump in heights for final 2 points is due to the leap to mesospheric heights
 possibleZ = z-2300; %Height above 0C line
 
 inputTempSpan = -inputTempSpan;
