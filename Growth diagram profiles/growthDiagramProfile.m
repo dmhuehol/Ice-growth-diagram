@@ -1,4 +1,4 @@
-function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual)
+function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual,printFig)
 %%growthDiagramProfile
     %Function to plot a balloon temperature/humidity profile on the ice growth
     %diagram. Saturation vapor pressure equations use the Improved
@@ -19,12 +19,13 @@ function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual
     %   'ice' to plot as relative humidity with respect to ice
     %manual: 'm' to use date and launchname designated in code, any other
     %   value or leave off for user to be prompted for these
+    %printFig: 0 to not save figure, 1 to save a PNG (0 by default)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 7/2/2020
-    %Last major revision: 7/2/2020
+    %Version date: 10/31/2020
+    %Last major revision: 10/31/2020
     %
     %See also makeGrowthDiagramStruct, iceGrowthDiagram, iceGrowthDiagramWater, eswLine
     %
@@ -40,6 +41,9 @@ if legLog~=0 && legLog~=1
 end
 if ~exist('manual','var')
     manual = 0;
+end
+if ~exist('printFig','var')
+    printFig = 0;
 end
 if ~strcmp(phaseFlag,'ice') && ~strcmp(phaseFlag,'water') && ~strcmp(phaseFlag,'vde')
     phaseMsg = 'Valid phases are ''ice'', ''water'', and ''vde''. See function help and try again.';
@@ -194,9 +198,6 @@ legendText{end+1} = '8-10 km';
 legendEntries(end+1) = pcRest;
 legendText{end+1} = '>10 km';
 
-% set (gcf, 'PaperPositionMode', 'manual','PaperPosition',[0 0 1 1])
-% print('-painters','-dsvg','igd_okx_20142015')
-set(gcf,'renderer','Painters')
 
 leg = legend(legendEntries,legendText);
 if legLog==1
@@ -205,6 +206,15 @@ if legLog==1
     leg.NumColumns = 3;
 else
     leg.Visible = 'off';
+end
+
+set(gcf, 'Position', get(0, 'Screensize'));
+set(gcf,'renderer','Painters')
+if printFig == 1
+    dateStringNoSpace = dateString(~isspace(dateString));
+    saveFilename = ['iceGrowthProfile' '_' dateStringNoSpace '_' launchname];
+    disp(['Saving figure as: ' saveFilename '.png'])
+    saveas(gcf,saveFilename,'png');
 end
 
 end
