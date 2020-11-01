@@ -133,7 +133,7 @@ legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycr
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
 
 %% Plot other lines
-if isohumeFlag==1
+if isohumeFlag==1 %Draw isohumes wrt water at 10% intervals up to 100%, plus 102.5% and 105%
     
     for rhwc = [90:-10:0, 100, 102.5, 105]
         actHandle = num2str(rhwc);
@@ -158,8 +158,7 @@ if isohumeFlag==1
     legendTexts{end+1} = 'Saturation with respect to water (10% intervals)';
     legendTexts{end+1} = 'Saturation with respect to water (102.5%, 105%)';
     
-elseif isohumeFlag==2
-    %Draw isohumes, 100% only
+elseif isohumeFlag==2 %Draw isohumes, 100% only
     Tupper = 15; Tlower = -70;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);
@@ -170,12 +169,10 @@ elseif isohumeFlag==2
     legendEntries(end+1) = eswSupersatLineStandard;
     legendTexts{end+1} = 'Water saturation line (T_{ice} = T_{air})';
 else
-    %do nothing, don't plot isohumes
     disp('Isohumes disabled')
 end
 
-if ventLog==1
-    %Approximate maximum supersaturation with ventilation line
+if ventLog==1 %Approximate maximum supersaturation with ventilation line
     maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
     maxVentLine.Color = [0 26 255]./255;
     maxVentLine.LineWidth = 3.2;
