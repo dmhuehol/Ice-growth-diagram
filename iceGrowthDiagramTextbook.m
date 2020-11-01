@@ -116,87 +116,38 @@ switch castInTermsOf
         unnatural105.EdgeColor = 'none';
         hold on
         
-        % Plot other lines
-        esw50LineStandard = plot([50 50],[-70 0]);
-        esw50LineStandard.Color = [144 143 143]./255;
-        esw50LineStandard.LineWidth = 0.5;
-        esw50LineStandard.LineStyle = '--';
-        
-        esw60LineStandard = plot([60 60],[-70 0]);
-        esw60LineStandard.Color = [144 143 143]./255;
-        esw60LineStandard.LineWidth = 0.5;
-        esw60LineStandard.LineStyle = '--';
-        
-        esw70LineStandard = plot([70 70],[-70 0]);
-        esw70LineStandard.Color = [144 143 143]./255;
-        esw70LineStandard.LineWidth = 0.5;
-        esw70LineStandard.LineStyle = '--';
-        
-        esw80LineStandard = plot([80 80],[-70 0]);
-        esw80LineStandard.Color = [144 143 143]./255;
-        esw80LineStandard.LineWidth = 0.5;
-        esw80LineStandard.LineStyle = '--';
-        
-        esw90LineStandard = plot([90 90],[-70 0]);
-        esw90LineStandard.Color = [144 143 143]./255;
-        esw90LineStandard.LineWidth = 0.5;
-        esw90LineStandard.LineStyle = '--';
-        
-        esw100SupersatLineStandard = plot([100 100],[-70 0]);
-        esw100SupersatLineStandard.Color = [144 143 143]./255;
-        esw100SupersatLineStandard.LineWidth = 1;
-        
-        esw102p5LineStandard = plot([102.5 102.5],[-70 0]);
-        esw102p5LineStandard.Color = [144 143 143]./255;
-        esw102p5LineStandard.LineWidth = 0.5;
-        esw102p5LineStandard.LineStyle = '-.';
-        
-        startMat = ones(1,length(TlineStandardC));
-        
-        water_esi0LineData = iceSupersatToRH(startMat.*0,TlineStandardC);
-        esi0Line = plot(water_esi0LineData(1:289),TlineStandardC(1:289));
-        esi0Line.Color = [144 143 143]./255;
-        esi0Line.LineWidth = 1;
-        hold on
-        esi0Line2 = plot(water_esi0LineData(332:end),TlineStandardC(332:end));
-        esi0Line2.Color = [144 143 143]./255;
-        esi0Line2.LineWidth = 1;
-        
-        water_esi10LineData = iceSupersatToRH(startMat.*10,TlineStandardC);
-        esi10Line = plot(water_esi10LineData(201:end),TlineStandardC(201:end));
-        esi10Line.Color = [144 143 143]./255;
-        esi10Line.LineWidth = 1.5;
-        esi10Line.LineStyle = ':';
-        
-        water_esi20LineData = iceSupersatToRH(startMat.*20,TlineStandardC);
-        esi20Line = plot(water_esi20LineData(248:end),TlineStandardC(248:end));
-        esi20Line.Color = [144 143 143]./255;
-        esi20Line.LineWidth = 1.5;
-        esi20Line.LineStyle = ':';
-        
-        water_esi30LineData = iceSupersatToRH(startMat.*30,TlineStandardC);
-        esi30Line = plot(water_esi30LineData(291:end),TlineStandardC(291:end));
-        esi30Line.Color = [144 143 143]./255;
-        esi30Line.LineWidth = 1.5;
-        esi30Line.LineStyle = ':';
-        
-        water_esi40LineData = iceSupersatToRH(startMat.*40,TlineStandardC);
-        esi40Line = plot(water_esi40LineData(335:end),TlineStandardC(335:end));
-        esi40Line.Color = [144 143 143]./255;
-        esi40Line.LineWidth = 1.5;
-        esi40Line.LineStyle = ':';
-        
-        water_esi50LineData = iceSupersatToRH(startMat.*50,TlineStandardC);
-        esi50Line = plot(water_esi50LineData(376:end),TlineStandardC(376:end));
-        esi50Line.Color = [144 143 143]./255;
-        esi50Line.LineWidth = 1.5;
-        esi50Line.LineStyle = ':';
-        
-        water_esi60LineData = iceSupersatToRH(startMat.*60,TlineStandardC);
-        esi60Line = plot(water_esi60LineData(416:end),TlineStandardC(416:end));
-        esi60Line.Color = [144 143 143]./255;
-        esi60Line.LineWidth = 1.5;
-        esi60Line.LineStyle = ':';
+        %Draw isohumes
+        for rhwc = [90:-10:0, 100, 102.5, 105]
+            actHandle = num2str(rhwc);
+            actHandleNoPunct = actHandle(actHandle~='.');
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
+            if rhwc>100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
+            elseif rhwc == 100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 1;
+            else
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
+            end
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
+        end
+
+        for rhic = 60:-10:0
+            actRhiHandle = num2str(rhic);
+            esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
+            if rhic == 0
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:289),TlineStandardC(1:289));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(332:end),TlineStandardC(332:end));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 1; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 1;
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255;
+            else
+                esiLine_Handles.(['p', actRhiHandle, 'Plot']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num']),TlineStandardC);
+                esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 1.5;
+                esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineStyle = ':';
+            end
+            esiLine_Handles.(['p', actRhiHandle, 'Plot']).Color = [144 143 143]./255;
+        end
         
         % On-figure labels for isohumes and ice-isohumes
         lIce0 = text(83.38,-18.3,'100% (ice saturation)');
@@ -332,82 +283,21 @@ switch castInTermsOf
         % Plot isohumes and ventilation lines
         Tupper = 15; Tlower = -70;
         TlineStandardC = Tupper:-0.1:Tlower;
-        [eswLineData] = eswLine(100,Tlower,Tupper);
-        eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
-        eswSupersatLineStandard.Color = [144 143 143]./255;
-        eswSupersatLineStandard.LineWidth = 0.5;
-        
-        eswLine90Data = eswLine(90,Tlower,Tupper);
-        eswSupersatLineStandard90 = plot(eswLine90Data,TlineStandardC);
-        eswSupersatLineStandard90.LineStyle = '--';
-        eswSupersatLineStandard90.Color = [144 143 143]./255;
-        eswSupersatLineStandard90.LineWidth = 0.5;
-        
-        eswLine80Data = eswLine(80,Tlower,Tupper);
-        eswSupersatLineStandard80 = plot(eswLine80Data,TlineStandardC);
-        eswSupersatLineStandard80.LineStyle = '--';
-        eswSupersatLineStandard80.Color = [144 143 143]./255;
-        eswSupersatLineStandard80.LineWidth = 0.5;
-        
-        eswLine70Data = eswLine(70,Tlower,Tupper);
-        eswSupersatLineStandard70 = plot(eswLine70Data,TlineStandardC);
-        eswSupersatLineStandard70.LineStyle = '--';
-        eswSupersatLineStandard70.Color = [144 143 143]./255;
-        eswSupersatLineStandard70.LineWidth = 0.5;
-        
-        eswLine60Data = eswLine(60,Tlower,Tupper);
-        eswSupersatLineStandard60 = plot(eswLine60Data,TlineStandardC);
-        eswSupersatLineStandard60.LineStyle = '--';
-        eswSupersatLineStandard60.Color = [144 143 143]./255;
-        eswSupersatLineStandard60.LineWidth = 0.5;
-        
-        eswLine50Data = eswLine(50,Tlower,Tupper);
-        eswSupersatLineStandard50 = plot(eswLine50Data,TlineStandardC);
-        eswSupersatLineStandard50.LineStyle = '--';
-        eswSupersatLineStandard50.Color = [144 143 143]./255;
-        eswSupersatLineStandard50.LineWidth = 0.5;
-        
-        eswLine40Data = eswLine(40,Tlower,Tupper);
-        eswSupersatLineStandard40 = plot(eswLine40Data,TlineStandardC);
-        eswSupersatLineStandard40.LineStyle = '--';
-        eswSupersatLineStandard40.Color = [144 143 143]./255;
-        eswSupersatLineStandard40.LineWidth = 0.5;
-        
-        eswLine30Data = eswLine(30,Tlower,Tupper);
-        eswSupersatLineStandard30 = plot(eswLine30Data,TlineStandardC);
-        eswSupersatLineStandard30.LineStyle = '--';
-        eswSupersatLineStandard30.Color = [144 143 143]./255;
-        eswSupersatLineStandard30.LineWidth = 0.5;
-        
-        eswLine20Data = eswLine(20,Tlower,Tupper);
-        eswSupersatLineStandard20 = plot(eswLine20Data,TlineStandardC);
-        eswSupersatLineStandard20.LineStyle = '--';
-        eswSupersatLineStandard20.Color = [144 143 143]./255;
-        eswSupersatLineStandard20.LineWidth = 0.5;
-        
-        eswLine10Data = eswLine(10,Tlower,Tupper);
-        eswSupersatLineStandard10 = plot(eswLine10Data,TlineStandardC);
-        eswSupersatLineStandard10.LineStyle = '--';
-        eswSupersatLineStandard10.Color = [144 143 143]./255;
-        eswSupersatLineStandard10.LineWidth = 0.5;
-        
-        eswLine0Data = eswLine(0,Tlower,Tupper);
-        eswSupersatLineStandard0 = plot(eswLine0Data,TlineStandardC);
-        eswSupersatLineStandard0.LineStyle = '--';
-        eswSupersatLineStandard0.Color = [144 143 143]./255;
-        eswSupersatLineStandard0.LineWidth = 0.5;
-        
-        eswLinep25Data = eswLine(102.5,Tlower,Tupper);
-        eswSupersatLineStandardp25 = plot(eswLinep25Data(177:end),TlineStandardC(177:end));
-        eswSupersatLineStandardp25.LineStyle = '-.';
-        eswSupersatLineStandardp25.Color = [144 143 143]./255;
-        eswSupersatLineStandardp25.LineWidth = 0.5;
-        
-        eswLinep5Data = eswLine(105,Tlower,Tupper);
-        eswSupersatLineStandardp5 = plot(eswLinep5Data(203:end),TlineStandardC(203:end));
-        eswSupersatLineStandardp5.LineStyle = '-.';
-        eswSupersatLineStandardp5.Color = [144 143 143]./255;
-        eswSupersatLineStandardp5.LineWidth = 0.5;
+        for rhwc = [90:-10:0, 100, 102.5, 105]
+            actHandle = num2str(rhwc);
+            actHandleNoPunct = actHandle(actHandle~='.');
+            eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
+            if rhwc>100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
+            elseif rhwc == 100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-';
+            else
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '--';
+            end
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
+        end
         
         %maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
         %maxVentLine.Color = [0 26 255]./255;
@@ -564,95 +454,22 @@ switch castInTermsOf
         % Plot other lines
         Tupper = 15; Tlower = -70;
         TlineStandardC = Tupper:-0.1:Tlower;
-        [eswLineData] = eswLine(100,Tlower,Tupper);
-        [eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
-        eswSupersatLineStandard = plot(eswLineData,TlineStandardC);
-        eswSupersatLineStandard.Color = [144 143 143]./255;
-        eswSupersatLineStandard.LineWidth = 0.5;
-        
-        eswLine90Data = eswLine(90,Tlower,Tupper);
-        [eswLine90Data] = iceSupersatToVaporExc(eswLine90Data,TlineStandardC);
-        eswSupersatLineStandard90 = plot(eswLine90Data,TlineStandardC);
-        eswSupersatLineStandard90.LineStyle = '--';
-        eswSupersatLineStandard90.Color = [144 143 143]./255;
-        eswSupersatLineStandard90.LineWidth = 0.5;
-        
-        eswLine80Data = eswLine(80,Tlower,Tupper);
-        [eswLine80Data] = iceSupersatToVaporExc(eswLine80Data,TlineStandardC);
-        eswSupersatLineStandard80 = plot(eswLine80Data,TlineStandardC);
-        eswSupersatLineStandard80.LineStyle = '--';
-        eswSupersatLineStandard80.Color = [144 143 143]./255;
-        eswSupersatLineStandard80.LineWidth = 0.5;
-        
-        eswLine70Data = eswLine(70,Tlower,Tupper);
-        [eswLine70Data] = iceSupersatToVaporExc(eswLine70Data,TlineStandardC);
-        eswSupersatLineStandard70 = plot(eswLine70Data,TlineStandardC);
-        eswSupersatLineStandard70.LineStyle = '--';
-        eswSupersatLineStandard70.Color = [144 143 143]./255;
-        eswSupersatLineStandard70.LineWidth = 0.5;
-        
-        eswLine60Data = eswLine(60,Tlower,Tupper);
-        [eswLine60Data] = iceSupersatToVaporExc(eswLine60Data,TlineStandardC);
-        eswSupersatLineStandard60 = plot(eswLine60Data,TlineStandardC);
-        eswSupersatLineStandard60.LineStyle = '--';
-        eswSupersatLineStandard60.Color = [144 143 143]./255;
-        eswSupersatLineStandard60.LineWidth = 0.5;
-        
-        eswLine50Data = eswLine(50,Tlower,Tupper);
-        [eswLine50Data] = iceSupersatToVaporExc(eswLine50Data,TlineStandardC);
-        eswSupersatLineStandard50 = plot(eswLine50Data,TlineStandardC);
-        eswSupersatLineStandard50.LineStyle = '--';
-        eswSupersatLineStandard50.Color = [144 143 143]./255;
-        eswSupersatLineStandard50.LineWidth = 0.5;
-        
-        eswLine40Data = eswLine(40,Tlower,Tupper);
-        [eswLine40Data] = iceSupersatToVaporExc(eswLine40Data,TlineStandardC);
-        eswSupersatLineStandard40 = plot(eswLine40Data,TlineStandardC);
-        eswSupersatLineStandard40.LineStyle = '--';
-        eswSupersatLineStandard40.Color = [144 143 143]./255;
-        eswSupersatLineStandard40.LineWidth = 0.5;
-        
-        eswLine30Data = eswLine(30,Tlower,Tupper);
-        [eswLine30Data] = iceSupersatToVaporExc(eswLine30Data,TlineStandardC);
-        eswSupersatLineStandard30 = plot(eswLine30Data,TlineStandardC);
-        eswSupersatLineStandard30.LineStyle = '--';
-        eswSupersatLineStandard30.Color = [144 143 143]./255;
-        eswSupersatLineStandard30.LineWidth = 0.5;
-        
-        eswLine20Data = eswLine(20,Tlower,Tupper);
-        [eswLine20Data] = iceSupersatToVaporExc(eswLine20Data,TlineStandardC);
-        eswSupersatLineStandard20 = plot(eswLine20Data,TlineStandardC);
-        eswSupersatLineStandard20.LineStyle = '--';
-        eswSupersatLineStandard20.Color = [144 143 143]./255;
-        eswSupersatLineStandard20.LineWidth = 0.5;
-        
-        eswLine10Data = eswLine(10,Tlower,Tupper);
-        [eswLine10Data] = iceSupersatToVaporExc(eswLine10Data,TlineStandardC);
-        eswSupersatLineStandard10 = plot(eswLine10Data,TlineStandardC);
-        eswSupersatLineStandard10.LineStyle = '--';
-        eswSupersatLineStandard10.Color = [144 143 143]./255;
-        eswSupersatLineStandard10.LineWidth = 0.5;
-        
-        eswLine0Data = eswLine(0,Tlower,Tupper);
-        [eswLine0Data] = iceSupersatToVaporExc(eswLine0Data,TlineStandardC);
-        eswSupersatLineStandard0 = plot(eswLine0Data,TlineStandardC);
-        eswSupersatLineStandard0.LineStyle = '--';
-        eswSupersatLineStandard0.Color = [144 143 143]./255;
-        eswSupersatLineStandard0.LineWidth = 0.5;
-        
-        eswLinep25Data = eswLine(102.5,Tlower,Tupper);
-        [eswLinep25Data] = iceSupersatToVaporExc(eswLinep25Data,TlineStandardC);
-        eswSupersatLineStandardp25 = plot(eswLinep25Data,TlineStandardC);
-        eswSupersatLineStandardp25.LineStyle = '-.';
-        eswSupersatLineStandardp25.Color = [144 143 143]./255;
-        eswSupersatLineStandardp25.LineWidth = 0.5;
-        
-        eswLinep5Data = eswLine(105,Tlower,Tupper);
-        [eswLinep5Data] = iceSupersatToVaporExc(eswLinep5Data,TlineStandardC);
-        eswSupersatLineStandardp5 = plot(eswLinep5Data,TlineStandardC);
-        eswSupersatLineStandardp5.LineStyle = '-.';
-        eswSupersatLineStandardp5.Color = [144 143 143]./255;
-        eswSupersatLineStandardp5.LineWidth = 0.5;
+        for rhwc = [90:-10:0, 100, 102.5, 105]
+            actHandle = num2str(rhwc);
+            actHandleNoPunct = actHandle(actHandle~='.');
+            eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
+            eswLine_Handles.(['p', actHandleNoPunct, 'Vde']) = iceSupersatToVaporExc(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde']),TlineStandardC);
+            if rhwc>100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
+            elseif rhwc == 100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-';
+            else
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '--';
+            end
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
+            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
+        end
         
         %Approximate maximum supersaturation with ventilation line
         %maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
