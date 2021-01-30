@@ -1,5 +1,7 @@
 # Ice growth diagram
 
+**CAUTION:** This branch (`spring2021-presentation-figures`) is specifically for making figures for the presentation used in spring 2021 classes at NC State. Switch to the `master` branch for the most up-to-date code, or to `for-OSF-submission-with-paper-2020` for the version of the code accompanying "Revisiting Diagrams of Ice Growth Environments" by Hueholt, Yuter, and Miller.
+
 ## Table of Contents
 * [Introduction](#introduction)  
 * [Basic ice diagrams](#basic-ice-diagrams)  
