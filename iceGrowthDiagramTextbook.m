@@ -177,21 +177,21 @@ switch castInTermsOf
         
         % On-figure labels for growth modes
         lIceSubsaturated = text(65,-14,'Subsaturated with respect to ice, no ice growth');
-        lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 11;
-        lFaceW = text(95.5,-6,'Face growth (column-like)');
+        lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 13;
+        lFaceW = text(95.3,-6,'Face (column-like)');
         lFaceW.FontName = 'Lato'; lFaceW.FontSize = 13;
-        lEdgeW = text(91.25,-14.5,'Edge growth (plate-like)');
+        lEdgeW = text(91.25,-14.5,'Edge (plate-like)');
         lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 13;
-        lCornerSectorW = text(100.65,-19.9,{'Corner growth', '(sector plates)'});
+        lCornerSectorW = text(100.65,-19.6,{'Corner', '(sector)'});
         lCornerSectorW.FontName = 'Lato'; lCornerSectorW.FontSize = 13;
-        lCornerBranchedW = text(102,-15,{'Corner', 'growth', '(branched,', 'dendrites)'});
+        lCornerBranchedW = text(102,-15,{'Corner' '(branched)'});
         lCornerBranchedW.FontName = 'Lato'; lCornerBranchedW.FontSize = 13;
-        lMixedW = text(68.9,-40,'Mixed (polycrystals, plates, columns, equiaxed)');
+        lMixedW = text(68.9,-40,'Mixed (polycrystalline, edge, face, and equiaxed)');
         lMixedW.FontName = 'Lato'; lMixedW.FontSize = 13;
         lMixedW.Rotation = -38;
-        lPolycrystalsPlatelikeW = text(80.6,-34,'Polycrystals (platelike)');
+        lPolycrystalsPlatelikeW = text(80.6,-34,'Platelike polycrystalline');
         lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 13;
-        lPolycrystalsColumnarW = text(77,-50,'Polycrystals (columnar)');
+        lPolycrystalsColumnarW = text(77,-50,'Columnar polycrystalline');
         lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 13;
         
         % Diagram settings
@@ -304,27 +304,27 @@ switch castInTermsOf
         %maxVentLine.LineWidth = 1;
         
         % On-figure labels for growth modes
-        lFace = text(0.01,-6,'Face growth (column-like)');
+        lFace = text(0.01,-6,'Face (column-like)');
         lFace.FontName = 'Lato'; lFace.FontSize = 13;
-        lEdge = text(0.06,-15.8,'Edge growth (plate-like)');
+        lEdge = text(0.06,-15.8,'Edge (plate-like)');
         lEdge.FontName = 'Lato'; lEdge.FontSize = 13;
-        lCornerBranched = text(0.165,-12.6,'Corner growth');
+        lCornerBranched = text(0.165,-12.6,'Corner');
         lCornerBranched.FontName = 'Lato'; lCornerBranched.FontSize = 13;
         lCornerBranched.Rotation = 30;
-        lCornerBranchedLine2 = text(0.18,-12.6,'(branched, dendrites)');
-        lCornerBranchedLine2.FontName = 'Lato'; lCornerBranchedLine2.FontSize = 11;
+        lCornerBranchedLine2 = text(0.18,-12.6,'(branched)');
+        lCornerBranchedLine2.FontName = 'Lato'; lCornerBranchedLine2.FontSize = 13;
         lCornerBranchedLine2.Rotation = 30;
-        lCornerSector = text(0.22,-18.03,'Corner growth');
+        lCornerSector = text(0.22,-18.03,'Corner');
         lCornerSector.FontName = 'Lato'; lCornerSector.FontSize = 13;
         lCornerSector.Rotation = 30;
-        lCornerSectorLine2 = text(0.235,-18.03,'(sector plates)');
+        lCornerSectorLine2 = text(0.235,-18.03,'(sector)');
         lCornerSectorLine2.FontName = 'Lato'; lCornerSectorLine2.FontSize = 13;
         lCornerSectorLine2.Rotation = 30;
-        lPolycrystalsPlatelike = text(0.27,-32,'Polycrystals (platelike)');
+        lPolycrystalsPlatelike = text(0.27,-32,'Platelike polycrystalline');
         lPolycrystalsPlatelike.FontName = 'Lato'; lPolycrystalsPlatelike.FontSize = 13;
-        lPolycrystalsColumnar = text(0.32,-49.5,'Polycrystals (columnar)');
+        lPolycrystalsColumnar = text(0.32,-49.5,'Columnar polycrystalline');
         lPolycrystalsColumnar.FontName = 'Lato'; lPolycrystalsColumnar.FontSize = 13;
-        lMixed = text(0.02,-19.5,'Mixed (polycrystals, plates, columns, equiaxed)');
+        lMixed = text(0.02,-19.5,'Mixed (polycrystalline, edge, face, and equiaxed)');
         lMixed.FontName = 'Lato'; lMixed.FontSize = 13;
         lMixed.Rotation = 90;
         
@@ -495,22 +495,24 @@ switch castInTermsOf
         %lVentVde.Rotation = 7;
         
         % On-figure growth mode labels
-        lEdgeWarmVde = text(0.01,-2,'Edge growth (plate-like)');
+        lEdgeWarmVde = text(0.01,-2,'Edge (plate-like)');
         lEdgeWarmVde.FontName = 'Lato'; lEdgeWarmVde.FontSize = 13;
-        lFaceVde = text(0.07,-6,'Face growth (column-like)');
+        lFaceVde = text(0.07,-6,'Face (column-like)');
         lFaceVde.FontName = 'Lato'; lFaceVde.FontSize = 13;
-        lEdgeColdVde = text(0.12,-14,'Edge growth (plate-like)');
+        lEdgeColdVde = text(0.12,-14,'Edge (plate-like)');
         lEdgeColdVde.FontName = 'Lato'; lEdgeColdVde.FontSize = 13;
-        lCornerSectorVde = text(0.227,-10,'Corner growth (sector plates)');
+        lCornerSectorVde = text(0.227,-10,'Corner (sector)');
         lCornerSectorVde.FontName = 'Lato'; lCornerSectorVde.FontSize = 13;
-        lCornerBranchedVde = text(0.255,-15.5,'Corner growth');
+        lCornerBranchedVde = text(0.255,-15.5,'Corner');
         lCornerBranchedVde.FontName = 'Lato'; lCornerBranchedVde.FontSize = 13;
-        lCornerBranchedVde2 = text(0.265,-14.5,'(branched, dendrites)');
+        lCornerBranchedVde2 = text(0.265,-14.5,'(branched)');
         lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 13;
-        lPolycrystalsPlatelikeVde = text(0.085,-28,'Polycrystals (platelike)');
+        lPolycrystalsPlatelikeVde = text(0.085,-28,'Platelike polycrystalline');
         lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 13;
-        lPolycrystalsColumnarVde = text(0.008,-48.05,{'Polycrystals', '(columnar)'});
+        lPolycrystalsColumnarVde = text(0.008,-48.05,{'Columnar', 'polycrystalline'});
         lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 13;
+        lMixedVde = text(0.007,-16,{'Mixed (polycrystalline,', 'edge, face, and equiaxed)'});
+        lMixedVde.FontName = 'Lato'; lMixedVde.FontSize = 13;
         
         % Diagram settings
         axe = gca;
