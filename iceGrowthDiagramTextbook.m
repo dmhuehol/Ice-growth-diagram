@@ -125,7 +125,8 @@ switch castInTermsOf
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
             elseif rhwc == 100
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 1;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 2.5;
             else
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
@@ -133,13 +134,17 @@ switch castInTermsOf
             eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
         end
 
-        for rhic = 60:-10:0
-            actRhiHandle = num2str(rhic);
+        for rhic = 60:-10:-20
+            if rhic > 0
+                actRhiHandle = num2str(rhic);
+            else
+                actRhiHandle = ['sub',num2str(abs(rhic))];
+            end
             esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
             if rhic == 0
-                esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:289),TlineStandardC(1:289));
-                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(332:end),TlineStandardC(332:end));
-                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 1; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 1;
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:278),TlineStandardC(1:278));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(352:end),TlineStandardC(352:end));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 2.5; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 2.5;
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255;
             else
                 esiLine_Handles.(['p', actRhiHandle, 'Plot']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num']),TlineStandardC);
@@ -150,49 +155,61 @@ switch castInTermsOf
         end
         
         % On-figure labels for isohumes and ice-isohumes
-        lIce0 = text(83.38,-18.3,'100% (ice saturation)');
-        lIce0.FontName = 'Lato'; lIce0.FontSize = 11;
+        labX = [76.99,80.1,81.88,85.2,87.38,89.45,91.42,93.31,95.2];
+        labY = [-3.95,-11.85,-20.175,-25.875,-32.275,-38.275,-43.975,-49.475,-54.775];
+        lIce80p = text(labX(1),labY(1),'80% (ice)');
+        lIce80p.FontName = 'Lato'; lIce80p.FontSize = 16;
+        lIce80p.Rotation = -32;
+        lIce90p = text(labX(2),labY(2),'90% (ice)');
+        lIce90p.FontName = 'Lato'; lIce90p.FontSize = 16;
+        lIce90p.Rotation = -32;
+        lIce0 = text(labX(3),labY(3),'100% (ice saturation)');
+        lIce0.FontName = 'Lato'; lIce0.FontSize = 18;
         lIce0.Rotation = -32;
-        lIce10 = text(86.7,-24,'110% (ice)');
-        lIce10.FontName = 'Lato'; lIce10.FontSize = 11;
+        lIce10 = text(labX(4),labY(4),'110% (ice)');
+        lIce10.FontName = 'Lato'; lIce10.FontSize = 16;
         lIce10.Rotation = -31;
-        lIce20 = text(88.88,-30.4,'120% (ice)');
-        lIce20.FontName = 'Lato'; lIce20.FontSize = 11;
+        lIce20 = text(labX(5),labY(5),'120% (ice)');
+        lIce20.FontName = 'Lato'; lIce20.FontSize = 16;
         lIce20.Rotation = -31;
-        lIce30 = text(90.95,-36.4,'130% (ice)');
-        lIce30.FontName = 'Lato'; lIce30.FontSize = 11;
+        lIce30 = text(labX(6),labY(6),'130% (ice)');
+        lIce30.FontName = 'Lato'; lIce30.FontSize = 16;
         lIce30.Rotation = -31;
-        lIce40 = text(92.92,-42.1,'140% (ice)');
-        lIce40.FontName = 'Lato'; lIce40.FontSize = 11;
+        lIce40 = text(labX(7),labY(7),'140% (ice)');
+        lIce40.FontName = 'Lato'; lIce40.FontSize = 16;
         lIce40.Rotation = -31;
-        lIce50 = text(94.81,-47.6,'150% (ice)');
-        lIce50.FontName = 'Lato'; lIce50.FontSize = 11;
+        lIce50 = text(labX(8),labY(8),'150% (ice)');
+        lIce50.FontName = 'Lato'; lIce50.FontSize = 16;
         lIce50.Rotation = -31;
-        lIce60 = text(96.7,-52.9,'160% (ice)');
-        lIce60.FontName = 'Lato'; lIce60.FontSize = 11;
+        lIce60 = text(labX(9),labY(9),'160% (ice)');
+        lIce60.FontName = 'Lato'; lIce60.FontSize = 16;
         lIce60.Rotation = -32;
         %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
-        %lVentW.FontName = 'Lato'; lVentW.FontSize = 12; lVentW.Color = 'k';
+        %lVentW.FontName = 'Lato'; lVentW.FontSize = 13; lVentW.Color = 'k';
         %lVentW.Rotation = 41;
         
         % On-figure labels for growth modes
-        lIceSubsaturated = text(65,-14,'Subsaturated with respect to ice, no ice growth');
-        lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 13;
-        lFaceW = text(95.3,-6,'Face (column-like)');
-        lFaceW.FontName = 'Lato'; lFaceW.FontSize = 13;
-        lEdgeW = text(91.25,-14.5,'Edge (plate-like)');
-        lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 13;
-        lCornerSectorW = text(100.65,-19.6,{'Corner', '(sector)'});
-        lCornerSectorW.FontName = 'Lato'; lCornerSectorW.FontSize = 13;
-        lCornerBranchedW = text(102,-15,{'Corner' '(branched)'});
-        lCornerBranchedW.FontName = 'Lato'; lCornerBranchedW.FontSize = 13;
+        lIceSubsaturated = text(65,-19,'Subsaturated with respect to ice, no ice growth');
+        lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 16;
+        lFaceW = text(95.2,-6,'Face (column-like)');
+        lFaceW.FontName = 'Lato'; lFaceW.FontSize = 16;
+        lEdgeW = text(93,-17.65,'Edge (plate-like)');
+        lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 16;
+        lCornerSectorTypeW = text(100.65,-19.7,'Corner');
+        lCornerSectorTypeW.FontName = 'Lato'; lCornerSectorTypeW.FontSize = 16;
+        lCornerSectorSubtypeW = text(100.65,-18.4,'(sector)');
+        lCornerSectorSubtypeW.FontName = 'Lato'; lCornerSectorSubtypeW.FontSize = 14;
+        lCornerBranchedTypeW = text(102,-15.6,'Corner');
+        lCornerBranchedTypeW.FontName = 'Lato'; lCornerBranchedTypeW.FontSize = 16;
+        lCornerBranchedSubtypeW = text(102,-14.3,'(branched)');
+        lCornerBranchedSubtypeW.FontName = 'Lato'; lCornerBranchedSubtypeW.FontSize = 14;
         lMixedW = text(68.9,-40,'Mixed (polycrystalline, edge, face, and equiaxed)');
-        lMixedW.FontName = 'Lato'; lMixedW.FontSize = 13;
+        lMixedW.FontName = 'Lato'; lMixedW.FontSize = 16;
         lMixedW.Rotation = -38;
-        lPolycrystalsPlatelikeW = text(80.6,-34,'Platelike polycrystalline');
-        lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 13;
+        lPolycrystalsPlatelikeW = text(79.05,-33.95,'Platelike polycrystalline');
+        lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 16;
         lPolycrystalsColumnarW = text(77,-50,'Columnar polycrystalline');
-        lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 13;
+        lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 16;
         
         % Diagram settings
         axe = gca;
@@ -287,16 +304,22 @@ switch castInTermsOf
             actHandle = num2str(rhwc);
             actHandleNoPunct = actHandle(actHandle~='.');
             eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
-            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
             if rhwc>100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
             elseif rhwc == 100
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:526),TlineStandardC(1:526));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(564:end),TlineStandardC(564:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
             else
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '--';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 1.5;
             end
             eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
-            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
         end
         
         %maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
@@ -305,51 +328,57 @@ switch castInTermsOf
         
         % On-figure labels for growth modes
         lFace = text(0.01,-6,'Face (column-like)');
-        lFace.FontName = 'Lato'; lFace.FontSize = 13;
-        lEdge = text(0.06,-15.8,'Edge (plate-like)');
-        lEdge.FontName = 'Lato'; lEdge.FontSize = 13;
+        lFace.FontName = 'Lato'; lFace.FontSize = 16;
+        lEdge = text(0.08,-15.8,'Edge (plate-like)');
+        lEdge.FontName = 'Lato'; lEdge.FontSize = 16;
         lCornerBranched = text(0.165,-12.6,'Corner');
-        lCornerBranched.FontName = 'Lato'; lCornerBranched.FontSize = 13;
+        lCornerBranched.FontName = 'Lato'; lCornerBranched.FontSize = 16;
         lCornerBranched.Rotation = 30;
         lCornerBranchedLine2 = text(0.18,-12.6,'(branched)');
-        lCornerBranchedLine2.FontName = 'Lato'; lCornerBranchedLine2.FontSize = 13;
+        lCornerBranchedLine2.FontName = 'Lato'; lCornerBranchedLine2.FontSize = 14;
         lCornerBranchedLine2.Rotation = 30;
         lCornerSector = text(0.22,-18.03,'Corner');
-        lCornerSector.FontName = 'Lato'; lCornerSector.FontSize = 13;
+        lCornerSector.FontName = 'Lato'; lCornerSector.FontSize = 16;
         lCornerSector.Rotation = 30;
         lCornerSectorLine2 = text(0.235,-18.03,'(sector)');
-        lCornerSectorLine2.FontName = 'Lato'; lCornerSectorLine2.FontSize = 13;
+        lCornerSectorLine2.FontName = 'Lato'; lCornerSectorLine2.FontSize = 14;
         lCornerSectorLine2.Rotation = 30;
-        lPolycrystalsPlatelike = text(0.27,-32,'Platelike polycrystalline');
-        lPolycrystalsPlatelike.FontName = 'Lato'; lPolycrystalsPlatelike.FontSize = 13;
+        lPolycrystalsPlatelike = text(0.26,-32,'Platelike polycrystalline');
+        lPolycrystalsPlatelike.FontName = 'Lato'; lPolycrystalsPlatelike.FontSize = 16;
         lPolycrystalsColumnar = text(0.32,-49.5,'Columnar polycrystalline');
-        lPolycrystalsColumnar.FontName = 'Lato'; lPolycrystalsColumnar.FontSize = 13;
+        lPolycrystalsColumnar.FontName = 'Lato'; lPolycrystalsColumnar.FontSize = 16;
         lMixed = text(0.02,-19.5,'Mixed (polycrystalline, edge, face, and equiaxed)');
-        lMixed.FontName = 'Lato'; lMixed.FontSize = 13;
+        lMixed.FontName = 'Lato'; lMixed.FontSize = 16;
         lMixed.Rotation = 90;
         
         % On-figure labels for isohumes
         lWater60 = text(0.008,-54.89,'60%');
-        lWater60.FontName = 'Lato'; lWater60.FontSize = 11;
+        lWater60.FontName = 'Lato'; lWater60.FontSize = 16;
         lWater60.Rotation = 34;
         lWater70 = text(0.1161,-48.5,'70%');
-        lWater70.FontName = 'Lato'; lWater70.FontSize = 11;
+        lWater70.FontName = 'Lato'; lWater70.FontSize = 16;
         lWater70.Rotation = 33;
         lWater80 = text(0.236,-44.9,'80%');
-        lWater80.FontName = 'Lato'; lWater80.FontSize = 11;
+        lWater80.FontName = 'Lato'; lWater80.FontSize = 16;
         lWater80.Rotation = 31;
         lWater90 = text(0.3412,-40.9,'90%');
-        lWater90.FontName = 'Lato'; lWater90.FontSize = 11;
+        lWater90.FontName = 'Lato'; lWater90.FontSize = 16;
         lWater90.Rotation = 29;
-        lWater100 = text(0.4428,-37.4,'100% (T_{ice} = T_{air})');
-        lWater100.FontName = 'Lato'; lWater100.FontSize = 11;
+        lWater100 = text(0.4428,-37.4,'100% ');
+        lWater100.FontName = 'Lato'; lWater100.FontSize = 16;
         lWater100.Rotation = 26;
+        lWaterNote = text(0.465,-38.8,'(T_{ice} = T_{air})');
+        lWaterNote.FontName = 'Lato'; lWaterNote.FontSize = 14;
+        lWaterNote.Rotation = 26;
         lWater102p5 = text(0.4596,-36,'102.5%');
-        lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 11;
+        lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 16;
         lWater102p5.Rotation = 26;
-        lWater105 = text(0.4742,-34.5,'105% (approx. max ambient supersat)');
-        lWater105.FontName = 'Lato'; lWater105.FontSize = 11;
+        lWater105 = text(0.4742,-34.5,'105% ');
+        lWater105.FontName = 'Lato'; lWater105.FontSize = 16;
         lWater105.Rotation = 25;
+        lWater105Note = text(0.495,-36.09,'(approx. max ambient supersat)');
+        lWater105Note.FontName = 'Lato'; lWater105Note.FontSize = 14;
+        lWater105Note.Rotation = 25;
         %lVent = text(0.36,-15.9,'Approx. max natural supersat (with ventilation)');
         %lVent.FontName = 'Lato'; lVent.FontSize = 12;
         %lVent.Rotation = 16;
@@ -454,16 +483,27 @@ switch castInTermsOf
             actHandleNoPunct = actHandle(actHandle~='.');
             eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
             eswLine_Handles.(['p', actHandleNoPunct, 'Vde']) = iceSupersatToVaporExc(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
-            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde']),TlineStandardC);
             if rhwc>100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde']),TlineStandardC);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
             elseif rhwc == 100
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-';
+%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:526),TlineStandardC(1:526));
+%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(564:end),TlineStandardC(564:end));
+%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-';
+%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5;
+%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(1:346),TlineStandardC(1:346));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(360:end),TlineStandardC(360:end));                
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
             else
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '--';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde']),TlineStandardC);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 1.5;
             end
             eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
-            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
         end
         
         %Approximate maximum supersaturation with ventilation line
@@ -472,47 +512,52 @@ switch castInTermsOf
         %maxVentLine.LineWidth = 1.2;
         
         % On-figure isohume labels
-        l70Vde = text(0.005243,-48.8,'70%');
-        l70Vde.FontName = 'Lato'; l70Vde.FontSize = 11;
-        l70Vde.Rotation = -85;
+        l70Vde = text(0.00524,-44.2,'70%');
+        l70Vde.FontName = 'Lato'; l70Vde.FontSize = 16;
+        l70Vde.Rotation = -85.8;
         l80Vde = text(0.02493,-36.7,'80%');
-        l80Vde.FontName = 'Lato'; l80Vde.FontSize = 11;
+        l80Vde.FontName = 'Lato'; l80Vde.FontSize = 16;
         l80Vde.Rotation = -80;
         l90Vde = text(0.06927,-30.6,'90%');
-        l90Vde.FontName = 'Lato'; l90Vde.FontSize = 11;
+        l90Vde.FontName = 'Lato'; l90Vde.FontSize = 16;
         l90Vde.Rotation = -50;
         l100Vde = text(0.1866,-21,'100%');
-        l100Vde.FontName = 'Lato'; l100Vde.FontSize = 11;
+        l100Vde.FontName = 'Lato'; l100Vde.FontSize = 16;
         l100Vde.Rotation = -27;
         l2p5Vde = text(0.2133,-20.8,'102.5%');
-        l2p5Vde.FontName = 'Lato'; l2p5Vde.FontSize = 11;
+        l2p5Vde.FontName = 'Lato'; l2p5Vde.FontSize = 16;
         l2p5Vde.Rotation = -22;
-        l5Vde = text(0.2245,-22,'105% (approx. max ambient supersat)');
-        l5Vde.FontName = 'Lato'; l5Vde.FontSize = 11;
+        l5Vde = text(0.2245,-22,'105% ');
+        l5Vde.FontName = 'Lato'; l5Vde.FontSize = 16;
         l5Vde.Rotation = -18;
+        l5VdeNote = text(0.238,-20.85,'(approx. max ambient supersat)');
+        l5VdeNote.FontName = 'Lato'; l5VdeNote.FontSize = 14;
+        l5VdeNote.Rotation = -18.3;
         %lVentVde = text(0.28,-2.9,'Approx. max natural supersat (with ventilation)');
         %lVentVde.FontName = 'Lato'; lVentVde.FontSize = 12;
         %lVentVde.Rotation = 7;
         
         % On-figure growth mode labels
         lEdgeWarmVde = text(0.01,-2,'Edge (plate-like)');
-        lEdgeWarmVde.FontName = 'Lato'; lEdgeWarmVde.FontSize = 13;
+        lEdgeWarmVde.FontName = 'Lato'; lEdgeWarmVde.FontSize = 16;
         lFaceVde = text(0.07,-6,'Face (column-like)');
-        lFaceVde.FontName = 'Lato'; lFaceVde.FontSize = 13;
+        lFaceVde.FontName = 'Lato'; lFaceVde.FontSize = 16;
         lEdgeColdVde = text(0.12,-14,'Edge (plate-like)');
-        lEdgeColdVde.FontName = 'Lato'; lEdgeColdVde.FontSize = 13;
-        lCornerSectorVde = text(0.227,-10,'Corner (sector)');
-        lCornerSectorVde.FontName = 'Lato'; lCornerSectorVde.FontSize = 13;
+        lEdgeColdVde.FontName = 'Lato'; lEdgeColdVde.FontSize = 16;
+        lCornerSectorVde = text(0.227,-10,'Corner ');
+        lCornerSectorVde.FontName = 'Lato'; lCornerSectorVde.FontSize = 16;
+        lCornerSectorVdeSubtype = text(0.2438,-10,'(sector)');
+        lCornerSectorVdeSubtype.FontName = 'Lato'; lCornerSectorVdeSubtype.FontSize = 14;
         lCornerBranchedVde = text(0.255,-15.5,'Corner');
-        lCornerBranchedVde.FontName = 'Lato'; lCornerBranchedVde.FontSize = 13;
-        lCornerBranchedVde2 = text(0.265,-14.5,'(branched)');
-        lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 13;
-        lPolycrystalsPlatelikeVde = text(0.085,-28,'Platelike polycrystalline');
-        lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 13;
-        lPolycrystalsColumnarVde = text(0.008,-48.05,{'Columnar', 'polycrystalline'});
-        lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 13;
-        lMixedVde = text(0.007,-16,{'Mixed (polycrystalline,', 'edge, face, and equiaxed)'});
-        lMixedVde.FontName = 'Lato'; lMixedVde.FontSize = 13;
+        lCornerBranchedVde.FontName = 'Lato'; lCornerBranchedVde.FontSize = 16;
+        lCornerBranchedVde2 = text(0.265,-14.42,'(branched)');
+        lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 14;
+        lPolycrystalsPlatelikeVde = text(0.085,-26,'Platelike polycrystalline');
+        lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 16;
+        lPolycrystalsColumnarVde = text(0.004,-48.05,{'Columnar', 'polycrystalline'});
+        lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 16;
+        lMixedVde = text(0.004,-16,{'Mixed (polycrystalline,', 'edge, face, and equiaxed)'});
+        lMixedVde.FontName = 'Lato'; lMixedVde.FontSize = 16;
         
         % Diagram settings
         axe = gca;
@@ -549,16 +594,16 @@ switch castInTermsOf
 end
 
 %% Prompt user whether to save figure as PNG
-saveFigPrompt = 'Save figure as PNG? [Y/N] ';
-saveYesNo = input(saveFigPrompt,'s');
-
-set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
-set(gcf,'renderer','Painters')
-
-if strcmp(saveYesNo,'Y') || strcmp(saveYesNo,'y')
-    saveFilename = ['igd_' char(castInTermsOf)];
-    disp(['Saving figure as: ' saveFilename '.png'])
-    saveas(gcf,saveFilename,'png');
-end
+% saveFigPrompt = 'Save figure as PNG? [Y/N] ';
+% saveYesNo = input(saveFigPrompt,'s');
+% 
+% set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
+% set(gcf,'renderer','Painters')
+% 
+% if strcmp(saveYesNo,'Y') || strcmp(saveYesNo,'y')
+%     saveFilename = ['igd_' char(castInTermsOf)];
+%     disp(['Saving figure as: ' saveFilename '.png'])
+%     saveas(gcf,saveFilename,'png');
+% end
 
 end

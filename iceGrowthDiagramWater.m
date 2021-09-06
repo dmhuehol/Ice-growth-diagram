@@ -160,7 +160,7 @@ for rhwc = [90:-10:0, 100, 102.5, 105]
     actHandle = num2str(rhwc);
     actHandleNoPunct = actHandle(actHandle~='.');
     eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
-    if rhwc>100
+    if rhwc >= 100
         eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
     else
         eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
@@ -173,8 +173,12 @@ legendEntries(end+1) = eswLine_Handles.p105Plot;
 legendTexts{end+1} = 'RH_w (10% intervals)';
 legendTexts{end+1} = 'RH_w (102.5%, 105%)';
 
-for rhic = 60:-10:0
-    actRhiHandle = num2str(rhic);
+for rhic = 60:-10:-100 %input is an ice SUPERSATURATION, so -100% ice supersaturation = 0% ice saturation
+    if rhic > 0
+        actRhiHandle = num2str(rhic);
+    else
+        actRhiHandle = ['sub',num2str(abs(rhic))];
+    end
     esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
     esiLine_Handles.(['p', actRhiHandle, 'Plot']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num']),TlineStandardC);
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).Color = [255/255 230/255 0 0.8];
@@ -182,7 +186,7 @@ for rhic = 60:-10:0
 end
 
 legendEntries(end+1) = esiLine_Handles.p60Plot;
-legendTexts{end+1} = 'RH_{ice} (10% intervals, 100% min, 160% max)';
+legendTexts{end+1} = 'RH_{ice} (10% intervals, 60% min, 160% max)';
 
 %% Diagram settings
 axe = gca;
