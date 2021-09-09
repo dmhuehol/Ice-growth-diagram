@@ -49,7 +49,7 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
-[eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
+[eswLineDataVde] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
 
 switch castInTermsOf
     case "water"
@@ -310,7 +310,7 @@ switch castInTermsOf
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
             elseif rhwc == 100
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:526),TlineStandardC(1:526));
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(564:end),TlineStandardC(564:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(539:end),TlineStandardC(539:end));
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-';
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5;
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
@@ -352,7 +352,7 @@ switch castInTermsOf
         lMixed.Rotation = 90;
         
         % On-figure labels for isohumes
-        lWater60 = text(0.008,-54.89,'60%');
+        lWater60 = text(0.005,-54.4,'60%');
         lWater60.FontName = 'Lato'; lWater60.FontSize = 16;
         lWater60.Rotation = 34;
         lWater70 = text(0.1161,-48.5,'70%');
@@ -364,12 +364,9 @@ switch castInTermsOf
         lWater90 = text(0.3412,-40.9,'90%');
         lWater90.FontName = 'Lato'; lWater90.FontSize = 16;
         lWater90.Rotation = 29;
-        lWater100 = text(0.4428,-37.4,'100% ');
+        lWater100 = text(0.4428,-37.4,'100%');
         lWater100.FontName = 'Lato'; lWater100.FontSize = 16;
         lWater100.Rotation = 26;
-        lWaterNote = text(0.465,-38.8,'(T_{ice} = T_{air})');
-        lWaterNote.FontName = 'Lato'; lWaterNote.FontSize = 14;
-        lWaterNote.Rotation = 26;
         lWater102p5 = text(0.4596,-36,'102.5%');
         lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 16;
         lWater102p5.Rotation = 26;
@@ -444,9 +441,9 @@ switch castInTermsOf
         variousplates = patch(hd.VariousPlates.vaporExcBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.TextbookColor);
         variousplates.EdgeColor = 'none';
         
-        intermediatePlatesP = patch([hd.VariousPlates.vaporExcBounds(end),hd.VariousPlates.vaporExcBounds(end)-3,eswLineData(351),eswLineData(371)],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediatePlatesP = patch([hd.VariousPlates.vaporExcBounds(end),hd.VariousPlates.vaporExcBounds(end)-3,eswLineDataVde(351),eswLineDataVde(371)],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
         intermediatePlatesP.EdgeColor = 'none';
-        intermediateSectorP = patch([eswLineData(351) 0.9113 0.9113 eswLineData(371)],[-20 -20 -22 -22],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
+        intermediateSectorP = patch([eswLineDataVde(351) 0.9113 0.9113 eswLineDataVde(371)],[-20 -20 -22 -22],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
         intermediateSectorP.EdgeColor = 'none';
         
         intermediateSPD_floor = patch([hd.Dendrites.vaporExcBounds(1),hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(2) hd.Dendrites.vaporExcBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
@@ -507,7 +504,7 @@ switch castInTermsOf
         end
         
         %Approximate maximum supersaturation with ventilation line
-        %maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
+        %maxVentLine = plot(2.*eswLineDataVde(151:end),TlineStandardC(151:end));
         %maxVentLine.Color = [0 26 255]./255;
         %maxVentLine.LineWidth = 1.2;
         
