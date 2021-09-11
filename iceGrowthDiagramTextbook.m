@@ -134,7 +134,7 @@ switch castInTermsOf
             eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
         end
 
-        for rhic = 60:-10:-20
+        for rhic = 60:-10:-100 %input is an ice supersturation, -100% ice supersaturation = 0% ice saturation
             if rhic > 0
                 actRhiHandle = num2str(rhic);
             else

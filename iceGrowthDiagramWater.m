@@ -173,7 +173,7 @@ legendEntries(end+1) = eswLine_Handles.p105Plot;
 legendTexts{end+1} = 'RH_w (10% intervals)';
 legendTexts{end+1} = 'RH_w (102.5%, 105%)';
 
-for rhic = 60:-10:-100 %input is an ice SUPERSATURATION, so -100% ice supersaturation = 0% ice saturation
+for rhic = 60:-10:-100 %input is an ice supersturation, -100% ice supersaturation = 0% ice saturation
     if rhic > 0
         actRhiHandle = num2str(rhic);
     else
