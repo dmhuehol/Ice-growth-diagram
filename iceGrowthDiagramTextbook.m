@@ -143,12 +143,26 @@ switch castInTermsOf
                 actRhiHandle = ['sub',num2str(abs(rhic))];
             end
             esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
-            if rhic == 0
+            if rhic == 0 %Break 100% ice saturation curve around label manually
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:351),TlineStandardC(1:351));
-                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(426:end),TlineStandardC(426:end));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(428:end),TlineStandardC(428:end));
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 2.5; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 2.5;
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255;
-            else
+            elseif rhic == 30 %Break 130% ice saturation curve around "Columnar polycrystalline" and "130% (ice)" labels manually
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:530),TlineStandardC(1:530));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(566:600),TlineStandardC(566:600));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot3']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(600:642),TlineStandardC(600:642));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot4']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(656:end),TlineStandardC(656:end));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 1.5; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 1.5; esiLine_Handles.(['p', actRhiHandle, 'Plot3']).LineWidth = 1.5; esiLine_Handles.(['p', actRhiHandle, 'Plot4']).LineWidth = 1.5;
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineStyle = ':'; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineStyle = ':'; esiLine_Handles.(['p', actRhiHandle, 'Plot3']).LineStyle = ':'; esiLine_Handles.(['p', actRhiHandle, 'Plot4']).LineStyle = ':';
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot3']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot4']).Color = [144 143 143]./255;
+            elseif rhic == 20 %Break 120% ice saturation curve around "Corner (branched)" label manually
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:290),TlineStandardC(1:290));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(314:end),TlineStandardC(314:end));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 1.5; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 1.5;
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineStyle = ':'; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineStyle = ':'; 
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255;
+           else
                 esiLine_Handles.(['p', actRhiHandle, 'Plot']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num']),TlineStandardC);
                 esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 1.5;
                 esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineStyle = ':';
@@ -163,41 +177,41 @@ switch castInTermsOf
         end
         
         % On-figure labels for isohumes and ice-isohumes
-        %labelsInLine = plot(inLineX,inLineY); labelsInLine.Color = 'r'; labelsInLine.LineWidth = 1.5;
+        %labelsInLine = plot(inLineX,inLineY); labelsInLine.Color = 'r'; labelsInLine.LineWidth = 1.5; %uncomment to show the line the labels fall along
         labX = flip(labX);
         labY = flip(labY);
 
-        lIce60p = text(labX(1),labY(1),'60% (ice)');
+        lIce60p = text(labX(1),labY(1),'60% (ice)','BackgroundColor',hd.subsaturated.Color);
         lIce60p.FontName = 'Lato'; lIce60p.FontSize = 16;
         lIce60p.Rotation = -40;
-        lIce70p = text(labX(2),labY(2),'70% (ice)');
+        lIce70p = text(labX(2),labY(2),'70% (ice)','BackgroundColor',hd.subsaturated.Color);
         lIce70p.FontName = 'Lato'; lIce70p.FontSize = 16;
         lIce70p.Rotation = -36;
-        lIce80p = text(labX(3),labY(3),'80% (ice)');
+        lIce80p = text(labX(3),labY(3),'80% (ice)','BackgroundColor',hd.subsaturated.Color);
         lIce80p.FontName = 'Lato'; lIce80p.FontSize = 16;
-        lIce80p.Rotation = -32.5;
-        lIce90p = text(labX(4),labY(4),'90% (ice)');
+        lIce80p.Rotation = -36;
+        lIce90p = text(labX(4),labY(4),'90% (ice)','BackgroundColor',hd.subsaturated.Color);
         lIce90p.FontName = 'Lato'; lIce90p.FontSize = 16;
-        lIce90p.Rotation = -32;
-        lIce0 = text(labX(5),labY(5),'100% (ice saturation)');
+        lIce90p.Rotation = -36;
+        lIce0 = text(labX(5),labY(5),'100% (ice saturation)'); %Curve must be broken around label manually (intersects multiple colors)
         lIce0.FontName = 'Lato'; lIce0.FontSize = 18;
         lIce0.Rotation = -35;
-        lIce10 = text(labX(6),labY(6),'110% (ice)');
+        lIce10 = text(labX(6),labY(6),'110% (ice)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         lIce10.FontName = 'Lato'; lIce10.FontSize = 16;
         lIce10.Rotation = -35;
-        lIce20 = text(labX(7),labY(7),'120% (ice)');
+        lIce20 = text(labX(7),labY(7),'120% (ice)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         lIce20.FontName = 'Lato'; lIce20.FontSize = 16;
         lIce20.Rotation = -31;
-        lIce30 = text(labX(8),labY(8),'130% (ice)');
+        lIce30 = text(labX(8),labY(8),'130% (ice)'); %Curve must be broken around label manually (intersects multiple colors)
         lIce30.FontName = 'Lato'; lIce30.FontSize = 16;
         lIce30.Rotation = -31;
-        lIce40 = text(labX(9),labY(9),'140% (ice)');
+        lIce40 = text(labX(9),labY(9),'140% (ice)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
         lIce40.FontName = 'Lato'; lIce40.FontSize = 16;
         lIce40.Rotation = -31;
-        lIce50 = text(labX(10),labY(10),'150% (ice)');
+        lIce50 = text(labX(10),labY(10),'150% (ice)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
         lIce50.FontName = 'Lato'; lIce50.FontSize = 16;
         lIce50.Rotation = -31;
-        lIce60 = text(labX(11),labY(11),'160% (ice)');
+        lIce60 = text(labX(11),labY(11),'160% (ice)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
         lIce60.FontName = 'Lato'; lIce60.FontSize = 16;
         lIce60.Rotation = -32;
         %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
@@ -205,11 +219,11 @@ switch castInTermsOf
         %lVentW.Rotation = 41;
         
         % On-figure labels for growth modes
-        lIceSubsaturated = text(72,-10,'Subsaturated with respect to ice, no ice growth');
+        lIceSubsaturated = text(72,-10,'Subsaturated with respect to ice, no ice growth','BackgroundColor',hd.subsaturated.Color);
         lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 16;
-        lFaceW = text(95.2,-6,'Face (column-like)');
+        lFaceW = text(95.8,-6,'Face (column-like)','BackgroundColor',hd.ColumnLike.TextbookColor);
         lFaceW.FontName = 'Lato'; lFaceW.FontSize = 16;
-        lEdgeW = text(93,-17.65,'Edge (plate-like)');
+        lEdgeW = text(93.3,-17.65,'Edge (plate-like)','BackgroundColor',hd.Plates.TextbookColor);
         lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 16;
         lCornerSectorTypeW = text(100.65,-19.7,'Corner');
         lCornerSectorTypeW.FontName = 'Lato'; lCornerSectorTypeW.FontSize = 16;
@@ -219,12 +233,12 @@ switch castInTermsOf
         lCornerBranchedTypeW.FontName = 'Lato'; lCornerBranchedTypeW.FontSize = 16;
         lCornerBranchedSubtypeW = text(102,-14.3,'(branched)');
         lCornerBranchedSubtypeW.FontName = 'Lato'; lCornerBranchedSubtypeW.FontSize = 14;
-        lMixedW = text(65,-46.6,'Mixed (polycrystalline, edge, face, and equiaxed)');
+        lMixedW = text(64,-48.6,'Mixed (polycrystalline, edge, face, and equiaxed)');
         lMixedW.FontName = 'Lato'; lMixedW.FontSize = 16;
-        lMixedW.Rotation = -39;
-        lPolycrystalsPlatelikeW = text(89,-28,'Platelike polycrystalline');
+        lMixedW.Rotation = -41;
+        lPolycrystalsPlatelikeW = text(89,-28,'Platelike polycrystalline','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 16;
-        lPolycrystalsColumnarW = text(77,-50,'Columnar polycrystalline');
+        lPolycrystalsColumnarW = text(77,-50,'Columnar polycrystalline'); %Curve must be broken around label manually (bad angle of approach)
         lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 16;
         
         % Diagram settings
