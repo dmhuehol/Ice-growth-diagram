@@ -158,7 +158,7 @@ switch castInTermsOf
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot3']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot4']).Color = [144 143 143]./255;
             elseif rhic == 20 %Break 120% ice saturation curve around "Corner (branched)" label manually
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:290),TlineStandardC(1:290));
-                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(314:end),TlineStandardC(314:end));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(315:end),TlineStandardC(315:end));
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 1.5; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 1.5;
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineStyle = ':'; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineStyle = ':'; 
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255;
@@ -229,9 +229,9 @@ switch castInTermsOf
         lCornerSectorTypeW.FontName = 'Lato'; lCornerSectorTypeW.FontSize = 16;
         lCornerSectorSubtypeW = text(100.65,-18.4,'(sector)');
         lCornerSectorSubtypeW.FontName = 'Lato'; lCornerSectorSubtypeW.FontSize = 14;
-        lCornerBranchedTypeW = text(102,-15.6,'Corner');
+        lCornerBranchedTypeW = text(102,-15.9,'Corner');
         lCornerBranchedTypeW.FontName = 'Lato'; lCornerBranchedTypeW.FontSize = 16;
-        lCornerBranchedSubtypeW = text(102,-14.3,'(branched)');
+        lCornerBranchedSubtypeW = text(102,-14.7,'(branched)');
         lCornerBranchedSubtypeW.FontName = 'Lato'; lCornerBranchedSubtypeW.FontSize = 14;
         lMixedW = text(64,-48.6,'Mixed (polycrystalline, edge, face, and equiaxed)');
         lMixedW.FontName = 'Lato'; lMixedW.FontSize = 16;
