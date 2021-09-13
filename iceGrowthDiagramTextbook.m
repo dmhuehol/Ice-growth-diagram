@@ -134,7 +134,9 @@ switch castInTermsOf
             eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
         end
 
-        for rhic = 60:-10:-100 %input is an ice supersturation, -100% ice supersaturation = 0% ice saturation
+        inLineX = [55,96.4635]; inLineY = [-2,-53.2]; %Place left edge of labels along this line
+        rhiCount = 1;
+        for rhic = 60:-10:-100 %input is an ice supersaturation, -100% ice supersaturation = 0% ice saturation
             if rhic > 0
                 actRhiHandle = num2str(rhic);
             else
@@ -142,8 +144,8 @@ switch castInTermsOf
             end
             esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
             if rhic == 0
-                esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:278),TlineStandardC(1:278));
-                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(352:end),TlineStandardC(352:end));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:351),TlineStandardC(1:351));
+                esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(426:end),TlineStandardC(426:end));
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).LineWidth = 2.5; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).LineWidth = 2.5;
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']).Color = [144 143 143]./255; esiLine_Handles.(['p', actRhiHandle, 'Plot2']).Color = [144 143 143]./255;
             else
@@ -152,36 +154,50 @@ switch castInTermsOf
                 esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineStyle = ':';
             end
             esiLine_Handles.(['p', actRhiHandle, 'Plot']).Color = [144 143 143]./255;
+            if rhic >= -40 %60% RHi (-40% ice supersaturation) is minimum label on textbook diagram
+                [xInt,yInt] = polyxpoly(inLineX,inLineY,esiLine_Handles.(['p', actRhiHandle, 'Num']),TlineStandardC);
+                labX(rhiCount) = xInt;
+                labY(rhiCount) = yInt;
+                rhiCount = rhiCount + 1;
+            end
         end
         
         % On-figure labels for isohumes and ice-isohumes
-        labX = [76.99,80.1,81.88,85.2,87.38,89.45,91.42,93.31,95.2];
-        labY = [-3.95,-11.85,-20.175,-25.875,-32.275,-38.275,-43.975,-49.475,-54.775];
-        lIce80p = text(labX(1),labY(1),'80% (ice)');
+        %labelsInLine = plot(inLineX,inLineY); labelsInLine.Color = 'r'; labelsInLine.LineWidth = 1.5;
+        labX = flip(labX);
+        labY = flip(labY);
+
+        lIce60p = text(labX(1),labY(1),'60% (ice)');
+        lIce60p.FontName = 'Lato'; lIce60p.FontSize = 16;
+        lIce60p.Rotation = -40;
+        lIce70p = text(labX(2),labY(2),'70% (ice)');
+        lIce70p.FontName = 'Lato'; lIce70p.FontSize = 16;
+        lIce70p.Rotation = -36;
+        lIce80p = text(labX(3),labY(3),'80% (ice)');
         lIce80p.FontName = 'Lato'; lIce80p.FontSize = 16;
-        lIce80p.Rotation = -32;
-        lIce90p = text(labX(2),labY(2),'90% (ice)');
+        lIce80p.Rotation = -32.5;
+        lIce90p = text(labX(4),labY(4),'90% (ice)');
         lIce90p.FontName = 'Lato'; lIce90p.FontSize = 16;
         lIce90p.Rotation = -32;
-        lIce0 = text(labX(3),labY(3),'100% (ice saturation)');
+        lIce0 = text(labX(5),labY(5),'100% (ice saturation)');
         lIce0.FontName = 'Lato'; lIce0.FontSize = 18;
-        lIce0.Rotation = -32;
-        lIce10 = text(labX(4),labY(4),'110% (ice)');
+        lIce0.Rotation = -35;
+        lIce10 = text(labX(6),labY(6),'110% (ice)');
         lIce10.FontName = 'Lato'; lIce10.FontSize = 16;
-        lIce10.Rotation = -31;
-        lIce20 = text(labX(5),labY(5),'120% (ice)');
+        lIce10.Rotation = -35;
+        lIce20 = text(labX(7),labY(7),'120% (ice)');
         lIce20.FontName = 'Lato'; lIce20.FontSize = 16;
         lIce20.Rotation = -31;
-        lIce30 = text(labX(6),labY(6),'130% (ice)');
+        lIce30 = text(labX(8),labY(8),'130% (ice)');
         lIce30.FontName = 'Lato'; lIce30.FontSize = 16;
         lIce30.Rotation = -31;
-        lIce40 = text(labX(7),labY(7),'140% (ice)');
+        lIce40 = text(labX(9),labY(9),'140% (ice)');
         lIce40.FontName = 'Lato'; lIce40.FontSize = 16;
         lIce40.Rotation = -31;
-        lIce50 = text(labX(8),labY(8),'150% (ice)');
+        lIce50 = text(labX(10),labY(10),'150% (ice)');
         lIce50.FontName = 'Lato'; lIce50.FontSize = 16;
         lIce50.Rotation = -31;
-        lIce60 = text(labX(9),labY(9),'160% (ice)');
+        lIce60 = text(labX(11),labY(11),'160% (ice)');
         lIce60.FontName = 'Lato'; lIce60.FontSize = 16;
         lIce60.Rotation = -32;
         %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
@@ -189,7 +205,7 @@ switch castInTermsOf
         %lVentW.Rotation = 41;
         
         % On-figure labels for growth modes
-        lIceSubsaturated = text(65,-19,'Subsaturated with respect to ice, no ice growth');
+        lIceSubsaturated = text(72,-10,'Subsaturated with respect to ice, no ice growth');
         lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 16;
         lFaceW = text(95.2,-6,'Face (column-like)');
         lFaceW.FontName = 'Lato'; lFaceW.FontSize = 16;
@@ -203,10 +219,10 @@ switch castInTermsOf
         lCornerBranchedTypeW.FontName = 'Lato'; lCornerBranchedTypeW.FontSize = 16;
         lCornerBranchedSubtypeW = text(102,-14.3,'(branched)');
         lCornerBranchedSubtypeW.FontName = 'Lato'; lCornerBranchedSubtypeW.FontSize = 14;
-        lMixedW = text(68.9,-40,'Mixed (polycrystalline, edge, face, and equiaxed)');
+        lMixedW = text(65,-46.6,'Mixed (polycrystalline, edge, face, and equiaxed)');
         lMixedW.FontName = 'Lato'; lMixedW.FontSize = 16;
-        lMixedW.Rotation = -38;
-        lPolycrystalsPlatelikeW = text(79.05,-33.95,'Platelike polycrystalline');
+        lMixedW.Rotation = -39;
+        lPolycrystalsPlatelikeW = text(89,-28,'Platelike polycrystalline');
         lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 16;
         lPolycrystalsColumnarW = text(77,-50,'Columnar polycrystalline');
         lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 16;
