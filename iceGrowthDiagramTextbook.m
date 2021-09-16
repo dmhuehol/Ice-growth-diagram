@@ -120,14 +120,35 @@ switch castInTermsOf
         for rhwc = [90:-10:0, 100, 102.5, 105]
             actHandle = num2str(rhwc);
             actHandleNoPunct = actHandle(actHandle~='.');
-            eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
-            if rhwc>100
+            if rhwc == 105
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.9;
+            elseif rhwc == 102.5
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot([rhwc rhwc],[-14.1,0]);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot([rhwc rhwc],[-70,-16.4]);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-.'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.9; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.9;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
             elseif rhwc == 100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 2.5;
+            elseif rhwc == 80
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot([rhwc rhwc],[-22,0]);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot([rhwc rhwc],[-49,-23.2]);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']) = plot([rhwc rhwc],[-70,-50.3]);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineWidth = 0.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).Color = [144 143 143]./255;
+            elseif rhwc == 70
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot([rhwc rhwc],[-37.7,0]);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot([rhwc rhwc],[-70,-39.8]);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
             else
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
             end
@@ -223,11 +244,11 @@ switch castInTermsOf
         lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 16;
         lFaceW = text(95.8,-6,'Face (column-like)','BackgroundColor',hd.ColumnLike.TextbookColor);
         lFaceW.FontName = 'Lato'; lFaceW.FontSize = 16;
-        lEdgeW = text(93.3,-17.65,'Edge (plate-like)','BackgroundColor',hd.Plates.TextbookColor);
+        lEdgeW = text(93.8,-17.65,'Edge (plate-like)','BackgroundColor',hd.Plates.TextbookColor);
         lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 16;
-        lCornerSectorTypeW = text(100.65,-19.7,'Corner');
+        lCornerSectorTypeW = text(100.16,-11.5,'Corner');
         lCornerSectorTypeW.FontName = 'Lato'; lCornerSectorTypeW.FontSize = 16;
-        lCornerSectorSubtypeW = text(100.65,-18.4,'(sector)');
+        lCornerSectorSubtypeW = text(100.16,-10.2,'(sector)');
         lCornerSectorSubtypeW.FontName = 'Lato'; lCornerSectorSubtypeW.FontSize = 14;
         lCornerBranchedTypeW = text(102,-15.9,'Corner');
         lCornerBranchedTypeW.FontName = 'Lato'; lCornerBranchedTypeW.FontSize = 16;
@@ -334,16 +355,35 @@ switch castInTermsOf
             actHandle = num2str(rhwc);
             actHandleNoPunct = actHandle(actHandle~='.');
             eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
-            if rhwc>100
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
-            elseif rhwc == 100
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:526),TlineStandardC(1:526));
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(539:end),TlineStandardC(539:end));
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-';
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5;
+            if rhwc == 105
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:497),TlineStandardC(1:497));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(576:end),TlineStandardC(576:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-.'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.9; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.9;
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
+            elseif rhwc == 102.5
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:278),TlineStandardC(1:278));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(300:end),TlineStandardC(300:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-.'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.9; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.9;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
+            elseif rhwc == 100
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 2.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
+            elseif rhwc == 90
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:559),TlineStandardC(1:559));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(573:end),TlineStandardC(573:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 1.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 1.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;               
+            elseif rhwc == 60
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:695),TlineStandardC(1:695));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(713:end),TlineStandardC(713:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 1.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 1.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;               
             else
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
@@ -357,7 +397,7 @@ switch castInTermsOf
         %maxVentLine.LineWidth = 1;
         
         % On-figure labels for growth modes
-        lFace = text(0.01,-6,'Face (column-like)');
+        lFace = text(0.01,-6,'Face (column-like)','BackgroundColor',hd.ColumnLike.TextbookColor);
         lFace.FontName = 'Lato'; lFace.FontSize = 16;
         lEdge = text(0.08,-15.8,'Edge (plate-like)');
         lEdge.FontName = 'Lato'; lEdge.FontSize = 16;
@@ -377,7 +417,7 @@ switch castInTermsOf
         lPolycrystalsPlatelike.FontName = 'Lato'; lPolycrystalsPlatelike.FontSize = 16;
         lPolycrystalsColumnar = text(0.32,-49.5,'Columnar polycrystalline');
         lPolycrystalsColumnar.FontName = 'Lato'; lPolycrystalsColumnar.FontSize = 16;
-        lMixed = text(0.02,-19.5,'Mixed (polycrystalline, edge, face, and equiaxed)');
+        lMixed = text(0.02,-19.5,'Mixed (polycrystalline, edge, face, and equiaxed)','BackgroundColor',hd.Mixed.TextbookColor);
         lMixed.FontName = 'Lato'; lMixed.FontSize = 16;
         lMixed.Rotation = 90;
         
@@ -385,19 +425,19 @@ switch castInTermsOf
         lWater60 = text(0.005,-54.4,'60%');
         lWater60.FontName = 'Lato'; lWater60.FontSize = 16;
         lWater60.Rotation = 34;
-        lWater70 = text(0.1161,-48.5,'70%');
+        lWater70 = text(0.1161,-48.5,'70%','BackgroundColor',hd.PolycrystalsC.TextbookColor);
         lWater70.FontName = 'Lato'; lWater70.FontSize = 16;
         lWater70.Rotation = 33;
-        lWater80 = text(0.236,-44.9,'80%');
+        lWater80 = text(0.236,-44.9,'80%','BackgroundColor',hd.PolycrystalsC.TextbookColor);
         lWater80.FontName = 'Lato'; lWater80.FontSize = 16;
         lWater80.Rotation = 31;
         lWater90 = text(0.3412,-40.9,'90%');
         lWater90.FontName = 'Lato'; lWater90.FontSize = 16;
         lWater90.Rotation = 29;
-        lWater100 = text(0.4428,-37.4,'100%');
+        lWater100 = text(0.4428,-37.4,'100%','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         lWater100.FontName = 'Lato'; lWater100.FontSize = 16;
         lWater100.Rotation = 26;
-        lWater102p5 = text(0.4596,-36,'102.5%');
+        lWater102p5 = text(0.4596,-36,'102.5%','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 16;
         lWater102p5.Rotation = 26;
         lWater105 = text(0.4742,-34.5,'105% ');
@@ -510,21 +550,46 @@ switch castInTermsOf
             actHandleNoPunct = actHandle(actHandle~='.');
             eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
             eswLine_Handles.(['p', actHandleNoPunct, 'Vde']) = iceSupersatToVaporExc(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
-            if rhwc>100
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde']),TlineStandardC);
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = '-.';
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineWidth = 0.5;
+            if rhwc == 105
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(1:309),TlineStandardC(1:309));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(372:617),TlineStandardC(372:617));                
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(628:end),TlineStandardC(628:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-.'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-.'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.9; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.9; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineWidth = 0.9;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).Color = [144 143 143]./255;
+            elseif rhwc == 102.5
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(1:343),TlineStandardC(1:343));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(360:616),TlineStandardC(360:616));                
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(630:end),TlineStandardC(630:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-.'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-.'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineStyle = '-.';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.9; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.9; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineWidth = 0.9;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).Color = [144 143 143]./255;
             elseif rhwc == 100
-%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(1:526),TlineStandardC(1:526));
-%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Num'])(564:end),TlineStandardC(564:end));
-%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-';
-%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5;
-%                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(1:346),TlineStandardC(1:346));
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(360:end),TlineStandardC(360:end));                
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-';
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(360:615),TlineStandardC(360:615));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(630:end),TlineStandardC(630:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = '-'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineStyle = '-';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 2.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineWidth = 2.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).Color = [144 143 143]./255;
+            elseif rhwc == 90
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(1:615),TlineStandardC(1:615));                
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(644:end),TlineStandardC(644:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 1.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 1.5;
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
+            elseif rhwc == 80
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(1:615),TlineStandardC(1:615));                
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(646:end),TlineStandardC(646:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 1.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 1.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
+            elseif rhwc == 70
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(1:566),TlineStandardC(1:566));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(595:615),TlineStandardC(595:615));                
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde'])(648:end),TlineStandardC(648:end));
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineStyle = ':';
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 1.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 1.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineWidth = 1.5;
+                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).Color = [144 143 143]./255;
             else
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot(eswLine_Handles.(['p', actHandleNoPunct, 'Vde']),TlineStandardC);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
@@ -542,10 +607,10 @@ switch castInTermsOf
         l70Vde = text(0.00524,-44.2,'70%');
         l70Vde.FontName = 'Lato'; l70Vde.FontSize = 16;
         l70Vde.Rotation = -85.8;
-        l80Vde = text(0.02493,-36.7,'80%');
+        l80Vde = text(0.02493,-36.7,'80%','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         l80Vde.FontName = 'Lato'; l80Vde.FontSize = 16;
         l80Vde.Rotation = -80;
-        l90Vde = text(0.06927,-30.6,'90%');
+        l90Vde = text(0.06927,-30.6,'90%','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         l90Vde.FontName = 'Lato'; l90Vde.FontSize = 16;
         l90Vde.Rotation = -50;
         l100Vde = text(0.1866,-21,'100%');
@@ -571,19 +636,19 @@ switch castInTermsOf
         lFaceVde.FontName = 'Lato'; lFaceVde.FontSize = 16;
         lEdgeColdVde = text(0.12,-14,'Edge (plate-like)');
         lEdgeColdVde.FontName = 'Lato'; lEdgeColdVde.FontSize = 16;
-        lCornerSectorVde = text(0.227,-10,'Corner ');
+        lCornerSectorVde = text(0.235,-10,'Corner ');
         lCornerSectorVde.FontName = 'Lato'; lCornerSectorVde.FontSize = 16;
-        lCornerSectorVdeSubtype = text(0.2438,-10,'(sector)');
+        lCornerSectorVdeSubtype = text(0.2518,-9.95,'(sector)');
         lCornerSectorVdeSubtype.FontName = 'Lato'; lCornerSectorVdeSubtype.FontSize = 14;
-        lCornerBranchedVde = text(0.255,-15.5,'Corner');
+        lCornerBranchedVde = text(0.265,-15.5,'Corner');
         lCornerBranchedVde.FontName = 'Lato'; lCornerBranchedVde.FontSize = 16;
-        lCornerBranchedVde2 = text(0.265,-14.42,'(branched)');
+        lCornerBranchedVde2 = text(0.271,-14.42,'(branched)');
         lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 14;
         lPolycrystalsPlatelikeVde = text(0.085,-26,'Platelike polycrystalline');
         lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 16;
-        lPolycrystalsColumnarVde = text(0.004,-48.05,{'Columnar', 'polycrystalline'});
+        lPolycrystalsColumnarVde = text(0.0034,-48.05,{'Columnar', 'polycrystalline'});
         lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 16;
-        lMixedVde = text(0.004,-16,{'Mixed (polycrystalline,', 'edge, face, and equiaxed)'});
+        lMixedVde = text(0.003,-16.1,{'Mixed (polycrystalline,', 'edge, face, and equiaxed)'});
         lMixedVde.FontName = 'Lato'; lMixedVde.FontSize = 16;
         
         % Diagram settings
