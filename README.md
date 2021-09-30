@@ -100,10 +100,10 @@ Image files in this directory are used in the Github readme.
 The function `growthDiagramProfile` can be used to plot data from radiosondes on the ice growth diagram. This shows what areas of the crystal growth space are accessible along a profile. A sample data structure from the Utqiagvik launch site is included in the "Growth diagram profiles" subdirectory. An example image is below.  
 ![Ice growth diagram profile from Jan 2018 in Barrow AK](Demo/utqiagvik_sample_readme.png)  
 **Code to replicate**  
-1. Open the sample Utqiagvik data in MATLAB  
+1. Open the sample Utqiagvik data in MATLAB: `utqiagvik_sample = load('Demo/utq_djf1718.mat')`  
 2. Make sure `stationLookupIGRAv2` and `IGRA v2 Station List.m` are in the working directory. These are necessary to produce the title of the growth diagram profile.
-3. `growthDiagramProfile(utqiagvik_sample,1:39,1,'water',0,0)`  
-4. The command window will prompt for a date. Type `Jan 2018`.  
+3. `growthDiagramProfile(utqiagvik_sample,1:121,1,'water',0,0)`  
+4. The command window will prompt for a date. Type `DJF 2017-2018`.  
 5. The command window will prompt for a location. Type `Utqiagvik, AK`.
 
 Code to import a general IGRA v2 soundings data file can be found in the [IGRA v2](https://github.com/dmhuehol/IGRA-v2) repository.  
