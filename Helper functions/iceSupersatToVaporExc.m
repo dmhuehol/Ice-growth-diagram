@@ -29,9 +29,8 @@ function [vaporDensExc] = iceSupersatToVaporExc(iceSupersatDecimal,temp)
     
 classNum = {'numeric'};
 attributeBlank = {};
-attributeMax = {'<=',10}; %Never would you ever need a ice supersaturation this high
-validateattributes(iceSupersatDecimal,classNum,attributeMax); %Check to ensure numeric
-validateattributes(temp,classNum,attributeBlank); %Check to ensure numeric input
+validateattributes(iceSupersatDecimal,classNum,attributeBlank); %Check to ensure numeric
+validateattributes(temp,classNum,attributeBlank);
 
 Rv = 461.5; %J/(kgK)
 Tk = temp+273.15;

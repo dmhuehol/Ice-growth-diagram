@@ -175,7 +175,7 @@ if isohumeFlag==1
     legendEntries(end+1) = eswLine_Handles.p100Plot;
     legendEntries(end+1) = eswLine_Handles.p90Plot;
     legendEntries(end+1) = eswLine_Handles.p105Plot;
-    legendTexts{end+1} = 'RH_w = 100% (T_{ice} = T_{air})';
+    legendTexts{end+1} = 'RH_w = 100%';
     legendTexts{end+1} = 'RH_w (10% intervals)';
     legendTexts{end+1} = 'RH_w (102.5%, 105%)';
  
