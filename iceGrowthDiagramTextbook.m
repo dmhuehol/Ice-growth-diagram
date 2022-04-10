@@ -56,7 +56,7 @@ switch castInTermsOf
         %% Ice growth diagram in terms of relative humidity with respect to water
         % Modifiable variables
         xlimRange = [55 105];
-        ylimRange = [-56.5 0];
+        ylimRange = [-70 0];
         
         % Draw the growth modes
         Tupper = 15; Tlower = -70;
@@ -268,12 +268,12 @@ switch castInTermsOf
         axe.FontSize = 18;
         
         yyaxis right
-        [zLabels, tempsInRange, rightLimits] = ylimitsForIceDiagram(ylimRange);
+        [zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
         axe.YTick = tempsInRange;
         yticklabels(zLabels);
         ylim(rightLimits)
         axe.Layer = 'top';
-        yLab = ylabel(['Height above 0' char(176) 'C level in m (ICAO standard atmosphere)']);
+        yLab = ylabel(icaoAxLabel);
         yLab.FontName = 'Lato Bold'; yLab.Color = 'k';
         
         yyaxis left %Changes what axis dot notation refers
@@ -295,7 +295,7 @@ switch castInTermsOf
         %% Ice growth diagram in terms of relative humidity with respect to ice
         % Check variables
         xlimRange = [-0 0.6];
-        ylimRange = [-56.5 0];
+        ylimRange = [-70 0];
         
         % Draw the growth types
         plates = patch(hd.Plates.supersatBounds, hd.Plates.TempBounds,hd.Plates.TextbookColor);
@@ -456,12 +456,12 @@ switch castInTermsOf
         axe.FontSize = 18;
         
         yyaxis right
-        [zLabels, tempsInRange, rightLimits] = ylimitsForIceDiagram(ylimRange);
+        [zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
         axe.YTick = tempsInRange;
         yticklabels(zLabels);
         ylim(rightLimits)
         axe.Layer = 'top';
-        yLab = ylabel(['Height above 0' char(176) 'C level in m (ICAO standard atmosphere)']);
+        yLab = ylabel(icaoAxLabel);
         yLab.FontName = 'Lato Bold';
         
         yyaxis left %Changes what axis dot notation refers
@@ -485,7 +485,7 @@ switch castInTermsOf
         %% Ice growth diagram in terms of vapor density excess
         % Modifiable variables
         xlimRange = [0 0.351];
-        ylimRange = [-56.5 0];
+        ylimRange = [-70 0];
         
         % Draw the growth types
         plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.TextbookColor);
@@ -660,12 +660,12 @@ switch castInTermsOf
         axe.FontSize = 18;
         
         yyaxis right
-        [zLabels, tempsInRange, rightLimits] = ylimitsForIceDiagram(ylimRange);
+        [zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
         axe.YTick = tempsInRange;
         yticklabels(zLabels);
         ylim(rightLimits)
         axe.Layer = 'top';
-        yLab = ylabel(['Height above 0' char(176) 'C level in m (ICAO standard atmosphere)']);
+        yLab = ylabel(icaoAxLabel);
         yLab.FontName = 'Lato Bold';
         
         yyaxis left %Changes what axis dot notation refers

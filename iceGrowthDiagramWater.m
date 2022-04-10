@@ -194,12 +194,12 @@ axe.FontName = 'Lato';
 axe.FontSize = 18;
 
 yyaxis right
-[zLabels, tempsInRange, rightLimits] = ylimitsForIceDiagram(ylimRange);
+[zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
 axe.YTick = tempsInRange;
 yticklabels(zLabels);
 ylim(rightLimits)
 axe.Layer = 'top';
-yLab = ylabel(['Height above 0' char(176) 'C level in m (ICAO standard atmosphere)']);
+yLab = ylabel(icaoAxLabel);
 yLab.FontName = 'Lato Bold';
 
 yyaxis left %Changes what axis dot notation refers

@@ -77,8 +77,8 @@ if ~exist('xlimRange','var')
     disp('Default ice supersaturation range for x-axis is 0 to 60%')
 end
 if ~exist('ylimRange','var')
-    ylimRange = [-56.5 0];
-    disp(['Default temperature range for y-axis is -56.5 to 0' char(176) 'C'])
+    ylimRange = [-70 0];
+    disp(['Default temperature range for y-axis is -70 to 0' char(176) 'C'])
 end
 if ~exist('printFig','var')
     printFig = 0;
@@ -208,12 +208,12 @@ axe.FontName = 'Lato';
 axe.FontSize = 18;
 
 yyaxis right
-[zLabels, tempsInRange, rightLimits] = ylimitsForIceDiagram(ylimRange);
+[zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
 axe.YTick = tempsInRange;
 yticklabels(zLabels);
 ylim(rightLimits)
 axe.Layer = 'top';
-yLab = ylabel(['Height above 0' char(176) 'C level in m (ICAO standard atmosphere)']);
+yLab = ylabel(icaoAxLabel);
 yLab.FontName = 'Lato Bold';
 
 yyaxis left %Changes what axis dot notation refers
