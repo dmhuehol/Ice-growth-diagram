@@ -77,8 +77,8 @@ if ~exist('xlimRange','var')
     end    
 end
 if ~exist('ylimRange','var')
-    ylimRange = [-56.5 0];
-    disp(['Default temperature range for y-axis is -56.5 to 0' char(176) 'C'])
+    ylimRange = [-70 0];
+    disp(['Default temperature range for y-axis is -70 to 0' char(176) 'C'])
 end
 if legendLocStr == 0
     legendLocStr = 'none';
@@ -119,22 +119,6 @@ sectorplates3.EdgeColor = 'none';
 dendrites = patch(hd.Dendrites.waterBounds,hd.Dendrites.TempBounds,hd.Dendrites.Color);
 dendrites.EdgeColor = 'none';
 
-intermediatePlatesP = patch([hd.VariousPlates.waterBounds(end),hd.VariousPlates.waterBounds(end)-3,100 100],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.PolycrystalsP.Color],4,[],3));
-intermediatePlatesP.EdgeColor = 'none';
-intermediateSectorP = patch([100 100 200 200],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color],4,[],3));
-intermediateSectorP.EdgeColor = 'none';
-
-intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
-intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([hd.SectorPlates.waterBounds(2,3) hd.SectorPlates.waterBounds(2,2) hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(4)], [hd.SectorPlates.TempBounds(3) hd.SectorPlates.TempBounds(2) hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
-intermediateSPD_wall.EdgeColor = 'none';
-intermediateSPD_ceiling = patch([hd.Dendrites.waterBounds(4),hd.Dendrites.waterBounds(4) hd.SectorPlates.waterBounds(6) hd.SectorPlates.waterBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
-intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_triangleTop = patch([hd.SectorPlates.waterBounds(2,3) hd.Dendrites.waterBounds(4) hd.Dendrites.waterBounds(1)], [hd.SectorPlates.TempBounds(3) hd.Dendrites.TempBounds(3) hd.SectorPlates.TempBounds(3)], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
-intermediateSPD_triangleTop.EdgeColor = 'none';
-intermediateSPD_triangleBottom = patch([hd.SectorPlates.waterBounds(2,2), hd.Dendrites.waterBounds(1), hd.Dendrites.waterBounds(1)], [hd.SectorPlates.TempBounds(2), hd.Dendrites.TempBounds(1), hd.SectorPlates.TempBounds(2)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
-intermediateSPD_triangleBottom.EdgeColor = 'none';
-
 mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = hd.Mixed.Color;
 mixed1.EdgeAlpha = 0;
@@ -151,6 +135,49 @@ end
 unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
 unnatural105.EdgeColor = 'none';
 hold on
+
+% Fuzzy boundaries between tabular and columnar
+fzColMult = patch([95.94, 96.32, 105, 105], [-4.2, -3.8, -3.8, -4.2], reshape([hd.ColumnLike.Color; hd.Plates.Color; hd.Plates.Color; hd.ColumnLike.Color],4,[],3));
+fzColMult.EdgeColor = 'none';
+
+% Fuzzy boundary between columnar and branched
+fzColBranch = patch([100,100,120.6,120.6],[-7.7,-8.3,-8.3,-7.7],reshape([hd.ColumnLike.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.ColumnLike.Color],4,[],3));
+fzColBranch.EdgeColor = 'none';
+% Fuzzy boundary between columnar and tabular (cold)
+fzColTab = patch([95.8841, 96, 100, 100], [-8.2,-7.8,-7.8,-8.2],reshape([hd.VariousPlates.Color; hd.ColumnLike.Color; hd.ColumnLike.Color; hd.VariousPlates.Color],4,[],3));
+fzColTab.EdgeColor = 'none';
+% Fuzzy boundary between columnar and mixed
+fzColMult = patch([92.17, 92.5, 96.1, 95.6958], [-8.2, -7.8, -7.8, -8.2], reshape([hd.Mixed.Color; hd.ColumnLike.Color; hd.ColumnLike.Color; hd.Mixed.Color],4,[],3));
+fzColMult.EdgeColor = 'none';
+% Fuzzy boundaries between tabular+branched and tabular polycrystalline
+intermediatePlatesP = patch([hd.VariousPlates.waterBounds(end), 85.23, 100, 100],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediatePlatesP.EdgeColor = 'none';
+intermediateSectorP = patch([100 100 200 200],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediateSectorP.EdgeColor = 'none';
+% Fuzzy INTERFACE between tabular, multiple, columnar
+fzTabMultCol = patch([95.6993, 96.0688, 96, 95.6305], [-8.2, -8.2, -7.8, -7.8], reshape([hd.Mixed.Color; hd.VariousPlates.Color; hd.ColumnLike.Color; hd.ColumnLike.Color],4,[],3));
+fzTabMultCol.EdgeColor = 'none';
+% Fuzzy boundary between tabular and multiple
+fzTabMult = patch([84.93, 85.26, 96.0688, 95.6993], [-20, -20, -8.2, -8.2], reshape([hd.Mixed.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.Mixed.Color],4,[],3));
+fzTabMult.EdgeColor = 'none';
+% Fuzzy INTERFACE between tabular, multiple, tabular polycrystalline
+% fzTabMultTabP = patch([83.28, 83.4409, 83.6, 85.26, 85.1, 84.93], [-22, -22, -22, -20, -20, -20], reshape([hd.Mixed.Color; hd.PolycrystalsP.Color; hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.Mixed.Color; hd.Mixed.Color],6,[],3));
+% fzTabMultTabP = patch([83.28, 83.4409, 83.6, 85.26, 85.1, 84.93], [-22, -22, -22, -20, -20, -20], reshape([hd.Mixed.Color; hd.PolycrystalsP.Color; hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.Mixed.Color],6,[],3));
+% fzTabMultTabP = patch([83.28, 83.5, 83.6, 85.26, 86, 85.1], [-22, -22, -22, -20, -20, -20], reshape([hd.Mixed.Color; hd.PolycrystalsP.Color; hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.Mixed.Color],6,[],3));
+% fzTabMultTabP.EdgeColor = 'none';
+
+
+% Fuzzy boundaries betweeen branched and side branched
+intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
+intermediateSPD_floor.EdgeColor = 'none';
+intermediateSPD_wall = patch([hd.SectorPlates.waterBounds(2,3) hd.SectorPlates.waterBounds(2,2) hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(4)], [hd.SectorPlates.TempBounds(3) hd.SectorPlates.TempBounds(2) hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_wall.EdgeColor = 'none';
+intermediateSPD_ceiling = patch([hd.Dendrites.waterBounds(4),hd.Dendrites.waterBounds(4) hd.SectorPlates.waterBounds(6) hd.SectorPlates.waterBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_ceiling.EdgeColor = 'none';
+intermediateSPD_triangleTop = patch([hd.SectorPlates.waterBounds(2,3) hd.Dendrites.waterBounds(4) hd.Dendrites.waterBounds(1)], [hd.SectorPlates.TempBounds(3) hd.Dendrites.TempBounds(3) hd.SectorPlates.TempBounds(3)], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleTop.EdgeColor = 'none';
+intermediateSPD_triangleBottom = patch([hd.SectorPlates.waterBounds(2,2), hd.Dendrites.waterBounds(1), hd.Dendrites.waterBounds(1)], [hd.SectorPlates.TempBounds(2), hd.Dendrites.TempBounds(1), hd.SectorPlates.TempBounds(2)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
 legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
