@@ -129,8 +129,8 @@ if crystalLog==1
     hd.Dendrites.Habit = 'Corner (branched)'; %Dendrites
     hd.Dendrites.Color = [247 214 153]./255;
     hd.Dendrites.TextbookColor = [253 243 225]./255;
-    hd.Dendrites.TempBounds = [-12.7 -12.7 -17.1 -17.1];
-    hd.Dendrites.supersatBounds = [0.16 0.43 0.43 0.21];
+    hd.Dendrites.TempBounds = [-12.2 -12.2 -17.6 -17.6];
+    hd.Dendrites.supersatBounds = [0.15 0.43 0.43 0.21];
     hd.Dendrites.waterBounds = iceSupersatToRH(hd.Dendrites.supersatBounds.*100,hd.Dendrites.TempBounds);
     hd.Dendrites.vaporExcBounds = iceSupersatToVaporExc(hd.Dendrites.supersatBounds,hd.Dendrites.TempBounds);
     
