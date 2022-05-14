@@ -51,7 +51,7 @@ if ~exist('ventLog','var')
     disp('Ventilation line disabled by default')
 end
 if ~exist('legLog','var')
-    legLog = 1;
+    legLog = 0; %DISABLE LEGEND WHILE TROUBLESHOOTING
     disp('Legend enabled by default')
 end
 if ~exist('legendLocStr','var')
@@ -130,6 +130,33 @@ if ventLog
 end
 unnatural105 = patch(hd.unnatural105.supersatBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
 unnatural105.EdgeColor = 'none';
+
+brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
+tabEdgeRhi = [0, (rhwToRhi(105,-4.05)/100 - 1)]; %convert percent RHw to supersat RHi
+tabEdge = line(tabEdgeRhi,[-4.05,-4.05]);
+tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
+colEdgeRhi = [0, rhwToRhi(105,-8.05)/100 - 1];
+colEdge = line(colEdgeRhi,[-8.05,-8.05]);
+colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
+varEdgeRhi = rhwToRhi(ones(1,141)*100.05, TlineStandardC(231:371))/100 - 1;
+varEdge = line(varEdgeRhi,TlineStandardC(231:371));
+varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
+polyBorderStrgRhi = rhwToRhi([89.8227,105],[-40.2,-40.2])/100 - 1;
+polyBorderStrg = line(polyBorderStrgRhi,[-40.2,-40.2]);
+polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
+polyBorderAngVde = rhwToRhi([68.6524,89.8227],[-45.875,-40.2])/100 - 1;
+polyBorderAng = line(polyBorderAngVde,[-45.875,-40.2]);
+polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
+mixedEdge1Rhi = [0.038,0.038,0.038];
+mixedEdge1 = line(mixedEdge1Rhi,[-46.2,-22,-8]);
+mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
+mixedEdge15Vde = rhwToRhi([66.5,68.6274],[-46.2,-45.9])/100 - 1;
+mixedEdge15 = line(mixedEdge15Vde,[-46.2,-45.9]);
+mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
+mixedEdge2Vde = rhwToRhi(hd.Mixed.waterBounds(2,10:end)+0.025, hd.Mixed.TempBounds(2,10:end)+0.025)/100 - 1;
+mixedEdge2 = line(mixedEdge2Vde, hd.Mixed.TempBounds(2,10:end)+0.025);
+mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Sans subsaturated to make images

@@ -60,7 +60,7 @@ if ~exist('ventLog','var')
     ventLog = 0;
 end
 if ~exist('legLog','var')
-    legLog = 1;
+    legLog = 0; %DISABLE LEGEND FOR TROUBLESHOOTING
     disp('Legend enabled by default')
 end
 if ~exist('legendLocStr','var')
@@ -77,8 +77,8 @@ if ~exist('xlimRange','var')
     end    
 end
 if ~exist('ylimRange','var')
-    ylimRange = [-56.5 0];
-    disp(['Default temperature range for y-axis is -56.5 to 0' char(176) 'C'])
+    ylimRange = [-70 0];
+    disp(['Default temperature range for y-axis is -70 to 0' char(176) 'C'])
 end
 if legendLocStr == 0
     legendLocStr = 'none';
@@ -137,9 +137,9 @@ intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = hd.Mixed.Color;
-mixed1.EdgeAlpha = 0;
 mixed2 = patch(hd.Mixed.waterBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
 mixed2.EdgeColor = 'none';
+
 warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
@@ -150,6 +150,25 @@ if ventLog
 end
 unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
 unnatural105.EdgeColor = 'none';
+
+brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
+tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
+colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
+varEdge = line([100.05,100.05],[-8,-22]);
+varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
+polyBorderStrg = line([89.8227,105],[-40.2,-40.2]);
+polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
+polyBorderAng = line([68.6524,89.8227],[-45.875,-40.2]);
+polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
+mixedEdge1 = line([66.5,83.4409,95.8841],[-46.2,-22,-8]);
+mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
+mixedEdge15 = line([66.5,68.6274],[-46.2,-45.9]);
+mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
+mixedEdge2 = line(hd.Mixed.waterBounds(2,5:end)+0.025, hd.Mixed.TempBounds(2,5:end)+0.025);
+mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];

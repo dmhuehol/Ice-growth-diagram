@@ -56,7 +56,7 @@ switch castInTermsOf
         %% Ice growth diagram in terms of relative humidity with respect to water
         % Modifiable variables
         xlimRange = [55 105];
-        ylimRange = [-70 0];
+        ylimRange = [-56.5 0];
         
         % Draw the growth modes
         Tupper = 15; Tlower = -70;
@@ -114,6 +114,25 @@ switch castInTermsOf
         %unnaturalVent.EdgeColor = 'none';
         unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
         unnatural105.EdgeColor = 'none';
+
+        brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
+        tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+        tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
+        colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+        colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
+        varEdge = line([100.05,100.05],[-8,-22]);
+        varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
+        polyBorderStrg = line([89.8227,105],[-40.2,-40.2]);
+        polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
+        polyBorderAng = line([68.6524,89.8227],[-45.875,-40.2]);
+        polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
+        mixedEdge1 = line([66.5,83.4409,95.8841],[-46.2,-22,-8]);
+        mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
+        mixedEdge15 = line([66.5,68.6274],[-46.2,-45.9]);
+        mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
+        mixedEdge2 = line(hd.Mixed.waterBounds(2,5:end)+0.025, hd.Mixed.TempBounds(2,5:end)+0.025);
+        mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+
         hold on
         
         %Draw isohumes
@@ -242,22 +261,22 @@ switch castInTermsOf
         % On-figure labels for growth modes
         lIceSubsaturated = text(72,-10,'Subsaturated with respect to ice, no ice growth','BackgroundColor',hd.subsaturated.Color);
         lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 16;
-        lFaceW = text(95.8,-6,'Face (column-like)','BackgroundColor',hd.ColumnLike.TextbookColor);
+        lFaceW = text(95.8,-6,'Columnar','BackgroundColor',hd.ColumnLike.TextbookColor);
         lFaceW.FontName = 'Lato'; lFaceW.FontSize = 16;
-        lEdgeW = text(93.8,-17.65,'Edge (plate-like)','BackgroundColor',hd.Plates.TextbookColor);
+        lEdgeW = text(93.8,-17.65,'Tabular','BackgroundColor',hd.Plates.TextbookColor);
         lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 16;
-        lCornerSectorTypeW = text(100.16,-11.5,'Corner');
+        lCornerSectorTypeW = text(100.16,-11.5,'Branched');
         lCornerSectorTypeW.FontName = 'Lato'; lCornerSectorTypeW.FontSize = 16;
-        lCornerSectorSubtypeW = text(100.16,-10.2,'(sector)');
-        lCornerSectorSubtypeW.FontName = 'Lato'; lCornerSectorSubtypeW.FontSize = 14;
-        lCornerBranchedTypeW = text(102,-15.9,'Corner');
+%         lCornerSectorSubtypeW = text(100.16,-10.2,'(sector)');
+%         lCornerSectorSubtypeW.FontName = 'Lato'; lCornerSectorSubtypeW.FontSize = 14;
+        lCornerBranchedTypeW = text(102,-15.9,'Side');
         lCornerBranchedTypeW.FontName = 'Lato'; lCornerBranchedTypeW.FontSize = 16;
-        lCornerBranchedSubtypeW = text(102,-14.7,'(branched)');
-        lCornerBranchedSubtypeW.FontName = 'Lato'; lCornerBranchedSubtypeW.FontSize = 14;
-        lMixedW = text(64,-48.6,'Mixed (polycrystalline, edge, face, and equiaxed)');
+        lCornerBranchedSubtypeW = text(102,-14.7,'branched');
+        lCornerBranchedSubtypeW.FontName = 'Lato'; lCornerBranchedSubtypeW.FontSize = 16;
+        lMixedW = text(64,-48.6,'Multiple (tabular, columnar, polycrystalline)');
         lMixedW.FontName = 'Lato'; lMixedW.FontSize = 16;
         lMixedW.Rotation = -41;
-        lPolycrystalsPlatelikeW = text(89,-28,'Platelike polycrystalline','BackgroundColor',hd.PolycrystalsP.TextbookColor);
+        lPolycrystalsPlatelikeW = text(89,-28,'Tabular polycrystalline','BackgroundColor',hd.PolycrystalsP.TextbookColor);
         lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 16;
         lPolycrystalsColumnarW = text(77,-50,'Columnar polycrystalline'); %Curve must be broken around label manually (bad angle of approach)
         lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 16;
@@ -295,7 +314,7 @@ switch castInTermsOf
         %% Ice growth diagram in terms of relative humidity with respect to ice
         % Check variables
         xlimRange = [-0 0.6];
-        ylimRange = [-70 0];
+        ylimRange = [-56.5 0];
         
         % Draw the growth types
         plates = patch(hd.Plates.supersatBounds, hd.Plates.TempBounds,hd.Plates.TextbookColor);
@@ -346,6 +365,33 @@ switch castInTermsOf
         %unnaturalVent.EdgeColor = 'none';
         unnatural105 = patch(hd.unnatural105.supersatBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
         unnatural105.EdgeColor = 'none';
+
+        brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
+        tabEdgeRhi = [0, (rhwToRhi(105,-4.05)/100 - 1)]; %convert percent RHw to supersat RHi
+        tabEdge = line(tabEdgeRhi,[-4.05,-4.05]);
+        tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
+        colEdgeRhi = [0, rhwToRhi(105,-8.05)/100 - 1];
+        colEdge = line(colEdgeRhi,[-8.05,-8.05]);
+        colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
+        varEdgeRhi = rhwToRhi(ones(1,141)*100.05, TlineStandardC(231:371))/100 - 1;
+        varEdge = line(varEdgeRhi,TlineStandardC(231:371));
+        varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
+        polyBorderStrgRhi = rhwToRhi([89.8227,105],[-40.2,-40.2])/100 - 1;
+        polyBorderStrg = line(polyBorderStrgRhi,[-40.2,-40.2]);
+        polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
+        polyBorderAngVde = rhwToRhi([68.6524,89.8227],[-45.875,-40.2])/100 - 1;
+        polyBorderAng = line(polyBorderAngVde,[-45.875,-40.2]);
+        polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
+        mixedEdge1Rhi = [0.038,0.038,0.038];
+        mixedEdge1 = line(mixedEdge1Rhi,[-46.2,-22,-8]);
+        mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
+        mixedEdge15Vde = rhwToRhi([66.5,68.6274],[-46.2,-45.9])/100 - 1;
+        mixedEdge15 = line(mixedEdge15Vde,[-46.2,-45.9]);
+        mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
+        mixedEdge2Vde = rhwToRhi(hd.Mixed.waterBounds(2,10:end)+0.025, hd.Mixed.TempBounds(2,10:end)+0.025)/100 - 1;
+        mixedEdge2 = line(mixedEdge2Vde, hd.Mixed.TempBounds(2,10:end)+0.025);
+        mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+
         hold on
         
         % Plot isohumes and ventilation lines
@@ -397,27 +443,27 @@ switch castInTermsOf
         %maxVentLine.LineWidth = 1;
         
         % On-figure labels for growth modes
-        lFace = text(0.01,-6,'Face (column-like)','BackgroundColor',hd.ColumnLike.TextbookColor);
+        lFace = text(0.01,-6,'Columnar','BackgroundColor',hd.ColumnLike.TextbookColor);
         lFace.FontName = 'Lato'; lFace.FontSize = 16;
-        lEdge = text(0.08,-15.8,'Edge (plate-like)');
+        lEdge = text(0.08,-15.8,'Tabular');
         lEdge.FontName = 'Lato'; lEdge.FontSize = 16;
-        lCornerBranched = text(0.165,-12.6,'Corner');
+        lCornerBranched = text(0.165,-12.6,'Side');
         lCornerBranched.FontName = 'Lato'; lCornerBranched.FontSize = 16;
         lCornerBranched.Rotation = 30;
-        lCornerBranchedLine2 = text(0.18,-12.6,'(branched)');
-        lCornerBranchedLine2.FontName = 'Lato'; lCornerBranchedLine2.FontSize = 14;
+        lCornerBranchedLine2 = text(0.18,-12.6,'branched');
+        lCornerBranchedLine2.FontName = 'Lato'; lCornerBranchedLine2.FontSize = 16;
         lCornerBranchedLine2.Rotation = 30;
-        lCornerSector = text(0.22,-18.03,'Corner');
+        lCornerSector = text(0.22,-18.03,'Branched');
         lCornerSector.FontName = 'Lato'; lCornerSector.FontSize = 16;
         lCornerSector.Rotation = 30;
-        lCornerSectorLine2 = text(0.235,-18.03,'(sector)');
-        lCornerSectorLine2.FontName = 'Lato'; lCornerSectorLine2.FontSize = 14;
-        lCornerSectorLine2.Rotation = 30;
-        lPolycrystalsPlatelike = text(0.26,-32,'Platelike polycrystalline');
+%         lCornerSectorLine2 = text(0.235,-18.03,'(sector)');
+%         lCornerSectorLine2.FontName = 'Lato'; lCornerSectorLine2.FontSize = 14;
+%         lCornerSectorLine2.Rotation = 30;
+        lPolycrystalsPlatelike = text(0.26,-32,'Tabular polycrystalline');
         lPolycrystalsPlatelike.FontName = 'Lato'; lPolycrystalsPlatelike.FontSize = 16;
         lPolycrystalsColumnar = text(0.32,-49.5,'Columnar polycrystalline');
         lPolycrystalsColumnar.FontName = 'Lato'; lPolycrystalsColumnar.FontSize = 16;
-        lMixed = text(0.02,-19.5,'Mixed (polycrystalline, edge, face, and equiaxed)','BackgroundColor',hd.Mixed.TextbookColor);
+        lMixed = text(0.02,-19.5,'Multiple (tabular, columnar, polycrystalline)','BackgroundColor',hd.Mixed.TextbookColor);
         lMixed.FontName = 'Lato'; lMixed.FontSize = 16;
         lMixed.Rotation = 90;
         
@@ -485,7 +531,7 @@ switch castInTermsOf
         %% Ice growth diagram in terms of vapor density excess
         % Modifiable variables
         xlimRange = [0 0.351];
-        ylimRange = [-70 0];
+        ylimRange = [-56.5 0];
         
         % Draw the growth types
         plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.TextbookColor);
@@ -540,6 +586,34 @@ switch castInTermsOf
         %unnaturalVent.EdgeColor = 'none';
         unnatural105 = patch(hd.unnatural105.vaporExcBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
         unnatural105.EdgeColor = 'none';
+
+        brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
+        tabEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+        tabEdge = line(tabEdgeVde,[-4.05,-4.05]);
+        tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
+        colEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+        colEdge = line(colEdgeVde,[-8.05,-8.05]);
+        colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
+        varEdgeVde = rhwToVaporExc(ones(1,141)*100.05, TlineStandardC(231:371));
+        varEdge = line(varEdgeVde,TlineStandardC(231:371));
+        varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
+        polyBorderStrgVde = rhwToVaporExc([89.8227,105],[-40.2,-40.2]);
+        polyBorderStrg = line(polyBorderStrgVde,[-40.2,-40.2]);
+        polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
+        polyBorderAngVde = rhwToVaporExc([68.6524,89.8227],[-45.875,-40.2]);
+        polyBorderAng = line(polyBorderAngVde,[-45.875,-40.2]);
+        polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
+        mixedEdge1Vde = rhwToVaporExc([66.5,83.4409,95.8841],[-46.2,-22,-8]);
+        mixedEdge1 = line(mixedEdge1Vde,[-46.2,-22,-8]);
+        mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
+        mixedEdge15Vde = rhwToVaporExc([66.5,68.6274],[-46.2,-45.9]);
+        mixedEdge15 = line(mixedEdge15Vde,[-46.2,-45.9]);
+        mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
+        mixedEdge2Vde = rhwToVaporExc(hd.Mixed.waterBounds(2,10:end)+0.025, hd.Mixed.TempBounds(2,10:end)+0.025);
+        mixedEdge2 = line(mixedEdge2Vde, hd.Mixed.TempBounds(2,10:end)+0.025);
+        mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+
+
         hold on
         
         % Plot other lines
@@ -633,25 +707,25 @@ switch castInTermsOf
         %lVentVde.Rotation = 7;
         
         % On-figure growth mode labels
-        lEdgeWarmVde = text(0.01,-2,'Edge (plate-like)');
+        lEdgeWarmVde = text(0.01,-2,'Tabular');
         lEdgeWarmVde.FontName = 'Lato'; lEdgeWarmVde.FontSize = 16;
-        lFaceVde = text(0.07,-6,'Face (column-like)');
+        lFaceVde = text(0.07,-6,'Columnar');
         lFaceVde.FontName = 'Lato'; lFaceVde.FontSize = 16;
-        lEdgeColdVde = text(0.12,-14,'Edge (plate-like)');
+        lEdgeColdVde = text(0.12,-14,'Tabular');
         lEdgeColdVde.FontName = 'Lato'; lEdgeColdVde.FontSize = 16;
-        lCornerSectorVde = text(0.235,-10,'Corner ');
+        lCornerSectorVde = text(0.235,-10,'Branched');
         lCornerSectorVde.FontName = 'Lato'; lCornerSectorVde.FontSize = 16;
-        lCornerSectorVdeSubtype = text(0.2518,-9.95,'(sector)');
-        lCornerSectorVdeSubtype.FontName = 'Lato'; lCornerSectorVdeSubtype.FontSize = 14;
-        lCornerBranchedVde = text(0.265,-15.5,'Corner');
+%         lCornerSectorVdeSubtype = text(0.2518,-9.95,'(sector)');
+%         lCornerSectorVdeSubtype.FontName = 'Lato'; lCornerSectorVdeSubtype.FontSize = 14;
+        lCornerBranchedVde = text(0.265,-15.5,'Side');
         lCornerBranchedVde.FontName = 'Lato'; lCornerBranchedVde.FontSize = 16;
-        lCornerBranchedVde2 = text(0.271,-14.42,'(branched)');
-        lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 14;
-        lPolycrystalsPlatelikeVde = text(0.085,-26,'Platelike polycrystalline');
+        lCornerBranchedVde2 = text(0.271,-14.42,'branched');
+        lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 16;
+        lPolycrystalsPlatelikeVde = text(0.085,-26,'Tabular polycrystalline');
         lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 16;
         lPolycrystalsColumnarVde = text(0.0034,-48.05,{'Columnar', 'polycrystalline'});
         lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 16;
-        lMixedVde = text(0.003,-16.1,{'Mixed (polycrystalline,', 'edge, face, and equiaxed)'});
+        lMixedVde = text(0.003,-16.1,{'Multiple (polycrystalline,', 'tabular, columnar)'});
         lMixedVde.FontName = 'Lato'; lMixedVde.FontSize = 16;
         
         % Diagram settings
