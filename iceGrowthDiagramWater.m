@@ -1,17 +1,18 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig,yRight)
 %%iceGrowthDiagramWater
     %Function to plot an ice growth diagram in terms of relative humidity
     %with respect to water. This is the version of the diagram highlighted
     %in the submitted paper this code accompanies, tentatively:
-    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, submitted 2020: Revisiting
-    % Diagrams of Ice Growth Environments, Bulletin of the American
-    % Meteorological Society, submitted.
+    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, submit 2020/revised 2022:
+    % Revisiting Diagrams of Ice Growth Environments, Bulletin of the American
+    % Meteorological Society.
     %
     %We strongly recommend this diagram in educational and research
     %contexts outside of specific applications where the relative humidity
     %with respect to ice or vapor density excess versions are necessary.
     %
-    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
+    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig,yRight)
+    % iceGrowthDiagram() is equivalent to iceGrowthDiagramWater(hd,0,1,'southoutside',[55 105],[-70 0],0,1)
     %
     %Output
     %fig: figure handle for the ice growth diagram
@@ -22,21 +23,22 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legL
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
     %ventLog: logical 1/0 to show ventilation
     %legLog: logical 1/0 to show the legend
-    %legendLocStr: legend location string ('southoutside' is standard)
+    %legendLocStr: legend location string ('southoutside' is default)
     %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [55 124])
     %ylimRange: determines range for the y-axis (in deg C), input as
     %   2-element array in increasing order (i.e. [-56.5 0]). Minimum
     %   temperature cannot be less than -70 degrees Celsius.
     %printFig: 1/0 to save/not save figure as PNG (0 by default)
+    %yRight: 1/0 to enable/disable right y-axis (ICAO atmosphere, 1 by default)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Edits made as part of HON499: Capstone II
-    %Version date: 10/31/2020
-    %Last major revision: 10/31/2020
+    %Version date: 6/2/2022
+    %Last major revision: 6/1/2022
     %
-    %See also makeGrowthDiagramStruct, iceSupersatToRH
+    %See also makeGrowthDiagramStruct
     %
 
 %% Check variables
@@ -60,7 +62,7 @@ if ~exist('ventLog','var')
     ventLog = 0;
 end
 if ~exist('legLog','var')
-    legLog = 0; %DISABLE LEGEND FOR TROUBLESHOOTING
+    legLog = 1;
     disp('Legend enabled by default')
 end
 if ~exist('legendLocStr','var')
@@ -85,6 +87,9 @@ if legendLocStr == 0
 end
 if ~exist('printFig','var')
     printFig = 0;
+end
+if ~exist('yRight','var')
+    yRight = 1;
 end
 
 %% Make s-T diagram
@@ -156,7 +161,7 @@ tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
 tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
 colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
 colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
-varEdge = line([100.05,100.05],[-8,-22]);
+varEdge = line([100.1,100.1],[-8,-22]);
 varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
 polyBorderStrg = line([89.8227,105],[-40.2,-40.2]);
 polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
@@ -192,7 +197,7 @@ legendEntries(end+1) = eswLine_Handles.p105Plot;
 legendTexts{end+1} = 'RH_w (10% intervals)';
 legendTexts{end+1} = 'RH_w (100%, 102.5%, 105%)';
 
-for rhic = 60:-10:-100 %input is an ice supersturation, -100% ice supersaturation = 0% ice saturation
+for rhic = 60:-10:-100 %-100% ice supersaturation = 0% ice saturation
     if rhic > 0
         actRhiHandle = num2str(rhic);
     else
@@ -210,16 +215,20 @@ legendTexts{end+1} = 'RH_{ice} (10% intervals, 60% min, 160% max)';
 %% Diagram settings
 axe = gca;
 axe.FontName = 'Lato';
-axe.FontSize = 18;
+axe.FontSize = 20;
 
-yyaxis right
-[zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
-axe.YTick = tempsInRange;
-yticklabels(zLabels);
-ylim(rightLimits)
-axe.Layer = 'top';
-yLab = ylabel(icaoAxLabel);
-yLab.FontName = 'Lato Bold';
+yyaxis right %Add ICAO reference atmosphere
+if yRight == 1
+    [zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
+    axe.YTick = tempsInRange;
+    yticklabels(zLabels);
+    ylim(rightLimits)
+    axe.Layer = 'top';
+    yLab = ylabel(icaoAxLabel);
+    yLab.FontName = 'Lato Bold';
+else
+    yticks([])
+end
 
 yyaxis left %Changes what axis dot notation refers
 ylim(ylimRange)
@@ -245,7 +254,7 @@ if legLog == 1
     leg = legend(legendEntries,legendTexts);
     leg.Location = legendLocStr;
     leg.NumColumns = 3;
-    leg.FontSize = 14;
+    leg.FontSize = 16;
 else
     %no legend
 end

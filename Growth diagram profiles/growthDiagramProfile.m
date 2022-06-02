@@ -66,23 +66,26 @@ if strcmp(phaseFlag,'ice')==1
     isohumesLog = 1; ventLog = 0; legLogForGeneration = 1;
     legLocation = 'southeast';
     satLim = [0,0.6]; %[0,0.6] is standard
-    tempLim = [-56.5,0]; % [-56.5,0] is standard
-    [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
+    tempLim = [-70,0]; % [-70,0] is standard
+    yRight = 0; % Disable ICAO reference when plotting real data
+    [fig,legendEntries,legendText] = iceGrowthDiagram(hd,isohumesLog,ventLog,legLogForGeneration,legLocation,satLim,tempLim,0,yRight); %Plot ice diagram without saving
 elseif strcmp(phaseFlag,'water')==1
     legLogForGeneration = 1;
     legLocation = 'southoutside';
     ventLog = 0;
     satLim = [55,105]; %[55 105] is standard without ventilation; [55 124] with ventilation
-    tempLim = [-56.5,0]; % [-56.5,0] is standard
-    [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
+    tempLim = [-70,0]; % [-70,0] is standard
+    yRight = 0; %Disable ICAO reference when plotting real data
+    [fig,legendEntries,legendText] = iceGrowthDiagramWater(hd,ventLog,legLogForGeneration,legLocation,satLim,tempLim,0,yRight); %Plot ice diagram without saving
 elseif strcmp(phaseFlag,'vde')==1
     legLogForGeneration = 1;
     legLocation = 'northeast';
     isohumeLog = 1;
     ventLog = 0;
     satLim = [0,0.35]; %[55 105] is standard without ventilation; [55 124] with ventilation
-    tempLim = [-56.5,0]; % [-56.5,0] is standard
-    [fig,legendEntries,legendText] = iceGrowthDiagramVaporExc(hd,isohumeLog,ventLog,legLogForGeneration,legLocation,satLim,tempLim); %Plot the growth diagram
+    tempLim = [-70,0]; % [-70,0] is standard
+    yRight = 0; %Disable ICAO reference when plotting real data
+    [fig,legendEntries,legendText] = iceGrowthDiagramVaporExc(hd,isohumeLog,ventLog,legLogForGeneration,legLocation,satLim,tempLim,0,yRight); %Plot the growth diagram
 end
 if length(timeIndex)==1
     % Autogenerate title for single profiles

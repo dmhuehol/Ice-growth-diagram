@@ -5,12 +5,12 @@
 % Written by: Daniel Hueholt
 % North Carolina State University
 % Research Assistant at Environment Analytics
-% Version date: 10/31/2020
-% Last major revision: 10/31/2020
+% Version date: 5/26/2022
+% Last major revision: 5/26/2022
 
 %% Fig: okx_djf1415
 load('okx_djf1415.mat'); %Load radiosonde data for Upton, NY DJF 2014-2015
-growthDiagramProfile(okx_djf1415,1:178,1,'water',0,1);
+growthDiagramProfile(okx_djf1415,1:178,1,'water',0,0);
 % Enter 'Dec-Feb 2014-2015' when prompted for date
 % Enter 'Upton, NY' when prompted for location
 
@@ -28,9 +28,7 @@ growthDiagramProfile(dnr_djf1415,1:179,1,'water',0,1);
 
 %% Fig: Subfigure for sequences
 [hd] = makeGrowthDiagramStruct(1,1);
-iceGrowthDiagramWater(hd,0,0,[],[90 105],[-23,-7]); %EC sequence
-iceGrowthDiagramWater(hd,0,0,[],[90 105],[-15,0]); %FE sequence
-iceGrowthDiagramWater(hd,0,0,[],[65 105],[-50,-30]); %PcPp sequence
+iceGrowthDiagramWater(hd,0,0,[],[90 105],[-25,0]); %For all sequences
 
 %% Bonus content
 %% Fig: okx_djf1920

@@ -1,10 +1,11 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig,yRight)
 %%iceGrowthDiagram
     %Function to plot an ice growth diagram in terms of relative humidity
     %with respect to ice. Returns the figure handle so further
     %modifications are possible.
     %
-    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRang,ylimRange,printFig)
+    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRang,ylimRange,printFig,yRight)
+    % iceGrowthDiagram() is equivalent to iceGrowthDiagram(hd,1,0,1,'southoutside',[0 0.6],[-70 0],0,1)
     %
     %Output
     %fig: figure handle for the ice growth diagram
@@ -26,15 +27,16 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,isohumeFlag,ventL
     %    array in increasing order (default: [-56.5 0]). Minimum temperature cannot
     %    be less than -70 degrees Celsius.
     %printFig: 1/0 to save/not save figure as PNG (0 by default)
+    %yRight: 1/0 to enable/disable right y-axis (ICAO atmosphere, 1 by default)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Edits made as part of HON499: Capstone II
-    %Version date: 10/31/2020
-    %Last major revision: 10/31/2020
+    %Version date: 6/2/2022
+    %Last major revision: 6/1/2022
     %
-    %See also makeGrowthDiagramStruct, eswLine, ylimitsForIceDiagram
+    %See also makeGrowthDiagramStruct
     %
 
 %% Check variables
@@ -51,7 +53,7 @@ if ~exist('ventLog','var')
     disp('Ventilation line disabled by default')
 end
 if ~exist('legLog','var')
-    legLog = 0; %DISABLE LEGEND WHILE TROUBLESHOOTING
+    legLog = 1;
     disp('Legend enabled by default')
 end
 if ~exist('legendLocStr','var')
@@ -68,6 +70,9 @@ if ~exist('ylimRange','var')
 end
 if ~exist('printFig','var')
     printFig = 0;
+end
+if ~exist('yRight','var')
+    yRight = 1;
 end
 
 %% Make s-T diagram
@@ -138,7 +143,7 @@ tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
 colEdgeRhi = [0, rhwToRhi(105,-8.05)/100 - 1];
 colEdge = line(colEdgeRhi,[-8.05,-8.05]);
 colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
-varEdgeRhi = rhwToRhi(ones(1,141)*100.05, TlineStandardC(231:371))/100 - 1;
+varEdgeRhi = rhwToRhi(ones(1,141)*100.25, TlineStandardC(231:371))/100 - 1;
 varEdge = line(varEdgeRhi,TlineStandardC(231:371));
 varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
 polyBorderStrgRhi = rhwToRhi([89.8227,105],[-40.2,-40.2])/100 - 1;
@@ -214,16 +219,20 @@ end
 %% Diagram settings
 axe = gca;
 axe.FontName = 'Lato';
-axe.FontSize = 18;
+axe.FontSize = 20;
 
-yyaxis right
-[zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
-axe.YTick = tempsInRange;
-yticklabels(zLabels);
-ylim(rightLimits)
-axe.Layer = 'top';
-yLab = ylabel(icaoAxLabel);
-yLab.FontName = 'Lato Bold';
+yyaxis right %ICAO reference
+if yRight == 1
+    [zLabels, tempsInRange, rightLimits, icaoAxLabel] = ylimitsForIceDiagram(ylimRange);
+    axe.YTick = tempsInRange;
+    yticklabels(zLabels);
+    ylim(rightLimits)
+    axe.Layer = 'top';
+    yLab = ylabel(icaoAxLabel);
+    yLab.FontName = 'Lato Bold';
+else
+    yticks([])
+end
 
 yyaxis left %Changes what axis dot notation refers
 ylim(ylimRange)
@@ -247,7 +256,7 @@ if legLog==1
     leg = legend(legendEntries,legendTexts);
     leg.Location = legendLocStr;
     leg.NumColumns = 3;
-    leg.FontSize = 14;
+    leg.FontSize = 16;
 else
     %no legend
 end
