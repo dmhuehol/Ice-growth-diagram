@@ -1,4 +1,4 @@
-function [zLabels, tempsInRange, outputTempSpan] = ylimitsForIceDiagram(inputTempSpan)
+function [zLabels, tempsInRange, outputTempSpan, icaoAxLabel] = ylimitsForIceDiagram(inputTempSpan)
 %%ylimitsForIceDiagram
     %Generates labels, tick marks, and other relevant information for the
     %y-axes on the ice diagram given an input temperature range.
@@ -12,6 +12,7 @@ function [zLabels, tempsInRange, outputTempSpan] = ylimitsForIceDiagram(inputTem
     %outputTempSpan: input temperature span is in format [min max], output
     %is in format [-max -min]. This is required for the right-hand y-axis
     %to plot correctly on the ice diagram.
+    %icaoAxLabel: axis label for right y-axis on diagram
     %
     %Input
     %inputTempSpan: temperature span in format [min max]. Most common input
@@ -20,18 +21,19 @@ function [zLabels, tempsInRange, outputTempSpan] = ylimitsForIceDiagram(inputTem
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
-    %Last major revision: 10/31/2020
+    %Version date: 3/28/2022
+    %Last major revision: 3/28/2022
     %
     
+icaoAxLabel = ['Height above 0' char(176) 'C level in m (ICAO standard troposphere)'];
+
 classNum = {'numeric'};
 attribute = {'>=',-70};
 validateattributes(inputTempSpan,classNum,attribute); %Check to ensure numeric greater than -70C (diagram does not go farther than -70C)
 
 possibleTemps = [0 2 4 6 8 10 12 14 16 18 20 22 30 40 50 56.5 60 70];
 % -56.5 deg C is tropopause, 11000 m is height of tropopause
-z = [2300 2625 2925 3225 3550 3850 4150 4475 4775 5075 5400 5700 6925 8450 10000 11000 71750 76750];
-% Note massive jump in heights for final 2 points is due to the leap to mesospheric heights
+z = [2300 2625 2925 3225 3550 3850 4150 4475 4775 5075 5400 5700 6925 8450 10000 11000 NaN NaN];
 possibleZ = z-2300; %Height above 0C line
 
 inputTempSpan = -inputTempSpan;
@@ -41,7 +43,11 @@ outputTempSpan = fliplr(inputTempSpan); %Flip these for right-hand y-axis plotti
 
 zLabels = {};
 for c = length(zInRange):-1:1
-    zLabels{c} = num2str(zInRange(c));
+    if ~isnan(zInRange(c))
+        zLabels{c} = num2str(zInRange(c));
+    else
+        continue
+    end
 end
 
 end

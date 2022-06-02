@@ -91,7 +91,7 @@ if crystalLog==1
     esw_sp = 6.1094.*exp((17.625.*T_sp)./(243.04+T_sp));
     esi_sp = 6.1121.*exp((22.587.*T_sp)./(273.86+T_sp));
     
-    hd.Plates.Habit = 'Edge (plate-like)'; %Plates
+    hd.Plates.Habit = 'Tabular'; %Plates
     hd.Plates.Color = [243 139 156]./255;
     hd.Plates.TextbookColor = [252 222 226]./255;
     hd.Plates.TempBounds = [0 0 -4 -4];
@@ -99,7 +99,7 @@ if crystalLog==1
     hd.Plates.waterBounds = iceSupersatToRH(hd.Plates.supersatBounds.*100,hd.Plates.TempBounds);
     hd.Plates.vaporExcBounds = iceSupersatToVaporExc(hd.Plates.supersatBounds,hd.Plates.TempBounds);
 
-    hd.ColumnLike.Habit = 'Face (column-like)'; %Column-like
+    hd.ColumnLike.Habit = 'Columnar'; %Column-like
     hd.ColumnLike.Color = [165 162 221]./255;
     hd.ColumnLike.TextbookColor = [204 202 235]./255;
     hd.ColumnLike.TempBounds = [-4 -4 -8 -8];
@@ -107,7 +107,7 @@ if crystalLog==1
     hd.ColumnLike.waterBounds = iceSupersatToRH(hd.ColumnLike.supersatBounds.*100,hd.ColumnLike.TempBounds);
     hd.ColumnLike.vaporExcBounds = iceSupersatToVaporExc(hd.ColumnLike.supersatBounds,hd.ColumnLike.TempBounds);
     
-    hd.VariousPlates.Habit = 'Edge (various plates)'; %Various plates
+    hd.VariousPlates.Habit = 'Tabular'; %Various plates
     hd.VariousPlates.Color = hd.Plates.Color;
     hd.VariousPlates.TextbookColor = hd.Plates.TextbookColor;
     Tupper = -8; Tlower = -22;
@@ -118,7 +118,7 @@ if crystalLog==1
     hd.VariousPlates.waterBounds = iceSupersatToRH(hd.VariousPlates.supersatBounds.*100,hd.VariousPlates.TempBounds);
     hd.VariousPlates.vaporExcBounds = iceSupersatToVaporExc(hd.VariousPlates.supersatBounds,hd.VariousPlates.TempBounds);
     
-    hd.SectorPlates.Habit = 'Corner (sector)'; %Sector plates
+    hd.SectorPlates.Habit = 'Branched'; %Sector plates
     hd.SectorPlates.Color =  [218 146 56]./255;
     hd.SectorPlates.TextbookColor = [245 224 198]./255;
     hd.SectorPlates.TempBounds = [-8 -8 -12.2 -12.2; -12.2 -12.2 -17.6 -17.6; -17.6 -17.6 -22 -22];
@@ -126,7 +126,7 @@ if crystalLog==1
     hd.SectorPlates.waterBounds = iceSupersatToRH(hd.SectorPlates.supersatBounds.*100,hd.SectorPlates.TempBounds);
     hd.SectorPlates.vaporExcBounds = iceSupersatToVaporExc(hd.SectorPlates.supersatBounds,hd.SectorPlates.TempBounds);
     
-    hd.Dendrites.Habit = 'Corner (branched)'; %Dendrites
+    hd.Dendrites.Habit = 'Side branched'; %Dendrites
     hd.Dendrites.Color = [247 214 153]./255;
     hd.Dendrites.TextbookColor = [253 243 225]./255;
     hd.Dendrites.TempBounds = [-12.7 -12.7 -17.1 -17.1];
@@ -134,7 +134,7 @@ if crystalLog==1
     hd.Dendrites.waterBounds = iceSupersatToRH(hd.Dendrites.supersatBounds.*100,hd.Dendrites.TempBounds);
     hd.Dendrites.vaporExcBounds = iceSupersatToVaporExc(hd.Dendrites.supersatBounds,hd.Dendrites.TempBounds);
     
-    hd.PolycrystalsP.Habit = 'Platelike polycrystalline';
+    hd.PolycrystalsP.Habit = 'Tabular polycrystalline';
     hd.PolycrystalsP.Color = [89 25 42]./255;
     hd.PolycrystalsP.TextbookColor = [207 189 195]./255;
     hd.PolycrystalsP.TempBounds = [-46.6 -40.2 -22 -22; -40.2 -40.2 -22 -22];
@@ -150,7 +150,7 @@ if crystalLog==1
     hd.PolycrystalsC.waterBounds = iceSupersatToRH(hd.PolycrystalsC.supersatBounds.*100,hd.PolycrystalsC.TempBounds);
     hd.PolycrystalsC.vaporExcBounds = iceSupersatToVaporExc(hd.PolycrystalsC.supersatBounds,hd.PolycrystalsC.TempBounds);
     
-    hd.Mixed.Habit = 'Mixed (polycrystalline, edge, face, and equiaxed)';
+    hd.Mixed.Habit = 'Multiple';
     hd.Mixed.Color = [143 111 73]./255;
     hd.Mixed.TextbookColor = [223 214 203]./255;
     hd.Mixed.TempBounds = [linspace(-8,-46.6,10) -46.6 -22 -8; linspace(-46.6,-70,9) -70 -60 -55 -45.9];
