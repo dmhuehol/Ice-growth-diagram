@@ -53,7 +53,7 @@ The code will automatically set inputs, including the necessary basic hd structu
 2. `iceGrowthDiagramVaporExc(hd,1,0,1,'southoutside',[0 0.351],[-70 0],0,1)`
 
 ### Ice growth diagram: relative humidity with respect to water (textbook edition)
-![Ice growth diagram with respect to water](Demo/igd_textbook.png)
+![Ice growth diagram with respect to water](Demo/igd_rhw_textbook.png)
 This code can also be used to generate analogous images in terms of relative humidity with respect to ice or vapor density excess.
 #### Code to replicate
 1. `iceGrowthDiagramTextbook`
@@ -62,7 +62,7 @@ This code can also be used to generate analogous images in terms of relative hum
 
 ## Converting between ice supersaturation and vapor density excess
 Two common units of supersaturation are ice supersaturation (percent or decimal) or vapor density excess beyond ice saturation (g/m^3). Converting between the two units is possible, but not intuitive. Use `iceSupersatToVaporExc` to convert between these units.
-### Example 
+### Example
 Given an ice supersaturation of 3.8% at -8 deg Celsius, what is the vapor density excess at the same temperature?  
 1. `[vde] = iceSupersatToVaporExc(0.038,-8)`  
 This returns `vde = 0.0962`. Thus a vapor density excess of 0.096 g/m^3 corresponds to an ice supersaturation of 3.8% at -8 deg Celsius!  
