@@ -16,13 +16,13 @@ growthDiagramProfile(okx_djf1415,1:178,1,'water',0,0);
 
 %% Fig: utq_djf1415
 load('utq_djf1415.mat'); %Load radiosonde data for Utqiagvik, AK DJF 2014-2015
-growthDiagramProfile(utq_djf1415,1:180,1,'water',0,1);
+growthDiagramProfile(utq_djf1415,1:180,1,'water',0,0);
 % Enter 'Dec-Feb 2014-2015' when prompted for date
 % Enter 'Utqiagvik, AK' when prompted for location
 
 %% Fig: dnr_djf1415
 load('dnr_djf1415.mat'); % Load radiosonde data for Denver, CO DJF 2014-2015
-growthDiagramProfile(dnr_djf1415,1:179,1,'water',0,1);
+growthDiagramProfile(dnr_djf1415,1:179,1,'water',0,0);
 % Enter 'Dec-Feb 2014-2015' when prompted for date
 % Enter 'Denver, CO' when prompted for location
 
