@@ -123,9 +123,9 @@ dendrites.EdgeColor = 'none';
 variousplates = patch(hd.VariousPlates.vaporExcBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.Color);
 variousplates.EdgeColor = 'none';
 
-intermediatePlatesP = patch([hd.VariousPlates.vaporExcBounds(end),hd.VariousPlates.vaporExcBounds(end)-3,eswLineData(351),eswLineData(371)],[-22 -20 -20 -22],reshape([hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediatePlatesP = patch([hd.VariousPlates.vaporExcBounds(end),hd.VariousPlates.vaporExcBounds(end)-3,eswLineData(351),eswLineData(371)],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.PolycrystalsP.Color],4,[],3));
 intermediatePlatesP.EdgeColor = 'none';
-intermediateSectorP = patch([eswLineData(351) 0.9113 0.9113 eswLineData(371)],[-20 -20 -22 -22],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediateSectorP = patch([eswLineData(351) 0.9113 0.9113 eswLineData(371)],[-20 -20 -22.1 -22.1],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color; hd.PolycrystalsP.Color],4,[],3));
 intermediateSectorP.EdgeColor = 'none';
 
 intermediateSPD_floor = patch([hd.Dendrites.vaporExcBounds(1),hd.Dendrites.vaporExcBounds(1) hd.Dendrites.vaporExcBounds(2) hd.Dendrites.vaporExcBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));

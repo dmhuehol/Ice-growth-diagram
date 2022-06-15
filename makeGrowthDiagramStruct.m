@@ -110,10 +110,10 @@ if crystalLog==1
     hd.VariousPlates.Habit = 'Tabular'; %Various plates
     hd.VariousPlates.Color = hd.Plates.Color;
     hd.VariousPlates.TextbookColor = hd.Plates.TextbookColor;
-    Tupper = -8; Tlower = -22;
+    Tupper = -8; Tlower = -20;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);
-    hd.VariousPlates.TempBounds = [-8 TlineStandardC -22];
+    hd.VariousPlates.TempBounds = [-8 TlineStandardC -20];
     hd.VariousPlates.supersatBounds = [0.038 eswLineData 0.038];
     hd.VariousPlates.waterBounds = iceSupersatToRH(hd.VariousPlates.supersatBounds.*100,hd.VariousPlates.TempBounds);
     hd.VariousPlates.vaporExcBounds = iceSupersatToVaporExc(hd.VariousPlates.supersatBounds,hd.VariousPlates.TempBounds);
