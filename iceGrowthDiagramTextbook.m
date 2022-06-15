@@ -162,12 +162,6 @@ switch castInTermsOf
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineStyle = ':';
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).LineWidth = 0.5;
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot3']).Color = [144 143 143]./255;
-            elseif rhwc == 70
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']) = plot([rhwc rhwc],[-37.7,0]);
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']) = plot([rhwc rhwc],[-70,-39.8]);
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineStyle = ':'; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineStyle = ':';
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).LineWidth = 0.5; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).LineWidth = 0.5;
-                eswLine_Handles.(['p', actHandleNoPunct, 'Plot1']).Color = [144 143 143]./255; eswLine_Handles.(['p', actHandleNoPunct, 'Plot2']).Color = [144 143 143]./255;
             else
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).LineStyle = ':';
