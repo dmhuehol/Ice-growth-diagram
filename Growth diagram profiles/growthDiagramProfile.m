@@ -208,14 +208,14 @@ legendEntries(end+1) = pcRest;
 legendText{end+1} = '>10 km';
 
 
-leg = legend(legendEntries,legendText);
-if legLog==1
-    leg.Location = legLocation;
-    leg.FontSize = 14;
-    leg.NumColumns = 3;
-else
-    leg.Visible = 'off';
-end
+% leg = legend(legendEntries,legendText);
+% if legLog==1
+%     leg.Location = legLocation;
+%     leg.FontSize = 14;
+%     leg.NumColumns = 3;
+% else
+%     leg.Visible = 'off';
+% end
 
 set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
 set(gcf,'renderer','Painters')

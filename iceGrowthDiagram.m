@@ -112,14 +112,16 @@ intermediatePlatesP.EdgeColor = 'none';
 intermediateSectorP = patch([eswLineData(351) 0.6 0.6 eswLineData(371)],[-20 -20 -22.1 -22.1],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color; hd.PolycrystalsP.Color],4,[],3));
 intermediateSectorP.EdgeColor = 'none';
 
-intermediateSPD_floor = patch([hd.Dendrites.supersatBounds(1),hd.Dendrites.supersatBounds(1) hd.Dendrites.supersatBounds(2) hd.Dendrites.supersatBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
+intermediateSPD_floor = patch([0.15,0.16,0.43,0.4212], [hd.SectorPlates.TempBounds(5)*0.97,-13.5,-13.5,hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.supersatBounds(4) hd.Dendrites.supersatBounds(4) hd.Dendrites.supersatBounds(1)], [hd.SectorPlates.TempBounds(5) hd.SectorPlates.TempBounds(11) hd.Dendrites.TempBounds(3),hd.Dendrites.TempBounds(2)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_wall = patch([0.2103,0.1401,0.16,0.2121], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_wall.EdgeColor = 'none';
-intermediateSPD_ceiling = patch([hd.Dendrites.supersatBounds(4),hd.Dendrites.supersatBounds(4) hd.SectorPlates.supersatBounds(6) hd.SectorPlates.supersatBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_ceiling = patch([0.21,0.2224,0.6084,0.5244], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_remainingTriangle = patch([hd.SectorPlates.supersatBounds(5),hd.Dendrites.supersatBounds(1) hd.Dendrites.supersatBounds(1)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(1) hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
-intermediateSPD_remainingTriangle.EdgeColor = 'none';
+intermediateSPD_triangleTop = patch([0.2103,0.2224,0.21], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],3,[],3));
+intermediateSPD_triangleTop.EdgeColor = 'none';
+intermediateSPD_triangleBottom = patch([0.1401,0.16,0.15], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.supersatBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
 mixed1.EdgeColor = 'none';

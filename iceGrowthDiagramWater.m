@@ -129,15 +129,15 @@ intermediatePlatesP.EdgeColor = 'none';
 intermediateSectorP = patch([100 100 200 200],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color],4,[],3));
 intermediateSectorP.EdgeColor = 'none';
 
-intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5) hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
+intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([hd.SectorPlates.waterBounds(2,3) hd.SectorPlates.waterBounds(2,2) hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(4)], [hd.SectorPlates.TempBounds(3) hd.SectorPlates.TempBounds(2) hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_wall = patch([hd.SectorPlates.waterBounds(2,3)*0.995 hd.SectorPlates.waterBounds(2,2)*0.995 hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(4)], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_wall.EdgeColor = 'none';
-intermediateSPD_ceiling = patch([hd.Dendrites.waterBounds(4),hd.Dendrites.waterBounds(4) hd.SectorPlates.waterBounds(6) hd.SectorPlates.waterBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11) hd.SectorPlates.TempBounds(11),hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_ceiling = patch([hd.Dendrites.waterBounds(4),hd.Dendrites.waterBounds(4) hd.SectorPlates.waterBounds(6) hd.SectorPlates.waterBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_triangleTop = patch([hd.SectorPlates.waterBounds(2,3) hd.Dendrites.waterBounds(4) hd.Dendrites.waterBounds(1)], [hd.SectorPlates.TempBounds(3) hd.Dendrites.TempBounds(3) hd.SectorPlates.TempBounds(3)], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleTop = patch([101.08, 102.093, 102.093], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],3,[],3));
 intermediateSPD_triangleTop.EdgeColor = 'none';
-intermediateSPD_triangleBottom = patch([hd.SectorPlates.waterBounds(2,2), hd.Dendrites.waterBounds(1), hd.Dendrites.waterBounds(1)], [hd.SectorPlates.TempBounds(2), hd.Dendrites.TempBounds(1), hd.SectorPlates.TempBounds(2)],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleBottom = patch([101.365,102.249,102.249], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
 intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
@@ -161,7 +161,7 @@ tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
 tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
 colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
 colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
-varEdge = line([100.1,100.1],[-8,-22]);
+varEdge = line([100.1,100.1],[-8,-22]); %100.1 normally, 100.04 for Figure 7
 varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
 polyBorderStrg = line([89.8227,105],[-40.2,-40.2]);
 polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
@@ -250,14 +250,14 @@ end
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 
-if legLog == 1
-    leg = legend(legendEntries,legendTexts);
-    leg.Location = legendLocStr;
-    leg.NumColumns = 3;
-    leg.FontSize = 16;
-else
-    %no legend
-end
+% if legLog == 1
+%     leg = legend(legendEntries,legendTexts);
+%     leg.Location = legendLocStr;
+%     leg.NumColumns = 3;
+%     leg.FontSize = 16;
+% else
+%     %no legend
+% end
 
 set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
 set(gcf,'renderer','Painters')

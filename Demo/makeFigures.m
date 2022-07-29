@@ -10,7 +10,7 @@
 
 %% Fig: okx_djf1415
 load('okx_djf1415.mat'); %Load radiosonde data for Upton, NY DJF 2014-2015
-growthDiagramProfile(okx_djf1415,1:178,1,'water',0,0);
+growthDiagramProfile(okx_djf1415,1:178,0,'water',0,0);
 % Enter 'Dec-Feb 2014-2015' when prompted for date
 % Enter 'Upton, NY' when prompted for location
 
@@ -28,7 +28,7 @@ growthDiagramProfile(dnr_djf1415,1:179,1,'water',0,0);
 
 %% Fig: Subfigure for sequences
 [hd] = makeGrowthDiagramStruct(1,1);
-iceGrowthDiagramWater(hd,0,0,[],[90 105],[-25,0]); %For all sequences
+iceGrowthDiagramWater(hd,0,0,[],[90 105],[-25,0],0,0); %For all sequences
 
 %% Bonus content
 %% Fig: okx_djf1920
