@@ -1,11 +1,10 @@
 function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
 %%makeGrowthDiagramStruct
     %Function to make a structure containing all information needed to plot
-    %an ice growth diagram. These values are used in the submitted paper
-    %this code accompanies, tentatively:
-    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, submitted 2020: Revisiting
+    %an ice growth diagram. These values are used in the paper:
+    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, 2022: Revisiting
     % Diagrams of Ice Growth Environments, Bulletin of the American
-    % Meteorological Society, submitted.
+    % Meteorological Society, doi.org/10.1175/BAMS-D-21-0271.1.
     %
     %Values are derived from text and figures in Bailey and Hallett 2009 and
     %Bailey and Hallett 2004. Bailey and Hallett 2009 cuts off the top of
@@ -38,8 +37,8 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Portions written as part of HON499: Capstone II
-    %Version date: 10/31/2020
-    %Last major revision: 10/31/2020
+    %Version date: 12/2022
+    %Last major revision: 12/2022
     %
     %See also iceSupersatToRH, iceSupersatToVaporExc
     %
@@ -81,23 +80,22 @@ hd.Constants.es0 = 611; %Pa (vapor pressure constant)
 
 %% Make structure
 if crystalLog==1
-    % "Various plates" habit
-    T_vp = [-8 -22];
-    esw_vp = 6.1094.*exp((17.625.*T_vp)./(243.04+T_vp));
-    esi_vp = 6.1121.*exp((22.587.*T_vp)./(273.86+T_vp));
+%     tempTabular = [-8 -22];
+%     eswTabular = 6.1094.*exp((17.625.*tempTabular)./(243.04+tempTabular));
+%     esiTabular = 6.1121.*exp((22.587.*tempTabular)./(273.86+tempTabular));
 
-    % "Sector plates" habit
-    T_sp = [-8 -12.2; -12.2 -17.6; -17.6 -22];
-    esw_sp = 6.1094.*exp((17.625.*T_sp)./(243.04+T_sp));
-    esi_sp = 6.1121.*exp((22.587.*T_sp)./(273.86+T_sp));
+    % Branched form boundaries (used for calculations elsewhere)
+    tempBranched = [-8 -12.2; -12.2 -17.6; -17.6 -22];
+    eswBranched = 6.1094.*exp((17.625.*tempBranched)./(243.04+tempBranched));
+    esiBranched = 6.1121.*exp((22.587.*tempBranched)./(273.86+tempBranched));
     
-    hd.Plates.Habit = 'Tabular'; %Plates
-    hd.Plates.Color = [243 139 156]./255;
-    hd.Plates.TextbookColor = [252 222 226]./255;
-    hd.Plates.TempBounds = [0 0 -4 -4];
-    hd.Plates.supersatBounds = [0 0.1 0.1 0];
-    hd.Plates.waterBounds = iceSupersatToRH(hd.Plates.supersatBounds.*100,hd.Plates.TempBounds);
-    hd.Plates.vaporExcBounds = iceSupersatToVaporExc(hd.Plates.supersatBounds,hd.Plates.TempBounds);
+    hd.Tabular0.Habit = 'Tabular'; %Tabular form between 0C and -4C
+    hd.Tabular0.Color = [243 139 156]./255;
+    hd.Tabular0.TextbookColor = [252 222 226]./255;
+    hd.Tabular0.TempBounds = [0 0 -4 -4];
+    hd.Tabular0.supersatBounds = [0 0.1 0.1 0];
+    hd.Tabular0.waterBounds = iceSupersatToRH(hd.Tabular0.supersatBounds.*100,hd.Tabular0.TempBounds);
+    hd.Tabular0.vaporExcBounds = iceSupersatToVaporExc(hd.Tabular0.supersatBounds,hd.Tabular0.TempBounds);
 
     hd.ColumnLike.Habit = 'Columnar'; %Column-like
     hd.ColumnLike.Color = [165 162 221]./255;
@@ -108,8 +106,8 @@ if crystalLog==1
     hd.ColumnLike.vaporExcBounds = iceSupersatToVaporExc(hd.ColumnLike.supersatBounds,hd.ColumnLike.TempBounds);
     
     hd.VariousPlates.Habit = 'Tabular'; %Various plates
-    hd.VariousPlates.Color = hd.Plates.Color;
-    hd.VariousPlates.TextbookColor = hd.Plates.TextbookColor;
+    hd.VariousPlates.Color = hd.Tabular0.Color;
+    hd.VariousPlates.TextbookColor = hd.Tabular0.TextbookColor;
     Tupper = -8; Tlower = -20;
     TlineStandardC = Tupper:-0.1:Tlower;
     [eswLineData] = eswLine(100,Tlower,Tupper);
@@ -122,7 +120,7 @@ if crystalLog==1
     hd.SectorPlates.Color =  [218 146 56]./255;
     hd.SectorPlates.TextbookColor = [245 224 198]./255;
     hd.SectorPlates.TempBounds = [-8 -8 -12.2 -12.2; -12.2 -12.2 -17.6 -17.6; -17.6 -17.6 -22 -22];
-    hd.SectorPlates.supersatBounds = [(esw_sp(1)-esi_sp(1))/esi_sp(1) 0.36 0.36 (esw_sp(4)-esi_sp(4))/esi_sp(4); (esw_sp(2)-esi_sp(2))/esi_sp(2) 0.15 0.21 (esw_sp(5)-esi_sp(5))/esi_sp(5); (esw_sp(3)-esi_sp(3))/esi_sp(3) 0.6 0.6 (esw_sp(6)-esi_sp(6))/esi_sp(6)];
+    hd.SectorPlates.supersatBounds = [(eswBranched(1)-esiBranched(1))/esiBranched(1) 0.36 0.36 (eswBranched(4)-esiBranched(4))/esiBranched(4); (eswBranched(2)-esiBranched(2))/esiBranched(2) 0.15 0.21 (eswBranched(5)-esiBranched(5))/esiBranched(5); (eswBranched(3)-esiBranched(3))/esiBranched(3) 0.6 0.6 (eswBranched(6)-esiBranched(6))/esiBranched(6)];
     hd.SectorPlates.waterBounds = iceSupersatToRH(hd.SectorPlates.supersatBounds.*100,hd.SectorPlates.TempBounds);
     hd.SectorPlates.vaporExcBounds = iceSupersatToVaporExc(hd.SectorPlates.supersatBounds,hd.SectorPlates.TempBounds);
     

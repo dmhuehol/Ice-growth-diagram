@@ -100,7 +100,7 @@ TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
 [eswLineData] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
 
-plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.Color);
+plates = patch(hd.Tabular0.vaporExcBounds, hd.Tabular0.TempBounds, hd.Tabular0.Color);
 plates.EdgeColor = 'none';
 columnlike = patch(hd.ColumnLike.vaporExcBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
 columnlike.EdgeColor = 'none';
@@ -183,7 +183,7 @@ mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = 
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
+legendTexts = {hd.Tabular0.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
 if isohumeFlag==1

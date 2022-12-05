@@ -84,7 +84,7 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 [eswLineData] = eswLine(100,Tlower,Tupper);
-plates = patch(hd.Plates.supersatBounds, hd.Plates.TempBounds,hd.Plates.Color);
+plates = patch(hd.Tabular0.supersatBounds, hd.Tabular0.TempBounds,hd.Tabular0.Color);
 plates.EdgeColor = 'none';
 columnlike = patch(hd.ColumnLike.supersatBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
 columnlike.EdgeColor = 'none';
@@ -114,13 +114,13 @@ intermediateSectorP.EdgeColor = 'none';
 
 intermediateSPD_floor = patch([0.15,0.16,0.43,0.4212], [hd.SectorPlates.TempBounds(5)*0.97,-13.5,-13.5,hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([0.2103,0.1401,0.16,0.2121], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_wall = patch([0.2054,0.135,0.16,0.2121], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_wall.EdgeColor = 'none';
 intermediateSPD_ceiling = patch([0.21,0.2224,0.6084,0.5244], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
 intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_triangleTop = patch([0.2103,0.2224,0.21], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],3,[],3));
+intermediateSPD_triangleTop = patch([0.2054,0.2224,0.21], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],3,[],3));
 intermediateSPD_triangleTop.EdgeColor = 'none';
-intermediateSPD_triangleBottom = patch([0.1401,0.16,0.15], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleBottom = patch([0.135,0.16,0.15], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
 intermediateSPD_triangleBottom.EdgeColor = 'none';
 
 mixed1 = patch(hd.Mixed.supersatBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
@@ -167,7 +167,7 @@ mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = 
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1]; %Sans subsaturated to make images
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
+legendTexts = {hd.Tabular0.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit};
 
 %% Plot other lines
 if isohumeFlag==1 %Draw isohumes wrt water at 10% intervals up to 100%, plus 102.5% and 105%
@@ -264,11 +264,13 @@ else
 end
 
 set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
-set(gcf,'renderer','Painters')
+set(gcf,'renderer','painters')
 if printFig == 1
     saveFilename = 'igd_rhi';
-    disp(['Saving figure as: ' saveFilename '.png'])
-    saveas(gcf,saveFilename,'png');
+%     disp(['Saving figure as: ' saveFilename '.png'])
+%     saveas(gcf,saveFilename,'epsc');
+    exportgraphics(gcf,saveFilename,'BackgroundColor','none','ContentType','vector')
+%     print('-r800',saveFilename,'-dpng')
 end
 
 end

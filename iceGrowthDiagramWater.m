@@ -101,7 +101,7 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 
-plates = patch(hd.Plates.waterBounds, hd.Plates.TempBounds, hd.Plates.Color);
+plates = patch(hd.Tabular0.waterBounds, hd.Tabular0.TempBounds, hd.Tabular0.Color);
 plates.EdgeColor = 'none';
 columnlike = patch(hd.ColumnLike.waterBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
 columnlike.EdgeColor = 'none';
@@ -177,7 +177,7 @@ mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = 
 hold on
 
 legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
-legendTexts = {hd.Plates.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
+legendTexts = {hd.Tabular0.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
 for rhwc = [90:-10:0, 100, 102.5, 105]

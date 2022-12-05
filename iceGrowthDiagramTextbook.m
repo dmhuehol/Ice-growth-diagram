@@ -21,8 +21,8 @@
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
-    %Last major revision: 10/31/2020
+    %Version date: 12/2022
+    %Last major revision: 12/2022
     %
     %Based on concept art originally made in Adobe Illustrator by Dr. Matthew
     %Miller, Senior Research Scholar at Environment Analytics.
@@ -48,8 +48,11 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
+%eswLine refers to "difference between relative humidity with respect to
+%water and ice saturation" used for plotting isohumes or orienting other
+%objects on the diagrams
 [eswLineData] = eswLine(100,Tlower,Tupper);
-[eswLineDataVde] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
+[eswLineDataVde] = iceSupersatToVaporExc(eswLineData,TlineStandardC); %Vapor density excess equivalent
 
 switch castInTermsOf
     case "water"
@@ -58,11 +61,10 @@ switch castInTermsOf
         xlimRange = [55 105];
         ylimRange = [-70 0];
         
-        % Draw the growth modes
+        % Draw the growth forms
         Tupper = 15; Tlower = -70;
         TlineStandardC = Tupper:-0.1:Tlower;
-        
-        plates = patch(hd.Plates.waterBounds, hd.Plates.TempBounds, hd.Plates.TextbookColor);
+        plates = patch(hd.Tabular0.waterBounds, hd.Tabular0.TempBounds, hd.Tabular0.TextbookColor);
         plates.EdgeColor = 'none';
         columnlike = patch(hd.ColumnLike.waterBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
         columnlike.EdgeColor = 'none';
@@ -259,7 +261,7 @@ switch castInTermsOf
         lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 16;
         lFaceW = text(95.8,-6,'Columnar','BackgroundColor',hd.ColumnLike.TextbookColor);
         lFaceW.FontName = 'Lato'; lFaceW.FontSize = 16;
-        lEdgeW = text(93.8,-17.65,'Tabular','BackgroundColor',hd.Plates.TextbookColor);
+        lEdgeW = text(93.8,-17.65,'Tabular','BackgroundColor',hd.Tabular0.TextbookColor);
         lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 16;
         lCornerSectorTypeW = text(100.16,-11.5,'Branched');
         lCornerSectorTypeW.FontName = 'Lato'; lCornerSectorTypeW.FontSize = 16;
@@ -313,7 +315,7 @@ switch castInTermsOf
         ylimRange = [-70 0];
         
         % Draw the growth types
-        plates = patch(hd.Plates.supersatBounds, hd.Plates.TempBounds,hd.Plates.TextbookColor);
+        plates = patch(hd.Tabular0.supersatBounds, hd.Tabular0.TempBounds,hd.Tabular0.TextbookColor);
         plates.EdgeColor = 'none';
         columnlike = patch(hd.ColumnLike.supersatBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
         columnlike.EdgeColor = 'none';
@@ -343,13 +345,13 @@ switch castInTermsOf
         
         intermediateSPD_floor = patch([0.15,0.16,0.43,0.4212], [hd.SectorPlates.TempBounds(5)*0.97,-13.5,-13.5,hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
         intermediateSPD_floor.EdgeColor = 'none';
-        intermediateSPD_wall = patch([0.2103,0.1401,0.16,0.2121], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
+        intermediateSPD_wall = patch([0.2054,0.135,0.16,0.2121], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
         intermediateSPD_wall.EdgeColor = 'none';
         intermediateSPD_ceiling = patch([0.21,0.2224,0.6084,0.5244], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
         intermediateSPD_ceiling.EdgeColor = 'none';
-        intermediateSPD_triangleTop = patch([0.2103,0.2224,0.21], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],3,[],3));
+        intermediateSPD_triangleTop = patch([0.2054,0.2224,0.21], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],3,[],3));
         intermediateSPD_triangleTop.EdgeColor = 'none';
-        intermediateSPD_triangleBottom = patch([0.1401,0.16,0.15], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
+        intermediateSPD_triangleBottom = patch([0.135,0.16,0.15], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
         intermediateSPD_triangleBottom.EdgeColor = 'none';
 
         mixed1 = patch(hd.Mixed.supersatBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.TextbookColor);
@@ -533,7 +535,7 @@ switch castInTermsOf
         ylimRange = [-70 0];
         
         % Draw the growth types
-        plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.TextbookColor);
+        plates = patch(hd.Tabular0.vaporExcBounds, hd.Tabular0.TempBounds, hd.Tabular0.TextbookColor);
         plates.EdgeColor = 'none';
         columnlike = patch(hd.ColumnLike.vaporExcBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
         columnlike.EdgeColor = 'none';
