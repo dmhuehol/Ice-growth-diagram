@@ -101,49 +101,49 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 
-plates = patch(hd.Tabular0.waterBounds, hd.Tabular0.TempBounds, hd.Tabular0.Color);
-plates.EdgeColor = 'none';
-columnlike = patch(hd.ColumnLike.waterBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.Color);
-columnlike.EdgeColor = 'none';
-variousplates = patch(hd.VariousPlates.waterBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.Color);
-variousplates.EdgeColor = 'none';
-polycrystalsP1 = patch(hd.PolycrystalsP.waterBounds(1,:),hd.PolycrystalsP.TempBounds(1,:),hd.PolycrystalsP.Color);
-polycrystalsP1.EdgeColor = 'none';
-polycrystalsP2 = patch(hd.PolycrystalsP.waterBounds(2,:),hd.PolycrystalsP.TempBounds(2,:),hd.PolycrystalsP.Color);
-polycrystalsP2.EdgeColor = 'none';
-polycrystalsC1 = patch(hd.PolycrystalsC.waterBounds(1,:),hd.PolycrystalsC.TempBounds(1,:),hd.PolycrystalsC.Color);
-polycrystalsC1.EdgeColor = 'none';
-polycrystalsC2 = patch(hd.PolycrystalsC.waterBounds(2,:),hd.PolycrystalsC.TempBounds(2,:),hd.PolycrystalsC.Color);
-polycrystalsC2.EdgeColor = 'none';
-sectorplates1 = patch(hd.SectorPlates.waterBounds(1,:),hd.SectorPlates.TempBounds(1,:),hd.SectorPlates.Color);
-sectorplates1.EdgeColor = 'none';
-sectorplates2 = patch(hd.SectorPlates.waterBounds(2,:),hd.SectorPlates.TempBounds(2,:),hd.SectorPlates.Color);
-sectorplates2.EdgeColor = 'none';
-sectorplates3 = patch(hd.SectorPlates.waterBounds(3,:),hd.SectorPlates.TempBounds(3,:),hd.SectorPlates.Color);
-sectorplates3.EdgeColor = 'none';
-dendrites = patch(hd.Dendrites.waterBounds,hd.Dendrites.TempBounds,hd.Dendrites.Color);
-dendrites.EdgeColor = 'none';
+tabular0C = patch(hd.Tabular0.waterBounds, hd.Tabular0.TempBounds, hd.Tabular0.Color);
+tabular0C.EdgeColor = 'none';
+columnar = patch(hd.Columnar.waterBounds,hd.Columnar.TempBounds,hd.Columnar.Color);
+columnar.EdgeColor = 'none';
+tabular8C = patch(hd.Tabular8.waterBounds,hd.Tabular8.TempBounds,hd.Tabular8.Color);
+tabular8C.EdgeColor = 'none';
+tabPolycrystPt1 = patch(hd.TabPolycryst.waterBounds(1,:),hd.TabPolycryst.TempBounds(1,:),hd.TabPolycryst.Color);
+tabPolycrystPt1.EdgeColor = 'none';
+tabPolycrystPt2 = patch(hd.TabPolycryst.waterBounds(2,:),hd.TabPolycryst.TempBounds(2,:),hd.TabPolycryst.Color);
+tabPolycrystPt2.EdgeColor = 'none';
+colPolycrystPt1 = patch(hd.ColPolycryst.waterBounds(1,:),hd.ColPolycryst.TempBounds(1,:),hd.ColPolycryst.Color);
+colPolycrystPt1.EdgeColor = 'none';
+colPolycrystPt2 = patch(hd.ColPolycryst.waterBounds(2,:),hd.ColPolycryst.TempBounds(2,:),hd.ColPolycryst.Color);
+colPolycrystPt2.EdgeColor = 'none';
+branchedPt1 = patch(hd.Branched.waterBounds(1,:),hd.Branched.TempBounds(1,:),hd.Branched.Color);
+branchedPt1.EdgeColor = 'none';
+branchedPt2 = patch(hd.Branched.waterBounds(2,:),hd.Branched.TempBounds(2,:),hd.Branched.Color);
+branchedPt2.EdgeColor = 'none';
+branchedPt3 = patch(hd.Branched.waterBounds(3,:),hd.Branched.TempBounds(3,:),hd.Branched.Color);
+branchedPt3.EdgeColor = 'none';
+sideBranched = patch(hd.SideBranched.waterBounds,hd.SideBranched.TempBounds,hd.SideBranched.Color);
+sideBranched.EdgeColor = 'none';
 
-intermediatePlatesP = patch([83.4409,hd.VariousPlates.waterBounds(end)-3,100 100],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.Color; hd.VariousPlates.Color; hd.VariousPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediatePlatesP = patch([83.4409,hd.Tabular8.waterBounds(end)-3,100 100],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.Color; hd.Tabular8.Color; hd.Tabular8.Color; hd.TabPolycryst.Color],4,[],3));
 intermediatePlatesP.EdgeColor = 'none';
-intermediateSectorP = patch([100 100 200 200],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.PolycrystalsP.Color],4,[],3));
+intermediateSectorP = patch([100 100 200 200],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.Color; hd.Branched.Color; hd.Branched.Color; hd.TabPolycryst.Color],4,[],3));
 intermediateSectorP.EdgeColor = 'none';
 
-intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color; hd.SectorPlates.Color],4,[],3));
+intermediateSPD_floor = patch([hd.SideBranched.waterBounds(1),hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(2) hd.SideBranched.waterBounds(2)], [hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(2) hd.SideBranched.TempBounds(2),hd.Branched.TempBounds(5)*0.99],reshape([hd.Branched.Color; hd.SideBranched.Color; hd.SideBranched.Color; hd.Branched.Color],4,[],3));
 intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([hd.SectorPlates.waterBounds(2,3)*0.995 hd.SectorPlates.waterBounds(2,2)*0.995 hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(4)], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_wall = patch([hd.Branched.waterBounds(2,3)*0.995 hd.Branched.waterBounds(2,2)*0.995 hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(4)], [hd.Branched.TempBounds(3)*1.03 hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(1) hd.SideBranched.TempBounds(3)*1.01],reshape([hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color; hd.SideBranched.Color],4,[],3));
 intermediateSPD_wall.EdgeColor = 'none';
-intermediateSPD_ceiling = patch([hd.Dendrites.waterBounds(4),hd.Dendrites.waterBounds(4) hd.SectorPlates.waterBounds(6) hd.SectorPlates.waterBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.Color; hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],4,[],3));
+intermediateSPD_ceiling = patch([hd.SideBranched.waterBounds(4),hd.SideBranched.waterBounds(4) hd.Branched.waterBounds(6) hd.Branched.waterBounds(9)], [hd.SideBranched.TempBounds(4) hd.Branched.TempBounds(11)*1.03 hd.Branched.TempBounds(11)*1.03,hd.SideBranched.TempBounds(4)],reshape([hd.SideBranched.Color; hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color],4,[],3));
 intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_triangleTop = patch([101.08, 102.093, 102.093], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.Color; hd.SectorPlates.Color; hd.Dendrites.Color],3,[],3));
+intermediateSPD_triangleTop = patch([101.08, 102.093, 102.093], [-18.128, -18.128, -17.1], reshape([hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color],3,[],3));
 intermediateSPD_triangleTop.EdgeColor = 'none';
-intermediateSPD_triangleBottom = patch([101.365,102.249,102.249], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.Color; hd.Dendrites.Color; hd.SectorPlates.Color],3,[],3));
+intermediateSPD_triangleBottom = patch([101.365,102.249,102.249], [-11.834,-12.7,-11.834], reshape([hd.Branched.Color; hd.SideBranched.Color; hd.Branched.Color],3,[],3));
 intermediateSPD_triangleBottom.EdgeColor = 'none';
 
-mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.Color);
-mixed1.EdgeColor = hd.Mixed.Color;
-mixed2 = patch(hd.Mixed.waterBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.Color);
-mixed2.EdgeColor = 'none';
+multiplePt1 = patch(hd.Multiple.waterBounds(1,:),hd.Multiple.TempBounds(1,:),hd.Multiple.Color);
+multiplePt1.EdgeColor = hd.Multiple.Color;
+multiplePt2 = patch(hd.Multiple.waterBounds(2,:),hd.Multiple.TempBounds(2,:),hd.Multiple.Color);
+multiplePt2.EdgeColor = 'none';
 
 warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
@@ -167,17 +167,17 @@ polyBorderStrg = line([89.8227,105],[-40.2,-40.2]);
 polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
 polyBorderAng = line([68.6524,89.8227],[-45.875,-40.2]);
 polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
-mixedEdge1 = line([66.5,83.4409,95.8841],[-46.2,-22,-8]);
-mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
-mixedEdge15 = line([66.5,68.6274],[-46.2,-45.9]);
-mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
-mixedEdge2 = line(hd.Mixed.waterBounds(2,5:end)+0.025, hd.Mixed.TempBounds(2,5:end)+0.025);
-mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+multipleEdge1 = line([66.5,83.4409,95.8841],[-46.2,-22,-8]);
+multipleEdge1.LineWidth = brdThc; multipleEdge1.LineStyle = brdSt; multipleEdge1.Color = brdCol;
+multipleEdge15 = line([66.5,68.6274],[-46.2,-45.9]);
+multipleEdge15.LineWidth = brdThc; multipleEdge15.LineStyle = brdSt; multipleEdge15.Color = brdCol;
+multipleEdge2 = line(hd.Multiple.waterBounds(2,5:end)+0.025, hd.Multiple.TempBounds(2,5:end)+0.025);
+multipleEdge2.LineWidth = brdThc; multipleEdge2.LineStyle = brdSt; multipleEdge2.Color = brdCol;
 
 hold on
 
-legendEntries = [plates columnlike sectorplates1 dendrites polycrystalsP1 polycrystalsC1 mixed1 subsaturated];
-legendTexts = {hd.Tabular0.Habit,hd.ColumnLike.Habit,hd.SectorPlates.Habit,hd.Dendrites.Habit,hd.PolycrystalsP.Habit,hd.PolycrystalsC.Habit,hd.Mixed.Habit,'Subsaturated wrt ice, no crystal growth'};
+legendEntries = [tabular0C columnar branchedPt1 sideBranched tabPolycrystPt1 colPolycrystPt1 multiplePt1 subsaturated];
+legendTexts = {hd.Tabular0.Form,hd.Columnar.Form,hd.Branched.Form,hd.SideBranched.Form,hd.TabPolycryst.Form,hd.ColPolycryst.Form,hd.Multiple.Form,'Subsaturated wrt ice, no crystal growth'};
 
 %% Plot other lines
 for rhwc = [90:-10:0, 100, 102.5, 105]
