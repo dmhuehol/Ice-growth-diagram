@@ -123,7 +123,7 @@ sideBranched = patch(hd.SideBranched.supersatBounds,hd.SideBranched.TempBounds,h
 sideBranched.EdgeColor = 'none';
 
 % The fuzzy boundaries are hand-tuned for aesthetics. If changes are made
-% elsewhere inthe code, these often need further manual adjustment.
+% elsewhere in the code, these often need further manual adjustment.
 % Define fuzzy boundary into tabular polycrystalline form from tabular and branched forms
 intermedTabular = patch([hd.Tabular8.supersatBounds(end),hd.Tabular8.supersatBounds(end),eswLineData(351) eswLineData(371)],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.Color; hd.Tabular8.Color; hd.Tabular8.Color; hd.TabPolycryst.Color],4,[],3));
 intermedTabular.EdgeColor = 'none';
@@ -164,7 +164,7 @@ end
 % Define dashed edges between growth forms to indicate uncertainty in the
 % exact bounding conditions. In-line comments where variables are unclear.
 brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
-tabEdgeRhi = [0, (rhwToRhi(105,-4.05)/100 - 1)]; %convert percent RHw to supersat RHi
+tabEdgeRhi = [0, (rhwToRhi(105,-4.05)/100 - 1)]; %Convert percent RHw to supersat RHi
 tabEdge = line(tabEdgeRhi,[-4.05,-4.05]);
 tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
 colEdgeRhi = [0, rhwToRhi(105,-8.05)/100 - 1];
@@ -173,10 +173,10 @@ colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
 tabBrnchEdgeRhi = rhwToRhi(ones(1,141)*100.25, TlineStandardC(231:371))/100 - 1;
 tabBrnchEdge = line(tabBrnchEdgeRhi,TlineStandardC(231:371));
 tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
-tabColPolyStrgEdgeRhi = rhwToRhi([89.8227,105],[-40.2,-40.2])/100 - 1; % Straight edge between tabular polycrystalline and columnar polycrystalline
+tabColPolyStrgEdgeRhi = rhwToRhi([89.8227,105],[-40.2,-40.2])/100 - 1; %Straight edge between tabular polycrystalline and columnar polycrystalline
 tabColPolyStrgEdge = line(tabColPolyStrgEdgeRhi,[-40.2,-40.2]);
 tabColPolyStrgEdge.LineWidth = brdThc; tabColPolyStrgEdge.LineStyle = brdSt; tabColPolyStrgEdge.Color = brdCol;
-tabColPolyAngEdgeRhi = rhwToRhi([68.6524,89.8227],[-45.875,-40.2])/100 - 1; % Angled edge between tabular polycrystalline and columnar polycrystalline
+tabColPolyAngEdgeRhi = rhwToRhi([68.6524,89.8227],[-45.875,-40.2])/100 - 1; %Angled edge between tabular polycrystalline and columnar polycrystalline
 tabColPolyAngEdge = line(tabColPolyAngEdgeRhi,[-45.875,-40.2]);
 tabColPolyAngEdge.LineWidth = brdThc; tabColPolyAngEdge.LineStyle = brdSt; tabColPolyAngEdge.Color = brdCol;
 multipleEdge1Rhi = [0.038,0.038,0.038];
@@ -195,8 +195,7 @@ legendEntries = [tabular0C columnar branchedPt1 sideBranched tabPolycrystPt1 col
 legendTexts = {hd.Tabular0.Form,hd.Columnar.Form,hd.Branched.Form,hd.SideBranched.Form,hd.TabPolycryst.Form,hd.ColPolycryst.Form,hd.Multiple.Form};
 
 %% Plot other lines
-if isohumeFlag==1 %Draw isohumes wrt water at 10% intervals up to 100%, plus 102.5% and 105%
-    
+if isohumeFlag==1 %Draw isohumes wrt water at 10% intervals up to 100%, plus 102.5% and 105%    
     for rhwc = [90:-10:0, 100, 102.5, 105]
         actHandle = num2str(rhwc); %Handles defined dynamically
         actHandleNoPunct = actHandle(actHandle~='.');

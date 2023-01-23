@@ -103,10 +103,11 @@ fig = figure;
 leftColor = [0 0 0]; rightColor = [0 0 0];
 set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-axis color
 
-%% Draw the growth types
+%% Draw the growth forms
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
 
+% The growth forms are patches with boundaries defined by the hd structure
 tabular0C = patch(hd.Tabular0.waterBounds, hd.Tabular0.TempBounds, hd.Tabular0.Color);
 tabular0C.EdgeColor = 'none';
 columnar = patch(hd.Columnar.waterBounds,hd.Columnar.TempBounds,hd.Columnar.Color);
@@ -130,27 +131,33 @@ branchedPt3.EdgeColor = 'none';
 sideBranched = patch(hd.SideBranched.waterBounds,hd.SideBranched.TempBounds,hd.SideBranched.Color);
 sideBranched.EdgeColor = 'none';
 
-intermediatePlatesP = patch([83.4409,hd.Tabular8.waterBounds(end)-3,100 100],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.Color; hd.Tabular8.Color; hd.Tabular8.Color; hd.TabPolycryst.Color],4,[],3));
-intermediatePlatesP.EdgeColor = 'none';
-intermediateSectorP = patch([100 100 200 200],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.Color; hd.Branched.Color; hd.Branched.Color; hd.TabPolycryst.Color],4,[],3));
-intermediateSectorP.EdgeColor = 'none';
+% The fuzzy boundaries are hand-tuned for aesthetics. If changes are made
+% elsewhere in the code, these often need further manual adjustment.
+% Define fuzzy boundary into tabular polycrystalline form from tabular and branched forms
+intermedTabular = patch([83.4409,hd.Tabular8.waterBounds(end)-3,100 100],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.Color; hd.Tabular8.Color; hd.Tabular8.Color; hd.TabPolycryst.Color],4,[],3));
+intermedTabular.EdgeColor = 'none';
+intermedBranched = patch([100 100 200 200],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.Color; hd.Branched.Color; hd.Branched.Color; hd.TabPolycryst.Color],4,[],3));
+intermedBranched.EdgeColor = 'none';
 
-intermediateSPD_floor = patch([hd.SideBranched.waterBounds(1),hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(2) hd.SideBranched.waterBounds(2)], [hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(2) hd.SideBranched.TempBounds(2),hd.Branched.TempBounds(5)*0.99],reshape([hd.Branched.Color; hd.SideBranched.Color; hd.SideBranched.Color; hd.Branched.Color],4,[],3));
-intermediateSPD_floor.EdgeColor = 'none';
-intermediateSPD_wall = patch([hd.Branched.waterBounds(2,3)*0.995 hd.Branched.waterBounds(2,2)*0.995 hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(4)], [hd.Branched.TempBounds(3)*1.03 hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(1) hd.SideBranched.TempBounds(3)*1.01],reshape([hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color; hd.SideBranched.Color],4,[],3));
-intermediateSPD_wall.EdgeColor = 'none';
-intermediateSPD_ceiling = patch([hd.SideBranched.waterBounds(4),hd.SideBranched.waterBounds(4) hd.Branched.waterBounds(6) hd.Branched.waterBounds(9)], [hd.SideBranched.TempBounds(4) hd.Branched.TempBounds(11)*1.03 hd.Branched.TempBounds(11)*1.03,hd.SideBranched.TempBounds(4)],reshape([hd.SideBranched.Color; hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color],4,[],3));
-intermediateSPD_ceiling.EdgeColor = 'none';
-intermediateSPD_triangleTop = patch([101.08, 102.093, 102.093], [-18.128, -18.128, -17.1], reshape([hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color],3,[],3));
-intermediateSPD_triangleTop.EdgeColor = 'none';
-intermediateSPD_triangleBottom = patch([101.365,102.249,102.249], [-11.834,-12.7,-11.834], reshape([hd.Branched.Color; hd.SideBranched.Color; hd.Branched.Color],3,[],3));
-intermediateSPD_triangleBottom.EdgeColor = 'none';
+% Define fuzzy boundary between the branched and side branched forms
+intermedBSB_floor = patch([hd.SideBranched.waterBounds(1),hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(2) hd.SideBranched.waterBounds(2)], [hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(2) hd.SideBranched.TempBounds(2),hd.Branched.TempBounds(5)*0.99],reshape([hd.Branched.Color; hd.SideBranched.Color; hd.SideBranched.Color; hd.Branched.Color],4,[],3));
+intermedBSB_floor.EdgeColor = 'none';
+intermedBSB_wall = patch([hd.Branched.waterBounds(2,3)*0.995 hd.Branched.waterBounds(2,2)*0.995 hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(4)], [hd.Branched.TempBounds(3)*1.03 hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(1) hd.SideBranched.TempBounds(3)*1.01],reshape([hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color; hd.SideBranched.Color],4,[],3));
+intermedBSB_wall.EdgeColor = 'none';
+intermedBSB_ceiling = patch([hd.SideBranched.waterBounds(4),hd.SideBranched.waterBounds(4) hd.Branched.waterBounds(6) hd.Branched.waterBounds(9)], [hd.SideBranched.TempBounds(4) hd.Branched.TempBounds(11)*1.03 hd.Branched.TempBounds(11)*1.03,hd.SideBranched.TempBounds(4)],reshape([hd.SideBranched.Color; hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color],4,[],3));
+intermedBSB_ceiling.EdgeColor = 'none';
+intermedBSB_triangleTop = patch([101.08, 102.093, 102.093], [-18.128, -18.128, -17.1], reshape([hd.Branched.Color; hd.Branched.Color; hd.SideBranched.Color],3,[],3));
+intermedBSB_triangleTop.EdgeColor = 'none';
+intermedBSB_triangleBottom = patch([101.365,102.249,102.249], [-11.834,-12.7,-11.834], reshape([hd.Branched.Color; hd.SideBranched.Color; hd.Branched.Color],3,[],3));
+intermedBSB_triangleBottom.EdgeColor = 'none';
 
+% Multiple growth form must be defined here for proper layering
 multiplePt1 = patch(hd.Multiple.waterBounds(1,:),hd.Multiple.TempBounds(1,:),hd.Multiple.Color);
 multiplePt1.EdgeColor = hd.Multiple.Color;
 multiplePt2 = patch(hd.Multiple.waterBounds(2,:),hd.Multiple.TempBounds(2,:),hd.Multiple.Color);
 multiplePt2.EdgeColor = 'none';
 
+% Additional objects to allow for different user inputs
 warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
@@ -163,17 +170,19 @@ else %Cut off diagram at 105% RHw (default behavior)
     unnatural105.EdgeColor = 'none';
 end
 
+% Define dashed edges between growth forms to indicate uncertainty in the
+% exact bounding conditions. In-line comments where variables are unclear.
 brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
 tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
 tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
 colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
 colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
-varEdge = line([100.1,100.1],[-8,-22]); %100.1 normally, 100.04 for Figure 7
-varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
-polyBorderStrg = line([89.8227,105],[-40.2,-40.2]);
-polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
-polyBorderAng = line([68.6524,89.8227],[-45.875,-40.2]);
-polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
+tabBrnchEdge = line([100.1,100.1],[-8,-22]); %Physically at 100, negligibly displaced for visual clarity: 100.1 normally, 100.04 for Figure 7
+tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
+tabColPolyStrgEdge = line([89.8227,105],[-40.2,-40.2]); %"Straight" edge between tabular polycrystalline and columnar polycrystalline
+tabColPolyStrgEdge.LineWidth = brdThc; tabColPolyStrgEdge.LineStyle = brdSt; tabColPolyStrgEdge.Color = brdCol;
+tabColPolyAngEdge = line([68.6524,89.8227],[-45.875,-40.2]); %"Angled" edge between tabular polycrystalline and columnar polycrystalline
+tabColPolyAngEdge.LineWidth = brdThc; tabColPolyAngEdge.LineStyle = brdSt; tabColPolyAngEdge.Color = brdCol;
 multipleEdge1 = line([66.5,83.4409,95.8841],[-46.2,-22,-8]);
 multipleEdge1.LineWidth = brdThc; multipleEdge1.LineStyle = brdSt; multipleEdge1.Color = brdCol;
 multipleEdge15 = line([66.5,68.6274],[-46.2,-45.9]);
@@ -188,7 +197,7 @@ legendTexts = {hd.Tabular0.Form,hd.Columnar.Form,hd.Branched.Form,hd.SideBranche
 
 %% Plot other lines
 for rhwc = [90:-10:0, 100, 102.5, 105]
-    actHandle = num2str(rhwc);
+    actHandle = num2str(rhwc); %Dynamically define handles
     actHandleNoPunct = actHandle(actHandle~='.');
     eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
     if rhwc >= 100
@@ -216,7 +225,7 @@ for rhic = 60:-10:-100 %-100% ice supersaturation = 0% ice saturation
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 3.2;
 end
 
-if bh09VentLog==1 %Approximate maximum supersaturation with ventilation line from Bailey & Hallett 2009
+if bh09VentLog==1 % Bailey and Hallett 2009 maximum supersaturation with ventilation approximation
     [eswLineData] = eswLine(100,Tlower,Tupper);
     maxVentValuesInRH = iceSupersatToRH(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
     maxVentLine = plot(maxVentValuesInRH,TlineStandardC(151:end));
