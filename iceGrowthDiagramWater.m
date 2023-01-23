@@ -149,12 +149,13 @@ warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.w
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
-if ventLog
+if ventLog %If Bailey & Hallett 2009 max ventilation approximation specified
     unnaturalVent = patch(hd.unnaturalVent.waterBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
     unnaturalVent.EdgeColor = 'none';
+else %Cut off diagram at 105% RHw (default behavior)
+    unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+    unnatural105.EdgeColor = 'none';
 end
-unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
-unnatural105.EdgeColor = 'none';
 
 brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
 tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
@@ -209,6 +210,17 @@ for rhic = 60:-10:-100 %-100% ice supersaturation = 0% ice saturation
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 3.2;
 end
 
+if ventLog==1 %Approximate maximum supersaturation with ventilation line from Bailey & Hallett 2009
+    [eswLineData] = eswLine(100,Tlower,Tupper);
+    maxVentValuesInRH = iceSupersatToRH(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
+    maxVentLine = plot(maxVentValuesInRH,TlineStandardC(151:end));
+    maxVentLine.Color = [0 26 255]./255;
+    maxVentLine.LineWidth = 3.2;
+    
+    legendEntries(end+1) = maxVentLine;
+    legendTexts{end+1} = 'Approximate max natural supersat (with ventilation)';
+end
+
 legendEntries(end+1) = esiLine_Handles.p60Plot;
 legendTexts{end+1} = 'RH_{ice} (10% intervals, 60% min, 160% max)';
 
@@ -250,14 +262,14 @@ end
 axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
 axe.YDir = 'reverse';
 
-% if legLog == 1
-%     leg = legend(legendEntries,legendTexts);
-%     leg.Location = legendLocStr;
-%     leg.NumColumns = 3;
-%     leg.FontSize = 16;
-% else
-%     %no legend
-% end
+if legLog == 1
+    leg = legend(legendEntries,legendTexts);
+    leg.Location = legendLocStr;
+    leg.NumColumns = 3;
+    leg.FontSize = 16;
+else
+    %no legend
+end
 
 set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
 set(gcf,'renderer','Painters')

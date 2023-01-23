@@ -154,7 +154,7 @@ if crystalLog==1
 end
 
 if otherLog==1
-    Tupper_other = 15; Tlower_other = -70;
+    Tupper_other = 15; Tlower_other = -90; %Block out regions even if extended beyond default
     TlineStandardC = Tupper_other:-0.1:Tlower_other;
     [eswLineData_other] = eswLine(100,Tlower_other,Tupper_other);
 

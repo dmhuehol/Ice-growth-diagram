@@ -147,12 +147,13 @@ warmerThanFreezing = patch(hd.warm.vaporExcBounds(1,:),hd.warm.TempBounds(1,:),h
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.vaporExcBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
-if ventLog
+if ventLog %If Bailey & Hallett 2009 max ventilation approximation specified
     unnaturalVent = patch(hd.unnaturalVent.vaporExcBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
     unnaturalVent.EdgeColor = 'none';
+else %Cut off diagram at 105% RHw (default behavior)
+    unnatural105 = patch(hd.unnatural105.vaporExcBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
+    unnatural105.EdgeColor = 'none';
 end
-unnatural105 = patch(hd.unnatural105.vaporExcBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
-unnatural105.EdgeColor = 'none';
 
 brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
 tabEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);

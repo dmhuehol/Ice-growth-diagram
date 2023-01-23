@@ -252,9 +252,14 @@ switch castInTermsOf
         lIce60 = text(labX(11),labY(11),'160% (ice)','BackgroundColor',hd.ColPolycryst.TextbookColor);
         lIce60.FontName = 'Lato'; lIce60.FontSize = 16;
         lIce60.Rotation = -27;
-        %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
-        %lVentW.FontName = 'Lato'; lVentW.FontSize = 13; lVentW.Color = 'k';
-        %lVentW.Rotation = 41;
+        lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
+        lVentW.FontName = 'Lato'; lVentW.FontSize = 13; lVentW.Color = 'k';
+        lVentW.Rotation = 41;
+
+        %maxVentValuesInRH = iceSupersatToRH(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
+        %maxVentLine = plot(maxVentValuesInRH,TlineStandardC(151:end));
+        %maxVentLine.Color = [0 26 255]./255;
+        %maxVentLine.LineWidth = 1;
         
         % On-figure labels for growth modes
         lIceSubsaturated = text(72,-10,'Subsaturated with respect to ice, no ice growth','BackgroundColor',hd.subsaturated.Color);
