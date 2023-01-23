@@ -29,9 +29,9 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %
     %Inputs
     %crystalLog: logical 1/0 whether or not to contain info for crystal
-    %   habits, defaults to 1
+    %   habits (default: 1)
     %otherLog: logical 1/0 whether or not to include info for other parameters 
-    %   (e.g. subsaturated areas, unnatural supersaturations), defaults to 1 
+    %   (e.g. subsaturated areas, unnatural supersaturations), (default: 1)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University

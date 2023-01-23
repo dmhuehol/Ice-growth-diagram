@@ -1,5 +1,10 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFlag,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig,yRight)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc( ...
+    hd, isohumeFlag, bh09VentLog, legLog, legendLocStr, xlimRange, ...
+    ylimRange, printFig, yRight)
 %%iceGrowthDiagramVaporExc
+    %QUICK START: You can just run iceGrowthDiagramVaporExc() to obtain the
+    %diagram with all default settings!
+    %
     %Function to plot an ice growth diagram with respect to vapor density
     %excess over ice saturation. Returns the figure handle so further
     %modifications are possible.
@@ -19,32 +24,34 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc(hd,isohumeFl
     %       5% supersaturations with respect to water
     %    2 draws only the water saturation line (RH=100%)
     %    0 and all other values don't plot any isohumes
-    %ventLog: logical 1/0 to draw the maximum natural supersaturation line
-    %legLog: logical 1/0 to show the legend
-    %legendLocStr: legend location string ('southoutside' is standard)
-    %xlimRange: determines range for x-axis, input as 2-element array (default: [0 0.351])
+    %   (default: 1)
+    %bh09VentLog: logical 1/0 to draw the Bailey & Hallett 2009 maximum
+    %   supersaturation approximation (default: 0)
+    %legLog: logical 1/0 to show the legend (default: 1)
+    %legendLocStr: legend location string (default: 'southoutside')
+    %xlimRange: determines range for x-axis, input as 2-element array in
+    %   increasing order (default: [0 0.351]) 
     %ylimRange: determines range for y-axis (in deg C), input as 2-element
-    %    array in increasing order (default: [-56.5 0]). Minimum temperature cannot
-    %    be less than -70 degrees Celsius.
-    %printFig: 1/0 to save/not save figure as PNG (0 by default)
-    %yRight: 1/0 to enable/disable right y-axis (ICAO atmosphere, 1 by default)
+    %    array in increasing order (default: [-56.5 0]).
+    %printFig: 1/0 to save/not save figure as PNG (default: 0)
+    %yRight: 1/0 to enable/disable right y-axis ICAO atmosphere (default: 1)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     % Written as part of HON499: Capstone II
-    %Version date: 6/2/2022
-    %Last major revision: 6/1/2022
+    %Version date: 1/2023
+    %Last major revision: 1/2023
     %
     %See also makeGrowthDiagramStruct
     %
 
 %% Check variables
-if nargin == 0
+if nargin == 0 %Instantiate structure containing all growth diagram information
     disp('Creating default ice diagram!')
     crystalLog = 1;
     otherLog = 1;
-    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
+    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog);
 end
 if isnumeric(hd)==1
     msg = 'Must enter a habit diagram structure as first input!';
@@ -58,8 +65,8 @@ if ~exist('isohumeFlag','var')
     isohumeFlag = 1;
     disp('Isohumes enabled by default')
 end
-if ~exist('ventLog','var')
-    ventLog = 0;
+if ~exist('bh09VentLog','var')
+    bh09VentLog = 0;
     disp('Ventilation line disabled by default')
 end
 if ~exist('legLog','var')
@@ -71,7 +78,7 @@ if ~exist('legendLocStr','var')
     disp('Legend location defaults to below the diagram');
 end
 if ~exist('xlimRange','var')
-    if ventLog
+    if bh09VentLog
         xlimRange = [0 0.5];
     else
         xlimRange = [0 0.351];
@@ -147,7 +154,7 @@ warmerThanFreezing = patch(hd.warm.vaporExcBounds(1,:),hd.warm.TempBounds(1,:),h
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.vaporExcBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
-if ventLog %If Bailey & Hallett 2009 max ventilation approximation specified
+if bh09VentLog %If Bailey & Hallett 2009 max ventilation approximation specified
     unnaturalVent = patch(hd.unnaturalVent.vaporExcBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
     unnaturalVent.EdgeColor = 'none';
 else %Cut off diagram at 105% RHw (default behavior)
@@ -226,7 +233,7 @@ else %do nothing, don't plot isohumes
     disp('Isohumes disabled')
 end
 
-if ventLog==1 %Approximate maximum supersaturation with ventilation line
+if bh09VentLog==1 %Approximate maximum supersaturation with ventilation line
     maxVentLine = plot(2.*eswLineData(151:end),TlineStandardC(151:end));
     maxVentLine.Color = [0 26 255]./255;
     maxVentLine.LineWidth = 3.2;

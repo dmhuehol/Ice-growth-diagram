@@ -1,18 +1,24 @@
-function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig,yRight)
+function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater( ...
+    hd, bh09VentLog, legLog, legendLocStr, xlimRange, ylimRange, printFig, ...
+    yRight)
 %%iceGrowthDiagramWater
+    %QUICK START: You can just run iceGrowthDiagramWater() to obtain the
+    %diagram with all default settings!
+    %
     %Function to plot an ice growth diagram in terms of relative humidity
     %with respect to water. This is the version of the diagram highlighted
-    %in the submitted paper this code accompanies, tentatively:
-    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, submit 2020/revised 2022:
-    % Revisiting Diagrams of Ice Growth Environments, Bulletin of the American
-    % Meteorological Society.
+    %in the paper this code accompanies:
+    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, 2022: Revisiting
+    % Diagrams of Ice Growth Environments, Bulletin of the American
+    % Meteorological Society, doi.org/10.1175/BAMS-D-21-0271.1.
     %
-    %We strongly recommend this diagram in educational and research
-    %contexts outside of specific applications where the relative humidity
-    %with respect to ice or vapor density excess versions are necessary.
+    %We recommend this diagram in educational contexts outside of specific
+    %applications where the relative humidity with respect to ice or vapor
+    %density excess versions are necessary. Additionally, this diagram
+    %simplifies radiosonde data plotting.
     %
-    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagram(hd,ventLog,legLog,legendLocStr,xlimRange,ylimRange,printFig,yRight)
-    % iceGrowthDiagram() is equivalent to iceGrowthDiagramWater(hd,0,1,'southoutside',[55 105],[-70 0],0,1)
+    %General form: [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,bh09VentLog,legLog,legendLocStr,xlimRange,ylimRange,printFig,yRight)
+    % iceGrowthDiagramWater() is equivalent to iceGrowthDiagramWater(hd,0,1,'southoutside',[55 105],[-70 0],0,1)
     %
     %Output
     %fig: figure handle for the ice growth diagram
@@ -21,33 +27,33 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater(hd,ventLog,legL
     %
     %Input
     %hd: the habit diagram structure, create with makeGrowthDiagramStruct
-    %ventLog: logical 1/0 to show ventilation
-    %legLog: logical 1/0 to show the legend
-    %legendLocStr: legend location string ('southoutside' is default)
-    %xlimRange: determines the range for the x-axis, input as 2-element array (i.e. [55 124])
+    %bh09VentLog: logical 1/0 to draw the Bailey & Hallett 2009 maximum
+    %   supersaturation approximation (default: 0)
+    %legLog: logical 1/0 to show the legend (default: 1)
+    %legendLocStr: legend location string (default: 'southoutside')
+    %xlimRange: determines the range for the x-axis, input as 2-element
+    %   array in increasing order (default: [55 105])
     %ylimRange: determines range for the y-axis (in deg C), input as
-    %   2-element array in increasing order (i.e. [-56.5 0]). Minimum
-    %   temperature cannot be less than -70 degrees Celsius.
-    %printFig: 1/0 to save/not save figure as PNG (0 by default)
-    %yRight: 1/0 to enable/disable right y-axis (ICAO atmosphere, 1 by default)
+    %   2-element array in increasing order (default: [-70 0])
+    %printFig: 1/0 to save/not save figure as PNG (default: 0)
+    %yRight: 1/0 to enable/disable right y-axis ICAO atmosphere (default: 1)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
     %Edits made as part of HON499: Capstone II
-    %Version date: 6/2/2022
-    %Last major revision: 6/1/2022
+    %Version date: 1/2023
+    %Last major revision: 1/2023
     %
     %See also makeGrowthDiagramStruct
     %
 
 %% Check variables
-if nargin == 0
+if nargin == 0 %Instantiate structure containing all growth diagram information
     disp('Creating default ice diagram!')
-    pause(1) %For the vibes
     crystalLog = 1;
     otherLog = 1;
-    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
+    [hd] = makeGrowthDiagramStruct(crystalLog,otherLog);
 end
 if isnumeric(hd)==1
     msg = 'Make sure hd structure is first input!';
@@ -58,8 +64,8 @@ if ~exist('hd','var')
     otherLog = 1;
     [hd] = makeGrowthDiagramStruct(crystalLog,otherLog); %Instantiate full structure
 end
-if ~exist('ventLog','var')
-    ventLog = 0;
+if ~exist('bh09VentLog','var')
+    bh09VentLog = 0;
 end
 if ~exist('legLog','var')
     legLog = 1;
@@ -70,7 +76,7 @@ if ~exist('legendLocStr','var')
     disp('Legend location defaults to below the figure');
 end
 if ~exist('xlimRange','var')
-    if ventLog
+    if bh09VentLog
         xlimRange = [55 124];
         disp('Default RHwater range for x-axis (with ventilation) is 55 to 124%')
     else
@@ -149,7 +155,7 @@ warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.w
 warmerThanFreezing.EdgeColor = 'none';
 subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
 subsaturated.EdgeColor = 'none';
-if ventLog %If Bailey & Hallett 2009 max ventilation approximation specified
+if bh09VentLog %If Bailey & Hallett 2009 max ventilation approximation specified
     unnaturalVent = patch(hd.unnaturalVent.waterBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
     unnaturalVent.EdgeColor = 'none';
 else %Cut off diagram at 105% RHw (default behavior)
@@ -210,7 +216,7 @@ for rhic = 60:-10:-100 %-100% ice supersaturation = 0% ice saturation
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 3.2;
 end
 
-if ventLog==1 %Approximate maximum supersaturation with ventilation line from Bailey & Hallett 2009
+if bh09VentLog==1 %Approximate maximum supersaturation with ventilation line from Bailey & Hallett 2009
     [eswLineData] = eswLine(100,Tlower,Tupper);
     maxVentValuesInRH = iceSupersatToRH(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
     maxVentLine = plot(maxVentValuesInRH,TlineStandardC(151:end));
@@ -254,7 +260,7 @@ yLab.FontName = 'Lato Bold';
 xLab = xlabel('Relative humidity with respect to water (%)');
 xLab.FontName = 'Lato Bold';
 axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
-if ventLog
+if bh09VentLog
     axe.XTick = [50 55 60 70 80 90 100 110 120 130 140 150 160 170];
 else
     axe.XTick = [50 55 60 65 70 75 80 85 90 95 100 105];
