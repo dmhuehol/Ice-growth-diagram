@@ -1,11 +1,13 @@
 %% makeFigures
-% This script loads the necessary data and makes the exact figures shown
-% in the ice diagram paper.
+% This script loads necessary data and makes the exact figures shown in:
+% Hueholt, D.M., Yuter, S.E., and M.A. Miller, 2022: Revisiting
+% Diagrams of Ice Growth Environments, Bulletin of the American
+% Meteorological Society, doi.org/10.1175/BAMS-D-21-0271.1.
 %
 % Written by: Daniel Hueholt
 % North Carolina State University
 % Research Assistant at Environment Analytics
-% Version date: 5/26/2022
+% Version date: 1/2023
 % Last major revision: 5/26/2022
 
 %% Fig: okx_djf1415
@@ -30,7 +32,7 @@ growthDiagramProfile(dnr_djf1415,1:179,1,'water',0,0);
 [hd] = makeGrowthDiagramStruct(1,1);
 iceGrowthDiagramWater(hd,0,0,[],[90 105],[-25,0],0,0); %For all sequences
 
-%% Bonus content
+%% Bonus content: Illustrating more seasonal radiosonde profiles
 %% Fig: okx_djf1920
 load('okx_djf1920.mat'); %Load radiosonde data for Upton, NY DJF 2019-2020
 growthDiagramProfile(okx_djf1920,1:185,1,'water',0,1);

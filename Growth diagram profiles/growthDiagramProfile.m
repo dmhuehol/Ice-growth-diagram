@@ -1,37 +1,47 @@
-function [fig] = growthDiagramProfile(sounding,timeIndex,legLog,phaseFlag,manual,printFig)
+function [fig] = growthDiagramProfile( ...
+    sounding, timeIndex, legLog, phaseFlag, manual, printFig)
 %%growthDiagramProfile
-    %Function to plot a weather balloon profile on the ice growth
-    %diagram. Saturation vapor pressure equations use the Improved
+    %Function to plot a radiosonde profile on the ice growth diagram.
+    %The input radiosonde structure matches the format output by the IGRA
+    %v2 processing code at github.com/dmhuehol/IGRA-v2. Sample files are
+    %included in this repository.
+    %For details about the ice growth diagram, see:
+    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, 2022: Revisiting
+    % Diagrams of Ice Growth Environments, Bulletin of the American
+    % Meteorological Society, doi.org/10.1175/BAMS-D-21-0271.1.
+    % 
+    %Saturation vapor pressure equations use the Improved
     %August-Roche-Magnus equation from
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
     % J. Appl. Meteor., 35, 601?609,
-    % https://doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
+    % doi.org/10.1175/1520-0450(1996)035<0601:IMFAOS>2.0.CO;2
     % See equations 25 and 27 from above citation.
-    %
-    %The input sounding structure matches the format output by the IGRA v2
-    %processing code at github.com/dmhuehol/IGRA-v2. Sample files are
-    %included in this repository.
     %
     %General form: growthDiagramProfile(sounding,timeIndex,legLog,manual,printFig)
     %
     %Inputs
-    %sounding: a processed sounding data structure, must include moisture data
-    %timeIndex: the index of the desired sounding within the structure
-    %legLog: logical 1/0 to plot/not plot legend. Enabled by default.
-    %phaseFlag: 'water' to plot as relative humidity with respect to water,
+    %sounding: 
+    %   a processed sounding data structure, must include moisture data
+    %timeIndex: 
+    %   the index of the desired sounding within the structure
+    %legLog: 
+    %   logical 1/0 to plot/not plot legend. Enabled by default.
+    %phaseFlag: 
+    %   'water' to plot as relative humidity with respect to water
     %   'ice' to plot as relative humidity with respect to ice
-    %manual: 'm' to use date and launchname designated in code, any other
+    %   'vde' to plot as vapor density excess (not recommended, see Hueholt et al. 2022 Appx. B)
+    %manual: 
+    %   'm' to use date and launchname designated in code, any other
     %   value or leave off for user to be prompted for these
-    %printFig: logical 1/0 to save/not save figure as a PNG (0 by default)
+    %printFig: 
+    %   logical 1/0 to save/not save figure as a PNG (0 by default)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 11/1/2020
-    %Last major revision: 10/31/2020
-    %
-    %See also makeGrowthDiagramStruct, iceGrowthDiagram, iceGrowthDiagramWater, eswLine
+    %Version date: 1/2023
+    %Last major revision: 1/2023
     %
 
 %% Variable checks
@@ -92,12 +102,12 @@ if length(timeIndex)==1
     try
         dateString = datestr(datenum(sounding(timeIndex).valid_date_num(1),sounding(timeIndex).valid_date_num(2),sounding(timeIndex).valid_date_num(3),sounding(timeIndex).valid_date_num(4),0,0),'mmm dd, yyyy HH UTC'); %For title
         [launchname] = stationLookupIGRAv2(sounding(timeIndex).stationID);
-    catch ME %#ok
+    catch ME %#ok %Set automatic title not in stationLookupIGRAv2
         dateString = datestr(datenum(sounding(timeIndex).valid_date_num(1),sounding(timeIndex).valid_date_num(2),sounding(timeIndex).valid_date_num(3),sounding(timeIndex).valid_date_num(4),0,0),'mmm dd, yyyy HH UTC'); %For title
-        launchname = '43.1025,-76.1891 (north of Syracuse, NY)';
+        launchname = ''; %Specify here
     end
 else
-    if ~strcmp(manual,'m')
+    if ~strcmp(manual,'m') %Prompt user for input
         startDatetime = datetime(sounding(timeIndex(1)).year,sounding(timeIndex(1)).month,sounding(timeIndex(1)).day,sounding(timeIndex(1)).hour,0,0);
         endDatetime = datetime(sounding(timeIndex(end)).year,sounding(timeIndex(end)).month,sounding(timeIndex(end)).day,sounding(timeIndex(end)).hour,0,0);
         disp(['Starting date is: ',datestr(startDatetime)])
@@ -113,7 +123,7 @@ t = title({['Ice growth profile for ' dateString],launchname});
 t.FontName = 'Lato Bold';
 t.FontSize = 20;
 
-%% Plot points on the parameter space defined by the ice growth diagram
+%% Plot points on the ice growth diagram
 disp('Plotting in progress!')
 totalNumber = length(timeIndex);
 disp(['Total number of soundings to plot is ', num2str(totalNumber)]);  % Reports number of soundings to plot
@@ -207,15 +217,14 @@ legendText{end+1} = '8-10 km';
 legendEntries(end+1) = pcRest;
 legendText{end+1} = '>10 km';
 
-
-% leg = legend(legendEntries,legendText);
-% if legLog==1
-%     leg.Location = legLocation;
-%     leg.FontSize = 14;
-%     leg.NumColumns = 3;
-% else
-%     leg.Visible = 'off';
-% end
+leg = legend(legendEntries,legendText);
+if legLog==1
+    leg.Location = legLocation;
+    leg.FontSize = 14;
+    leg.NumColumns = 3;
+else
+    leg.Visible = 'off';
+end
 
 set(gcf, 'PaperUnits','points','PaperPosition', [1 1 1440 849]);
 set(gcf,'renderer','Painters')
