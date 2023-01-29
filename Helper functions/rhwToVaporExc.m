@@ -10,16 +10,19 @@ function [rhoDiff] = rhwToVaporExc(rhw,temp)
     %General form: [rhoDiff] = rhwToVaporExc(rhw,temp)
     %
     %Output
-    %rhoDiff: vapor density excess in g/m^3
+    %rhoDiff: 
+    %   vapor density excess in g/m^3
     %
     %Input
-    %rhw: Relative humidity (with respect to water) in %
-    %temp: Temperature in Celsius
+    %rhw: 
+    %   relative humidity (with respect to water) in % (e.g. enter 90 for 90% RHw)
+    %temp: 
+    %   temperature in Celsius
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
+    %Version date: 1/2023
     %Last major revision: 10/31/2020
     %
 

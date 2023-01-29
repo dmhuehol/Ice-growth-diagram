@@ -173,10 +173,10 @@ end
 % Define dashed edges between growth forms to indicate uncertainty in the
 % exact bounding conditions. In-line comments where variables are unclear.
 brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
-tabEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+tabEdgeVde = rhwToVaporExc([iceSupersatToRHw(0,-4.05),105],[-4.05,-4.05]);
 tabEdge = line(tabEdgeVde,[-4.05,-4.05]);
 tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
-colEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+colEdgeVde = rhwToVaporExc([iceSupersatToRHw(0,-8.05),105],[-8.05,-8.05]);
 colEdge = line(colEdgeVde,[-8.05,-8.05]);
 colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
 tabBrnchEdgeVde = rhwToVaporExc(ones(1,141)*100.05, TlineStandardC(231:371));

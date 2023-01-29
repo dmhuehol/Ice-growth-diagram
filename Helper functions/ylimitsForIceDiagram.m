@@ -4,18 +4,24 @@ function [zLabels, tempsInRange, outputTempSpan, icaoAxLabel] = ylimitsForIceDia
     %y-axes on the ice diagram given an input temperature range.
     %
     %General form: [zLabels, tempsInRange, tempSpan] = ylimitsForIceDiagram(tempSpan)
+    %
     %Outputs
-    %zLabels: cell array containing labels for ICAO standard atmosphere
-    %heights within the input temperature span
-    %tempsInRange: used to make the tickmarks that are relabeled to reflect
-    %ICAO standard heights
-    %outputTempSpan: input temperature span is in format [min max], output
-    %is in format [-max -min]. This is required for the right-hand y-axis
-    %to plot correctly on the ice diagram.
-    %icaoAxLabel: axis label for right y-axis on diagram
+    %zLabels: 
+    %   cell array containing labels for ICAO standard atmosphere
+    %   heights within the input temperature span
+    %tempsInRange:
+    %   used to make the tickmarks that are relabeled to reflect
+    %   ICAO standard heights
+    %outputTempSpan: 
+    %   input temperature span is in format [min max], output
+    %   is in format [-max -min]. This is required for the right-hand y-axis
+    %   to plot correctly on the ice diagram.
+    %icaoAxLabel: 
+    %   axis label for right y-axis on diagram
     %
     %Input
-    %inputTempSpan: temperature span in format [min max]
+    %inputTempSpan: 
+    %   temperature span in format [min max]
     %   Default [-70 0] to span common water ice conditions in atmosphere
     %   [-56.5 0] is useful if plotting data in mid-latitude regions
     %

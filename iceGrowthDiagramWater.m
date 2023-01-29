@@ -173,9 +173,9 @@ end
 % Define dashed edges between growth forms to indicate uncertainty in the
 % exact bounding conditions. In-line comments where variables are unclear.
 brdThc = 3; brdCol = [105,105,105]./255; brdSt = '--';
-tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+tabEdge = line([iceSupersatToRHw(0,-4.05),105],[-4.05,-4.05]);
 tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
-colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+colEdge = line([iceSupersatToRHw(0,-8.05),105],[-8.05,-8.05]);
 colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
 tabBrnchEdge = line([100.1,100.1],[-8,-22]); %Physically at 100, negligibly displaced for visual clarity: 100.1 normally, 100.04 for Figure 7
 tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
@@ -219,7 +219,7 @@ for rhic = 60:-10:-100 %-100% ice supersaturation = 0% ice saturation
     else
         actRhiHandle = ['sub',num2str(abs(rhic))];
     end
-    esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
+    esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRHw(rhic,TlineStandardC);
     esiLine_Handles.(['p', actRhiHandle, 'Plot']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num']),TlineStandardC);
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).Color = [255/255 230/255 0 0.8];
     esiLine_Handles.(['p', actRhiHandle, 'Plot']).LineWidth = 3.2;
@@ -227,7 +227,7 @@ end
 
 if bh09VentLog==1 % Bailey and Hallett 2009 maximum supersaturation with ventilation approximation
     [eswLineData] = eswLine(100,Tlower,Tupper);
-    maxVentValuesInRH = iceSupersatToRH(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
+    maxVentValuesInRH = iceSupersatToRHw(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
     maxVentLine = plot(maxVentValuesInRH,TlineStandardC(151:end));
     maxVentLine.Color = [0 26 255]./255;
     maxVentLine.LineWidth = 3.2;

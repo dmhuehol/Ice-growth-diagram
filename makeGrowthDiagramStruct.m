@@ -40,7 +40,7 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %Version date: 1/2023
     %Last major revision: 1/2023
     %
-    %See also iceSupersatToRH, iceSupersatToVaporExc
+    %See also iceSupersatToRHw, iceSupersatToVaporExc
     %
 
 %% Variable checks
@@ -90,7 +90,7 @@ if crystalLog==1
     hd.Tabular0.TextbookColor = [252 222 226]./255;
     hd.Tabular0.TempBounds = [0 0 -4 -4];
     hd.Tabular0.supersatBounds = [0 0.1 0.1 0];
-    hd.Tabular0.waterBounds = iceSupersatToRH(hd.Tabular0.supersatBounds.*100,hd.Tabular0.TempBounds);
+    hd.Tabular0.waterBounds = iceSupersatToRHw(hd.Tabular0.supersatBounds.*100,hd.Tabular0.TempBounds);
     hd.Tabular0.vaporExcBounds = iceSupersatToVaporExc(hd.Tabular0.supersatBounds,hd.Tabular0.TempBounds);
 
     hd.Columnar.Form = 'Columnar'; %Columnar form
@@ -98,7 +98,7 @@ if crystalLog==1
     hd.Columnar.TextbookColor = [204 202 235]./255;
     hd.Columnar.TempBounds = [-4 -4 -8 -8];
     hd.Columnar.supersatBounds = [0 0.28 0.28 0];
-    hd.Columnar.waterBounds = iceSupersatToRH(hd.Columnar.supersatBounds.*100,hd.Columnar.TempBounds);
+    hd.Columnar.waterBounds = iceSupersatToRHw(hd.Columnar.supersatBounds.*100,hd.Columnar.TempBounds);
     hd.Columnar.vaporExcBounds = iceSupersatToVaporExc(hd.Columnar.supersatBounds,hd.Columnar.TempBounds);
     
     hd.Tabular8.Form = 'Tabular'; %Tabular form between -8C and -20C
@@ -109,7 +109,7 @@ if crystalLog==1
     [eswLineData] = eswLine(100,Tlower,Tupper);
     hd.Tabular8.TempBounds = [-8 TlineStandardC -20];
     hd.Tabular8.supersatBounds = [0.038 eswLineData 0.038];
-    hd.Tabular8.waterBounds = iceSupersatToRH(hd.Tabular8.supersatBounds.*100,hd.Tabular8.TempBounds);
+    hd.Tabular8.waterBounds = iceSupersatToRHw(hd.Tabular8.supersatBounds.*100,hd.Tabular8.TempBounds);
     hd.Tabular8.vaporExcBounds = iceSupersatToVaporExc(hd.Tabular8.supersatBounds,hd.Tabular8.TempBounds);
     
     hd.Branched.Form = 'Branched'; %Branched
@@ -117,7 +117,7 @@ if crystalLog==1
     hd.Branched.TextbookColor = [245 224 198]./255;
     hd.Branched.TempBounds = [-8 -8 -12.2 -12.2; -12.2 -12.2 -17.6 -17.6; -17.6 -17.6 -22 -22];
     hd.Branched.supersatBounds = [(eswBranched(1)-esiBranched(1))/esiBranched(1) 0.36 0.36 (eswBranched(4)-esiBranched(4))/esiBranched(4); (eswBranched(2)-esiBranched(2))/esiBranched(2) 0.15 0.21 (eswBranched(5)-esiBranched(5))/esiBranched(5); (eswBranched(3)-esiBranched(3))/esiBranched(3) 0.6 0.6 (eswBranched(6)-esiBranched(6))/esiBranched(6)];
-    hd.Branched.waterBounds = iceSupersatToRH(hd.Branched.supersatBounds.*100,hd.Branched.TempBounds);
+    hd.Branched.waterBounds = iceSupersatToRHw(hd.Branched.supersatBounds.*100,hd.Branched.TempBounds);
     hd.Branched.vaporExcBounds = iceSupersatToVaporExc(hd.Branched.supersatBounds,hd.Branched.TempBounds);
     
     hd.SideBranched.Form = 'Side branched'; %Side branched
@@ -125,7 +125,7 @@ if crystalLog==1
     hd.SideBranched.TextbookColor = [253 243 225]./255;
     hd.SideBranched.TempBounds = [-12.7 -12.7 -17.1 -17.1];
     hd.SideBranched.supersatBounds = [0.16 0.43 0.43 0.21];
-    hd.SideBranched.waterBounds = iceSupersatToRH(hd.SideBranched.supersatBounds.*100,hd.SideBranched.TempBounds);
+    hd.SideBranched.waterBounds = iceSupersatToRHw(hd.SideBranched.supersatBounds.*100,hd.SideBranched.TempBounds);
     hd.SideBranched.vaporExcBounds = iceSupersatToVaporExc(hd.SideBranched.supersatBounds,hd.SideBranched.TempBounds);
     
     hd.TabPolycryst.Form = 'Tabular polycrystalline';
@@ -133,7 +133,7 @@ if crystalLog==1
     hd.TabPolycryst.TextbookColor = [207 189 195]./255;
     hd.TabPolycryst.TempBounds = [-46.6 -40.2 -22 -22; -40.2 -40.2 -22 -22];
     hd.TabPolycryst.supersatBounds = [0.038 0.33 0.33 0.038; 0.33 1 0.6 0.33];
-    hd.TabPolycryst.waterBounds = iceSupersatToRH(hd.TabPolycryst.supersatBounds.*100,hd.TabPolycryst.TempBounds);
+    hd.TabPolycryst.waterBounds = iceSupersatToRHw(hd.TabPolycryst.supersatBounds.*100,hd.TabPolycryst.TempBounds);
     hd.TabPolycryst.vaporExcBounds = iceSupersatToVaporExc(hd.TabPolycryst.supersatBounds,hd.TabPolycryst.TempBounds);
     
     hd.ColPolycryst.Form = 'Columnar polycrystalline';
@@ -141,7 +141,7 @@ if crystalLog==1
     hd.ColPolycryst.TextbookColor = [183 198 203]./255;
     hd.ColPolycryst.TempBounds = [-46.6 -40.2 -70 -70 -70; -70 -70 -50 -40.2 -40.2];
     hd.ColPolycryst.supersatBounds = [0.038 0.33 0.33 0.33 0.038; 0.33 1 1 1 0.33];
-    hd.ColPolycryst.waterBounds = iceSupersatToRH(hd.ColPolycryst.supersatBounds.*100,hd.ColPolycryst.TempBounds);
+    hd.ColPolycryst.waterBounds = iceSupersatToRHw(hd.ColPolycryst.supersatBounds.*100,hd.ColPolycryst.TempBounds);
     hd.ColPolycryst.vaporExcBounds = iceSupersatToVaporExc(hd.ColPolycryst.supersatBounds,hd.ColPolycryst.TempBounds);
     
     hd.Multiple.Form = 'Multiple';
@@ -149,7 +149,7 @@ if crystalLog==1
     hd.Multiple.TextbookColor = [223 214 203]./255;
     hd.Multiple.TempBounds = [linspace(-8,-46.6,10) -46.6 -22 -8; linspace(-46.6,-70,9) -70 -60 -55 -45.9];
     hd.Multiple.supersatBounds = [zeros(1,10) 0.038 0.038 0.038; zeros(1,9) 0.0697 0.0697 0.0697 0.0697];
-    hd.Multiple.waterBounds = iceSupersatToRH(hd.Multiple.supersatBounds.*100,hd.Multiple.TempBounds);
+    hd.Multiple.waterBounds = iceSupersatToRHw(hd.Multiple.supersatBounds.*100,hd.Multiple.TempBounds);
     hd.Multiple.vaporExcBounds = iceSupersatToVaporExc(hd.Multiple.supersatBounds,hd.Multiple.TempBounds);
 end
 
@@ -163,7 +163,7 @@ if otherLog==1
     [ew105_line] = eswLine(105,Tlower_other,Tupper_other);
     hd.unnatural105.TempBounds = [0 TlineStandardC(2:11:end) 0];
     hd.unnatural105.supersatBounds = [0 ew105_line(2:11:end) 1];
-    hd.unnatural105.waterBounds = iceSupersatToRH(hd.unnatural105.supersatBounds.*100,hd.unnatural105.TempBounds);
+    hd.unnatural105.waterBounds = iceSupersatToRHw(hd.unnatural105.supersatBounds.*100,hd.unnatural105.TempBounds);
     hd.unnatural105.vaporExcBounds = iceSupersatToVaporExc(hd.unnatural105.supersatBounds,hd.unnatural105.TempBounds);
     
     hd.subsaturated.Form = 'Coordinates to cover subsaturated area (for radiosonde data plotting).';
@@ -171,21 +171,21 @@ if otherLog==1
     esiLineData = zeros(1,length(TlineStandardC(151:end)));
     hd.subsaturated.TempBounds = [0 TlineStandardC(151:end) -70 0];%[0 TlineStandardC(151:end) -70];
     hd.subsaturated.supersatBounds =  [-0.5 esiLineData -0.5 -0.5];%[-0.2 esiLineData -0.2];
-    hd.subsaturated.waterBounds = iceSupersatToRH(hd.subsaturated.supersatBounds*100,hd.subsaturated.TempBounds);
+    hd.subsaturated.waterBounds = iceSupersatToRHw(hd.subsaturated.supersatBounds*100,hd.subsaturated.TempBounds);
     hd.subsaturated.vaporExcBounds = iceSupersatToVaporExc(hd.subsaturated.supersatBounds,hd.subsaturated.TempBounds);
     
     hd.warm.Form = 'Coordinates to cover the area warmer than freezing (for radiosonde data plotting).';
     hd.warm.Color = [255,255,255]./255; %Invisible by default; suggest [204 204 204]./255 if want to plot
     hd.warm.TempBounds = [25 25 0 0];
     hd.warm.supersatBounds = [0 0.6 0.6 0];
-    hd.warm.waterBounds = iceSupersatToRH(hd.warm.supersatBounds.*100,hd.warm.TempBounds);
+    hd.warm.waterBounds = iceSupersatToRHw(hd.warm.supersatBounds.*100,hd.warm.TempBounds);
     hd.warm.vaporExcBounds = iceSupersatToVaporExc(hd.warm.supersatBounds,hd.warm.TempBounds);
 
     hd.unnaturalVent.Form = 'Coordinates to block out unnatural supersaturations corresponding to Bailey and Hallett 2009 ventilation approximation'; %Follows the 2*water saturation line
     hd.unnaturalVent.Color = [1 1 1];
     hd.unnaturalVent.TempBounds = [0 TlineStandardC(2:11:end) 0];
     hd.unnaturalVent.supersatBounds = [0 eswLineData_other(2:11:end).*2 1];
-    hd.unnaturalVent.waterBounds = iceSupersatToRH(hd.unnaturalVent.supersatBounds.*100,hd.unnaturalVent.TempBounds);
+    hd.unnaturalVent.waterBounds = iceSupersatToRHw(hd.unnaturalVent.supersatBounds.*100,hd.unnaturalVent.TempBounds);
     hd.unnaturalVent.vaporExcBounds = iceSupersatToVaporExc(hd.unnaturalVent.supersatBounds,hd.unnaturalVent.TempBounds);
     
 end

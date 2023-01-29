@@ -132,9 +132,9 @@ switch castInTermsOf
         % Define dashed edges between growth forms to indicate uncertainty in the
         % exact bounding conditions.
         brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
-        tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+        tabEdge = line([iceSupersatToRHw(0,-4.05),105],[-4.05,-4.05]);
         tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
-        colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+        colEdge = line([iceSupersatToRHw(0,-8.05),105],[-8.05,-8.05]);
         colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
         tabBrnchEdge = line([100.05,100.05],[-8,-22]); %Physically at 100, negligibly displaced for visual clarity
         tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
@@ -194,7 +194,7 @@ switch castInTermsOf
             else
                 actRhiHandle = ['sub',num2str(abs(rhic))];
             end
-            esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
+            esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRHw(rhic,TlineStandardC);
             if rhic == 0 %Break 100% ice saturation curve around label manually
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:346),TlineStandardC(1:346));
                 esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(428:end),TlineStandardC(428:end));
@@ -266,11 +266,11 @@ switch castInTermsOf
         lIce60 = text(labX(11),labY(11),'160% (ice)','BackgroundColor',hd.ColPolycryst.TextbookColor);
         lIce60.FontName = 'Lato'; lIce60.FontSize = 16;
         lIce60.Rotation = -27;
-        lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
-        lVentW.FontName = 'Lato'; lVentW.FontSize = 13; lVentW.Color = 'k';
-        lVentW.Rotation = 41;
+        %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)'); %BH09 approximation
+        %lVentW.FontName = 'Lato'; lVentW.FontSize = 13; lVentW.Color = 'k';
+        %lVentW.Rotation = 41;
 
-        %maxVentValuesInRH = iceSupersatToRH(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
+        %maxVentValuesInRH = iceSupersatToRHw(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
         %maxVentLine = plot(maxVentValuesInRH,TlineStandardC(151:end));
         %maxVentLine.Color = [0 26 255]./255;
         %maxVentLine.LineWidth = 1;
@@ -622,10 +622,10 @@ switch castInTermsOf
         % Define dashed edges between growth forms to indicate uncertainty in the
         % exact bounding conditions.
         brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
-        tabEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+        tabEdgeVde = rhwToVaporExc([iceSupersatToRHw(0,-4.05),105],[-4.05,-4.05]);
         tabEdge = line(tabEdgeVde,[-4.05,-4.05]);
         tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
-        colEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+        colEdgeVde = rhwToVaporExc([iceSupersatToRHw(0,-8.05),105],[-8.05,-8.05]);
         colEdge = line(colEdgeVde,[-8.05,-8.05]);
         colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
         varEdgeVde = rhwToVaporExc(ones(1,141)*100.05, TlineStandardC(231:371));
