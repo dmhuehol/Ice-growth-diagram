@@ -18,7 +18,8 @@
 
 ## Introduction
 Complete set of MATLAB code to plot the ice growth form diagram from [Hueholt et al. (2022) "Revisiting Diagrams of Ice Growth Environments" *Bulletin of the American Meteorological Society*](https://doi.org/10.1175/BAMS-D-21-0271.1). Tested and confirmed operational on MATLAB 2020a+. The ice growth diagram can be cast into three moisture variables: relative humidity with respect to water, relative humidity with respect to ice, and vapor density excess over ice saturation. There are "textbook" and "applied" versions of each ice diagram. The "textbook" versions are designed to be the most aesthetically-pleasing. "Applied" versions are higher-contrast, allowing for data to be easily overlayed.  
-The version of record for this code corresponding to the paper can be found at the [archive hosted on Open Science Foundation](https://osf.io/g9vzj/).
+The version of record for this code corresponding to the paper can be found at the [archive hosted on Open Science Foundation](https://osf.io/g9vzj/). To quickly replicate the figures
+from the paper, see the script `makeFigures` in the `Demo` subdirectory.
 
 ## Basic ice diagrams
 The following examples show how to make the three applied diagrams and the textbook diagram cast in terms of relative humidity with respect to water.

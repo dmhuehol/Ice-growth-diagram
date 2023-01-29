@@ -188,7 +188,7 @@ tabEdge = line([iceSupersatToRHw(0,-4.05),105],[-4.05,-4.05]);
 tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
 colEdge = line([iceSupersatToRHw(0,-8.05),105],[-8.05,-8.05]);
 colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
-tabBrnchEdge = line([100.1,100.1],[-8,-22]); %Physically at 100, negligibly displaced for visual clarity: 100.1 normally, 100.04 for Figure 7
+tabBrnchEdge = line([100.1,100.1],[-8,-22]); %Physically at 100, negligibly displaced for visual clarity: 100.1 normally, 100.04 for Figure 7e
 tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
 tabColPolyStrgEdge = line([89.8227,105],[-40.2,-40.2]); %"Straight" edge between tabular polycrystalline and columnar polycrystalline
 tabColPolyStrgEdge.LineWidth = brdThc; tabColPolyStrgEdge.LineStyle = brdSt; tabColPolyStrgEdge.Color = brdCol;

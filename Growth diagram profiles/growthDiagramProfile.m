@@ -217,6 +217,8 @@ legendText{end+1} = '8-10 km';
 legendEntries(end+1) = pcRest;
 legendText{end+1} = '>10 km';
 
+% To both suppress the legend and free up the figure space taken up by the
+% legend, comment out this entire block.
 leg = legend(legendEntries,legendText);
 if legLog==1
     leg.Location = legLocation;
