@@ -11,20 +11,23 @@ function [vaporDensExc] = iceSupersatToVaporExc(iceSupersatDecimal,temp)
     %General form: [vaporDensExc] = iceSupersatToVaporExc(iceSupersatDecimal,temp)
     %
     %Output
-    %vaporDensExc: vapor density excess in g/m^3
+    %vaporDensExc: 
+    %   vapor density excess in g/m^3
     %
     %Inputs:
-    %iceSupersatDecimal: supersaturation with respect to ice as a decimal
-    %temp: temperature in deg C
+    %iceSupersatDecimal: 
+    %   supersaturation with respect to ice as a decimal, e.g. enter 28 for 128% RHi
+    %temp: 
+    %   temperature in deg C
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Research Assistant at Environment Analytics
     % Created as part of HON499: Capstone II
-    %Version date: 10/31/2020
+    %Version date: 1/2023
     %Last major revision: 10/31/2020
     %
-    %See also iceSupersatToRH
+    %See also iceSupersatToRHw
     %
     
 classNum = {'numeric'};

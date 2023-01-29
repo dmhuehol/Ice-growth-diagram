@@ -12,16 +12,19 @@ function [rhi] = rhwToRhi(rhw,temp)
     %General form: [rhi] = rhwToRhi(percent,temp)
     %
     %Output
-    %rhi: relative humidity with respect to ice percentage
+    %rhi: 
+    %   relative humidity with respect to ice percentage
     %
     %Input
-    %rhw: relative humidity with respect to water percentage
-    %temp: temperature in Celsius
+    %rhw: 
+    %   relative humidity with respect to water percentage (e.g. enter 90 for 90% RHw)
+    %temp: 
+    %   temperature in Celsius
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
+    %Version date: 1/2023
     %Last major revision: 10/31/2020
     %
     

@@ -1,7 +1,13 @@
 %% iceGrowthDiagramTextbook
-    % This code produces textbook-quality ice growth diagrams in terms of
+    % This code produces the ice growth diagrams in terms of
     % relative humidity with respect to water, relative humidity with respect to
-    % ice, and vapor density excess.
+    % ice, and vapor density excess. These are designed to be the most
+    % aesthetically pleasing and intuitive layouts for educational
+    % environments.
+    % For details, see:
+    % Hueholt, D.M., Yuter, S.E., and M.A. Miller, 2022: Revisiting
+    % Diagrams of Ice Growth Environments, Bulletin of the American
+    % Meteorological Society, doi.org/10.1175/BAMS-D-21-0271.1.
     %
     % General form: call iceGrowthDiagramTextbook at command window. The user
     % will be provided with an input prompt.
@@ -10,8 +16,8 @@
     % figure drawing is accomplished through a thicket of hardcoding in order
     % to make the appropriate on-figure labels, colors, etc. The code is
     % sectioned off by the moisture variables in a switch/case block. A very
-    % limited selection of parameters are modifiable and are described at the
-    % start of their respective sections. 
+    % limited selection of parameters are easily modifiable and are
+    % described at the start of their respective sections. 
     %
     % For flexible code that produces the high-contrast applied ice growth
     % diagram, see iceGrowthDiagram, iceGrowthDiagramWater, and
@@ -21,8 +27,8 @@
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
-    %Last major revision: 10/31/2020
+    %Version date: 1/2023
+    %Last major revision: 1/2023
     %
     %Based on concept art originally made in Adobe Illustrator by Dr. Matthew
     %Miller, Senior Research Scholar at Environment Analytics.
@@ -48,8 +54,11 @@ set(fig,'defaultAxesColorOrder',[leftColor; rightColor]) %Sets left and right y-
 
 Tupper = 15; Tlower = -70;
 TlineStandardC = Tupper:-0.1:Tlower;
+%eswLine refers to "difference between relative humidity with respect to
+%water and ice saturation" used for plotting isohumes or orienting other
+%objects on the diagrams
 [eswLineData] = eswLine(100,Tlower,Tupper);
-[eswLineDataVde] = iceSupersatToVaporExc(eswLineData,TlineStandardC);
+[eswLineDataVde] = iceSupersatToVaporExc(eswLineData,TlineStandardC); %Vapor density excess equivalent
 
 switch castInTermsOf
     case "water"
@@ -58,88 +67,95 @@ switch castInTermsOf
         xlimRange = [55 105];
         ylimRange = [-70 0];
         
-        % Draw the growth modes
+        % The growth forms are patches with boundaries defined by the hd structure
         Tupper = 15; Tlower = -70;
         TlineStandardC = Tupper:-0.1:Tlower;
+        tabular0C = patch(hd.Tabular0.waterBounds, hd.Tabular0.TempBounds, hd.Tabular0.TextbookColor);
+        tabular0C.EdgeColor = 'none';
+        columnar = patch(hd.Columnar.waterBounds,hd.Columnar.TempBounds,hd.Columnar.TextbookColor);
+        columnar.EdgeColor = 'none';
+        tabular8C = patch(hd.Tabular8.waterBounds,hd.Tabular8.TempBounds,hd.Tabular8.TextbookColor);
+        tabular8C.EdgeColor = 'none';
+        tabPolycrystPt1 = patch(hd.TabPolycryst.waterBounds(1,:),hd.TabPolycryst.TempBounds(1,:),hd.TabPolycryst.TextbookColor);
+        tabPolycrystPt1.EdgeColor = 'none';
+        tabPolycrystPt2 = patch(hd.TabPolycryst.waterBounds(2,:),hd.TabPolycryst.TempBounds(2,:),hd.TabPolycryst.TextbookColor);
+        tabPolycrystPt2.EdgeColor = 'none';
+        colPolycrystPt1 = patch(hd.ColPolycryst.waterBounds(1,:),hd.ColPolycryst.TempBounds(1,:),hd.ColPolycryst.TextbookColor);
+        colPolycrystPt1.EdgeColor = 'none';
+        colPolycrystPt2 = patch(hd.ColPolycryst.waterBounds(2,:),hd.ColPolycryst.TempBounds(2,:),hd.ColPolycryst.TextbookColor);
+        colPolycrystPt2.EdgeColor = 'none';
+        branchedPt1 = patch(hd.Branched.waterBounds(1,:),hd.Branched.TempBounds(1,:),hd.Branched.TextbookColor);
+        branchedPt1.EdgeColor = 'none';
+        branchedPt2 = patch(hd.Branched.waterBounds(2,:),hd.Branched.TempBounds(2,:),hd.Branched.TextbookColor);
+        branchedPt2.EdgeColor = 'none';
+        branchedPt3 = patch(hd.Branched.waterBounds(3,:),hd.Branched.TempBounds(3,:),hd.Branched.TextbookColor);
+        branchedPt3.EdgeColor = 'none';
+        sideBranched = patch(hd.SideBranched.waterBounds,hd.SideBranched.TempBounds,hd.SideBranched.TextbookColor);
+        sideBranched.EdgeColor = 'none';
         
-        plates = patch(hd.Plates.waterBounds, hd.Plates.TempBounds, hd.Plates.TextbookColor);
-        plates.EdgeColor = 'none';
-        columnlike = patch(hd.ColumnLike.waterBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
-        columnlike.EdgeColor = 'none';
-        variousplates = patch(hd.VariousPlates.waterBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.TextbookColor);
-        variousplates.EdgeColor = 'none';
-        polycrystalsP1 = patch(hd.PolycrystalsP.waterBounds(1,:),hd.PolycrystalsP.TempBounds(1,:),hd.PolycrystalsP.TextbookColor);
-        polycrystalsP1.EdgeColor = 'none';
-        polycrystalsP2 = patch(hd.PolycrystalsP.waterBounds(2,:),hd.PolycrystalsP.TempBounds(2,:),hd.PolycrystalsP.TextbookColor);
-        polycrystalsP2.EdgeColor = 'none';
-        polycrystalsC1 = patch(hd.PolycrystalsC.waterBounds(1,:),hd.PolycrystalsC.TempBounds(1,:),hd.PolycrystalsC.TextbookColor);
-        polycrystalsC1.EdgeColor = 'none';
-        polycrystalsC2 = patch(hd.PolycrystalsC.waterBounds(2,:),hd.PolycrystalsC.TempBounds(2,:),hd.PolycrystalsC.TextbookColor);
-        polycrystalsC2.EdgeColor = 'none';
-        sectorplates1 = patch(hd.SectorPlates.waterBounds(1,:),hd.SectorPlates.TempBounds(1,:),hd.SectorPlates.TextbookColor);
-        sectorplates1.EdgeColor = 'none';
-        sectorplates2 = patch(hd.SectorPlates.waterBounds(2,:),hd.SectorPlates.TempBounds(2,:),hd.SectorPlates.TextbookColor);
-        sectorplates2.EdgeColor = 'none';
-        sectorplates3 = patch(hd.SectorPlates.waterBounds(3,:),hd.SectorPlates.TempBounds(3,:),hd.SectorPlates.TextbookColor);
-        sectorplates3.EdgeColor = 'none';
-        dendrites = patch(hd.Dendrites.waterBounds,hd.Dendrites.TempBounds,hd.Dendrites.TextbookColor);
-        dendrites.EdgeColor = 'none';
+        % The fuzzy boundaries are hand-tuned for aesthetics. If changes are made
+        % elsewhere in the code, these often need further manual adjustment.
+        % Define fuzzy boundary into tabular polycrystalline form from tabular and branched forms
+        intermedTabular = patch([83.4409,hd.Tabular8.waterBounds(end)-3,100 100],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.TextbookColor; hd.Tabular8.TextbookColor; hd.Tabular8.TextbookColor; hd.TabPolycryst.TextbookColor],4,[],3));
+        intermedTabular.EdgeColor = 'none';
+        intermedBranched = patch([100 100 131 131],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.TextbookColor; hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.TabPolycryst.TextbookColor],4,[],3));
+        intermedBranched.EdgeColor = 'none';
         
-        intermediatePlatesP = patch([83.4409,hd.VariousPlates.waterBounds(end)-3,100 100],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
-        intermediatePlatesP.EdgeColor = 'none';
-        intermediateSectorP = patch([100 100 131 131],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
-        intermediateSectorP.EdgeColor = 'none';
+        % Define fuzzy boundary between the branched and side branched forms
+        intermedBSB_floor = patch([hd.SideBranched.waterBounds(1),hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(2) hd.SideBranched.waterBounds(2)], [hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(2) hd.SideBranched.TempBounds(2),hd.Branched.TempBounds(5)*0.99],reshape([hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.SideBranched.TextbookColor; hd.Branched.TextbookColor],4,[],3));
+        intermedBSB_floor.EdgeColor = 'none';
+        intermedBSB_wall = patch([hd.Branched.waterBounds(2,3)*0.995 hd.Branched.waterBounds(2,2)*0.995 hd.SideBranched.waterBounds(1) hd.SideBranched.waterBounds(4)], [hd.Branched.TempBounds(3)*1.03 hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(1) hd.SideBranched.TempBounds(3)*1.01],reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.SideBranched.TextbookColor],4,[],3));
+        intermedBSB_wall.EdgeColor = 'none';
+        intermedBSB_ceiling = patch([hd.SideBranched.waterBounds(4),hd.SideBranched.waterBounds(4) hd.Branched.waterBounds(6) hd.Branched.waterBounds(9)], [hd.SideBranched.TempBounds(4) hd.Branched.TempBounds(11)*1.03 hd.Branched.TempBounds(11)*1.03,hd.SideBranched.TempBounds(4)],reshape([hd.SideBranched.TextbookColor; hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor],4,[],3));
+        intermedBSB_ceiling.EdgeColor = 'none';
+        intermedBSB_triangleTop = patch([101.08, 102.093, 102.093], [-18.128, -18.128, -17.1], reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor],3,[],3));
+        intermedBSB_triangleTop.EdgeColor = 'none';
+        intermedBSB_triangleBottom = patch([101.365,102.249,102.249], [-11.834,-12.7,-11.834], reshape([hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.Branched.TextbookColor],3,[],3));
+        intermedBSB_triangleBottom.EdgeColor = 'none';
         
-        intermediateSPD_floor = patch([hd.Dendrites.waterBounds(1),hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(2) hd.Dendrites.waterBounds(2)], [hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
-        intermediateSPD_floor.EdgeColor = 'none';
-        intermediateSPD_wall = patch([hd.SectorPlates.waterBounds(2,3)*0.995 hd.SectorPlates.waterBounds(2,2)*0.995 hd.Dendrites.waterBounds(1) hd.Dendrites.waterBounds(4)], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
-        intermediateSPD_wall.EdgeColor = 'none';
-        intermediateSPD_ceiling = patch([hd.Dendrites.waterBounds(4),hd.Dendrites.waterBounds(4) hd.SectorPlates.waterBounds(6) hd.SectorPlates.waterBounds(9)], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
-        intermediateSPD_ceiling.EdgeColor = 'none';
-        intermediateSPD_triangleTop = patch([101.08, 102.093, 102.093], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],3,[],3));
-        intermediateSPD_triangleTop.EdgeColor = 'none';
-        intermediateSPD_triangleBottom = patch([101.365,102.249,102.249], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
-        intermediateSPD_triangleBottom.EdgeColor = 'none';
-        
-        mixed1 = patch(hd.Mixed.waterBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.TextbookColor);
-        mixed1.EdgeColor = 'none';
-        
-        mixed2 = patch(hd.Mixed.waterBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.TextbookColor);
-        mixed2.EdgeColor = 'none';
+        % Multiple growth form must be defined here for proper layering
+        multiplePt1 = patch(hd.Multiple.waterBounds(1,:),hd.Multiple.TempBounds(1,:),hd.Multiple.TextbookColor);
+        multiplePt1.EdgeColor = 'none';
+        multiplePt2 = patch(hd.Multiple.waterBounds(2,:),hd.Multiple.TempBounds(2,:),hd.Multiple.TextbookColor);
+        multiplePt2.EdgeColor = 'none';
+
+        % Additional objects
         warmerThanFreezing = patch(hd.warm.waterBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
         warmerThanFreezing.EdgeColor = 'none';
         subsaturated = patch(hd.subsaturated.waterBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
         subsaturated.EdgeColor = 'none';
-        %unnaturalVent = patch(hd.unnaturalVent.waterBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+        %unnaturalVent = patch(hd.unnaturalVent.waterBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color); %BH09 approximation
         %unnaturalVent.EdgeColor = 'none';
         unnatural105 = patch(hd.unnatural105.waterBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
         unnatural105.EdgeColor = 'none';
 
+        % Define dashed edges between growth forms to indicate uncertainty in the
+        % exact bounding conditions.
         brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
-        tabEdge = line([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+        tabEdge = line([iceSupersatToRHw(0,-4.05),105],[-4.05,-4.05]);
         tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
-        colEdge = line([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+        colEdge = line([iceSupersatToRHw(0,-8.05),105],[-8.05,-8.05]);
         colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
-        varEdge = line([100.05,100.05],[-8,-22]);
-        varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
-        polyBorderStrg = line([89.8227,105],[-40.2,-40.2]);
-        polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
-        polyBorderAng = line([68.6524,86.5],[-45.875,-41.15]);
-        polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
-        polyBorderAng2 = line([89.8227,88.5],[-40.2,-40.6]); % Break around 130% RHice isohume label
-        polyBorderAng2.LineWidth = brdThc; polyBorderAng2.LineStyle = brdSt; polyBorderAng2.Color = brdCol;
-        mixedEdge1 = line([66.5,83.4409,95.8841],[-46.2,-22,-8]);
-        mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
-        mixedEdge15 = line([66.5,68.6274],[-46.2,-45.9]);
-        mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
-        mixedEdge2 = line(hd.Mixed.waterBounds(2,5:end)+0.025, hd.Mixed.TempBounds(2,5:end)+0.025);
-        mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+        tabBrnchEdge = line([100.05,100.05],[-8,-22]); %Physically at 100, negligibly displaced for visual clarity
+        tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
+        tabColPolyStrgEdge = line([89.8227,105],[-40.2,-40.2]);
+        tabColPolyStrgEdge.LineWidth = brdThc; tabColPolyStrgEdge.LineStyle = brdSt; tabColPolyStrgEdge.Color = brdCol;
+        tabColPolyAngEdge = line([68.6524,86.5],[-45.875,-41.15]);
+        tabColPolyAngEdge.LineWidth = brdThc; tabColPolyAngEdge.LineStyle = brdSt; tabColPolyAngEdge.Color = brdCol;
+        tabColPolyAngEdgePt2 = line([89.8227,88.5],[-40.2,-40.6]); % Break around 130% RHice isohume label
+        tabColPolyAngEdgePt2.LineWidth = brdThc; tabColPolyAngEdgePt2.LineStyle = brdSt; tabColPolyAngEdgePt2.Color = brdCol;
+        multipleEdge1 = line([66.5,83.4409,95.8841],[-46.2,-22,-8]);
+        multipleEdge1.LineWidth = brdThc; multipleEdge1.LineStyle = brdSt; multipleEdge1.Color = brdCol;
+        multipleEdge15 = line([66.5,68.6274],[-46.2,-45.9]);
+        multipleEdge15.LineWidth = brdThc; multipleEdge15.LineStyle = brdSt; multipleEdge15.Color = brdCol;
+        multipleEdge2 = line(hd.Multiple.waterBounds(2,5:end)+0.025, hd.Multiple.TempBounds(2,5:end)+0.025);
+        multipleEdge2.LineWidth = brdThc; multipleEdge2.LineStyle = brdSt; multipleEdge2.Color = brdCol;
 
         hold on
         
         %Draw isohumes
         for rhwc = [90:-10:0, 100, 102.5, 105]
-            actHandle = num2str(rhwc);
+            actHandle = num2str(rhwc); %Dynamically define handles
             actHandleNoPunct = actHandle(actHandle~='.');
             if rhwc == 105
                 eswLine_Handles.(['p', actHandleNoPunct, 'Plot']) = plot([rhwc rhwc],[-70,0]);
@@ -178,7 +194,7 @@ switch castInTermsOf
             else
                 actRhiHandle = ['sub',num2str(abs(rhic))];
             end
-            esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRH(rhic,TlineStandardC);
+            esiLine_Handles.(['p', actRhiHandle, 'Num']) = iceSupersatToRHw(rhic,TlineStandardC);
             if rhic == 0 %Break 100% ice saturation curve around label manually
                 esiLine_Handles.(['p', actRhiHandle, 'Plot1']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(1:346),TlineStandardC(1:346));
                 esiLine_Handles.(['p', actRhiHandle, 'Plot2']) = plot(esiLine_Handles.(['p',actRhiHandle,'Num'])(428:end),TlineStandardC(428:end));
@@ -232,50 +248,53 @@ switch castInTermsOf
         lIce0 = text(labX(5),labY(5),'100% (ice saturation)'); %Curve must be broken around label manually (intersects multiple colors)
         lIce0.FontName = 'Lato'; lIce0.FontSize = 18;
         lIce0.Rotation = -29;
-        lIce10 = text(labX(6),labY(6),'110% (ice)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
+        lIce10 = text(labX(6),labY(6),'110% (ice)','BackgroundColor',hd.TabPolycryst.TextbookColor);
         lIce10.FontName = 'Lato'; lIce10.FontSize = 16;
         lIce10.Rotation = -28;
-        lIce20 = text(labX(7),labY(7),'120% (ice)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
+        lIce20 = text(labX(7),labY(7),'120% (ice)','BackgroundColor',hd.TabPolycryst.TextbookColor);
         lIce20.FontName = 'Lato'; lIce20.FontSize = 16;
         lIce20.Rotation = -26;
         lIce30 = text(labX(8),labY(8),'130% (ice)'); %Curve must be broken around label manually (intersects multiple colors)
         lIce30.FontName = 'Lato'; lIce30.FontSize = 16;
         lIce30.Rotation = -26;
-        lIce40 = text(labX(9),labY(9),'140% (ice)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
+        lIce40 = text(labX(9),labY(9),'140% (ice)','BackgroundColor',hd.ColPolycryst.TextbookColor);
         lIce40.FontName = 'Lato'; lIce40.FontSize = 16;
         lIce40.Rotation = -26;
-        lIce50 = text(labX(10),labY(10),'150% (ice)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
+        lIce50 = text(labX(10),labY(10),'150% (ice)','BackgroundColor',hd.ColPolycryst.TextbookColor);
         lIce50.FontName = 'Lato'; lIce50.FontSize = 16;
         lIce50.Rotation = -26;
-        lIce60 = text(labX(11),labY(11),'160% (ice)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
+        lIce60 = text(labX(11),labY(11),'160% (ice)','BackgroundColor',hd.ColPolycryst.TextbookColor);
         lIce60.FontName = 'Lato'; lIce60.FontSize = 16;
         lIce60.Rotation = -27;
-        %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)');
+        %lVentW = text(107,-6,'Approx. max natural supersat (with ventilation)'); %BH09 approximation
         %lVentW.FontName = 'Lato'; lVentW.FontSize = 13; lVentW.Color = 'k';
         %lVentW.Rotation = 41;
+
+        %maxVentValuesInRH = iceSupersatToRHw(2.*eswLineData(151:end)*100,TlineStandardC(151:end));
+        %maxVentLine = plot(maxVentValuesInRH,TlineStandardC(151:end));
+        %maxVentLine.Color = [0 26 255]./255;
+        %maxVentLine.LineWidth = 1;
         
         % On-figure labels for growth modes
         lIceSubsaturated = text(72,-10,'Subsaturated with respect to ice, no ice growth','BackgroundColor',hd.subsaturated.Color);
         lIceSubsaturated.FontName = 'Lato'; lIceSubsaturated.FontSize = 16;
-        lFaceW = text(95.8,-6,'Columnar','BackgroundColor',hd.ColumnLike.TextbookColor);
-        lFaceW.FontName = 'Lato'; lFaceW.FontSize = 16;
-        lEdgeW = text(93.8,-17.65,'Tabular','BackgroundColor',hd.Plates.TextbookColor);
-        lEdgeW.FontName = 'Lato'; lEdgeW.FontSize = 16;
-        lCornerSectorTypeW = text(100.16,-11.5,'Branched');
-        lCornerSectorTypeW.FontName = 'Lato'; lCornerSectorTypeW.FontSize = 16;
-%         lCornerSectorSubtypeW = text(100.16,-10.2,'(sector)');
-%         lCornerSectorSubtypeW.FontName = 'Lato'; lCornerSectorSubtypeW.FontSize = 14;
-        lCornerBranchedTypeW = text(102,-15.9,'Side');
-        lCornerBranchedTypeW.FontName = 'Lato'; lCornerBranchedTypeW.FontSize = 16;
-        lCornerBranchedSubtypeW = text(102,-14.7,'branched');
-        lCornerBranchedSubtypeW.FontName = 'Lato'; lCornerBranchedSubtypeW.FontSize = 16;
-        lMixedW = text(64,-48.6,'Multiple');
-        lMixedW.FontName = 'Lato'; lMixedW.FontSize = 16;
-        lMixedW.Rotation = -35;
-        lPolycrystalsPlatelikeW = text(89,-28,'Tabular polycrystalline','BackgroundColor',hd.PolycrystalsP.TextbookColor);
-        lPolycrystalsPlatelikeW.FontName = 'Lato'; lPolycrystalsPlatelikeW.FontSize = 16;
-        lPolycrystalsColumnarW = text(77,-50,'Columnar polycrystalline'); %Curve must be broken around label manually (bad angle of approach)
-        lPolycrystalsColumnarW.FontName = 'Lato'; lPolycrystalsColumnarW.FontSize = 16;
+        lColumnarW = text(95.8,-6,'Columnar','BackgroundColor',hd.Columnar.TextbookColor);
+        lColumnarW.FontName = 'Lato'; lColumnarW.FontSize = 16;
+        lTabularW = text(93.8,-17.65,'Tabular','BackgroundColor',hd.Tabular0.TextbookColor);
+        lTabularW.FontName = 'Lato'; lTabularW.FontSize = 16;
+        lBranchedTypeW = text(100.16,-11.5,'Branched');
+        lBranchedTypeW.FontName = 'Lato'; lBranchedTypeW.FontSize = 16;
+        lSideBranchedTypeW = text(102,-15.9,'Side');
+        lSideBranchedTypeW.FontName = 'Lato'; lSideBranchedTypeW.FontSize = 16;
+        lSideBranchedSubtypeW = text(102,-14.7,'branched');
+        lSideBranchedSubtypeW.FontName = 'Lato'; lSideBranchedSubtypeW.FontSize = 16;
+        lMultipleRhw = text(64,-48.6,'Multiple');
+        lMultipleRhw.FontName = 'Lato'; lMultipleRhw.FontSize = 16;
+        lMultipleRhw.Rotation = -35;
+        lTabPolycrystRhw = text(89,-28,'Tabular polycrystalline','BackgroundColor',hd.TabPolycryst.TextbookColor);
+        lTabPolycrystRhw.FontName = 'Lato'; lTabPolycrystRhw.FontSize = 16;
+        lColPolycrystRhw = text(77,-50,'Columnar polycrystalline'); %Curve must be broken around label manually (bad angle of approach)
+        lColPolycrystRhw.FontName = 'Lato'; lColPolycrystRhw.FontSize = 16;
         
         % Diagram settings
         axe = gca;
@@ -306,65 +325,75 @@ switch castInTermsOf
         axe.XTick = [50 55 60 65 70 75 80 85 90 95 100 105 110 120 130 140 150 160 170];
         axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
         axe.YDir = 'reverse';
+
     case "ice"
         %% Ice growth diagram in terms of relative humidity with respect to ice
-        % Check variables
+        % Modifiable variables
         xlimRange = [-0 0.6];
         ylimRange = [-70 0];
         
-        % Draw the growth types
-        plates = patch(hd.Plates.supersatBounds, hd.Plates.TempBounds,hd.Plates.TextbookColor);
-        plates.EdgeColor = 'none';
-        columnlike = patch(hd.ColumnLike.supersatBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
-        columnlike.EdgeColor = 'none';
-        variousplates = patch(hd.VariousPlates.supersatBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.TextbookColor);
-        variousplates.EdgeColor = 'none';
-        polycrystalsP1 = patch(hd.PolycrystalsP.supersatBounds(1,:),hd.PolycrystalsP.TempBounds(1,:),hd.PolycrystalsP.TextbookColor);
-        polycrystalsP1.EdgeColor = 'none';
-        polycrystalsP2 = patch(hd.PolycrystalsP.supersatBounds(2,:),hd.PolycrystalsP.TempBounds(2,:),hd.PolycrystalsP.TextbookColor);
-        polycrystalsP2.EdgeColor = 'none';
-        polycrystalsC1 = patch(hd.PolycrystalsC.supersatBounds(1,:),hd.PolycrystalsC.TempBounds(1,:),hd.PolycrystalsC.TextbookColor);
-        polycrystalsC1.EdgeColor = 'none';
-        polycrystalsC2 = patch(hd.PolycrystalsC.supersatBounds(2,:),hd.PolycrystalsC.TempBounds(2,:),hd.PolycrystalsC.TextbookColor);
-        polycrystalsC2.EdgeColor = 'none';
-        sectorplates1 = patch(hd.SectorPlates.supersatBounds(1,:),hd.SectorPlates.TempBounds(1,:),hd.SectorPlates.TextbookColor);
-        sectorplates1.EdgeColor = 'none';
-        sectorplates2 = patch(hd.SectorPlates.supersatBounds(2,:),hd.SectorPlates.TempBounds(2,:),hd.SectorPlates.TextbookColor);
-        sectorplates2.EdgeColor = 'none';
-        sectorplates3 = patch(hd.SectorPlates.supersatBounds(3,:),hd.SectorPlates.TempBounds(3,:),hd.SectorPlates.TextbookColor);
-        sectorplates3.EdgeColor = 'none';
-        dendrites = patch(hd.Dendrites.supersatBounds,hd.Dendrites.TempBounds,hd.Dendrites.TextbookColor);
-        dendrites.EdgeColor = 'none';
+        % The growth forms are patches with boundaries defined by the hd structure
+        tabular0C = patch(hd.Tabular0.supersatBounds, hd.Tabular0.TempBounds,hd.Tabular0.TextbookColor);
+        tabular0C.EdgeColor = 'none';
+        columnar = patch(hd.Columnar.supersatBounds,hd.Columnar.TempBounds,hd.Columnar.TextbookColor);
+        columnar.EdgeColor = 'none';
+        tabular8C = patch(hd.Tabular8.supersatBounds,hd.Tabular8.TempBounds,hd.Tabular8.TextbookColor);
+        tabular8C.EdgeColor = 'none';
+        tabPolycrystPt1 = patch(hd.TabPolycryst.supersatBounds(1,:),hd.TabPolycryst.TempBounds(1,:),hd.TabPolycryst.TextbookColor);
+        tabPolycrystPt1.EdgeColor = 'none';
+        tabPolycrystPt2 = patch(hd.TabPolycryst.supersatBounds(2,:),hd.TabPolycryst.TempBounds(2,:),hd.TabPolycryst.TextbookColor);
+        tabPolycrystPt2.EdgeColor = 'none';
+        colPolycrystPt1 = patch(hd.ColPolycryst.supersatBounds(1,:),hd.ColPolycryst.TempBounds(1,:),hd.ColPolycryst.TextbookColor);
+        colPolycrystPt1.EdgeColor = 'none';
+        colPolycrystPt2 = patch(hd.ColPolycryst.supersatBounds(2,:),hd.ColPolycryst.TempBounds(2,:),hd.ColPolycryst.TextbookColor);
+        colPolycrystPt2.EdgeColor = 'none';
+        branchedPt1 = patch(hd.Branched.supersatBounds(1,:),hd.Branched.TempBounds(1,:),hd.Branched.TextbookColor);
+        branchedPt1.EdgeColor = 'none';
+        branchedPt2 = patch(hd.Branched.supersatBounds(2,:),hd.Branched.TempBounds(2,:),hd.Branched.TextbookColor);
+        branchedPt2.EdgeColor = 'none';
+        branchedPt3 = patch(hd.Branched.supersatBounds(3,:),hd.Branched.TempBounds(3,:),hd.Branched.TextbookColor);
+        branchedPt3.EdgeColor = 'none';
+        sideBranched = patch(hd.SideBranched.supersatBounds,hd.SideBranched.TempBounds,hd.SideBranched.TextbookColor);
+        sideBranched.EdgeColor = 'none';
         
-        intermediatePlatesP = patch([hd.VariousPlates.supersatBounds(end),hd.VariousPlates.supersatBounds(end),eswLineData(351) eswLineData(371)],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
-        intermediatePlatesP.EdgeColor = 'none';
-        intermediateSectorP = patch([eswLineData(351) 0.6 0.6 eswLineData(371)],[-20 -20 -22.1 -22.1],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
-        intermediateSectorP.EdgeColor = 'none';
+        % The fuzzy boundaries are hand-tuned for aesthetics. If changes are made
+        % elsewhere in the code, these often need further manual adjustment.
+        % Define fuzzy boundary into tabular polycrystalline form from tabular and branched forms
+        intermedTabular = patch([hd.Tabular8.supersatBounds(end),hd.Tabular8.supersatBounds(end),eswLineData(351) eswLineData(371)],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.TextbookColor; hd.Tabular8.TextbookColor; hd.Tabular8.TextbookColor; hd.TabPolycryst.TextbookColor],4,[],3));
+        intermedTabular.EdgeColor = 'none';
+        intermedBranched = patch([eswLineData(351) 0.6 0.6 eswLineData(371)],[-20 -20 -22.1 -22.1],reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.TabPolycryst.TextbookColor; hd.TabPolycryst.TextbookColor],4,[],3));
+        intermedBranched.EdgeColor = 'none';
         
-        intermediateSPD_floor = patch([0.15,0.16,0.43,0.4212], [hd.SectorPlates.TempBounds(5)*0.97,-13.5,-13.5,hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
-        intermediateSPD_floor.EdgeColor = 'none';
-        intermediateSPD_wall = patch([0.2103,0.1401,0.16,0.2121], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
-        intermediateSPD_wall.EdgeColor = 'none';
-        intermediateSPD_ceiling = patch([0.21,0.2224,0.6084,0.5244], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
-        intermediateSPD_ceiling.EdgeColor = 'none';
-        intermediateSPD_triangleTop = patch([0.2103,0.2224,0.21], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],3,[],3));
-        intermediateSPD_triangleTop.EdgeColor = 'none';
-        intermediateSPD_triangleBottom = patch([0.1401,0.16,0.15], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
-        intermediateSPD_triangleBottom.EdgeColor = 'none';
+        % Define fuzzy boundary between the branched and side branched forms
+        intermedBSB_floor = patch([0.15,0.16,0.43,0.4212], [hd.Branched.TempBounds(5)*0.97,-13.5,-13.5,hd.Branched.TempBounds(5)*0.99],reshape([hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.SideBranched.TextbookColor; hd.Branched.TextbookColor],4,[],3));
+        intermedBSB_floor.EdgeColor = 'none';
+        intermedBSB_wall = patch([0.2054,0.135,0.16,0.2121], [hd.Branched.TempBounds(3)*1.03 hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(1) hd.SideBranched.TempBounds(3)*1.01],reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.SideBranched.TextbookColor],4,[],3));
+        intermedBSB_wall.EdgeColor = 'none';
+        intermedBSB_ceiling = patch([0.21,0.2224,0.6084,0.5244], [hd.SideBranched.TempBounds(4) hd.Branched.TempBounds(11)*1.03 hd.Branched.TempBounds(11)*1.03,hd.SideBranched.TempBounds(4)],reshape([hd.SideBranched.TextbookColor; hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor],4,[],3));
+        intermedBSB_ceiling.EdgeColor = 'none';
+        intermedBSB_triangleTop = patch([0.2054,0.2224,0.21], [-18.128, -18.128, -17.1], reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor],3,[],3));
+        intermedBSB_triangleTop.EdgeColor = 'none';
+        intermedBSB_triangleBottom = patch([0.135,0.16,0.15], [-11.834,-12.7,-11.834], reshape([hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.Branched.TextbookColor],3,[],3));
+        intermedBSB_triangleBottom.EdgeColor = 'none';
 
-        mixed1 = patch(hd.Mixed.supersatBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.TextbookColor);
-        mixed1.EdgeColor = 'none';
-        mixed2 = patch(hd.Mixed.supersatBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.TextbookColor);
-        mixed2.EdgeColor = 'none';
+        % Multiple growth form must be defined here for proper layering
+        multiplePt1 = patch(hd.Multiple.supersatBounds(1,:),hd.Multiple.TempBounds(1,:),hd.Multiple.TextbookColor);
+        multiplePt1.EdgeColor = 'none';
+        multiplePt2 = patch(hd.Multiple.supersatBounds(2,:),hd.Multiple.TempBounds(2,:),hd.Multiple.TextbookColor);
+        multiplePt2.EdgeColor = 'none';
+
+        % Additional objects
         warmerThanFreezing = patch(hd.warm.supersatBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
         warmerThanFreezing.EdgeColor = 'none';
         subsaturated = patch(hd.subsaturated.supersatBounds(1,:),hd.subsaturated.TempBounds(1,:),hd.subsaturated.Color);
         subsaturated.EdgeColor = 'none';
-        %unnaturalVent = patch(hd.unnaturalVent.supersatBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color);
+        %unnaturalVent = patch(hd.unnaturalVent.supersatBounds,hd.unnaturalVent.TempBounds,hd.unnaturalVent.Color); %BH09 approximation
         %unnaturalVent.EdgeColor = 'none';
         unnatural105 = patch(hd.unnatural105.supersatBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
         unnatural105.EdgeColor = 'none';
 
+        % Define dashed edges between growth forms to indicate uncertainty in the
+        % exact bounding conditions.
         brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
         tabEdgeRhi = [0, (rhwToRhi(105,-4.05)/100 - 1)]; %convert percent RHw to supersat RHi
         tabEdge = line(tabEdgeRhi,[-4.05,-4.05]);
@@ -373,23 +402,23 @@ switch castInTermsOf
         colEdge = line(colEdgeRhi,[-8.05,-8.05]);
         colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
         varEdgeRhi = rhwToRhi(ones(1,141)*100.05, TlineStandardC(231:371))/100 - 1;
-        varEdge = line(varEdgeRhi,TlineStandardC(231:371));
-        varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
+        tabBrnchEdge = line(varEdgeRhi,TlineStandardC(231:371));
+        tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
         polyBorderStrgRhi = rhwToRhi([89.8227,105],[-40.2,-40.2])/100 - 1;
-        polyBorderStrg = line(polyBorderStrgRhi,[-40.2,-40.2]);
-        polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
+        tabColPolyStrgEdge = line(polyBorderStrgRhi,[-40.2,-40.2]);
+        tabColPolyStrgEdge.LineWidth = brdThc; tabColPolyStrgEdge.LineStyle = brdSt; tabColPolyStrgEdge.Color = brdCol;
         polyBorderAngVde = rhwToRhi([68.6524,89.8227],[-45.875,-40.2])/100 - 1;
-        polyBorderAng = line(polyBorderAngVde,[-45.875,-40.2]);
-        polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
-        mixedEdge1Rhi = [0.038,0.038,0.038];
-        mixedEdge1 = line(mixedEdge1Rhi,[-46.2,-22,-8]);
-        mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
-        mixedEdge15Vde = rhwToRhi([66.5,68.6274],[-46.2,-45.9])/100 - 1;
-        mixedEdge15 = line(mixedEdge15Vde,[-46.2,-45.9]);
-        mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
-        mixedEdge2Vde = rhwToRhi(hd.Mixed.waterBounds(2,10:end)+0.025, hd.Mixed.TempBounds(2,10:end)+0.025)/100 - 1;
-        mixedEdge2 = line(mixedEdge2Vde, hd.Mixed.TempBounds(2,10:end)+0.025);
-        mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
+        tabColPolyAngEdge = line(polyBorderAngVde,[-45.875,-40.2]);
+        tabColPolyAngEdge.LineWidth = brdThc; tabColPolyAngEdge.LineStyle = brdSt; tabColPolyAngEdge.Color = brdCol;
+        multipleEdge1Rhi = [0.038,0.038,0.038];
+        multipleEdge1 = line(multipleEdge1Rhi,[-46.2,-22,-8]);
+        multipleEdge1.LineWidth = brdThc; multipleEdge1.LineStyle = brdSt; multipleEdge1.Color = brdCol;
+        multipleEdge15Vde = rhwToRhi([66.5,68.6274],[-46.2,-45.9])/100 - 1;
+        multipleEdge15 = line(multipleEdge15Vde,[-46.2,-45.9]);
+        multipleEdge15.LineWidth = brdThc; multipleEdge15.LineStyle = brdSt; multipleEdge15.Color = brdCol;
+        multipleEdge2Vde = rhwToRhi(hd.Multiple.waterBounds(2,10:end)+0.025, hd.Multiple.TempBounds(2,10:end)+0.025)/100 - 1;
+        multipleEdge2 = line(multipleEdge2Vde, hd.Multiple.TempBounds(2,10:end)+0.025);
+        multipleEdge2.LineWidth = brdThc; multipleEdge2.LineStyle = brdSt; multipleEdge2.Color = brdCol;
 
         hold on
         
@@ -397,7 +426,7 @@ switch castInTermsOf
         Tupper = 15; Tlower = -70;
         TlineStandardC = Tupper:-0.1:Tlower;
         for rhwc = [90:-10:0, 100, 102.5, 105]
-            actHandle = num2str(rhwc);
+            actHandle = num2str(rhwc); %Dynamically define handles
             actHandleNoPunct = actHandle(actHandle~='.');
             eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
             if rhwc == 105
@@ -442,47 +471,44 @@ switch castInTermsOf
         %maxVentLine.LineWidth = 1;
         
         % On-figure labels for growth modes
-        lFace = text(0.01,-6,'Columnar','BackgroundColor',hd.ColumnLike.TextbookColor);
-        lFace.FontName = 'Lato'; lFace.FontSize = 16;
-        lEdge = text(0.08,-15.8,'Tabular');
-        lEdge.FontName = 'Lato'; lEdge.FontSize = 16;
-        lCornerBranched = text(0.17,-13,'Side');
-        lCornerBranched.FontName = 'Lato'; lCornerBranched.FontSize = 16;
-        lCornerBranched.Rotation = 24;
-        lCornerBranchedLine2 = text(0.187,-13.5,'branched');
-        lCornerBranchedLine2.FontName = 'Lato'; lCornerBranchedLine2.FontSize = 16;
-        lCornerBranchedLine2.Rotation = 24;
-        lCornerSector = text(0.205,-17.8,'Branched');
-        lCornerSector.FontName = 'Lato'; lCornerSector.FontSize = 16;
-        lCornerSector.Rotation = 26;
-%         lCornerSectorLine2 = text(0.235,-18.03,'(sector)');
-%         lCornerSectorLine2.FontName = 'Lato'; lCornerSectorLine2.FontSize = 14;
-%         lCornerSectorLine2.Rotation = 30;
-        lPolycrystalsPlatelike = text(0.26,-32,'Tabular polycrystalline');
-        lPolycrystalsPlatelike.FontName = 'Lato'; lPolycrystalsPlatelike.FontSize = 16;
-        lPolycrystalsColumnar = text(0.32,-49.5,'Columnar polycrystalline');
-        lPolycrystalsColumnar.FontName = 'Lato'; lPolycrystalsColumnar.FontSize = 16;
-        lMixed = text(0.02,-19.5,'Multiple','BackgroundColor',hd.Mixed.TextbookColor);
-        lMixed.FontName = 'Lato'; lMixed.FontSize = 16;
-        lMixed.Rotation = 90;
+        lColumnar = text(0.01,-6,'Columnar','BackgroundColor',hd.Columnar.TextbookColor);
+        lColumnar.FontName = 'Lato'; lColumnar.FontSize = 16;
+        lTabular = text(0.08,-15.8,'Tabular');
+        lTabular.FontName = 'Lato'; lTabular.FontSize = 16;
+        lSideBranched = text(0.17,-13,'Side');
+        lSideBranched.FontName = 'Lato'; lSideBranched.FontSize = 16;
+        lSideBranched.Rotation = 24;
+        lSideBranchedLine2 = text(0.187,-13.5,'branched');
+        lSideBranchedLine2.FontName = 'Lato'; lSideBranchedLine2.FontSize = 16;
+        lSideBranchedLine2.Rotation = 24;
+        lBranched = text(0.205,-17.8,'Branched');
+        lBranched.FontName = 'Lato'; lBranched.FontSize = 16;
+        lBranched.Rotation = 26;
+        lTabPolycryst = text(0.26,-32,'Tabular polycrystalline');
+        lTabPolycryst.FontName = 'Lato'; lTabPolycryst.FontSize = 16;
+        lColPolycryst = text(0.32,-49.5,'Columnar polycrystalline');
+        lColPolycryst.FontName = 'Lato'; lColPolycryst.FontSize = 16;
+        lMultiple = text(0.02,-19.5,'Multiple','BackgroundColor',hd.Multiple.TextbookColor);
+        lMultiple.FontName = 'Lato'; lMultiple.FontSize = 16;
+        lMultiple.Rotation = 90;
         
         % On-figure labels for isohumes
-        lWater60 = text(0.005,-54.4,'60% (water)', 'BackgroundColor', hd.Mixed.TextbookColor);
+        lWater60 = text(0.005,-54.4,'60% (water)', 'BackgroundColor', hd.Multiple.TextbookColor);
         lWater60.FontName = 'Lato'; lWater60.FontSize = 16;
         lWater60.Rotation = 34;
-        lWater70 = text(0.097,-46.5,'70% (water)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
+        lWater70 = text(0.097,-46.5,'70% (water)','BackgroundColor',hd.ColPolycryst.TextbookColor);
         lWater70.FontName = 'Lato'; lWater70.FontSize = 16;
         lWater70.Rotation = 30;
-        lWater80 = text(0.222,-43.7,'80% (water)','BackgroundColor',hd.PolycrystalsC.TextbookColor);
+        lWater80 = text(0.222,-43.7,'80% (water)','BackgroundColor',hd.ColPolycryst.TextbookColor);
         lWater80.FontName = 'Lato'; lWater80.FontSize = 16;
         lWater80.Rotation = 27;
         lWater90 = text(0.3412,-40.9,'90% (water)');
         lWater90.FontName = 'Lato'; lWater90.FontSize = 16;
         lWater90.Rotation = 25;
-        lWater100 = text(0.406,-34.7,'100% (water)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
+        lWater100 = text(0.406,-34.7,'100% (water)','BackgroundColor',hd.TabPolycryst.TextbookColor);
         lWater100.FontName = 'Lato'; lWater100.FontSize = 16;
         lWater100.Rotation = 22;
-        lWater102p5 = text(0.425,-33.5,'102.5% (water)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
+        lWater102p5 = text(0.425,-33.5,'102.5% (water)','BackgroundColor',hd.TabPolycryst.TextbookColor);
         lWater102p5.FontName = 'Lato'; lWater102p5.FontSize = 16;
         lWater102p5.Rotation = 22;
         lWater105 = text(0.445,-32.4,'105% (water,');
@@ -526,57 +552,64 @@ switch castInTermsOf
         xticklabels(xTickLabels);
         axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
         axe.YDir = 'reverse';
+        
     case "vde"
         %% Ice growth diagram in terms of vapor density excess
         % Modifiable variables
         xlimRange = [0 0.351];
         ylimRange = [-70 0];
         
-        % Draw the growth types
-        plates = patch(hd.Plates.vaporExcBounds, hd.Plates.TempBounds, hd.Plates.TextbookColor);
-        plates.EdgeColor = 'none';
-        columnlike = patch(hd.ColumnLike.vaporExcBounds,hd.ColumnLike.TempBounds,hd.ColumnLike.TextbookColor);
-        columnlike.EdgeColor = 'none';
-        polycrystalsP1 = patch(hd.PolycrystalsP.vaporExcBounds(1,:),hd.PolycrystalsP.TempBounds(1,:),hd.PolycrystalsP.TextbookColor);
-        polycrystalsP1.EdgeColor = 'none';
-        polycrystalsP2 = patch(hd.PolycrystalsP.vaporExcBounds(2,:),hd.PolycrystalsP.TempBounds(2,:),hd.PolycrystalsP.TextbookColor);
-        polycrystalsP2.EdgeColor = 'none';
-        polycrystalsC1 = patch(hd.PolycrystalsC.vaporExcBounds(1,:),hd.PolycrystalsC.TempBounds(1,:),hd.PolycrystalsC.TextbookColor);
-        polycrystalsC1.EdgeColor = 'none';
-        polycrystalsC2 = patch(hd.PolycrystalsC.vaporExcBounds(2,:),hd.PolycrystalsC.TempBounds(2,:),hd.PolycrystalsC.TextbookColor);
-        polycrystalsC2.EdgeColor = 'none';
-        sectorplates1 = patch(hd.SectorPlates.vaporExcBounds(1,:),hd.SectorPlates.TempBounds(1,:),hd.SectorPlates.TextbookColor);
-        sectorplates1.EdgeColor = 'none';
-        sectorplates2 = patch(hd.SectorPlates.vaporExcBounds(2,:),hd.SectorPlates.TempBounds(2,:),hd.SectorPlates.TextbookColor);
-        sectorplates2.EdgeColor = 'none';
-        sectorplates3 = patch(hd.SectorPlates.vaporExcBounds(3,:),hd.SectorPlates.TempBounds(3,:),hd.SectorPlates.TextbookColor);
-        sectorplates3.EdgeColor = 'none';
-        dendrites = patch(hd.Dendrites.vaporExcBounds,hd.Dendrites.TempBounds,hd.Dendrites.TextbookColor);
-        dendrites.EdgeColor = 'none';
-        variousplates = patch(hd.VariousPlates.vaporExcBounds,hd.VariousPlates.TempBounds,hd.VariousPlates.TextbookColor);
-        variousplates.EdgeColor = 'none';
+        % The growth forms are patches with boundaries defined by the hd structure
+        tabular0C = patch(hd.Tabular0.vaporExcBounds, hd.Tabular0.TempBounds, hd.Tabular0.TextbookColor);
+        tabular0C.EdgeColor = 'none';
+        columnar = patch(hd.Columnar.vaporExcBounds,hd.Columnar.TempBounds,hd.Columnar.TextbookColor);
+        columnar.EdgeColor = 'none';
+        tabPolycrystPt1 = patch(hd.TabPolycryst.vaporExcBounds(1,:),hd.TabPolycryst.TempBounds(1,:),hd.TabPolycryst.TextbookColor);
+        tabPolycrystPt1.EdgeColor = 'none';
+        tabPolycrystPt2 = patch(hd.TabPolycryst.vaporExcBounds(2,:),hd.TabPolycryst.TempBounds(2,:),hd.TabPolycryst.TextbookColor);
+        tabPolycrystPt2.EdgeColor = 'none';
+        colPolycrystPt1 = patch(hd.ColPolycryst.vaporExcBounds(1,:),hd.ColPolycryst.TempBounds(1,:),hd.ColPolycryst.TextbookColor);
+        colPolycrystPt1.EdgeColor = 'none';
+        colPolycrystPt2 = patch(hd.ColPolycryst.vaporExcBounds(2,:),hd.ColPolycryst.TempBounds(2,:),hd.ColPolycryst.TextbookColor);
+        colPolycrystPt2.EdgeColor = 'none';
+        branchedPt1 = patch(hd.Branched.vaporExcBounds(1,:),hd.Branched.TempBounds(1,:),hd.Branched.TextbookColor);
+        branchedPt1.EdgeColor = 'none';
+        branchedPt2 = patch(hd.Branched.vaporExcBounds(2,:),hd.Branched.TempBounds(2,:),hd.Branched.TextbookColor);
+        branchedPt2.EdgeColor = 'none';
+        branchedPt3 = patch(hd.Branched.vaporExcBounds(3,:),hd.Branched.TempBounds(3,:),hd.Branched.TextbookColor);
+        branchedPt3.EdgeColor = 'none';
+        sideBranched = patch(hd.SideBranched.vaporExcBounds,hd.SideBranched.TempBounds,hd.SideBranched.TextbookColor);
+        sideBranched.EdgeColor = 'none';
+        tabular8C = patch(hd.Tabular8.vaporExcBounds,hd.Tabular8.TempBounds,hd.Tabular8.TextbookColor);
+        tabular8C.EdgeColor = 'none';
         
-        intermediatePlatesP = patch([hd.VariousPlates.vaporExcBounds(end),hd.VariousPlates.vaporExcBounds(end)-3,eswLineDataVde(351),eswLineDataVde(371)],[-22.1 -20 -20 -22.1],reshape([hd.PolycrystalsP.TextbookColor; hd.VariousPlates.TextbookColor; hd.VariousPlates.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
-        intermediatePlatesP.EdgeColor = 'none';
-        intermediateSectorP = patch([eswLineDataVde(351) 0.9113 0.9113 eswLineDataVde(371)],[-20 -20 -22.1 -22.1],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.PolycrystalsP.TextbookColor; hd.PolycrystalsP.TextbookColor],4,[],3));
-        intermediateSectorP.EdgeColor = 'none';
+        % The fuzzy boundaries are hand-tuned for aesthetics. If changes are made
+        % elsewhere in the code, these often need further manual adjustment.
+        % Define fuzzy boundary into tabular polycrystalline form from tabular and branched forms
+        intermedTabular = patch([hd.Tabular8.vaporExcBounds(end),hd.Tabular8.vaporExcBounds(end)-3,eswLineDataVde(351),eswLineDataVde(371)],[-22.1 -20 -20 -22.1],reshape([hd.TabPolycryst.TextbookColor; hd.Tabular8.TextbookColor; hd.Tabular8.TextbookColor; hd.TabPolycryst.TextbookColor],4,[],3));
+        intermedTabular.EdgeColor = 'none';
+        intermedBranched = patch([eswLineDataVde(351) 0.9113 0.9113 eswLineDataVde(371)],[-20 -20 -22.1 -22.1],reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.TabPolycryst.TextbookColor; hd.TabPolycryst.TextbookColor],4,[],3));
+        intermedBranched.EdgeColor = 'none';
         
-        intermediateSPD_floor = patch([0.2742,0.2713,0.729,0.7536], [hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(2) hd.Dendrites.TempBounds(2),hd.SectorPlates.TempBounds(5)*0.99],reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],4,[],3));
-        intermediateSPD_floor.EdgeColor = 'none';
-        intermediateSPD_wall = patch([0.2202,0.256,0.2713,0.241], [hd.SectorPlates.TempBounds(3)*1.03 hd.SectorPlates.TempBounds(5)*0.97 hd.Dendrites.TempBounds(1) hd.Dendrites.TempBounds(3)*1.01],reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
-        intermediateSPD_wall.EdgeColor = 'none';
-        intermediateSPD_ceiling = patch([0.2413,0.2329,0.6372,0.6026], [hd.Dendrites.TempBounds(4) hd.SectorPlates.TempBounds(11)*1.03 hd.SectorPlates.TempBounds(11)*1.03,hd.Dendrites.TempBounds(4)],reshape([hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],4,[],3));
-        intermediateSPD_ceiling.EdgeColor = 'none';
-        intermediateSPD_triangleTop = patch([0.2202,0.2329,0.2413], [-18.128, -18.128, -17.1], reshape([hd.SectorPlates.TextbookColor; hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor],3,[],3));
-        intermediateSPD_triangleTop.EdgeColor = 'none';
-        intermediateSPD_triangleBottom = patch([0.2560,0.2713,0.2742], [-11.834,-12.7,-11.834], reshape([hd.SectorPlates.TextbookColor; hd.Dendrites.TextbookColor; hd.SectorPlates.TextbookColor],3,[],3));
-        intermediateSPD_triangleBottom.EdgeColor = 'none';
+        % Define fuzzy boundary between the branched and side branched forms
+        intermedBSB_floor = patch([0.2742,0.2713,0.729,0.7536], [hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(2) hd.SideBranched.TempBounds(2),hd.Branched.TempBounds(5)*0.99],reshape([hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.SideBranched.TextbookColor; hd.Branched.TextbookColor],4,[],3));
+        intermedBSB_floor.EdgeColor = 'none';
+        intermedBSB_wall = patch([0.2202,0.256,0.2713,0.241], [hd.Branched.TempBounds(3)*1.03 hd.Branched.TempBounds(5)*0.97 hd.SideBranched.TempBounds(1) hd.SideBranched.TempBounds(3)*1.01],reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.SideBranched.TextbookColor],4,[],3));
+        intermedBSB_wall.EdgeColor = 'none';
+        intermedBSB_ceiling = patch([0.2413,0.2329,0.6372,0.6026], [hd.SideBranched.TempBounds(4) hd.Branched.TempBounds(11)*1.03 hd.Branched.TempBounds(11)*1.03,hd.SideBranched.TempBounds(4)],reshape([hd.SideBranched.TextbookColor; hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor],4,[],3));
+        intermedBSB_ceiling.EdgeColor = 'none';
+        intermedBSB_triangleTop = patch([0.2202,0.2329,0.2413], [-18.128, -18.128, -17.1], reshape([hd.Branched.TextbookColor; hd.Branched.TextbookColor; hd.SideBranched.TextbookColor],3,[],3));
+        intermedBSB_triangleTop.EdgeColor = 'none';
+        intermedBSB_triangleBottom = patch([0.2560,0.2713,0.2742], [-11.834,-12.7,-11.834], reshape([hd.Branched.TextbookColor; hd.SideBranched.TextbookColor; hd.Branched.TextbookColor],3,[],3));
+        intermedBSB_triangleBottom.EdgeColor = 'none';
         
-        mixed1 = patch(hd.Mixed.vaporExcBounds(1,:),hd.Mixed.TempBounds(1,:),hd.Mixed.TextbookColor);
-        mixed1.EdgeColor = 'none';
-        
-        mixed2 = patch(hd.Mixed.vaporExcBounds(2,:),hd.Mixed.TempBounds(2,:),hd.Mixed.TextbookColor);
-        mixed2.EdgeColor = 'none';
+        % Multiple growth form must be defined here for proper layering
+        multiplePt1 = patch(hd.Multiple.vaporExcBounds(1,:),hd.Multiple.TempBounds(1,:),hd.Multiple.TextbookColor);
+        multiplePt1.EdgeColor = 'none';
+        multiplePt2 = patch(hd.Multiple.vaporExcBounds(2,:),hd.Multiple.TempBounds(2,:),hd.Multiple.TextbookColor);
+        multiplePt2.EdgeColor = 'none';
+
+        % Additional objects
         warmerThanFreezing = patch(hd.warm.vaporExcBounds(1,:),hd.warm.TempBounds(1,:),hd.warm.Color);
         warmerThanFreezing.EdgeColor = 'none';
         subsaturated = patch(hd.subsaturated.vaporExcBounds,hd.subsaturated.TempBounds,hd.subsaturated.Color);
@@ -586,32 +619,33 @@ switch castInTermsOf
         unnatural105 = patch(hd.unnatural105.vaporExcBounds,hd.unnatural105.TempBounds,hd.unnatural105.Color);
         unnatural105.EdgeColor = 'none';
 
+        % Define dashed edges between growth forms to indicate uncertainty in the
+        % exact bounding conditions.
         brdThc = 0.9; brdCol = [105,105,105]./255; brdSt = '--';
-        tabEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-4.05),105],[-4.05,-4.05]);
+        tabEdgeVde = rhwToVaporExc([iceSupersatToRHw(0,-4.05),105],[-4.05,-4.05]);
         tabEdge = line(tabEdgeVde,[-4.05,-4.05]);
         tabEdge.LineWidth = brdThc; tabEdge.LineStyle = brdSt; tabEdge.Color = brdCol;
-        colEdgeVde = rhwToVaporExc([iceSupersatToRH(0,-8.05),105],[-8.05,-8.05]);
+        colEdgeVde = rhwToVaporExc([iceSupersatToRHw(0,-8.05),105],[-8.05,-8.05]);
         colEdge = line(colEdgeVde,[-8.05,-8.05]);
         colEdge.LineWidth = brdThc; colEdge.LineStyle = brdSt; colEdge.Color = brdCol;
         varEdgeVde = rhwToVaporExc(ones(1,141)*100.05, TlineStandardC(231:371));
-        varEdge = line(varEdgeVde,TlineStandardC(231:371));
-        varEdge.LineWidth = brdThc; varEdge.LineStyle = brdSt; varEdge.Color = brdCol;
+        tabBrnchEdge = line(varEdgeVde,TlineStandardC(231:371));
+        tabBrnchEdge.LineWidth = brdThc; tabBrnchEdge.LineStyle = brdSt; tabBrnchEdge.Color = brdCol;
         polyBorderStrgVde = rhwToVaporExc([89.8227,105],[-40.2,-40.2]);
-        polyBorderStrg = line(polyBorderStrgVde,[-40.2,-40.2]);
-        polyBorderStrg.LineWidth = brdThc; polyBorderStrg.LineStyle = brdSt; polyBorderStrg.Color = brdCol;
+        tabColPolyStrgEdge = line(polyBorderStrgVde,[-40.2,-40.2]);
+        tabColPolyStrgEdge.LineWidth = brdThc; tabColPolyStrgEdge.LineStyle = brdSt; tabColPolyStrgEdge.Color = brdCol;
         polyBorderAngVde = rhwToVaporExc([68.6524,89.8227],[-45.875,-40.2]);
-        polyBorderAng = line(polyBorderAngVde,[-45.875,-40.2]);
-        polyBorderAng.LineWidth = brdThc; polyBorderAng.LineStyle = brdSt; polyBorderAng.Color = brdCol;
-        mixedEdge1Vde = rhwToVaporExc([66.5,83.4409,95.8841],[-46.2,-22,-8]);
-        mixedEdge1 = line(mixedEdge1Vde,[-46.2,-22,-8]);
-        mixedEdge1.LineWidth = brdThc; mixedEdge1.LineStyle = brdSt; mixedEdge1.Color = brdCol;
-        mixedEdge15Vde = rhwToVaporExc([66.5,68.6274],[-46.2,-45.9]);
-        mixedEdge15 = line(mixedEdge15Vde,[-46.2,-45.9]);
-        mixedEdge15.LineWidth = brdThc; mixedEdge15.LineStyle = brdSt; mixedEdge15.Color = brdCol;
-        mixedEdge2Vde = rhwToVaporExc(hd.Mixed.waterBounds(2,10:end)+0.025, hd.Mixed.TempBounds(2,10:end)+0.025);
-        mixedEdge2 = line(mixedEdge2Vde, hd.Mixed.TempBounds(2,10:end)+0.025);
-        mixedEdge2.LineWidth = brdThc; mixedEdge2.LineStyle = brdSt; mixedEdge2.Color = brdCol;
-
+        tabColPolyAngEdge = line(polyBorderAngVde,[-45.875,-40.2]);
+        tabColPolyAngEdge.LineWidth = brdThc; tabColPolyAngEdge.LineStyle = brdSt; tabColPolyAngEdge.Color = brdCol;
+        multipleEdge1Vde = rhwToVaporExc([66.5,83.4409,95.8841],[-46.2,-22,-8]);
+        multipleEdge1 = line(multipleEdge1Vde,[-46.2,-22,-8]);
+        multipleEdge1.LineWidth = brdThc; multipleEdge1.LineStyle = brdSt; multipleEdge1.Color = brdCol;
+        multipleEdge15Vde = rhwToVaporExc([66.5,68.6274],[-46.2,-45.9]);
+        multipleEdge15 = line(multipleEdge15Vde,[-46.2,-45.9]);
+        multipleEdge15.LineWidth = brdThc; multipleEdge15.LineStyle = brdSt; multipleEdge15.Color = brdCol;
+        multipleEdge2Vde = rhwToVaporExc(hd.Multiple.waterBounds(2,10:end)+0.025, hd.Multiple.TempBounds(2,10:end)+0.025);
+        multipleEdge2 = line(multipleEdge2Vde, hd.Multiple.TempBounds(2,10:end)+0.025);
+        multipleEdge2.LineWidth = brdThc; multipleEdge2.LineStyle = brdSt; multipleEdge2.Color = brdCol;
 
         hold on
         
@@ -619,7 +653,7 @@ switch castInTermsOf
         Tupper = 15; Tlower = -70;
         TlineStandardC = Tupper:-0.1:Tlower;
         for rhwc = [90:-10:0, 100, 102.5, 105]
-            actHandle = num2str(rhwc);
+            actHandle = num2str(rhwc); %Dynamically define handles
             actHandleNoPunct = actHandle(actHandle~='.');
             eswLine_Handles.(['p', actHandleNoPunct, 'Num']) = eswLine(rhwc,Tlower,Tupper);
             eswLine_Handles.(['p', actHandleNoPunct, 'Vde']) = iceSupersatToVaporExc(eswLine_Handles.(['p', actHandleNoPunct, 'Num']),TlineStandardC);
@@ -671,7 +705,7 @@ switch castInTermsOf
             eswLine_Handles.(['p', actHandleNoPunct, 'Plot']).Color = [144 143 143]./255;
         end
         
-        %Approximate maximum supersaturation with ventilation line
+        %Approximate maximum supersaturation with ventilation line (BH09 approximation)
         %maxVentLine = plot(2.*eswLineDataVde(151:end),TlineStandardC(151:end));
         %maxVentLine.Color = [0 26 255]./255;
         %maxVentLine.LineWidth = 1.2;
@@ -683,10 +717,10 @@ switch castInTermsOf
         l70WaterVde = text(0.006,-41.7,'(water)');
         l70WaterVde.FontName = 'Lato'; l70WaterVde.FontSize = 16;
         l70WaterVde.Rotation = -96;
-        l80Vde = text(0.022,-39.3,'80% (water)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
+        l80Vde = text(0.022,-39.3,'80% (water)','BackgroundColor',hd.TabPolycryst.TextbookColor);
         l80Vde.FontName = 'Lato'; l80Vde.FontSize = 16;
         l80Vde.Rotation = -77;
-        l90Vde = text(0.055,-35,'90% (water)','BackgroundColor',hd.PolycrystalsP.TextbookColor);
+        l90Vde = text(0.055,-35,'90% (water)','BackgroundColor',hd.TabPolycryst.TextbookColor);
         l90Vde.FontName = 'Lato'; l90Vde.FontSize = 16;
         l90Vde.Rotation = -43;
         l100Vde = text(0.1866,-21,'100% (water)');
@@ -706,26 +740,24 @@ switch castInTermsOf
         %lVentVde.Rotation = 7;
         
         % On-figure growth mode labels
-        lEdgeWarmVde = text(0.01,-2,'Tabular');
-        lEdgeWarmVde.FontName = 'Lato'; lEdgeWarmVde.FontSize = 16;
-        lFaceVde = text(0.07,-6,'Columnar');
-        lFaceVde.FontName = 'Lato'; lFaceVde.FontSize = 16;
-        lEdgeColdVde = text(0.12,-14,'Tabular');
-        lEdgeColdVde.FontName = 'Lato'; lEdgeColdVde.FontSize = 16;
-        lCornerSectorVde = text(0.235,-12,'Branched');
-        lCornerSectorVde.FontName = 'Lato'; lCornerSectorVde.FontSize = 16;
-%         lCornerSectorVdeSubtype = text(0.2518,-9.95,'(sector)');
-%         lCornerSectorVdeSubtype.FontName = 'Lato'; lCornerSectorVdeSubtype.FontSize = 14;
-        lCornerBranchedVde = text(0.265,-15.5,'Side');
-        lCornerBranchedVde.FontName = 'Lato'; lCornerBranchedVde.FontSize = 16;
-        lCornerBranchedVde2 = text(0.272,-14.4,'branched');
-        lCornerBranchedVde2.FontName = 'Lato'; lCornerBranchedVde2.FontSize = 16;
-        lPolycrystalsPlatelikeVde = text(0.085,-26,'Tabular polycrystalline');
-        lPolycrystalsPlatelikeVde.FontName = 'Lato'; lPolycrystalsPlatelikeVde.FontSize = 16;
-        lPolycrystalsColumnarVde = text(0.0034,-48.05,{'Columnar', 'polycrystalline'});
-        lPolycrystalsColumnarVde.FontName = 'Lato'; lPolycrystalsColumnarVde.FontSize = 16;
-        lMixedVde = text(0.003,-12,{'Multiple'}, 'BackgroundColor',hd.Mixed.TextbookColor);
-        lMixedVde.FontName = 'Lato'; lMixedVde.FontSize = 16;
+        lTabular0CVde = text(0.01,-2,'Tabular');
+        lTabular0CVde.FontName = 'Lato'; lTabular0CVde.FontSize = 16;
+        lColumnarVde = text(0.07,-6,'Columnar');
+        lColumnarVde.FontName = 'Lato'; lColumnarVde.FontSize = 16;
+        lTabular8CVde = text(0.12,-14,'Tabular');
+        lTabular8CVde.FontName = 'Lato'; lTabular8CVde.FontSize = 16;
+        lBranchedVde = text(0.235,-12,'Branched');
+        lBranchedVde.FontName = 'Lato'; lBranchedVde.FontSize = 16;
+        lSideBranchedVde = text(0.265,-15.5,'Side');
+        lSideBranchedVde.FontName = 'Lato'; lSideBranchedVde.FontSize = 16;
+        lSideBranchedVde2 = text(0.272,-14.4,'branched');
+        lSideBranchedVde2.FontName = 'Lato'; lSideBranchedVde2.FontSize = 16;
+        lTabPolycrystVde = text(0.085,-26,'Tabular polycrystalline');
+        lTabPolycrystVde.FontName = 'Lato'; lTabPolycrystVde.FontSize = 16;
+        lColPolycrystVde = text(0.0034,-48.05,{'Columnar', 'polycrystalline'});
+        lColPolycrystVde.FontName = 'Lato'; lColPolycrystVde.FontSize = 16;
+        lMultipleVde = text(0.003,-12,{'Multiple'}, 'BackgroundColor',hd.Multiple.TextbookColor);
+        lMultipleVde.FontName = 'Lato'; lMultipleVde.FontSize = 16;
         
         % Diagram settings
         axe = gca;
@@ -755,13 +787,14 @@ switch castInTermsOf
         axe.YTick = [-70 -60 -55 -50 -40 -30 -22 -20 -18 -16 -14 -12 -10 -8 -6 -4 -2 0 2 4 6 8 10 12];
         axe.Layer = 'top'; %Forces tick marks to be displayed over the patch objects
         axe.YDir = 'reverse';
+
     otherwise
         close all
         inputFailureMsg = 'Invalid input! Please check input and try again.';
         error(inputFailureMsg)
 end
 
-%% Prompt user whether to save figure as PNG
+%% Prompt user whether to save figure as PNG (Disabled by default)
 % saveFigPrompt = 'Save figure as PNG? [Y/N] ';
 % saveYesNo = input(saveFigPrompt,'s');
 % 

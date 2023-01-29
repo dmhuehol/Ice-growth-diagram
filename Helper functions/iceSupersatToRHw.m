@@ -1,5 +1,5 @@
-function [RHw] = iceSupersatToRH(iceSupersat,temp)
-%%iceSupersatToRH
+function [RHw] = iceSupersatToRHw(iceSupersat,temp)
+%%iceSupersatToRHw
     %Converts ice supersaturation in percent to RH in percent. Uses the
     %Improved August-Roche-Magnus saturation vapor pressure equation from:
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
@@ -11,17 +11,20 @@ function [RHw] = iceSupersatToRH(iceSupersat,temp)
     %General form: [RHw] = iceSupersatToRH(iceSupersat,temp)
     %
     %Output
-    %RHw: relative humidity (with respect to water) in %
+    %RHw: 
+    %   relative humidity (with respect to water) in %
     %
     %Inputs:
-    %iceSupersat: supersaturation with respect to ice in %
-    %temp: temperature in deg C
+    %iceSupersat: 
+    %   supersaturation with respect to ice in %, e.g. enter 28 for 128% RHi
+    %temp: 
+    %   temperature in deg C
     %
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
+    %Version date: 1/2023
     %Last major revision: 10/31/2020
     %
     %See also iceSupersatToVaporExc

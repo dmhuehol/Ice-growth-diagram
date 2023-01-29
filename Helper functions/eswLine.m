@@ -1,7 +1,7 @@
 function [eswLineNum] = eswLine(rhw,Tlower,Tupper)
 %%eswLine
-    %Makes arrays of water RH difference from ice saturation. Used to plot
-    %isohumes on ice growth diagrams.
+    %Makes arrays of RHw difference from saturation with respect to ice.
+    %Used to plot isohumes on ice growth diagrams.
     %Equation is the Improved August-Roche-Magnus approximation from:
     % Alduchov, O.A. and R.E. Eskridge, 1996: 
     % Improved Magnus Form Approximation of Saturation Vapor Pressure.
@@ -12,18 +12,22 @@ function [eswLineNum] = eswLine(rhw,Tlower,Tupper)
     %General form: [eswLineNum] = eswLine(rhw,Tlower,Tupper)
     %
     %Output
-    %eswLineNum: array where elements are given in difference between water
-    %   saturation RH and ice saturation.
+    %eswLineNum: 
+    %   array where elements are given in difference between water
+    %   saturation RHw and ice saturation
     %
     %Input
-    %rhw: water saturation RH in percent
-    %Tlower: lower bound of temperature in Celsius to calculate saturations
-    %Tupper: upper bound of temperature in Celsius to calculate saturations
+    %rhw: 
+    %   water saturation RH in percent
+    %Tlower: 
+    %   lower bound of temperature in Celsius to calculate saturations
+    %Tupper: 
+    %   upper bound of temperature in Celsius to calculate saturations
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
     %Undergraduate Research Assistant at Environment Analytics
-    %Version date: 10/31/2020
+    %Version date: 1/2023
     %Last major revision: 10/31/2020
     %
 

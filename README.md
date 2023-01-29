@@ -18,7 +18,8 @@
 
 ## Introduction
 Complete set of MATLAB code to plot the ice growth form diagram from [Hueholt et al. (2022) "Revisiting Diagrams of Ice Growth Environments" *Bulletin of the American Meteorological Society*](https://doi.org/10.1175/BAMS-D-21-0271.1). Tested and confirmed operational on MATLAB 2020a+. The ice growth diagram can be cast into three moisture variables: relative humidity with respect to water, relative humidity with respect to ice, and vapor density excess over ice saturation. There are "textbook" and "applied" versions of each ice diagram. The "textbook" versions are designed to be the most aesthetically-pleasing. "Applied" versions are higher-contrast, allowing for data to be easily overlayed.  
-The version of record for this code corresponding to the paper can be found at the [archive hosted on Open Science Foundation](https://osf.io/g9vzj/).
+The version of record for this code corresponding to the paper can be found at the [archive hosted on Open Science Foundation](https://osf.io/g9vzj/). To quickly replicate the figures
+from the paper, see the script `makeFigures` in the `Demo` subdirectory.
 
 ## Basic ice diagrams
 The following examples show how to make the three applied diagrams and the textbook diagram cast in terms of relative humidity with respect to water.
@@ -68,7 +69,7 @@ Given an ice supersaturation of 3.8% at -8 deg Celsius, what is the vapor densit
 1. `[vde] = iceSupersatToVaporExc(0.038,-8)`  
 This returns `vde = 0.0962`. Thus a vapor density excess of 0.096 g/m^3 corresponds to an ice supersaturation of 3.8% at -8 deg Celsius!  
 
-To convert from ice supersaturation to relative humidity with respect to water use `iceSupersatToRH`. For the reverse process, see `rhwToRhi`. To calculate vapor density excess from relative humidity with respect to water directly, use `rhwToVaporExc`.
+To convert from ice supersaturation to relative humidity with respect to water use `iceSupersatToRHw`. For the reverse process from RHw to RHi, see `rhwToRhi`. To calculate vapor density excess from relative humidity with respect to water directly, use `rhwToVaporExc`.
 
 ## Repository description
 ### root
@@ -79,7 +80,7 @@ To convert from ice supersaturation to relative humidity with respect to water u
 
 ### Helper functions subdirectory
 `rhwToRhi`: Converts relative humidity with respect to water to relative humidity with respect to ice.  
-`iceSupersatToRH`: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.   
+`iceSupersatToRHw`: Converts an ice supersaturation in percent to a relative humidity with respect to water, also in percent.   
 `iceSupersatToVaporExc`: Converts an ice supersaturation in decimal to a vapor density excess in g/m^3.  
 `rhwToVaporExc`: Converts a relative humidity with respect to water to vapor density excess in g/m^3.  
 `eswLine`: Outputs arrays useful to draw isohumes with respect to water on the diagram.  

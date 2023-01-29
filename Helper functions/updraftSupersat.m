@@ -3,12 +3,15 @@ function [s_upper] = updraftSupersat(c,k,updraft)
     %Function to calculate maximum possible supersaturation inside an
     %updraft. These equations come from Twomey 1959 "The nuclei of
     %natural cloud formation part II".
-    % These equations are ONLY valid at P=800 hPa and T=10C.
+    % These equations are ONLY valid at P=800 hPa and T=10C. Because of
+    % this they really have nothing to do with ice growth at all, and
+    % cannot be applied in these contexts! This is only included out of
+    % historical interest.
     %
-    %General form: [s_upper,s_lower] = updraftSupersat(c,k,updraft)
+    %General form: [s_upper] = updraftSupersat(c,k,updraft)
     %
     %Output
-    %s_max: the maximum supersaturation in the updraft. Output in
+    %s_upper: the maximum supersaturation in the updraft. Output in
     %deg C which can be converted to % wrt water.
     %
     %Inputs
@@ -41,13 +44,6 @@ validateattributes(updraft,classNum,attribute);
 %%
 B = beta(3/2,k/2);
 s_upper = ((1.63*10^(-3).*updraft.^(3/2))./(c.*k.*B))^(1/(k+2)); % Equation 10
-
-% In progress
-% m = k+2;
-% A = 2.^(-3/2);
-% a = A./m;
-% alpha = 4.35*10^(-4).*(7.93*10^(-5)*updraft).^(k+0.5).*(c.*k)./(m).*B;
-% s_lower = alpha.*time.*(1-(a.*m)./(m+1).*time.^m+(a.^2.*m.^2)./((m+1).*(2.*m+1)).*time.^(2.*m)-((a.^3.*m.^3)./((m+1).*(2.*m+1).*(3.*m+1)).*time.^(3.*m))); % Equation 7
 
 
 
