@@ -13,28 +13,40 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramVaporExc( ...
     % iceGrowthDiagramVaporExc() is equivalent to iceGrowthDiagramVaporExc(hd,1,0,1,'southoutside',[0 0.351],[-70 0],0,1)
     %
     %Output
-    %fig: figure handle for the ice growth diagram
-    %legendEntries: figure legend data, used when called by growthDiagramProfile
-    %legendTexts: figure legend texts, used when called by growthDiagramProfile
+    %fig: 
+    %   figure handle for the ice growth diagram
+    %legendEntries: 
+    %   figure legend data, used when called by growthDiagramProfile
+    %legendTexts: 
+    %   figure legend texts, used when called by growthDiagramProfile
     %
     %Input
-    %hd: the habit diagram structure, create with makeGrowthDiagramStruct
-    %isohumeFlag: flag for drawing lines of constant RH with respect to water.
+    %hd: 
+    %   the habit diagram structure, create with makeGrowthDiagramStruct
+    %isohumeFlag: 
+    %   flag for drawing lines of constant RH with respect to water.
     %    1 draws RH lines at 10% intervals from 0 to 100, and at 2.5% and
     %       5% supersaturations with respect to water
     %    2 draws only the water saturation line (RH=100%)
     %    0 and all other values don't plot any isohumes
     %   (default: 1)
-    %bh09VentLog: logical 1/0 to draw the Bailey & Hallett 2009 maximum
+    %bh09VentLog: 
+    %   logical 1/0 to draw the Bailey & Hallett 2009 maximum
     %   supersaturation approximation (default: 0)
-    %legLog: logical 1/0 to show the legend (default: 1)
-    %legendLocStr: legend location string (default: 'southoutside')
-    %xlimRange: determines range for x-axis, input as 2-element array in
+    %legLog: 
+    %   logical 1/0 to show the legend (default: 1)
+    %legendLocStr: 
+    %   legend location string (default: 'southoutside')
+    %xlimRange: 
+    %   determines range for x-axis, input as 2-element array in
     %   increasing order (default: [0 0.351]) 
-    %ylimRange: determines range for y-axis (in deg C), input as 2-element
+    %ylimRange: 
+    %   determines range for y-axis (in deg C), input as 2-element
     %    array in increasing order (default: [-56.5 0]).
-    %printFig: 1/0 to save/not save figure as PNG (default: 0)
-    %yRight: 1/0 to enable/disable right y-axis ICAO atmosphere (default: 1)
+    %printFig: 
+    %   1/0 to save/not save figure as PNG (default: 0)
+    %yRight: 
+    %   1/0 to enable/disable right y-axis ICAO atmosphere (default: 1)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University

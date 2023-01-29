@@ -23,14 +23,17 @@ function [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %General form: [hd] = makeGrowthDiagramStruct(crystalLog,otherLog)
     %
     %Output
-    %hd: a structure containing name, plot colors, temperature bounds,
+    %hd: 
+    %   a structure containing name, plot colors, temperature bounds,
     %   RHice bounds, RHw bounds, and vapor density excess bounds for all
     %   regions of the diagram
     %
     %Inputs
-    %crystalLog: logical 1/0 whether or not to contain info for crystal
+    %crystalLog: 
+    %   logical 1/0 whether or not to contain info for crystal
     %   habits (default: 1)
-    %otherLog: logical 1/0 whether or not to include info for other parameters 
+    %otherLog: 
+    %   logical 1/0 whether or not to include info for other parameters 
     %   (e.g. subsaturated areas, unnatural supersaturations), (default: 1)
     %
     %Written by: Daniel Hueholt

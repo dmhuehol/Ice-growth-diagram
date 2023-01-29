@@ -21,22 +21,33 @@ function [fig,legendEntries,legendTexts] = iceGrowthDiagramWater( ...
     % iceGrowthDiagramWater() is equivalent to iceGrowthDiagramWater(hd,0,1,'southoutside',[55 105],[-70 0],0,1)
     %
     %Output
-    %fig: figure handle for the ice growth diagram
-    %legendEntries: figure legend data, used when called by growthDiagramProfile
-    %legendTexts: figure legend texts, used when called by growthDiagramProfile
+    %fig: 
+    %   figure handle for the ice growth diagram
+    %legendEntries: 
+    %   figure legend data, used when called by growthDiagramProfile
+    %legendTexts: 
+    %   figure legend texts, used when called by growthDiagramProfile
     %
     %Input
-    %hd: the habit diagram structure, create with makeGrowthDiagramStruct
-    %bh09VentLog: logical 1/0 to draw the Bailey & Hallett 2009 maximum
+    %hd: 
+    %   the habit diagram structure, create with makeGrowthDiagramStruct
+    %bh09VentLog: 
+    %   logical 1/0 to draw the Bailey & Hallett 2009 maximum
     %   supersaturation approximation (default: 0)
-    %legLog: logical 1/0 to show the legend (default: 1)
-    %legendLocStr: legend location string (default: 'southoutside')
-    %xlimRange: determines the range for the x-axis, input as 2-element
+    %legLog: 
+    %   logical 1/0 to show the legend (default: 1)
+    %legendLocStr: 
+    %   legend location string (default: 'southoutside')
+    %xlimRange: 
+    %   determines the range for the x-axis, input as 2-element
     %   array in increasing order (default: [55 105])
-    %ylimRange: determines range for the y-axis (in deg C), input as
+    %ylimRange: 
+    %   determines range for the y-axis (in deg C), input as
     %   2-element array in increasing order (default: [-70 0])
-    %printFig: 1/0 to save/not save figure as PNG (default: 0)
-    %yRight: 1/0 to enable/disable right y-axis ICAO atmosphere (default: 1)
+    %printFig: 
+    %   1/0 to save/not save figure as PNG (default: 0)
+    %yRight: 
+    %   1/0 to enable/disable right y-axis ICAO atmosphere (default: 1)
     %
     %Written by: Daniel Hueholt
     %North Carolina State University
