@@ -19,14 +19,16 @@
 ## Introduction
 Complete set of MATLAB code to plot the ice growth form diagram from [Hueholt et al. (2022) "Revisiting Diagrams of Ice Growth Environments" *Bulletin of the American Meteorological Society*](https://doi.org/10.1175/BAMS-D-21-0271.1). Tested and confirmed operational on MATLAB 2020a+. The ice growth diagram can be cast into three moisture variables: relative humidity with respect to water, relative humidity with respect to ice, and vapor density excess over ice saturation. There are "textbook" and "applied" versions of each ice diagram. The "textbook" versions are designed to be the most aesthetically-pleasing. "Applied" versions are higher-contrast, allowing for data to be easily overlayed.  
 The version of record for this code corresponding to the paper can be found at the [archive hosted on Open Science Foundation](https://osf.io/g9vzj/). To quickly replicate the figures
-from the paper, see the script `makeFigures` in the `Demo` subdirectory.
+from the paper, see the script `makeFigures` in the `Demo` subdirectory.  
+
+Figures 1, B1, B2, B3 from [Hueholt et al. (2022)](https://doi.org/10.1175/BAMS-D-21-0271.1) are reproduced on this repository under Fair Use for educational purposes. These figures are © Copyright 2022 American Meteorological Society (AMS). For permission to reuse any portion of this Work, please contact permissions@ametsoc.org. Any use of material in this Work that is determined to be “fair use” under Section 107 of the U.S. Copyright Act (17 U.S. Code § 107) or that satisfies the conditions specified in Section 108 of the U.S. Copyright Act (17 USC § 108) does not require the AMS’s permission. Republication, systematic reproduction, posting in electronic form, such as on a website or in a searchable database, or other uses of this material, except as exempted by the above statement, requires written permission or a license from the AMS. All AMS journals and monograph publications are registered with the Copyright Clearance Center [(https://www.copyright.com)](https://www.copyright.com). Additional details are provided in the AMS Copyright Policy statement, available on the AMS website [(https://www.ametsoc.org/PUBSCopyrightPolicy)](https://www.ametsoc.org/PUBSCopyrightPolicy).
 
 ## Basic ice diagrams
 The following examples show how to make the three applied diagrams and the textbook diagram cast in terms of relative humidity with respect to water.
 
 ### Ice growth diagram: relative humidity with respect to water
 ![Ice growth diagram with respect to water](Demo/igd_rhw_applied.png)
-This is our preferred version of the diagram. Relative humidity with respect to water is easier to understand and better represents the phase space of ice processes in the atmosphere than other moisture variables.
+This is our preferred version of the diagram (Figure B1 from [Hueholt et al. 2022](https://doi.org/10.1175/BAMS-D-21-0271.1)). Relative humidity with respect to water is easier to understand and better represents the phase space of ice processes in the atmosphere than other moisture variables.
 #### Minimal code to replicate
 1. `iceGrowthDiagramWater`
 The code will automatically set inputs, including the necessary basic hd structure.
@@ -36,7 +38,7 @@ The code will automatically set inputs, including the necessary basic hd structu
 
 ### Ice growth diagram: relative humidity with respect to ice
 ![Ice growth diagram with respect to water](Demo/igd_rhi_applied.png)
-For comparison to previous work, especially Bailey and Hallett (2009).
+For comparison to previous work, especially Bailey and Hallett (2009). This appears as Figure B2 in [Hueholt et al. 2022](https://doi.org/10.1175/BAMS-D-21-0271.1).
 #### Minimal code to replicate
 1. `iceGrowthDiagram`
 The code will automatically set inputs, including the necessary basic hd structure.
@@ -46,7 +48,7 @@ The code will automatically set inputs, including the necessary basic hd structu
 
 ### Ice growth diagram: vapor density excess
 ![Ice growth diagram with respect to water](Demo/igd_vde_applied.png)
-For comparison to previous work, especially Kobayashi (1961), Furukawa and Wettlaufer (2007), or Libbrecht (2017).
+For comparison to previous work, especially Kobayashi (1961), Furukawa and Wettlaufer (2007), or Libbrecht (2017). This appears as Figure B3 in [Hueholt et al. 2022](https://doi.org/10.1175/BAMS-D-21-0271.1).
 #### Minimal code to replicate
 1. `iceGrowthDiagramVaporExc`
 The code will automatically set inputs, including the necessary basic hd structure.
@@ -56,7 +58,7 @@ The code will automatically set inputs, including the necessary basic hd structu
 
 ### Ice growth diagram: relative humidity with respect to water (textbook edition)
 ![Ice growth diagram with respect to water](Demo/igd_rhw_textbook.png)
-This code can also be used to generate analogous images in terms of relative humidity with respect to ice or vapor density excess.
+This appears as Figure 1 in [Hueholt et al. 2022](https://doi.org/10.1175/BAMS-D-21-0271.1). This code can also be used to generate analogous images in terms of relative humidity with respect to ice or vapor density excess.
 #### Code to replicate
 1. `iceGrowthDiagramTextbook`
 2. The code will prompt the user for a phase. Input `'water'` to obtain the diagram shown here.
